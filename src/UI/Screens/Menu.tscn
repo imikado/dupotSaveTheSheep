@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd5514wt0rdxf"]
+
+[ext_resource type="Script" path="res://src/UI/Screens/Menu.gd" id="1_81gvo"]
+[ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_bkv4m"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_81gvo")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(241, 128)
+skew = -0.760964
+
+[node name="PlayButton" parent="." instance=ExtResource("1_bkv4m")]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 98.0
+offset_right = 447.0
+offset_bottom = 130.0
+_export_label = "play"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://yob4um0n673p"]
+
+[ext_resource type="Texture2D" uid="uid://x8cuq78vtr4p" path="res://src/UI/Controls/Shared/button.png" id="1_usd74"]
+[ext_resource type="Script" path="res://src/UI/Controls/LabelButton.gd" id="2_buitg"]
+[ext_resource type="FontFile" uid="uid://clvttg6gbi4aq" path="res://src/UI/Controls/Shared/Pixeled.ttf" id="2_jnw7x"]
+
+[sub_resource type="Theme" id="Theme_5ft0e"]
+default_font = ExtResource("2_jnw7x")
+default_font_size = 8
+
+[node name="LabelButton" type="TextureButton"]
+offset_right = 128.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_usd74")
+stretch_mode = 0
+script = ExtResource("2_buitg")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_5ft0e")
+theme_override_font_sizes/font_size = 16
+text = "text"
+horizontal_alignment = 1
+uppercase = true

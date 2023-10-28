@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm7q4yrquuexu"]
+
+[ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="1_xewed"]
+[ext_resource type="PackedScene" uid="uid://wy4f66o7eik0" path="res://src/Levels/Shared/level_world.tscn" id="2_lrq6a"]
+
+[node name="Level" type="Node2D"]
+
+[node name="LevelWorld" parent="." instance=ExtResource("2_lrq6a")]
+position = Vector2(-1, 0)
+
+[node name="Player" parent="." instance=ExtResource("1_xewed")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(15, -114)
+zoom = Vector2(0.6, 0.6)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true

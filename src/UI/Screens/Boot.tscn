@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://0xgtnll8ja04"]
+
+[ext_resource type="Script" path="res://src/UI/Screens/Boot.gd" id="1_5dee7"]
+[ext_resource type="Texture2D" uid="uid://xke64j47l8s3" path="res://src/UI/Screens/Boot/logodupot.png" id="2_3n2r8"]
+
+[node name="Boot" type="Node2D"]
+script = ExtResource("1_5dee7")
+
+[node name="background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 499.0
+offset_bottom = 282.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.933333, 0.372549, 0, 1)
+
+[node name="Logodupot" type="Sprite2D" parent="."]
+position = Vector2(249, 130)
+scale = Vector2(0.285833, 0.285833)
+texture = ExtResource("2_3n2r8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
