@@ -117,7 +117,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_cbu0o"]
 resource_name = "Jump"
-length = 0.2
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -244,10 +244,10 @@ libraries = {
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-3, 0, -6, -9, -4, -12, 4, -13, 6, 0)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "player")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "actor")]
 script = ExtResource("4_kq3e8")
 animationPlayer = NodePath("../AnimationPlayer")
-player = NodePath("..")
+actor = NodePath("..")
 
 [node name="StateIdle" type="Node" parent="StateMachine"]
 script = ExtResource("5_c6jvt")
@@ -263,6 +263,7 @@ can_jump = true
 
 [node name="StateJump" type="Node" parent="StateMachine"]
 script = ExtResource("7_xh0im")
+has_gravity = false
 animation_name = "Jump"
 
 [node name="StateFall" type="Node" parent="StateMachine"]

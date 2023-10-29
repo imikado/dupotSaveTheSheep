@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -200.0
+const JUMP_VELOCITY = -150.0
 
 const INPUT_ATTACK='ui_accept'
 const INPUT_JUMP='ui_select'
@@ -21,7 +21,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 	
-	update_gravity(delta)
+	if get_current_state().has_gravity:
+		update_gravity(delta)
 	
 	if get_current_state().can_move:
 		update_move(delta)
@@ -39,7 +40,7 @@ func process_jump(delta):
 #func _physics_process(delta):
 func update_gravity(delta):
 	# Add the gravity.
-	if not is_on_floor() and get_current_state().name!=PlayerStateMachine.STATE_JUMP:
+	if not is_on_floor():
 		set_new_state(PlayerStateMachine.STATE_FALL)
 		velocity.y += gravity * delta
 

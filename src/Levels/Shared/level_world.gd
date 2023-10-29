@@ -1,7 +1,7 @@
 extends Node2D
 class_name World
 
-@onready var tile_map:TileMap=$TileMap
+@onready var tile_map:TileMap=$ground
 
 static var _instance: World = null
 
