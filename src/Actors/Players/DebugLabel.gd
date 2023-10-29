@@ -1,6 +1,6 @@
 extends Label
 
-@export var state_machine:PlayerStateMachine
+@export var state_machine:StateMachine
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,5 +9,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	text="state: "+state_machine.current_state.name
+	text=state_machine.current_state.name
 	pass

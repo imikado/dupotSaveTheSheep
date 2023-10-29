@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dthmsw8atnen"]
+
+[ext_resource type="Script" path="res://src/Actors/Players/DebugLabel.gd" id="1_qn4xf"]
+
+[node name="StateMachineDebug" type="Label"]
+offset_left = -41.0
+offset_top = -59.0
+offset_right = 62.0
+offset_bottom = -33.0
+text = "state: "
+horizontal_alignment = 1
+script = ExtResource("1_qn4xf")

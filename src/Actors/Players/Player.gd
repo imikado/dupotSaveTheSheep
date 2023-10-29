@@ -71,7 +71,7 @@ func process_move():
 func set_new_state(new_state):
 	_state_machine.set_state(new_state)
 
-func get_current_state()->PlayerState:
+func get_current_state()->State:
 	return _state_machine.current_state
 	
 func get_current_speed():

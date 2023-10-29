@@ -11,7 +11,10 @@ var current_state: Object
 var available_state_name_list=[]
 var state_list = {}
 
-func _ready():
+func init():
+	
+	animationPlayer.connect("animation_finished",_on_animation_player_animation_finished)
+	
 	for available_state_name_loop in available_state_name_list:
 		var state_loop=get_node(available_state_name_loop)
 		state_loop.state_machine = self
