@@ -12,8 +12,8 @@
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateFall.gd" id="9_pdt5t"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="11_vadop"]
 
-[sub_resource type="Animation" id="Animation_1yvd8"]
-resource_name = "Idle"
+[sub_resource type="Animation" id="Animation_nm7gl"]
+resource_name = "Fall"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -25,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_ap35m")]
+"values": [ExtResource("5_jntdo")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -52,8 +52,8 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
-[sub_resource type="Animation" id="Animation_getxm"]
-resource_name = "Walking"
+[sub_resource type="Animation" id="Animation_1yvd8"]
+resource_name = "Idle"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -65,7 +65,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_gnjl8")]
+"values": [ExtResource("2_ap35m")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -132,8 +132,8 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
-[sub_resource type="Animation" id="Animation_nm7gl"]
-resource_name = "Fall"
+[sub_resource type="Animation" id="Animation_getxm"]
+resource_name = "Walking"
 length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -145,7 +145,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_jntdo")]
+"values": [ExtResource("3_gnjl8")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -190,7 +190,7 @@ hframes = 3
 region_rect = Rect2(0, 0, 64, 64)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-3, 0, -6, -9, -4, -12, 4, -13, 6, 0)
+polygon = PackedVector2Array(-3, 0, -6, -9, -4, -21, 7, -21, 6, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../StateMachine")
