@@ -16,10 +16,8 @@ func _init():
 	joystick_pos = position;
 
 func reset_move():
-	Input.action_release(Player.INPUT_RIGHT)
-	Input.action_release(Player.INPUT_LEFT)
-	Input.action_release(Player.INPUT_DOWN)
-	Input.action_release(Player.INPUT_UP)
+	GlobalInput.reset_move()
+	
 	
 
 func _input(event_):
@@ -52,14 +50,14 @@ func _input(event_):
 		if abs(joystickVector_.x)>abs(joystickVector_.y) :
 	
 			if(joystickVector_.x > 10):
-				Input.action_press(Player.INPUT_RIGHT)
-
+				GlobalInput.press_right_button()
 			elif(joystickVector_.x < -10):
-				Input.action_press(Player.INPUT_LEFT)
+				GlobalInput.press_left_button()
+
 		else:
 					
 			if(joystickVector_.y > 10):
-				Input.action_press(Player.INPUT_DOWN)
+				GlobalInput.press_down_button()
 			elif(joystickVector_.y < -10):
-				Input.action_press(Player.INPUT_UP)
+				GlobalInput.press_up_button()
 	

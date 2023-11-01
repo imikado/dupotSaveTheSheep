@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dld0jkheienqb"]
+[gd_scene load_steps=18 format=3 uid="uid://dld0jkheienqb"]
 
 [ext_resource type="Script" path="res://src/Actors/Players/Player.gd" id="1_nmcdb"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="2_ap35m"]
@@ -180,6 +180,9 @@ _data = {
 "Walking": SubResource("Animation_getxm")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtpuh"]
+size = Vector2(14, 20)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_nmcdb")
 
@@ -226,3 +229,9 @@ animation_name = "Fall"
 
 [node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("11_vadop")]
 state_machine = NodePath("../StateMachine")
+
+[node name="PlayerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea"]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_qtpuh")

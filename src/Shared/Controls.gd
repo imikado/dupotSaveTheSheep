@@ -3,7 +3,7 @@ extends CanvasLayer
 @onready var _attackManaButton:=get_node("manaAttack")
 
 func _ready() -> void:
-	if(!Game.isControlsEnabled()):
+	if(!GlobalGame.isControlsEnabled()):
 		visible=false
 
 

@@ -5,14 +5,8 @@ class_name Player
 const SPEED = 100.0
 const JUMP_VELOCITY = -150.0
 
-const INPUT_CARRYSHEEP='carry_sheep'
-const INPUT_ATTACK='ui_accept'
-const INPUT_JUMP='ui_select'
+const AREA='PlayerArea'
 
-const INPUT_LEFT='ui_left'
-const INPUT_RIGHT='ui_right'
-const INPUT_UP='ui_up'
-const INPUT_DOWN='ui_down'
 
 var carry_sheep=false
 
@@ -55,11 +49,11 @@ func update_gravity(delta):
 		velocity.y += gravity * delta
 
 func update_jump(delta):
-	if Input.is_action_just_pressed(INPUT_JUMP) and is_on_floor():
+	if GlobalInput.is_press_jump_button() and is_on_floor():
 		set_new_state(PlayerStateMachine.STATE_JUMP)
 
 func update_carry_sheep():
-	if !carry_sheep and Input.is_action_just_pressed(INPUT_CARRYSHEEP) and is_on_floor():
+	if !carry_sheep and GlobalInput.is_press_carry_button() and is_on_floor():
 		if abs(_sheep.position.x - position.x) <30:
 			print('carry sheep')
 			
@@ -71,7 +65,7 @@ func update_carry_sheep():
 			add_child(_sheep)
 			
 			carry_sheep=true
-	elif carry_sheep and Input.is_action_just_pressed(INPUT_CARRYSHEEP) and is_on_floor():
+	elif carry_sheep and GlobalInput.is_press_carry_button() and is_on_floor():
 		_sheep.reparent(get_parent())
 		_sheep.position.x+=10*direction
 		_sheep.position.y+=28
@@ -82,7 +76,7 @@ func update_carry_sheep():
 func update_move(delta):
 	var currentSpeed= get_current_speed()
 	
-	direction = Input.get_axis(INPUT_LEFT, INPUT_RIGHT)
+	direction = GlobalInput.get_direction()
 	if direction:
 		set_new_state(PlayerStateMachine.STATE_WALKING)
 		velocity.x = direction * currentSpeed

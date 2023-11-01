@@ -11,7 +11,7 @@
 position = Vector2(-1, 0)
 
 [node name="Player" parent="." node_paths=PackedStringArray("_sheep") instance=ExtResource("1_xewed")]
-position = Vector2(21, 321)
+position = Vector2(65, 321)
 _sheep = NodePath("../Sheep")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -24,5 +24,5 @@ drag_vertical_enabled = true
 [node name="Controls" parent="Player" instance=ExtResource("4_fp72d")]
 
 [node name="Sheep" parent="." instance=ExtResource("3_ctd8t")]
-position = Vector2(-80, 290)
+position = Vector2(-17, 323)
 speed = 50.0

@@ -73,12 +73,4 @@ func saveFile(filepath, content):
 func loadFile(filepath):
 	pass
 	
-func isInputNextButton(event: InputEvent)->bool:
-	if event.is_action_pressed("attack_mana") or event.is_action_pressed(Player.INPUT_DOWN)  or event.is_action_pressed(Player.INPUT_UP) or event.is_action_pressed("ui_focus_next"):
-		return true
-	return false
-	
-func isInputValidateButton(event: InputEvent)->bool:
-	if event.is_action_pressed("attack"):
-		return true
-	return false
+
