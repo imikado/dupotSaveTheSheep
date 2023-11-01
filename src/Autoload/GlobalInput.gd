@@ -17,12 +17,28 @@ func press_jump_button()->void:
 
 func is_press_jump_button()->bool:
 	return _is_button_pressed_in_list([INPUT_JUMP])
-	
+
+
+func press_action_button()->void:
+	Input.action_press(INPUT_ACTION)
+
 func is_press_action_button()->bool:
 	return _is_button_pressed_in_list([INPUT_ACTION])
-	
+
+
+func press_carry_button()->void:
+	Input.action_press(INPUT_CARRY)
+
 func is_press_carry_button()->bool:
 	return _is_button_pressed_in_list([INPUT_CARRY])
+
+
+func press_attack_button()->void:
+	Input.action_press(INPUT_ATTACK)
+
+func is_press_attack_button()->bool:
+	return _is_button_pressed_in_list([INPUT_ATTACK])
+	
 
 #direction
 func get_direction()->int:

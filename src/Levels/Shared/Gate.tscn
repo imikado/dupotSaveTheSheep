@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://c87l4h2e277ou"]
+[gd_scene load_steps=11 format=3 uid="uid://c87l4h2e277ou"]
 
 [ext_resource type="Texture2D" uid="uid://cfcxilrbu4ub6" path="res://src/Levels/Shared/gate.png" id="1_vgx7k"]
 [ext_resource type="Script" path="res://src/Levels/Shared/Gate.gd" id="1_yson1"]
 [ext_resource type="Script" path="res://src/Levels/Shared/GateArea.gd" id="2_dhavs"]
+[ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="4_2t113"]
 
 [sub_resource type="Animation" id="Animation_83yic"]
 resource_name = "Closed"
@@ -193,5 +194,25 @@ script = ExtResource("2_dhavs")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(8.5, 9)
 shape = SubResource("RectangleShape2D_0uc48")
+
+[node name="light" type="Node2D" parent="."]
+
+[node name="opened" type="ColorRect" parent="light"]
+offset_left = -1.0
+offset_top = -21.0
+offset_right = 1.0
+offset_bottom = -20.0
+color = Color(0, 0.654902, 0.290196, 1)
+
+[node name="closed" type="ColorRect" parent="light"]
+offset_left = -1.0
+offset_top = -21.0
+offset_right = 1.0
+offset_bottom = -20.0
+color = Color(0.74902, 0, 0.219608, 1)
+
+[node name="LightArrow" parent="." instance=ExtResource("4_2t113")]
+position = Vector2(15, -13)
+rotation = 0.523599
 
 [connection signal="gate_opened" from="Area2D" to="." method="_on_area_2d_gate_opened"]
