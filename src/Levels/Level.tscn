@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm7q4yrquuexu"]
+[gd_scene load_steps=6 format=3 uid="uid://dm7q4yrquuexu"]
 
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="1_xewed"]
 [ext_resource type="PackedScene" uid="uid://wy4f66o7eik0" path="res://src/Levels/Shared/level_world.tscn" id="2_lrq6a"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="3_ctd8t"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="4_fp72d"]
+[ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="4_hqk6k"]
 
 [node name="Level" type="Node2D"]
 
@@ -22,6 +23,8 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="Controls" parent="Player" instance=ExtResource("4_fp72d")]
+
+[node name="HUD" parent="Player" instance=ExtResource("4_hqk6k")]
 
 [node name="Sheep" parent="." instance=ExtResource("3_ctd8t")]
 position = Vector2(-17, 323)
