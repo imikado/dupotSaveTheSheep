@@ -2,4 +2,5 @@
 .godot/
 export/HTML5
 .vscode
-
+*~
+*autosave*

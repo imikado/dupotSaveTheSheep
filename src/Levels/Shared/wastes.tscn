@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cev5kgjc2i55p"]
+
+[ext_resource type="Texture2D" uid="uid://d0wwjxotv16mw" path="res://src/Levels/Shared/wastes.png" id="1_6kn3h"]
+[ext_resource type="Script" path="res://src/Levels/Shared/wastes.gd" id="1_7cu6h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cbks"]
+
+[node name="wastes" type="Area2D"]
+script = ExtResource("1_7cu6h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6kn3h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4cbks")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

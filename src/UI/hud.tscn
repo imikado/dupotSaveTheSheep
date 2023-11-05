@@ -13,6 +13,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="icon" type="TextureRect" parent="player"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 2.0
 offset_right = 19.0
@@ -20,6 +21,7 @@ offset_bottom = 18.0
 texture = ExtResource("1_rd6rf")
 
 [node name="lifeBar" type="ProgressBar" parent="player"]
+layout_mode = 0
 offset_left = 28.0
 offset_top = 8.0
 offset_right = 128.0
@@ -37,6 +39,7 @@ offset_right = 41.0
 offset_bottom = 63.0
 
 [node name="icon" type="TextureRect" parent="Sheep"]
+layout_mode = 0
 offset_left = 3.0
 offset_top = 2.0
 offset_right = 19.0
@@ -44,6 +47,7 @@ offset_bottom = 18.0
 texture = ExtResource("3_ebnga")
 
 [node name="lifeBar" type="ProgressBar" parent="Sheep"]
+layout_mode = 0
 offset_left = 28.0
 offset_top = 8.0
 offset_right = 78.0
