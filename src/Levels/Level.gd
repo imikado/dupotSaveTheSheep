@@ -40,6 +40,8 @@ func _ready():
 	remote_transform.update_position=true
 	remote_transform.update_scale=false
 	players["player"].player.add_child(remote_transform)
+	
+	switchFull()
 		
 	
 	
@@ -59,10 +61,17 @@ func switchSplit():
 		
 	
 func _process(delta):
+
+	
+	var zoom_delta=abs(players["player"].player.position.x - players["sheep"].player.position.x)/100  
+	
+	
+	fullViewportCamera.zoom=Vector2( clamp(zoom_delta,0.2,1.0), clamp(zoom_delta,0.2,1.0) )
+	return
 	if (
 		abs(players["player"].player.position.x - players["sheep"].player.position.x) < (512/2) 
 		and 
-		abs(players["player"].player.position.y - players["sheep"].player.position.y) < (50)
+		abs(players["player"].player.position.y - players["sheep"].player.position.y) < (25)
 	):
 		switchFull()
 	else:

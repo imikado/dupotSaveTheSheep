@@ -23,11 +23,16 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 	
+	if is_on_ceiling():
+		print("on ceiling")
+	
 	if get_current_state().has_gravity:
 		update_gravity(delta)
 	
 	if get_current_state().can_move:
 		update_move(delta)
+	else:
+		update_min_move(delta)
 	
 	if get_current_state().can_jump:
 		update_jump(delta)
@@ -85,6 +90,18 @@ func update_move(delta):
 	else:
 		set_new_state(PlayerStateMachine.STATE_IDLE)
 		velocity.x = move_toward(velocity.x, 0, currentSpeed)
+
+func update_min_move(delta):
+	if velocity.x!=0:
+		return
+		
+	var currentSpeed= get_current_speed()/2
+	
+	direction = GlobalInput.get_direction()
+	if direction:
+		velocity.x = direction *currentSpeed
+		
+		_sprite.flip_h=(direction==-1)
 
 
 func process_move():

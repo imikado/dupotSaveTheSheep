@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,9 +11,7 @@ func _process(delta):
 	pass
 
 
-func _on_body_entered(body):
-	print(body)
-	if body is Player:
-		print('gameover')
-		get_tree().change_scene_to_file('res://src/UI/Screens/game_over.tscn')
+func _on_label_button_pressed():
+	print('presse')
+	get_tree().change_scene_to_file('res://src/UI/Screens/Menu.tscn')
 	pass # Replace with function body.

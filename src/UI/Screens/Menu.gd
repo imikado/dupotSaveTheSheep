@@ -12,5 +12,5 @@ func _process(delta):
 
 
 func _on_play_button_pressed():
-	get_tree().change_scene_to_file("res://src/Levels/Level.tscn")
+	get_tree().change_scene_to_file("res://src/Levels/level_zoom.tscn")
 	pass # Replace with function body.
