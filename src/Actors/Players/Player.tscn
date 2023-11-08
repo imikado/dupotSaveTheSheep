@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dld0jkheienqb"]
+[gd_scene load_steps=22 format=3 uid="uid://dld0jkheienqb"]
 
 [ext_resource type="Script" path="res://src/Actors/Players/Player.gd" id="1_nmcdb"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="2_ap35m"]
@@ -7,8 +7,10 @@
 [ext_resource type="Script" path="res://src/Actors/Players/PlayerStateMachine.gd" id="4_kq3e8"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateIdle.gd" id="5_c6jvt"]
 [ext_resource type="Texture2D" uid="uid://cossrdctnpr4x" path="res://src/Actors/Players/Player/player-fall.png" id="5_jntdo"]
+[ext_resource type="Texture2D" uid="uid://bbyarrg5m2ayk" path="res://src/Actors/Players/Player/player-edge.png" id="6_6xbsm"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateWalking.gd" id="6_vgc3e"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateJump.gd" id="7_xh0im"]
+[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateEdge.gd" id="8_vy1bf"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateFall.gd" id="9_pdt5t"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="11_vadop"]
 
@@ -176,8 +178,49 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_r1fmr"]
+resource_name = "Edge"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_6xbsm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rw1v"]
 _data = {
+"Edge": SubResource("Animation_r1fmr"),
 "Fall": SubResource("Animation_nm7gl"),
 "Idle": SubResource("Animation_1yvd8"),
 "Jump": SubResource("Animation_1c7kc"),
@@ -192,7 +235,7 @@ script = ExtResource("1_nmcdb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
-texture = ExtResource("3_gnjl8")
+texture = ExtResource("6_6xbsm")
 hframes = 3
 region_rect = Rect2(0, 0, 64, 64)
 
@@ -217,6 +260,12 @@ can_move = true
 can_jump = true
 animation_name = "Idle"
 
+[node name="StateEdge" type="Node" parent="StateMachine"]
+script = ExtResource("8_vy1bf")
+can_move = true
+can_jump = true
+animation_name = "Edge"
+
 [node name="StateWalking" type="Node" parent="StateMachine"]
 script = ExtResource("6_vgc3e")
 can_move = true
@@ -240,3 +289,6 @@ state_machine = NodePath("../StateMachine")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea"]
 position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_qtpuh")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(6, 1)

@@ -18,13 +18,12 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var _state_machine:PlayerStateMachine = $StateMachine
 @onready var _sprite:Sprite2D = $Sprite2D
 
+@onready var _raycast:RayCast2D=$RayCast2D
+
 @export var _sheep:Sheep 
 
 
 func _physics_process(delta):
-	
-	if is_on_ceiling():
-		print("on ceiling")
 	
 	if get_current_state().has_gravity:
 		update_gravity(delta)
@@ -88,8 +87,13 @@ func update_move(delta):
 		
 		_sprite.flip_h=(direction==-1)
 	else:
-		set_new_state(PlayerStateMachine.STATE_IDLE)
-		velocity.x = move_toward(velocity.x, 0, currentSpeed)
+		if !_raycast.is_colliding():
+			set_new_state(PlayerStateMachine.STATE_EDGE)
+			velocity.x = move_toward(velocity.x, 0, currentSpeed)
+			print("on edge")
+		else:
+			set_new_state(PlayerStateMachine.STATE_IDLE)
+			velocity.x = move_toward(velocity.x, 0, currentSpeed)
 
 func update_min_move(delta):
 	if velocity.x!=0:

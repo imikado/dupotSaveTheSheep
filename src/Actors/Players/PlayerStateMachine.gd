@@ -5,9 +5,7 @@ const STATE_IDLE="StateIdle"
 const STATE_WALKING="StateWalking"
 const STATE_JUMP="StateJump"
 const STATE_FALL="StateFall"
-
-const ANIM_IDLE='Idle';
-const ANIM_WALKING='Walking';
+const STATE_EDGE="StateEdge"
 
 
 func _ready():
@@ -15,7 +13,8 @@ func _ready():
 		STATE_IDLE,
 		STATE_WALKING,
 		STATE_JUMP,
-		STATE_FALL
+		STATE_FALL,
+		STATE_EDGE
 	]
 	super.init()
 	
