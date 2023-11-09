@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://dld0jkheienqb"]
+[gd_scene load_steps=26 format=3 uid="uid://dld0jkheienqb"]
 
 [ext_resource type="Script" path="res://src/Actors/Players/Player.gd" id="1_nmcdb"]
+[ext_resource type="Texture2D" uid="uid://cpd0lts7lrx6l" path="res://src/Actors/Players/Player/player-impatient.png" id="2_a4qs2"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="2_ap35m"]
 [ext_resource type="Texture2D" uid="uid://134ipqk1sbau" path="res://src/Actors/Players/Player/player-walking.png" id="3_gnjl8"]
 [ext_resource type="Texture2D" uid="uid://dmseyqkwcrik4" path="res://src/Actors/Players/Player/player-jump.png" id="4_02sqv"]
@@ -13,10 +14,51 @@
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateEdge.gd" id="8_vy1bf"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateFall.gd" id="9_pdt5t"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="11_vadop"]
+[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateImpatient.gd" id="14_1xsim"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_moofm"]
 radius = 7.0
 height = 24.0
+
+[sub_resource type="Animation" id="Animation_r1fmr"]
+resource_name = "Edge"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_6xbsm")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
 
 [sub_resource type="Animation" id="Animation_nm7gl"]
 resource_name = "Fall"
@@ -60,7 +102,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_1yvd8"]
 resource_name = "Idle"
-length = 0.3
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -92,7 +134,7 @@ tracks/2/path = NodePath("../Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
+"times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -178,9 +220,9 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
-[sub_resource type="Animation" id="Animation_r1fmr"]
-resource_name = "Edge"
-length = 0.3
+[sub_resource type="Animation" id="Animation_d8j6w"]
+resource_name = "Impatient"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -191,7 +233,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_6xbsm")]
+"values": [ExtResource("2_a4qs2")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -203,7 +245,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [5]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -212,10 +254,25 @@ tracks/2/path = NodePath("../Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_jg8ng"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rw1v"]
@@ -223,7 +280,9 @@ _data = {
 "Edge": SubResource("Animation_r1fmr"),
 "Fall": SubResource("Animation_nm7gl"),
 "Idle": SubResource("Animation_1yvd8"),
+"Impatient": SubResource("Animation_d8j6w"),
 "Jump": SubResource("Animation_1c7kc"),
+"RESET": SubResource("Animation_jg8ng"),
 "Walking": SubResource("Animation_getxm")
 }
 
@@ -235,7 +294,7 @@ script = ExtResource("1_nmcdb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
-texture = ExtResource("6_6xbsm")
+texture = ExtResource("2_ap35m")
 hframes = 3
 region_rect = Rect2(0, 0, 64, 64)
 
@@ -280,6 +339,12 @@ animation_name = "Jump"
 [node name="StateFall" type="Node" parent="StateMachine"]
 script = ExtResource("9_pdt5t")
 animation_name = "Fall"
+
+[node name="StateImpatient" type="Node" parent="StateMachine"]
+script = ExtResource("14_1xsim")
+can_move = true
+can_jump = true
+animation_name = "Impatient"
 
 [node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("11_vadop")]
 state_machine = NodePath("../StateMachine")

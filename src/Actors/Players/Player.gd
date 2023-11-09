@@ -92,7 +92,8 @@ func update_move(delta):
 			velocity.x = move_toward(velocity.x, 0, currentSpeed)
 			print("on edge")
 		else:
-			set_new_state(PlayerStateMachine.STATE_IDLE)
+			if(get_current_state().name!=PlayerStateMachine.STATE_IMPATIENT):
+				set_new_state(PlayerStateMachine.STATE_IDLE)
 			velocity.x = move_toward(velocity.x, 0, currentSpeed)
 
 func update_min_move(delta):

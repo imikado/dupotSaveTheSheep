@@ -6,7 +6,7 @@ const STATE_WALKING="StateWalking"
 const STATE_JUMP="StateJump"
 const STATE_FALL="StateFall"
 const STATE_EDGE="StateEdge"
-
+const STATE_IMPATIENT="StateImpatient"
 
 func _ready():
 	available_state_name_list=[
@@ -14,7 +14,8 @@ func _ready():
 		STATE_WALKING,
 		STATE_JUMP,
 		STATE_FALL,
-		STATE_EDGE
+		STATE_EDGE,
+		STATE_IMPATIENT
 	]
 	super.init()
 	
