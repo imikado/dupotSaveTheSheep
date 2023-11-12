@@ -12,7 +12,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7cnq6"]
 radius = 6.0
-height = 22.0
+height = 12.0
 
 [sub_resource type="Animation" id="Animation_6naan"]
 resource_name = "Idle"
@@ -142,16 +142,17 @@ _data = {
 }
 
 [node name="Sheep" type="CharacterBody2D"]
+floor_stop_on_slope = false
 script = ExtResource("1_2bi6n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1, -32)
-texture = ExtResource("2_t1trx")
-hframes = 3
-frame = 2
+texture = ExtResource("1_87buc")
+hframes = 5
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -6)
+position = Vector2(-1, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7cnq6")
 

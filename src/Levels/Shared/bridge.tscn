@@ -1,0 +1,126 @@
+[gd_scene load_steps=7 format=3 uid="uid://dekcjwb6n7f7q"]
+
+[ext_resource type="Texture2D" uid="uid://dbnhotclb7nrj" path="res://src/Levels/Shared/BuildingWorkTileMap.png" id="1_3cee2"]
+[ext_resource type="Script" path="res://src/Levels/Shared/bridge.gd" id="1_vn2hk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vqpoh"]
+size = Vector2(28, 1)
+
+[sub_resource type="Animation" id="Animation_fmjbj"]
+resource_name = "close"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../subBridge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5708, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"sub_close"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_e7rwx"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../subBridge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"sub_open"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c0251"]
+_data = {
+"close": SubResource("Animation_fmjbj"),
+"open": SubResource("Animation_e7rwx")
+}
+
+[node name="bridge" type="Node2D"]
+script = ExtResource("1_vn2hk")
+
+[node name="toDuplicate" type="Node2D" parent="."]
+
+[node name="subBridge" type="AnimatableBody2D" parent="toDuplicate"]
+visible = false
+position = Vector2(0, 1)
+
+[node name="subBridgeSprite" type="Sprite2D" parent="toDuplicate/subBridge"]
+position = Vector2(1.37243, 1.04163)
+texture = ExtResource("1_3cee2")
+offset = Vector2(-13.3724, -16.0416)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="toDuplicate/subBridge"]
+position = Vector2(-13, 0.5)
+shape = SubResource("RectangleShape2D_vqpoh")
+
+[node name="subBridge" type="AnimatableBody2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="subBridgeSprite" type="Sprite2D" parent="subBridge"]
+position = Vector2(0, 1)
+texture = ExtResource("1_3cee2")
+offset = Vector2(-13, -16)
+flip_h = true
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="subBridge"]
+position = Vector2(-13, 0.5)
+shape = SubResource("RectangleShape2D_vqpoh")
+
+[node name="parts" type="Node2D" parent="subBridge"]
+
+[node name="pivot" type="Sprite2D" parent="."]
+position = Vector2(6, -4)
+texture = ExtResource("1_3cee2")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(64, 24, 11, 8)
+
+[node name="SubBridgeAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../pivot")
+libraries = {
+"": SubResource("AnimationLibrary_c0251")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

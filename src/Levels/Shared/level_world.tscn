@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://wy4f66o7eik0"]
+[gd_scene load_steps=15 format=3 uid="uid://wy4f66o7eik0"]
 
 [ext_resource type="Script" path="res://src/Levels/Shared/level_world.gd" id="1_lw4wr"]
 [ext_resource type="Texture2D" uid="uid://2g72vwn8ndws" path="res://src/Levels/Shared/TileMap.png" id="1_q3032"]
 [ext_resource type="Texture2D" uid="uid://ckkdsi6wklxwl" path="res://src/Levels/Shared/BuildingTileMap.png" id="3_c3nex"]
 [ext_resource type="PackedScene" uid="uid://c87l4h2e277ou" path="res://src/Levels/Shared/Gate.tscn" id="3_smtuv"]
 [ext_resource type="PackedScene" uid="uid://cev5kgjc2i55p" path="res://src/Levels/Shared/wastes.tscn" id="5_rnay1"]
+[ext_resource type="PackedScene" uid="uid://b5veltma7osxs" path="res://src/Levels/Shared/drone.tscn" id="6_5gx2f"]
+[ext_resource type="PackedScene" uid="uid://dekcjwb6n7f7q" path="res://src/Levels/Shared/bridge.tscn" id="7_2ejo6"]
+[ext_resource type="PackedScene" uid="uid://d2m1rekr4ryxw" path="res://src/Levels/Shared/handle.tscn" id="8_838qe"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6ex8"]
 texture = ExtResource("3_c3nex")
@@ -188,3 +191,16 @@ position = Vector2(62, 586)
 [node name="wastes3" parent="Node2D" instance=ExtResource("5_rnay1")]
 position = Vector2(82, 576)
 rotation = -0.651475
+
+[node name="drone" parent="." instance=ExtResource("6_5gx2f")]
+position = Vector2(-83, 176)
+distance = Vector2(170, 0)
+
+[node name="bridge" parent="." instance=ExtResource("7_2ejo6")]
+position = Vector2(130, 333)
+_number_subBridge = 4
+_camera_enabled = false
+
+[node name="Handle" parent="." node_paths=PackedStringArray("bridge") instance=ExtResource("8_838qe")]
+position = Vector2(186, 331)
+bridge = NodePath("../bridge")
