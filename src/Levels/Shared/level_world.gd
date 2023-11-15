@@ -8,7 +8,7 @@ class_name World
 
 static var _instance: World = null
 
-@onready var TRex=preload("res://src/Actors/Enemies/t_rex.tscn")
+@onready var TRex=preload("res://src/Actors/Enemies/t_rex2.tscn")
 
 func _ready():
 	_instance = self if _instance == null else _instance
