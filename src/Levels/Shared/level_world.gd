@@ -3,10 +3,22 @@ class_name World
 
 @onready var tile_map:TileMap=$ground
 
+@onready var _spawnList=$spawnList
+@onready var _enemyList=$enemyList
+
 static var _instance: World = null
+
+@onready var TRex=preload("res://src/Actors/Enemies/t_rex.tscn")
 
 func _ready():
 	_instance = self if _instance == null else _instance
+	
+	for child in _spawnList.get_children():
+		var new_TRex=TRex.instantiate()
+		
+		_enemyList.add_child(new_TRex)
+		
+		new_TRex.global_position=child.global_position
 	
 	
 static func get_tile_data_at(position: Vector2) -> TileData:

@@ -204,3 +204,13 @@ _camera_enabled = false
 [node name="Handle" parent="." node_paths=PackedStringArray("bridge") instance=ExtResource("8_838qe")]
 position = Vector2(186, 331)
 bridge = NodePath("../bridge")
+
+[node name="spawnList" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="spawnList"]
+position = Vector2(-118, 322)
+
+[node name="Marker2D2" type="Marker2D" parent="spawnList"]
+position = Vector2(332, 320)
+
+[node name="enemyList" type="Node2D" parent="."]
