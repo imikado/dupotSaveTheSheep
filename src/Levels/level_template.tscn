@@ -13,4 +13,4 @@ position = Vector2(688, 177)
 position = Vector2(-585, 328)
 
 [node name="Player" parent="LevelWorld" instance=ExtResource("2_sw5aw")]
-position = Vector2(-542, 324)
+position = Vector2(201, 325)
