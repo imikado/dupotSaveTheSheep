@@ -8,7 +8,7 @@ class_name World
 
 static var _instance: World = null
 
-@onready var TRex=load("res://src/Actors/Enemies/t_rex2.tscn")
+@onready var TRex=load("res://src/Actors/Enemies/TRex.tscn")
 
 
 func _ready():
