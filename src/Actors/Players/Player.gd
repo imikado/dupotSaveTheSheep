@@ -35,10 +35,16 @@ func _physics_process(delta):
 	
 	if get_current_state().can_jump:
 		update_jump(delta)
+	
+	if get_current_state().can_takeOutGun:
+		update_takeoutgun(delta)
+	
+	if get_current_state().can_shoot:
+		update_gunshoot(delta)
+	
 		
 	get_current_state().state_physics_process(delta)
 
-	update_carry_sheep()
 
 	process_move()
 	
@@ -55,6 +61,16 @@ func update_gravity(delta):
 func update_jump(delta):
 	if GlobalInput.is_press_jump_button() and is_on_floor():
 		set_new_state(PlayerStateMachine.STATE_JUMP)
+
+func update_takeoutgun(delta):
+	if GlobalInput.is_press_attack_button():
+		set_new_state(PlayerStateMachine.STATE_TAKEOUTGUN)
+
+func update_gunshoot(delta):
+	if GlobalInput.is_press_attack_button():
+		set_new_state(PlayerStateMachine.STATE_GUNSHOOT)
+
+
 
 func update_carry_sheep():
 	if !carry_sheep and GlobalInput.is_press_carry_button() and is_on_floor():
@@ -92,7 +108,7 @@ func update_move(delta):
 			velocity.x = move_toward(velocity.x, 0, currentSpeed)
 			print("on edge")
 		else:
-			if(get_current_state().name!=PlayerStateMachine.STATE_IMPATIENT):
+			if get_current_state().can_idle:
 				set_new_state(PlayerStateMachine.STATE_IDLE)
 			velocity.x = move_toward(velocity.x, 0, currentSpeed)
 

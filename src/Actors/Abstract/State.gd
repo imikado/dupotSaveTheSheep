@@ -15,6 +15,9 @@ func enter():
 func animation_play(animation_name:String ):
 	state_machine.animation_play(animation_name)
 	
+func animation_reset():
+	state_machine.animation_reset()
+	
 func state_physics_process(delta):
 	pass
 	

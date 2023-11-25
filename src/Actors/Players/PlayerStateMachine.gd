@@ -7,6 +7,10 @@ const STATE_JUMP="StateJump"
 const STATE_FALL="StateFall"
 const STATE_EDGE="StateEdge"
 const STATE_IMPATIENT="StateImpatient"
+const STATE_TAKEOUTGUN="StateTakeOutGun"
+const STATE_GUNOUT="StateGunOut"
+const STATE_GUNSHOOT="StateGunShoot"
+
 
 func _ready():
 	available_state_name_list=[
@@ -15,7 +19,10 @@ func _ready():
 		STATE_JUMP,
 		STATE_FALL,
 		STATE_EDGE,
-		STATE_IMPATIENT
+		STATE_IMPATIENT,
+		STATE_TAKEOUTGUN,
+		STATE_GUNOUT,
+		STATE_GUNSHOOT
 	]
 	super.init()
 	

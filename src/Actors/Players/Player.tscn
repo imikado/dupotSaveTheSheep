@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://dld0jkheienqb"]
+[gd_scene load_steps=34 format=3 uid="uid://dld0jkheienqb"]
 
 [ext_resource type="Script" path="res://src/Actors/Players/Player.gd" id="1_nmcdb"]
 [ext_resource type="Texture2D" uid="uid://cpd0lts7lrx6l" path="res://src/Actors/Players/Player/player-impatient.png" id="2_a4qs2"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="2_ap35m"]
+[ext_resource type="Texture2D" uid="uid://cd1sru7miht31" path="res://src/Actors/Players/Player/player-shoot.png" id="2_bkto8"]
 [ext_resource type="Texture2D" uid="uid://134ipqk1sbau" path="res://src/Actors/Players/Player/player-walking.png" id="3_gnjl8"]
 [ext_resource type="Texture2D" uid="uid://dmseyqkwcrik4" path="res://src/Actors/Players/Player/player-jump.png" id="4_02sqv"]
 [ext_resource type="Script" path="res://src/Actors/Players/PlayerStateMachine.gd" id="4_kq3e8"]
@@ -12,9 +13,13 @@
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateWalking.gd" id="6_vgc3e"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateJump.gd" id="7_xh0im"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateEdge.gd" id="8_vy1bf"]
+[ext_resource type="Texture2D" uid="uid://chkeo82jqtwwt" path="res://src/Actors/Players/Player/player-preshoot.png" id="8_xpmiw"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateFall.gd" id="9_pdt5t"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="11_vadop"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateImpatient.gd" id="14_1xsim"]
+[ext_resource type="Script" path="res://src/Actors/Players/States/StateTakeOutGun.gd" id="17_rgjwc"]
+[ext_resource type="Script" path="res://src/Actors/Players/States/StateGunOut.gd" id="18_h7gu6"]
+[ext_resource type="Script" path="res://src/Actors/Players/States/StateGunShoot.gd" id="19_4ugtj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_moofm"]
 radius = 7.0
@@ -275,6 +280,126 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_vf8ux"]
+resource_name = "gunShoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_bkto8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_85dsr"]
+resource_name = "takeOutGun"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_xpmiw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_3rms3"]
+resource_name = "gunOut"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_bkto8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rw1v"]
 _data = {
 "Edge": SubResource("Animation_r1fmr"),
@@ -283,7 +408,10 @@ _data = {
 "Impatient": SubResource("Animation_d8j6w"),
 "Jump": SubResource("Animation_1c7kc"),
 "RESET": SubResource("Animation_jg8ng"),
-"Walking": SubResource("Animation_getxm")
+"Walking": SubResource("Animation_getxm"),
+"gunOut": SubResource("Animation_3rms3"),
+"gunShoot": SubResource("Animation_vf8ux"),
+"takeOutGun": SubResource("Animation_85dsr")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtpuh"]
@@ -294,8 +422,8 @@ script = ExtResource("1_nmcdb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
-texture = ExtResource("2_ap35m")
-hframes = 3
+texture = ExtResource("2_bkto8")
+hframes = 2
 region_rect = Rect2(0, 0, 64, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -317,22 +445,27 @@ actor = NodePath("..")
 script = ExtResource("5_c6jvt")
 can_move = true
 can_jump = true
+can_takeOutGun = true
 animation_name = "Idle"
 
 [node name="StateEdge" type="Node" parent="StateMachine"]
 script = ExtResource("8_vy1bf")
+can_idle = false
 can_move = true
 can_jump = true
+can_takeOutGun = true
 animation_name = "Edge"
 
 [node name="StateWalking" type="Node" parent="StateMachine"]
 script = ExtResource("6_vgc3e")
 can_move = true
 can_jump = true
+can_takeOutGun = true
 animation_name = "Walking"
 
 [node name="StateJump" type="Node" parent="StateMachine"]
 script = ExtResource("7_xh0im")
+can_idle = false
 has_gravity = false
 animation_name = "Jump"
 
@@ -342,9 +475,29 @@ animation_name = "Fall"
 
 [node name="StateImpatient" type="Node" parent="StateMachine"]
 script = ExtResource("14_1xsim")
+can_idle = false
 can_move = true
 can_jump = true
+can_takeOutGun = true
 animation_name = "Impatient"
+
+[node name="StateTakeOutGun" type="Node" parent="StateMachine"]
+script = ExtResource("17_rgjwc")
+can_idle = false
+animation_name = "takeOutGun"
+
+[node name="StateGunOut" type="Node" parent="StateMachine"]
+script = ExtResource("18_h7gu6")
+can_idle = false
+can_move = true
+can_shoot = true
+animation_name = "gunOut"
+
+[node name="StateGunShoot" type="Node" parent="StateMachine"]
+script = ExtResource("19_4ugtj")
+can_idle = false
+can_move = true
+animation_name = "gunShoot"
 
 [node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("11_vadop")]
 state_machine = NodePath("../StateMachine")

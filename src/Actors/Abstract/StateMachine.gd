@@ -30,6 +30,9 @@ func _physics_process(delta):
 
 func animation_play(animation:String)->void :
 	animationPlayer.play(animation)
+	
+func animation_reset()->void:
+	animationPlayer.stop(false)
 
 func animation_stop()->void:
 	animationPlayer.stop()
