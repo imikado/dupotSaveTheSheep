@@ -505,6 +505,7 @@ animation_name = "takeOutGun"
 script = ExtResource("18_h7gu6")
 can_idle = false
 can_move = true
+can_jump = true
 can_shoot = true
 animation_name = "gunOut"
 
