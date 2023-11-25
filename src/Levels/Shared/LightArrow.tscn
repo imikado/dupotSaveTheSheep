@@ -40,6 +40,7 @@ _data = {
 script = ExtResource("1_wsruc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 50
 position = Vector2(0, -1)
 texture = ExtResource("1_vrqh4")
 

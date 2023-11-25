@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Sheep
 
-const SPEED = 100.0
+const SPEED = 30.0
 const JUMP_VELOCITY = -400.0
 
 @export var speed:float = SPEED

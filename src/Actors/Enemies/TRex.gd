@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Enemy
 
 @onready var _animationPlayer=$AnimationPlayer
 @onready var _sprite=$Sprite2D
@@ -24,7 +24,7 @@ func _physics_process(delta):
 	if get_current_state().has_gravity:
 		if not is_on_floor():
 			velocity.y += gravity * delta
-		
+			
 	if get_current_state().can_move:
 		if direction:
 			velocity.x = direction * get_current_speed()
@@ -35,8 +35,7 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 		get_current_state().state_physics_process(delta)
-
-
+	
 		if is_on_wall():
 			set_new_state(TRexStateMachine.STATE_TURN)
 			if direction == -1:
@@ -48,9 +47,15 @@ func _physics_process(delta):
 			
 			velocity.x=0
 			direction=0
+	else:
+		velocity.x=0
+
 
 	move_and_slide()
-	
+
+func damage():
+	set_new_state(TRexStateMachine.STATE_DAMAGED)
+	print('damaged')
 
 func turn():
 	direction=next_direction

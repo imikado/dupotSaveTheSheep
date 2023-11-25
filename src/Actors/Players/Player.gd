@@ -22,6 +22,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @export var _sheep:Sheep 
 
+@export var muzzleMarker2d:Marker2D
+
+@onready var Bullet = load("res://src/Actors/Players/Bullet.tscn")
+
 
 func _physics_process(delta):
 	
@@ -70,7 +74,15 @@ func update_gunshoot(delta):
 	if GlobalInput.is_press_attack_button():
 		set_new_state(PlayerStateMachine.STATE_GUNSHOOT)
 
-
+func shoot():
+	var bullet=Bullet.instantiate()
+	get_parent().add_child(bullet)
+	
+	bullet.global_position=muzzleMarker2d.global_position
+	if _sprite.flip_h:
+		bullet.run(-1)
+	else:
+		bullet.run(1)
 
 func update_carry_sheep():
 	if !carry_sheep and GlobalInput.is_press_carry_button() and is_on_floor():
@@ -93,6 +105,8 @@ func update_carry_sheep():
 		
 		carry_sheep=false
 
+
+
 func update_move(delta):
 	var currentSpeed= get_current_speed()
 	
@@ -102,6 +116,11 @@ func update_move(delta):
 		velocity.x = direction * currentSpeed
 		
 		_sprite.flip_h=(direction==-1)
+		if _sprite.flip_h:
+			muzzleMarker2d.position.x=-25
+		else:
+			muzzleMarker2d.position.x=25	
+		
 	else:
 		if !_raycast.is_colliding():
 			set_new_state(PlayerStateMachine.STATE_EDGE)

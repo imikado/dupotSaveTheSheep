@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2m1rekr4ryxw"]
+[gd_scene load_steps=8 format=3 uid="uid://d2m1rekr4ryxw"]
 
 [ext_resource type="Script" path="res://src/Levels/Shared/handle.gd" id="1_v77g5"]
 [ext_resource type="Texture2D" uid="uid://dbnhotclb7nrj" path="res://src/Levels/Shared/BuildingWorkTileMap.png" id="1_vi70r"]
+[ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="3_vbyle"]
 
 [sub_resource type="Animation" id="Animation_qfcgf"]
 resource_name = "close"
@@ -91,3 +92,7 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, -0.5)
 shape = SubResource("RectangleShape2D_jb0ux")
+
+[node name="LightArrow" parent="." instance=ExtResource("3_vbyle")]
+position = Vector2(12, -14)
+rotation = 0.744042
