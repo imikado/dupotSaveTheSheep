@@ -214,3 +214,8 @@ position = Vector2(-118, 322)
 position = Vector2(332, 320)
 
 [node name="enemyList" type="Node2D" parent="."]
+
+[node name="spawnTimer" type="Timer" parent="."]
+wait_time = 15.0
+
+[connection signal="timeout" from="spawnTimer" to="." method="_on_spawn_timer_timeout"]
