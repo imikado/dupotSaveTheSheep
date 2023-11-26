@@ -6,6 +6,7 @@ const STATE_WALKING="StateWalking"
 const STATE_FALL="StateFall"
 const STATE_TURN="StateTurn"
 const STATE_DAMAGED="StateDamaged"
+const STATE_DIE="StateDie"
 
 const ANIM_IDLE='Idle';
 const ANIM_WALKING='Walking';
@@ -18,6 +19,7 @@ func _ready():
 		STATE_IDLE,
 		STATE_TURN,
 		STATE_DAMAGED,
+		STATE_DIE
 		#STATE_FALL
 	]
 	super.init()

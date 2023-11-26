@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://chxkb2ffjdts7"]
+[gd_scene load_steps=6 format=3 uid="uid://chxkb2ffjdts7"]
 
+[ext_resource type="Script" path="res://src/Levels/level_zoom.gd" id="1_58wic"]
 [ext_resource type="Script" path="res://src/Levels/LevelZoomCamera2D.gd" id="1_h1bom"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="1_s1jsx"]
 [ext_resource type="PackedScene" uid="uid://dtjgk81pko51a" path="res://src/Levels/level_template.tscn" id="1_xpe02"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="2_rpgsj"]
 
 [node name="LevelZoom" type="Node2D"]
+script = ExtResource("1_58wic")
 
 [node name="HUD" parent="." instance=ExtResource("1_s1jsx")]
 

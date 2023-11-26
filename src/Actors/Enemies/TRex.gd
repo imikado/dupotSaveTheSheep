@@ -9,6 +9,8 @@ const JUMP_VELOCITY = -400.0
 var direction=1
 var next_direction=0
 
+var life =5
+
 @onready var _state_machine:TRexStateMachine = $StateMachine
 
 @export var speed:float = SPEED
@@ -16,14 +18,13 @@ var next_direction=0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func a_ready():
-	_animationPlayer.play('Idle')
+
 
 func _physics_process(delta):
 	# Add the gravity.
 	if get_current_state().has_gravity:
-		if not is_on_floor():
-			velocity.y += gravity * delta
+		#if not is_on_floor():
+		velocity.y += gravity * delta
 			
 	if get_current_state().can_move:
 		if direction:
@@ -55,7 +56,13 @@ func _physics_process(delta):
 
 func damage():
 	set_new_state(TRexStateMachine.STATE_DAMAGED)
-	print('damaged')
+	life -=1
+	if life <=0:
+		set_new_state(TRexStateMachine.STATE_DIE)
+		
+func finish_die():
+	queue_free()
+	GlobalEvents.emit_signal("enemy_die",self)
 
 func turn():
 	direction=next_direction
