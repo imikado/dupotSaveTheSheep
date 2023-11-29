@@ -1,20 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://g6loon2js4i6"]
+[gd_scene load_steps=9 format=3 uid="uid://g6loon2js4i6"]
 
 [ext_resource type="Script" path="res://src/UI/hud.gd" id="1_j2vg7"]
 [ext_resource type="Texture2D" uid="uid://cu7k7lf7s13xt" path="res://src/UI/Controls/Shared/icon-player.png" id="1_rd6rf"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="2_g12wp"]
 [ext_resource type="Texture2D" uid="uid://bdia6rq4j7acw" path="res://src/UI/Controls/Shared/icon-sheep.png" id="3_ebnga"]
+[ext_resource type="Texture2D" uid="uid://lsjrtiaxlhgk" path="res://src/UI/Controls/Shared/icon-water.png" id="5_l1ffq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3s2om"]
+bg_color = Color(0.00784314, 0.227451, 0.494118, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jx52h"]
+bg_color = Color(0.0784314, 0.662745, 0.819608, 1)
+
+[sub_resource type="Theme" id="Theme_8xadf"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_3s2om")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_jx52h")
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_j2vg7")
 
-[node name="player" type="Control" parent="."]
+[node name="Player" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="icon" type="TextureRect" parent="player"]
+[node name="icon" type="TextureRect" parent="Player"]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 2.0
@@ -22,7 +33,7 @@ offset_right = 19.0
 offset_bottom = 18.0
 texture = ExtResource("1_rd6rf")
 
-[node name="lifeBar" type="ProgressBar" parent="player"]
+[node name="lifeBar" type="ProgressBar" parent="Player"]
 layout_mode = 0
 offset_left = 28.0
 offset_top = 8.0
@@ -56,6 +67,34 @@ offset_right = 78.0
 offset_bottom = 14.0
 theme = ExtResource("2_g12wp")
 max_value = 50.0
+value = 45.0
+show_percentage = false
+
+[node name="Water" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 52.0
+offset_right = 41.0
+offset_bottom = 92.0
+
+[node name="icon" type="TextureRect" parent="Water"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 19.0
+offset_bottom = 18.0
+texture = ExtResource("5_l1ffq")
+
+[node name="lifeBar" type="ProgressBar" parent="Water"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 8.0
+offset_right = 78.0
+offset_bottom = 14.0
+theme = SubResource("Theme_8xadf")
+max_value = 80.0
+step = 1.0
 value = 45.0
 show_percentage = false
 

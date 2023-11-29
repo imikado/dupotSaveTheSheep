@@ -75,6 +75,11 @@ func update_gunshoot(delta):
 		set_new_state(PlayerStateMachine.STATE_GUNSHOOT)
 
 func shoot():
+
+	if !GlobalPlayer.can_use_amount_water(10):
+		print('cannot user water 10')
+		return
+
 	var bullet=Bullet.instantiate()
 	get_parent().add_child(bullet)
 	
@@ -83,6 +88,11 @@ func shoot():
 		bullet.run(-1)
 	else:
 		bullet.run(1)
+
+	GlobalPlayer.use_amount_water(10)
+
+	GlobalEvents.emit_signal("player_water_changed",GlobalPlayer.get_water())
+
 
 func update_carry_sheep():
 	if !carry_sheep and GlobalInput.is_press_carry_button() and is_on_floor():

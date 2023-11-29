@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://wy4f66o7eik0"]
+[gd_scene load_steps=16 format=3 uid="uid://wy4f66o7eik0"]
 
 [ext_resource type="Script" path="res://src/Levels/Shared/level_world.gd" id="1_lw4wr"]
 [ext_resource type="Texture2D" uid="uid://2g72vwn8ndws" path="res://src/Levels/Shared/TileMap.png" id="1_q3032"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b5veltma7osxs" path="res://src/Levels/Shared/drone.tscn" id="6_5gx2f"]
 [ext_resource type="PackedScene" uid="uid://dekcjwb6n7f7q" path="res://src/Levels/Shared/bridge.tscn" id="7_2ejo6"]
 [ext_resource type="PackedScene" uid="uid://d2m1rekr4ryxw" path="res://src/Levels/Shared/handle.tscn" id="8_838qe"]
+[ext_resource type="PackedScene" uid="uid://cluurftsudn5b" path="res://src/Levels/Shared/water_bottle.tscn" id="9_x1blq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k6ex8"]
 texture = ExtResource("3_c3nex")
@@ -134,6 +135,13 @@ sources/1 = SubResource("TileSetAtlasSource_e0fuv")
 [node name="LevelWorld" type="Node2D"]
 script = ExtResource("1_lw4wr")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1029.0
+offset_top = -443.0
+offset_right = 1260.0
+offset_bottom = 665.0
+color = Color(0, 0.15717, 0.320881, 1)
+
 [node name="buildingBackground2" type="TileMap" parent="."]
 modulate = Color(0.14902, 0.117647, 0.0784314, 1)
 position = Vector2(41, 77)
@@ -217,5 +225,16 @@ position = Vector2(332, 320)
 
 [node name="spawnTimer" type="Timer" parent="."]
 wait_time = 15.0
+
+[node name="watterBottles" type="Node2D" parent="."]
+
+[node name="WaterBottle" parent="watterBottles" instance=ExtResource("9_x1blq")]
+position = Vector2(-220, 181)
+
+[node name="WaterBottle2" parent="watterBottles" instance=ExtResource("9_x1blq")]
+position = Vector2(202, 189)
+
+[node name="WaterBottle3" parent="watterBottles" instance=ExtResource("9_x1blq")]
+position = Vector2(570, 235)
 
 [connection signal="timeout" from="spawnTimer" to="." method="_on_spawn_timer_timeout"]

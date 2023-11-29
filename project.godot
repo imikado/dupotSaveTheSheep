@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 GlobalGame="*res://src/Autoload/GlobalGame.gd"
 GlobalInput="*res://src/Autoload/GlobalInput.gd"
+GlobalEvents="*res://src/Autoload/GlobalEvents.gd"
+GlobalPlayer="*res://src/Autoload/GlobalPlayer.gd"
 
 [display]
 

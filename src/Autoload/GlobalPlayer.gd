@@ -2,15 +2,13 @@ extends Node
 
 const START_SCORE = 0
 const START_LIFE = 100
-const START_MANA = 10
-const MAX_MANA = 80
+const START_WATER = 20
+const MAX_WATER = 80
 
 var _score = 0
-var life = START_LIFE
-var mana = START_MANA
+var _life = START_LIFE
+var _water = START_WATER
 var _level = 1
-
-var attack_amount_mana = 10
 
 
 func set_level(level):
@@ -24,8 +22,8 @@ func get_level():
 func reset_game():
 	_level = 1
 	_score = START_SCORE
-	life = START_LIFE
-	mana = START_MANA
+	_life = START_LIFE
+	_water = START_WATER
 
 
 func get_score():
@@ -36,25 +34,33 @@ func save_score(score):
 	_score = score
 
 
-func increment_mana(value):
-	mana += value
-	if mana > MAX_MANA:
-		mana = MAX_MANA
+func get_water():
+	return _water
 
 
-func use_amount_mana(value):
-	mana -= value
+func increment_water(value):
+	_water += value
+	if _water > MAX_WATER:
+		_water = MAX_WATER
 
 
-func can_use_amount_mana(value):
-	if mana >= value:
+func use_amount_water(value):
+	_water -= value
+
+
+func can_use_amount_water(value):
+	if _water >= value:
 		return true
 	return false
 
 
-func decrease_health(value):
-	life -= value
+func get_life():
+	return _life
+
+
+func decrease_life(value):
+	_life -= value
 
 
 func update_life(value):
-	life = value
+	_life = value
