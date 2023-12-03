@@ -7,6 +7,8 @@ const JUMP_VELOCITY = -150.0
 
 const AREA='PlayerArea'
 
+const SHOOT_WATER_VALUE=1
+
 
 var carry_sheep=false
 
@@ -76,8 +78,8 @@ func update_gunshoot(delta):
 
 func shoot():
 
-	if !GlobalPlayer.can_use_amount_water(10):
-		print('cannot user water 10')
+	if !GlobalPlayer.can_use_amount_water(SHOOT_WATER_VALUE):
+		print('cannot user water '+str(SHOOT_WATER_VALUE))
 		return
 
 	var bullet=Bullet.instantiate()
@@ -89,7 +91,7 @@ func shoot():
 	else:
 		bullet.run(1)
 
-	GlobalPlayer.use_amount_water(10)
+	GlobalPlayer.use_amount_water(SHOOT_WATER_VALUE)
 
 	GlobalEvents.emit_signal("player_water_changed",GlobalPlayer.get_water())
 
