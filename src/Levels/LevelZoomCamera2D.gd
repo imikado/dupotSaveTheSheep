@@ -6,8 +6,8 @@ extends Camera2D
 @export var max_zoom = 5  # camera won't zoom farther than this
 @export var margin = Vector2(400, 200)  # include some buffer area around targets
 
-@onready var player=$"../LevelTemplate/LevelWorld/Player"
-@onready var sheep=$"../LevelTemplate/LevelWorld/Sheep"
+@export var player:Player
+@export var sheep:Sheep
 
 @onready var targets = []  # Array of targets to be tracked.
 

@@ -8,7 +8,7 @@ var is_open=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_animationPlayer.play('open')
+	#_animationPlayer.play('open')
 	pass # Replace with function body.
 
 

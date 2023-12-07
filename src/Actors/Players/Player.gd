@@ -166,10 +166,7 @@ func get_current_state()->State:
 	return _state_machine.current_state
 	
 func get_current_speed():
-	var customSpeed=World.get_custom_data_at(position,"moveSpeed",1)
-	if customSpeed==0:
-		return SPEED
-	return (SPEED*customSpeed)
+	return SPEED
 
 
 	

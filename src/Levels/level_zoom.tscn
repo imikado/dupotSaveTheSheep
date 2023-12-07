@@ -1,23 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://chxkb2ffjdts7"]
+[gd_scene load_steps=7 format=3 uid="uid://chxkb2ffjdts7"]
 
 [ext_resource type="Script" path="res://src/Levels/level_zoom.gd" id="1_58wic"]
 [ext_resource type="Script" path="res://src/Levels/LevelZoomCamera2D.gd" id="1_h1bom"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="1_s1jsx"]
-[ext_resource type="PackedScene" uid="uid://dtjgk81pko51a" path="res://src/Levels/level_template.tscn" id="1_xpe02"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="2_rpgsj"]
+[ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="6_sjld5"]
+[ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="7_niqfh"]
 
-[node name="LevelZoom" type="Node2D"]
+[node name="LevelZoom" type="Node2D" node_paths=PackedStringArray("player", "sheep")]
 script = ExtResource("1_58wic")
+player = NodePath("Player")
+sheep = NodePath("Sheep")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1527.0
+offset_top = -718.0
+offset_right = 2809.0
+offset_bottom = 2578.0
+color = Color(0, 0.156863, 0.321569, 1)
+
+[node name="rooms" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("1_s1jsx")]
 
 [node name="Controls" parent="." instance=ExtResource("2_rpgsj")]
 
-[node name="LevelTemplate" parent="." instance=ExtResource("1_xpe02")]
-position = Vector2(-820, -305)
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "sheep")]
 position = Vector2(0, 177)
 script = ExtResource("1_h1bom")
 min_zoom = 0.2
 margin = Vector2(50, 50)
+player = NodePath("../Player")
+sheep = NodePath("../Sheep")
+
+[node name="Player" parent="." instance=ExtResource("6_sjld5")]
+position = Vector2(-614, -207)
+
+[node name="Sheep" parent="." instance=ExtResource("7_niqfh")]
+position = Vector2(-417, -204)

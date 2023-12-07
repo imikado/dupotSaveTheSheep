@@ -9,25 +9,13 @@ size = Vector2(28, 1)
 [sub_resource type="Animation" id="Animation_fmjbj"]
 resource_name = "close"
 length = 1.1
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../subBridge:rotation")
+tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.5708, 0.0]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -38,25 +26,13 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_e7rwx"]
 resource_name = "open"
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../subBridge:rotation")
+tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.5708]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -76,9 +52,7 @@ script = ExtResource("1_vn2hk")
 
 [node name="toDuplicate" type="Node2D" parent="."]
 
-[node name="subBridge" type="AnimatableBody2D" parent="toDuplicate"]
-visible = false
-position = Vector2(0, 1)
+[node name="subBridge" type="StaticBody2D" parent="toDuplicate"]
 
 [node name="subBridgeSprite" type="Sprite2D" parent="toDuplicate/subBridge"]
 position = Vector2(1.37243, 1.04163)
@@ -92,8 +66,7 @@ region_rect = Rect2(0, 0, 32, 32)
 position = Vector2(-13, 0.5)
 shape = SubResource("RectangleShape2D_vqpoh")
 
-[node name="subBridge" type="AnimatableBody2D" parent="."]
-position = Vector2(0, 1)
+[node name="subBridge" type="StaticBody2D" parent="."]
 
 [node name="subBridgeSprite" type="Sprite2D" parent="subBridge"]
 position = Vector2(0, 1)
