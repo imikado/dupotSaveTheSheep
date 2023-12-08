@@ -60,7 +60,7 @@ func _ready():
 	
 	#---------
 	
-	player.global_position.x=600
+	player.global_position.x=20
 	player.global_position.y=0
 	
 	sheep.global_position.x=-10

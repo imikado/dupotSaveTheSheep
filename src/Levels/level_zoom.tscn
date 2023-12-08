@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://chxkb2ffjdts7"]
+[gd_scene load_steps=8 format=3 uid="uid://chxkb2ffjdts7"]
 
 [ext_resource type="Script" path="res://src/Levels/level_zoom.gd" id="1_58wic"]
 [ext_resource type="Script" path="res://src/Levels/LevelZoomCamera2D.gd" id="1_h1bom"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="1_s1jsx"]
+[ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_fvc06"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="2_rpgsj"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="6_sjld5"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="7_niqfh"]
@@ -13,11 +14,34 @@ player = NodePath("Player")
 sheep = NodePath("Sheep")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -1527.0
 offset_top = -718.0
 offset_right = 2809.0
 offset_bottom = 2578.0
 color = Color(0, 0.156863, 0.321569, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_offset = Vector2(480, 0)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(0.0117647, 0, 0, 1)
+position = Vector2(-50, 40)
+motion_offset = Vector2(10, 0)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(4, 164)
+texture = ExtResource("2_fvc06")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2(0, 50)
+motion_offset = Vector2(-20, 0)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(4, 164)
+texture = ExtResource("2_fvc06")
 
 [node name="rooms" type="Node2D" parent="."]
 
