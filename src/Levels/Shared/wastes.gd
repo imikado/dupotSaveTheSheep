@@ -15,5 +15,6 @@ func _on_body_entered(body):
 	print(body)
 	if body is Player:
 		print('gameover')
-		get_tree().change_scene_to_file('res://src/UI/Screens/game_over.tscn')
+		GlobalEvents.player_gameover.emit()
+		
 	pass # Replace with function body.

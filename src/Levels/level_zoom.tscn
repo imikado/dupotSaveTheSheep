@@ -1,46 +1,50 @@
-[gd_scene load_steps=8 format=3 uid="uid://chxkb2ffjdts7"]
+[gd_scene load_steps=11 format=3 uid="uid://chxkb2ffjdts7"]
 
 [ext_resource type="Script" path="res://src/Levels/level_zoom.gd" id="1_58wic"]
 [ext_resource type="Script" path="res://src/Levels/LevelZoomCamera2D.gd" id="1_h1bom"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="1_s1jsx"]
+[ext_resource type="PackedScene" uid="uid://cs0lw5ouwumj3" path="res://src/Levels/rooms/room_1.tscn" id="2_0fcxj"]
 [ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_fvc06"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="2_rpgsj"]
+[ext_resource type="PackedScene" uid="uid://cbqhrx2k2x53o" path="res://src/Levels/rooms/room_2.tscn" id="3_r52g3"]
+[ext_resource type="PackedScene" uid="uid://blqbs5g1aiy8m" path="res://src/Levels/rooms/room_3.tscn" id="4_b1ljw"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="6_sjld5"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="7_niqfh"]
 
 [node name="LevelZoom" type="Node2D" node_paths=PackedStringArray("player", "sheep")]
 script = ExtResource("1_58wic")
+Room1 = ExtResource("2_0fcxj")
+Room2 = ExtResource("3_r52g3")
+Room3 = ExtResource("4_b1ljw")
 player = NodePath("Player")
 sheep = NodePath("Sheep")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/sky"]
+z_as_relative = false
 offset_left = -1527.0
 offset_top = -718.0
 offset_right = 2809.0
 offset_bottom = 2578.0
-color = Color(0, 0.156863, 0.321569, 1)
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-scroll_base_offset = Vector2(480, 0)
+color = Color(0, 0, 0, 1)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-modulate = Color(0.0117647, 0, 0, 1)
-position = Vector2(-50, 40)
-motion_offset = Vector2(10, 0)
-motion_mirroring = Vector2(480, 0)
+motion_scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(4, 164)
+modulate = Color(0.235294, 0.360784, 0.45098, 1)
+position = Vector2(60, 279)
 texture = ExtResource("2_fvc06")
+flip_h = true
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-position = Vector2(0, 50)
-motion_offset = Vector2(-20, 0)
-motion_mirroring = Vector2(480, 0)
+motion_scale = Vector2(0.3, 0.3)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
-position = Vector2(4, 164)
+position = Vector2(20, 287)
 texture = ExtResource("2_fvc06")
 
 [node name="rooms" type="Node2D" parent="."]

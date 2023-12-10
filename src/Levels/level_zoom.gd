@@ -1,8 +1,8 @@
 extends Node2D
 
-@onready var Room1=load("res://src/Levels/rooms/room_1.tscn")
-@onready var Room2=load("res://src/Levels/rooms/room_2.tscn")
-@onready var Room3=load("res://src/Levels/rooms/room_3.tscn")
+@export var Room1:PackedScene
+@export var Room2:PackedScene
+@export var Room3:PackedScene
 
 @onready var hud=$HUD
 
@@ -11,11 +11,17 @@ extends Node2D
 @export var player:Player
 @export var sheep:Sheep
 
+@onready var parallaxLayer=$ParallaxBackground/ParallaxLayer
+@onready var parallaxLayerSprite=$ParallaxBackground/ParallaxLayer/Sprite2D
+
+@onready var parallaxLayer2=$ParallaxBackground/ParallaxLayer2
+@onready var parallaxLayer2Sprite=$ParallaxBackground/ParallaxLayer2/Sprite2D
+
 var score:int=0
 
 var roomNumber=-1
 
-@onready var roomList=[Room1,Room2,Room3]
+@onready var roomList:Array[PackedScene]=[Room1,Room2,Room3]
 
 func get_room():
 	
@@ -30,7 +36,7 @@ func get_room():
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	
-
+	GlobalEvents.player_gameover.connect(on_player_gameover)
 	
 	GlobalEvents.connect("enemy_die",on_enemy_die)
 	GlobalEvents.connect("player_water_changed",on_player_water_changed)
@@ -56,6 +62,13 @@ func _ready():
 	
 		currentX+=roomLoop.width
 	
+		var parallaxLayerSpriteLoop=parallaxLayerSprite.duplicate()
+		parallaxLayer.add_child(parallaxLayerSpriteLoop)
+		parallaxLayerSpriteLoop.global_position.x+=480*i
+		
+		var parallaxLayerSpriteLoop2=parallaxLayer2Sprite.duplicate()
+		parallaxLayer2.add_child(parallaxLayerSpriteLoop2)
+		parallaxLayerSpriteLoop2.global_position.x+=480*i
 	
 	
 	#---------
@@ -73,3 +86,7 @@ func on_enemy_die(enemy):
 	
 func on_player_water_changed(new_value):
 	hud.set_water(new_value)
+
+func on_player_gameover():
+	print('game over')
+	get_tree().change_scene_to_file('res://src/UI/Screens/game_over.tscn')
