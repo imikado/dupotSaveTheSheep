@@ -17,7 +17,7 @@ func spawn_trex():
 	
 	var enemyNumber=_enemyList.get_child_count()
 	
-	if enemyNumber < 3: 
+	if enemyNumber < 2: 
 	
 		var new_TRex=TRex.instantiate()
 		
@@ -28,3 +28,8 @@ func spawn_trex():
 
 	_spawnTimer.start()
 	
+
+
+func _on_timer_timeout():
+	spawn_trex()
+	pass # Replace with function body.

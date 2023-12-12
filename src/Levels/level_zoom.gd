@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var RoomStart:PackedScene
 @export var Room1:PackedScene
 @export var Room2:PackedScene
 @export var Room3:PackedScene
@@ -28,9 +29,7 @@ func get_room():
 	roomNumber+=1
 	if roomNumber>=roomList.size():
 		roomNumber=0
- 	
-
-	 
+ 	 
 	return roomList[roomNumber]
 
 # Called when the node enters the scene tree for the first time.
@@ -49,13 +48,17 @@ func _ready():
 	var previousWidth=0
 	var currentX=0
 	
-	for i in range(-1,7):
+	var roomStart=RoomStart.instantiate()
+	
+	_rooms.add_child(roomStart)
+	
+	roomStart.global_position.x=roomStart.width*-1
+	roomStart.global_position.y=0
+	
+	for i in range(1,8):
 		var roomLoop=get_room().instantiate()
 		
 		_rooms.add_child(roomLoop)
-		
-		if i<0:
-			currentX-=roomLoop.width
 		
 		roomLoop.global_position.x=currentX
 		roomLoop.global_position.y=0

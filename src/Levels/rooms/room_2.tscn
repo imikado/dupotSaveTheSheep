@@ -42,6 +42,9 @@ position = Vector2(237, 316)
 [node name="enemyList" type="Node2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
 
 [node name="WaterBottle" parent="." instance=ExtResource("5_7csw6")]
 position = Vector2(113, 185)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

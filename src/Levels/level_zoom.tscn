@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://chxkb2ffjdts7"]
+[gd_scene load_steps=12 format=3 uid="uid://chxkb2ffjdts7"]
 
 [ext_resource type="Script" path="res://src/Levels/level_zoom.gd" id="1_58wic"]
 [ext_resource type="Script" path="res://src/Levels/LevelZoomCamera2D.gd" id="1_h1bom"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cs0lw5ouwumj3" path="res://src/Levels/rooms/room_1.tscn" id="2_0fcxj"]
 [ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_fvc06"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="2_rpgsj"]
+[ext_resource type="PackedScene" uid="uid://dbtci2wi7fxc5" path="res://src/Levels/rooms/room_start.tscn" id="2_ycvxw"]
 [ext_resource type="PackedScene" uid="uid://cbqhrx2k2x53o" path="res://src/Levels/rooms/room_2.tscn" id="3_r52g3"]
 [ext_resource type="PackedScene" uid="uid://blqbs5g1aiy8m" path="res://src/Levels/rooms/room_3.tscn" id="4_b1ljw"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="6_sjld5"]
@@ -13,6 +14,7 @@
 
 [node name="LevelZoom" type="Node2D" node_paths=PackedStringArray("player", "sheep")]
 script = ExtResource("1_58wic")
+RoomStart = ExtResource("2_ycvxw")
 Room1 = ExtResource("2_0fcxj")
 Room2 = ExtResource("3_r52g3")
 Room3 = ExtResource("4_b1ljw")
