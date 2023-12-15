@@ -30,6 +30,10 @@ window/size/window_width_override=1440
 window/size/window_height_override=810
 window/stretch/mode="canvas_items"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 ui_accept={

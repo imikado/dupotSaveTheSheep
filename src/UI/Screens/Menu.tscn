@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cd5514wt0rdxf"]
+[gd_scene load_steps=4 format=3 uid="uid://cd5514wt0rdxf"]
 
 [ext_resource type="Script" path="res://src/UI/Screens/Menu.gd" id="1_81gvo"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_bkv4m"]
+[ext_resource type="PackedScene" uid="uid://c85diaod7sv51" path="res://src/Levels/main_level.tscn" id="2_4kpgy"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -11,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_81gvo")
+MainLevel = ExtResource("2_4kpgy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(241, 128)

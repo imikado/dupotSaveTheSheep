@@ -9,8 +9,8 @@ extends Node2D
 
 @onready var _rooms:Node2D=$rooms
 
-@export var player:Player
-@export var sheep:Sheep
+#@export var player:Player
+#@export var sheep:Sheep
 
 @onready var parallaxLayer=$ParallaxBackground/ParallaxLayer
 @onready var parallaxLayerSprite=$ParallaxBackground/ParallaxLayer/Sprite2D
@@ -27,6 +27,8 @@ var roomNumber=-1
 @onready var roomList:Array[PackedScene]=[Room1,Room2,Room3]
 
 var gameover=false
+
+var debugN=3
 
 func get_room():
 	
@@ -80,11 +82,14 @@ func _ready():
 	
 	#---------
 	
-	player.global_position.x=20
-	player.global_position.y=0
+	#player.global_position.x=20
+	#player.global_position.y=0
 	
-	sheep.global_position.x=-10
-	sheep.global_position.y=0
+	#sheep.global_position.x=-10
+	#sheep.global_position.y=0
+	
+	print("debug:")
+	print(debugN)
 	
 	
 func on_enemy_die(enemy):
@@ -103,5 +108,10 @@ func on_player_gameover():
 
 
 func _on_label_button_button_down():
+	on_player_gameover()
+	pass # Replace with function body.
+
+
+func _on_timer_timeout():
 	on_player_gameover()
 	pass # Replace with function body.

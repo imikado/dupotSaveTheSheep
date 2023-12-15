@@ -14,7 +14,7 @@ func _process(delta):
 func _on_body_entered(body):
 	print(body)
 	if body is Player:
-		print('gameover')
+		print('gameover waste')
 		GlobalEvents.player_gameover.emit()
 		
 	pass # Replace with function body.

@@ -1,0 +1,65 @@
+[gd_scene load_steps=13 format=3 uid="uid://c85diaod7sv51"]
+
+[ext_resource type="Script" path="res://src/Levels/main_level.gd" id="1_82721"]
+[ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_gm6x0"]
+[ext_resource type="PackedScene" uid="uid://dbtci2wi7fxc5" path="res://src/Levels/rooms/room_start.tscn" id="2_v7kny"]
+[ext_resource type="PackedScene" uid="uid://cs0lw5ouwumj3" path="res://src/Levels/rooms/room_1.tscn" id="3_8e7f5"]
+[ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="3_xp6lg"]
+[ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="4_wa5bp"]
+[ext_resource type="PackedScene" uid="uid://cbqhrx2k2x53o" path="res://src/Levels/rooms/room_2.tscn" id="4_xv7ay"]
+[ext_resource type="PackedScene" uid="uid://blqbs5g1aiy8m" path="res://src/Levels/rooms/room_3.tscn" id="5_64ro5"]
+[ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="6_04vjb"]
+[ext_resource type="PackedScene" uid="uid://tum3fvl70kwc" path="res://src/UI/Screens/game_over.tscn" id="6_idaaj"]
+[ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="7_f3yar"]
+[ext_resource type="Script" path="res://src/Levels/MainLevelCamera2D.gd" id="12_td7dg"]
+
+[node name="MainLevel" type="Node2D"]
+script = ExtResource("1_82721")
+RoomStart = ExtResource("2_v7kny")
+Room1 = ExtResource("3_8e7f5")
+Room2 = ExtResource("4_xv7ay")
+Room3 = ExtResource("5_64ro5")
+gameOverScene = ExtResource("6_idaaj")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="sky" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/sky"]
+z_as_relative = false
+offset_left = -1527.0
+offset_top = -718.0
+offset_right = 2809.0
+offset_bottom = 2578.0
+color = Color(0, 0, 0, 1)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+modulate = Color(0.235294, 0.360784, 0.45098, 1)
+position = Vector2(60, 279)
+texture = ExtResource("2_gm6x0")
+flip_h = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2(20, 287)
+texture = ExtResource("2_gm6x0")
+
+[node name="rooms" type="Node2D" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("3_xp6lg")]
+
+[node name="Controls" parent="." instance=ExtResource("4_wa5bp")]
+
+[node name="Player" parent="." instance=ExtResource("6_04vjb")]
+
+[node name="Sheep" parent="." instance=ExtResource("7_f3yar")]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "sheep")]
+script = ExtResource("12_td7dg")
+player = NodePath("../Player")
+sheep = NodePath("../Sheep")

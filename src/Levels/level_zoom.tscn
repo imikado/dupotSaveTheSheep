@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://chxkb2ffjdts7"]
+[gd_scene load_steps=14 format=3 uid="uid://chxkb2ffjdts7"]
 
 [ext_resource type="Script" path="res://src/Levels/level_zoom.gd" id="1_58wic"]
 [ext_resource type="Script" path="res://src/Levels/LevelZoomCamera2D.gd" id="1_h1bom"]
@@ -9,8 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dbtci2wi7fxc5" path="res://src/Levels/rooms/room_start.tscn" id="2_ycvxw"]
 [ext_resource type="PackedScene" uid="uid://cbqhrx2k2x53o" path="res://src/Levels/rooms/room_2.tscn" id="3_r52g3"]
 [ext_resource type="PackedScene" uid="uid://blqbs5g1aiy8m" path="res://src/Levels/rooms/room_3.tscn" id="4_b1ljw"]
+[ext_resource type="PackedScene" uid="uid://cd5514wt0rdxf" path="res://src/UI/Screens/Menu.tscn" id="6_2y2rm"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="6_sjld5"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="7_niqfh"]
+[ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="12_3h2vj"]
 
 [node name="LevelZoom" type="Node2D" node_paths=PackedStringArray("player", "sheep")]
 script = ExtResource("1_58wic")
@@ -20,6 +22,7 @@ Room2 = ExtResource("3_r52g3")
 Room3 = ExtResource("4_b1ljw")
 player = NodePath("Player")
 sheep = NodePath("Sheep")
+gameOverScene = ExtResource("6_2y2rm")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -68,3 +71,11 @@ position = Vector2(-614, -207)
 
 [node name="Sheep" parent="." instance=ExtResource("7_niqfh")]
 position = Vector2(-417, -204)
+
+[node name="LabelButton" parent="." instance=ExtResource("12_3h2vj")]
+offset_left = 51.0
+offset_top = 224.0
+offset_right = 179.0
+offset_bottom = 256.0
+
+[connection signal="button_down" from="LabelButton" to="." method="_on_label_button_button_down"]

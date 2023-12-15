@@ -50,6 +50,7 @@ func sub_close():
 	if init:
 		_available=true
 		return
+		
 	
 	var number=0
 	var tween = get_tree().create_tween()
