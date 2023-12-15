@@ -12,19 +12,19 @@ func _ready():
 func enter():
 	animation_play(animation_name)
 	
-func animation_play(animation_name:String ):
-	state_machine.animation_play(animation_name)
+func animation_play(animation_name_to_play:String ):
+	state_machine.animation_play(animation_name_to_play)
 	
 func animation_reset():
 	state_machine.animation_reset()
 	
-func state_physics_process(delta):
+func state_physics_process(_delta):
 	pass
 	
 func exit(next_state):
 	state_machine.change_to(next_state)
 	
-func on_animation_finished(anim_name:String):
+func on_animation_finished(_animation_name_finished:String):
 	animation_play(animation_name)
 	
 func get_actor()->CharacterBody2D:

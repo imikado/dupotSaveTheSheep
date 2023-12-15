@@ -73,7 +73,7 @@ func is_press_down_button()->bool:
 func is_press_next_button()->bool:
 	return _is_button_pressed_in_list([INPUT_FOCUS_NEXT,INPUT_ACTION,INPUT_JUMP,INPUT_UP,INPUT_DOWN])
 	
-func is_press_validate_button(event: InputEvent)->bool:
+func is_press_validate_button()->bool:
 	return _is_button_pressed_in_list([INPUT_ATTACK])
 
 func reset_move()->void:

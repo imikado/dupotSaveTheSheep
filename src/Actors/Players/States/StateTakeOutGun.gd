@@ -1,7 +1,7 @@
 extends  PlayerState
 
 
-func on_animation_finished(anim_name:String):
+func on_animation_finished(_anim_name:String):
 	exit(PlayerStateMachine.STATE_GUNOUT)
  
 

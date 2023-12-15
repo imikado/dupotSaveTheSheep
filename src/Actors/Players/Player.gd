@@ -54,7 +54,7 @@ func _physics_process(delta):
 
 	process_move()
 	
-func process_jump(delta):
+func process_jump(_delta):
 	velocity.y = JUMP_VELOCITY
 
 #func _physics_process(delta):
@@ -64,15 +64,15 @@ func update_gravity(delta):
 		set_new_state(PlayerStateMachine.STATE_FALL)
 		velocity.y += gravity * delta
 
-func update_jump(delta):
+func update_jump(_delta):
 	if GlobalInput.is_press_jump_button() and is_on_floor():
 		set_new_state(PlayerStateMachine.STATE_JUMP)
 
-func update_takeoutgun(delta):
+func update_takeoutgun(_delta):
 	if GlobalInput.is_press_attack_button():
 		set_new_state(PlayerStateMachine.STATE_TAKEOUTGUN)
 
-func update_gunshoot(delta):
+func update_gunshoot(_delta):
 	if GlobalInput.is_press_attack_button():
 		set_new_state(PlayerStateMachine.STATE_GUNSHOOT)
 
@@ -119,7 +119,7 @@ func update_carry_sheep():
 
 
 
-func update_move(delta):
+func update_move(_delta):
 	var currentSpeed= get_current_speed()
 	
 	direction = GlobalInput.get_direction()
@@ -143,7 +143,7 @@ func update_move(delta):
 				set_new_state(PlayerStateMachine.STATE_IDLE)
 			velocity.x = move_toward(velocity.x, 0, currentSpeed)
 
-func update_min_move(delta):
+func update_min_move(_delta):
 	if velocity.x!=0:
 		return
 		

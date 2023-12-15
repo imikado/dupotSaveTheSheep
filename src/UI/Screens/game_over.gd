@@ -7,11 +7,10 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 
 func _on_label_button_pressed():
-	print('presse')
 	get_tree().change_scene_to_file('res://src/UI/Screens/Menu.tscn')
 	pass # Replace with function body.

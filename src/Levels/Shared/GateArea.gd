@@ -8,7 +8,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	for area in get_overlapping_areas():
 		if area.name == Player.AREA:
 			emit_signal("gate_opened")

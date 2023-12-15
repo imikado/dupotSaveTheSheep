@@ -3,7 +3,7 @@ class_name PlayerStateIdle
 
 var iteration=0
 
-func on_animation_finished(anim_name:String):
+func on_animation_finished(_anim_name:String):
 	iteration+=1
 	
 	if(iteration>8):

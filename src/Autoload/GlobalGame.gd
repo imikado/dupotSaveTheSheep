@@ -68,9 +68,12 @@ func getHighScoreList():
 	
 
 func saveFile(filepath, content):
+	print(filepath)
+	print(content)
 	pass
 
 func loadFile(filepath):
+	print(filepath)
 	pass
 	
 

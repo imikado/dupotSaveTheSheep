@@ -51,7 +51,6 @@ func _ready():
 	
 
 	#rooms
-	var previousWidth=0
 	var currentX=0
 	
 	var roomStart=RoomStart.instantiate()
