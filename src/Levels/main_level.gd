@@ -9,8 +9,8 @@ extends Node2D
 
 @onready var _rooms:Node2D=$rooms
 
-#@export var player:Player
-#@export var sheep:Sheep
+@onready var player:Player=$Player
+@onready var sheep:Sheep=$Sheep
 
 @onready var parallaxLayer=$ParallaxBackground/ParallaxLayer
 @onready var parallaxLayerSprite=$ParallaxBackground/ParallaxLayer/Sprite2D
@@ -81,15 +81,12 @@ func _ready():
 	
 	#---------
 	
-	#player.global_position.x=20
+	player.global_position.x+=20
 	#player.global_position.y=0
 	
-	#sheep.global_position.x=-10
+	sheep.global_position.x=-10
 	#sheep.global_position.y=0
-	
-	print("debug:")
-	print(debugN)
-	
+
 	
 func on_enemy_die(enemy):
 	score+=enemy.get_points()

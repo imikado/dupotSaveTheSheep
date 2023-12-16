@@ -8,16 +8,16 @@ extends Node2D
 
 @onready var _spawnMarker2D=$spawnMarker2D
 
-@onready var TRex=load("res://src/Actors/Enemies/TRex.tscn")
+@export var TRex:PackedScene
 
-func _ready():
-	spawn_trex()	
+var enabled=false
 	
 func spawn_trex():
 	
 	var enemyNumber=_enemyList.get_child_count()
 	
 	if enemyNumber < 2: 
+	
 	
 		var new_TRex=TRex.instantiate()
 		
@@ -31,5 +31,30 @@ func spawn_trex():
 
 
 func _on_timer_timeout():
-	spawn_trex()
-	pass # Replace with function body.
+	if is_enabled():
+		spawn_trex()
+	
+func is_enabled()->bool:
+	return enabled
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	if !is_enabled():
+		spawn_trex()
+		enable_enemy_list()
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	disable_enemy_list()
+	
+func disable_enemy_list():
+	enabled=false
+	set_enemy_physics_process(false)
+
+func enable_enemy_list():
+	enabled=true
+	set_enemy_physics_process(true)
+	
+	
+func set_enemy_physics_process(processEnabled:bool):
+	for enmyLoop:Enemy in _enemyList.get_children():
+		enmyLoop.set_physics_process(processEnabled)
+

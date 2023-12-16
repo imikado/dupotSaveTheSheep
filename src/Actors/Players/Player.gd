@@ -137,7 +137,7 @@ func update_move(_delta):
 		if !_raycast.is_colliding():
 			set_new_state(PlayerStateMachine.STATE_EDGE)
 			velocity.x = move_toward(velocity.x, 0, currentSpeed)
-			print("on edge")
+
 		else:
 			if get_current_state().can_idle:
 				set_new_state(PlayerStateMachine.STATE_IDLE)

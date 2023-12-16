@@ -58,7 +58,10 @@ func damage():
 	set_new_state(TRexStateMachine.STATE_DAMAGED)
 	life -=1
 	if life <=0:
-		set_new_state(TRexStateMachine.STATE_DIE)
+		die()
+
+func die():
+	set_new_state(TRexStateMachine.STATE_DIE)
 		
 func finish_die():
 	queue_free()
