@@ -10,6 +10,7 @@ const STATE_IMPATIENT="StateImpatient"
 const STATE_TAKEOUTGUN="StateTakeOutGun"
 const STATE_GUNOUT="StateGunOut"
 const STATE_GUNSHOOT="StateGunShoot"
+const STATE_DAMAGED="StateDamaged"
 
 
 func _ready():
@@ -22,7 +23,8 @@ func _ready():
 		STATE_IMPATIENT,
 		STATE_TAKEOUTGUN,
 		STATE_GUNOUT,
-		STATE_GUNSHOOT
+		STATE_GUNSHOOT,
+		STATE_DAMAGED
 	]
 	super.init()
 	

@@ -169,5 +169,14 @@ func get_current_speed():
 	return SPEED
 
 
+func hit_damage(damage):
+	set_new_state(PlayerStateMachine.STATE_DAMAGED)
+	var tween := create_tween()
+	tween.tween_property(self,"modulate",Color.RED,0.3)
+	tween.tween_property(self,"modulate",Color.WHITE,0.2)
+	tween.tween_property(self,"modulate",Color.RED,0.3)
+	tween.tween_property(self,"modulate",Color.WHITE,0.2)
 	
+	GlobalEvents.player_take_damage.emit(damage)
+
 	

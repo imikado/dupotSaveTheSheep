@@ -14,7 +14,7 @@ var running=false
 func enable():
 	enabled=true
 	start_tween()
-	
+
 func disable():
 	enabled=false
 

@@ -17,6 +17,9 @@ func set_score(newscore:int):
 func set_water(value):
 	waterProgressBar.value=value
 
+func set_player_life(value):
+	playerProgressBar.value=value
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass

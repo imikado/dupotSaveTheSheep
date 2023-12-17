@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c4rt0pnhv86kl"]
+[gd_scene load_steps=23 format=3 uid="uid://c4rt0pnhv86kl"]
 
 [ext_resource type="Script" path="res://src/Actors/Enemies/TRex.gd" id="1_krotj"]
 [ext_resource type="Texture2D" uid="uid://cg8eqmidubnku" path="res://src/Actors/Enemies/TRex/trex-die.png" id="2_5jear"]
@@ -8,11 +8,16 @@
 [ext_resource type="Script" path="res://src/Actors/Enemies/TRexStateMachine.gd" id="3_s8b5v"]
 [ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateIdle.gd" id="4_m62k6"]
 [ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateWalking.gd" id="5_hhe6l"]
+[ext_resource type="Texture2D" uid="uid://doxed8miam4tj" path="res://src/Actors/Enemies/TRex/trex-attack.png" id="6_abglq"]
 [ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateTurn.gd" id="6_giupj"]
 [ext_resource type="Script" path="res://src/Actors/Enemies/StateDamaged.gd" id="8_bfywx"]
 [ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateDie.gd" id="11_34qpt"]
+[ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateAttack.gd" id="13_5biad"]
+[ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="14_b7p82"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkmhm"]
+radius = 15.0
+height = 58.0033
 
 [sub_resource type="Animation" id="Animation_7wfsr"]
 resource_name = "Damaged"
@@ -214,8 +219,49 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3]
 }
 
+[sub_resource type="Animation" id="Animation_6tvqd"]
+resource_name = "Attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_abglq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_73yow"]
 _data = {
+"Attack": SubResource("Animation_6tvqd"),
 "Damaged": SubResource("Animation_7wfsr"),
 "Die": SubResource("Animation_mtifj"),
 "Idle": SubResource("Animation_rhii5"),
@@ -229,14 +275,15 @@ script = ExtResource("1_krotj")
 points = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -16)
+position = Vector2(5, -16)
+rotation = -1.63805
 shape = SubResource("CapsuleShape2D_rkmhm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3, -32)
-texture = ExtResource("2_5jear")
-hframes = 4
-frame = 3
+texture = ExtResource("6_abglq")
+hframes = 3
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -269,3 +316,14 @@ animation_name = "Damaged"
 [node name="StateDie" type="Node" parent="StateMachine"]
 script = ExtResource("11_34qpt")
 animation_name = "Die"
+
+[node name="StateAttack" type="Node" parent="StateMachine"]
+script = ExtResource("13_5biad")
+animation_name = "Attack"
+
+[node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("14_b7p82")]
+state_machine = NodePath("../StateMachine")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
