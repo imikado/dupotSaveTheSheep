@@ -40,7 +40,7 @@ func _physics_process(delta):
 				var collision = move_and_collide(velocity * delta)
 				if collision:
 					var collider=collision.get_collider()
-					if collider is Player:
+					if collider is Player or collider is Sheep:
 						if can_attack:
 							set_new_state(TRexStateMachine.STATE_ATTACK)
 							move_and_slide()

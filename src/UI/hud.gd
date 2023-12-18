@@ -20,6 +20,10 @@ func set_water(value):
 func set_player_life(value):
 	playerProgressBar.value=value
 
+func set_sheep_life(value):
+	sheepProgressBar.value=value
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass

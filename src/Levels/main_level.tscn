@@ -52,6 +52,7 @@ texture = ExtResource("2_gm6x0")
 [node name="rooms" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("3_xp6lg")]
+metadata/_edit_vertical_guides_ = [23.0, 8.0]
 
 [node name="Controls" parent="." instance=ExtResource("4_wa5bp")]
 

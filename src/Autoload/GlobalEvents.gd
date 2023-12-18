@@ -20,6 +20,8 @@ signal player_took_lifebottle(bottle)
 
 signal player_take_damage(damage)
 
+signal sheep_take_damage(damage)
+
 signal player_tookadvantage_of_lifebottle
 
 signal player_gameover

@@ -47,10 +47,15 @@ func _ready():
 	GlobalEvents.connect("player_water_changed",on_player_water_changed)
 
 	GlobalEvents.player_take_damage.connect(on_player_take_damage)
+
+	GlobalEvents.sheep_take_damage.connect(on_sheep_take_damage)
+
 	
+
 	hud.set_score(GlobalPlayer.get_score())
 	hud.set_water(GlobalPlayer.get_water())
 	hud.set_player_life(GlobalPlayer.get_life())
+	hud.set_sheep_life(GlobalSheep.get_life())
 
 	#rooms
 	var currentX=0
@@ -100,6 +105,12 @@ func on_player_water_changed(new_value):
 func on_player_take_damage(damage):
 	GlobalPlayer.decrease_life(damage)
 	hud.set_player_life(GlobalPlayer.get_life() )
+
+func on_sheep_take_damage(damage):
+	GlobalSheep.decrease_life(damage)
+	hud.set_sheep_life(GlobalSheep.get_life() )
+	if GlobalSheep.get_life() <=0:
+		on_player_gameover()
 
 func on_player_gameover():
 	if !gameover:

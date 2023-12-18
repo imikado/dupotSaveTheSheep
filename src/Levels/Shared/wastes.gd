@@ -14,7 +14,6 @@ func _process(_delta):
 func _on_body_entered(body):
 	print(body)
 	if body is Player:
-		print('gameover waste')
 		GlobalEvents.player_gameover.emit()
 	if body is Enemy and body.has_method('die'):
 		body.die()

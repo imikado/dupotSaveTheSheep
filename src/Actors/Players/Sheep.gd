@@ -71,3 +71,9 @@ func set_new_state(new_state):
 func get_current_speed():
 	return SPEED
 	
+
+func hit_damage(damage):
+	set_new_state(SheepStateMachine.STATE_DAMAGED)
+	
+	GlobalEvents.sheep_take_damage.emit(damage)
+	

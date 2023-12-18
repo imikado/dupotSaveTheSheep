@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://detnxs05jctwf"]
+[gd_scene load_steps=17 format=3 uid="uid://detnxs05jctwf"]
 
 [ext_resource type="Script" path="res://src/Actors/Players/Sheep.gd" id="1_2bi6n"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="1_87buc"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="4_a756p"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/SheepStateWalking.gd" id="6_n3c7p"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/SheepStateTurn.gd" id="8_ahxuj"]
+[ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/StateDamaged.gd" id="9_rn3ht"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7cnq6"]
 radius = 6.0
@@ -133,9 +134,74 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2pql4"]
+resource_name = "Damaged"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_t1trx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.729412, 0.0392157, 0.235294, 1), Color(1, 1, 1, 1), Color(0.905882, 0, 0.368627, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d0gjw"]
 _data = {
+"Damaged": SubResource("Animation_2pql4"),
 "Idle": SubResource("Animation_6naan"),
 "Turn": SubResource("Animation_bvars"),
 "Walking": SubResource("Animation_5280c")
@@ -146,10 +212,11 @@ floor_stop_on_slope = false
 script = ExtResource("1_2bi6n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.905882, 0, 0.368627, 1)
 position = Vector2(1, -32)
-texture = ExtResource("2_a6gni")
-hframes = 2
-frame = 1
+texture = ExtResource("2_t1trx")
+hframes = 3
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -6)
@@ -179,6 +246,10 @@ animation_name = "Walking"
 [node name="StateTurn" type="Node" parent="StateMachine"]
 script = ExtResource("8_ahxuj")
 animation_name = "Turn"
+
+[node name="StateDamaged" type="Node" parent="StateMachine"]
+script = ExtResource("9_rn3ht")
+animation_name = "Damaged"
 
 [node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("4_a756p")]
 offset_left = -46.0
