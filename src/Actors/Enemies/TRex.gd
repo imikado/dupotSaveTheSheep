@@ -83,6 +83,9 @@ func damage():
 	if life <=0:
 		die()
 
+func spawn():
+	set_new_state(TRexStateMachine.STATE_SPAWN)
+
 func die():
 	set_new_state(TRexStateMachine.STATE_DIE)
 		
@@ -99,7 +102,7 @@ func get_current_state()->PlayerState:
 func set_new_state(new_state):
 	current_state_name=new_state
 	_state_machine.set_state(new_state)
-	print("new state:"+new_state)
+	#print("new state:"+new_state)
 
 
 
