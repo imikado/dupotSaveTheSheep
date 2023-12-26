@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://cod74mh86m8jt"]
+
+[ext_resource type="Texture2D" uid="uid://mt1rm8u1igv0" path="res://src/Levels/Shared/crane.png" id="1_xwijh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1s74"]
+size = Vector2(33.5, 1.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkxer"]
+size = Vector2(27, 3)
+
+[node name="Elevator" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xwijh")
+centered = false
+region_enabled = true
+region_rect = Rect2(1, 22, 36, 36)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
+z_index = 100
+z_as_relative = false
+texture = ExtResource("1_xwijh")
+centered = false
+region_enabled = true
+region_rect = Rect2(1, 22, 36, 36)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(18, 34.75)
+shape = SubResource("RectangleShape2D_m1s74")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(2, 20)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_hkxer")
+one_way_collision = true

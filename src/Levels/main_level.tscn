@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c85diaod7sv51"]
+[gd_scene load_steps=14 format=3 uid="uid://c85diaod7sv51"]
 
 [ext_resource type="Script" path="res://src/Levels/main_level.gd" id="1_82721"]
 [ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_gm6x0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://blqbs5g1aiy8m" path="res://src/Levels/rooms/room_3.tscn" id="5_64ro5"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="6_04vjb"]
 [ext_resource type="PackedScene" uid="uid://tum3fvl70kwc" path="res://src/UI/Screens/game_over.tscn" id="6_idaaj"]
+[ext_resource type="PackedScene" uid="uid://cp335epdftsej" path="res://src/Levels/rooms/room_4.tscn" id="6_pydal"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="7_f3yar"]
 [ext_resource type="Script" path="res://src/Levels/MainLevelCamera2D.gd" id="12_td7dg"]
 
@@ -19,6 +20,7 @@ RoomStart = ExtResource("2_v7kny")
 Room1 = ExtResource("3_8e7f5")
 Room2 = ExtResource("4_xv7ay")
 Room3 = ExtResource("5_64ro5")
+Room4 = ExtResource("6_pydal")
 gameOverScene = ExtResource("6_idaaj")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -62,5 +64,6 @@ metadata/_edit_vertical_guides_ = [23.0, 8.0]
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "sheep")]
 script = ExtResource("12_td7dg")
+zoom_speed = 0.5
 player = NodePath("../Player")
 sheep = NodePath("../Sheep")

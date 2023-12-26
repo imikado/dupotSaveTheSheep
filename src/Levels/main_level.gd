@@ -4,6 +4,7 @@ extends Node2D
 @export var Room1:PackedScene
 @export var Room2:PackedScene
 @export var Room3:PackedScene
+@export var Room4:PackedScene
 
 @onready var hud=$HUD
 
@@ -30,12 +31,21 @@ var gameover=false
 
 var debugN=3
 
+var alt=0
+
 func get_room():
 	
 	roomNumber+=1
 	if roomNumber>=roomList.size():
 		roomNumber=0
  	 
+	if roomNumber==2:
+		if alt==0:
+			alt=1
+			return Room4
+		else:
+			alt=0	
+	
 	return roomList[roomNumber]
 
 # Called when the node enters the scene tree for the first time.

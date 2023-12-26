@@ -13,7 +13,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7cnq6"]
 radius = 6.0
-height = 12.0
+height = 24.0
 
 [sub_resource type="Animation" id="Animation_2pql4"]
 resource_name = "Damaged"
@@ -212,14 +212,12 @@ floor_stop_on_slope = false
 script = ExtResource("1_2bi6n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0.905882, 0, 0.368627, 1)
 position = Vector2(1, -32)
 texture = ExtResource("2_t1trx")
 hframes = 3
-frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -6)
+position = Vector2(1, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7cnq6")
 

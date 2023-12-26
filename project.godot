@@ -22,6 +22,7 @@ GlobalInput="*res://src/Autoload/GlobalInput.gd"
 GlobalEvents="*res://src/Autoload/GlobalEvents.gd"
 GlobalPlayer="*res://src/Autoload/GlobalPlayer.gd"
 GlobalSheep="*res://src/Autoload/GlobalSheep.gd"
+GlobalTransition="*res://src/Autoload/global_transition.tscn"
 
 [display]
 
