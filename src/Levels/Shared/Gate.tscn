@@ -204,6 +204,8 @@ region_enabled = true
 region_rect = Rect2(0, 0, 36, 42)
 
 [node name="light" type="Node2D" parent="."]
+z_index = 100
+z_as_relative = false
 
 [node name="opened" type="ColorRect" parent="light"]
 offset_left = -1.0

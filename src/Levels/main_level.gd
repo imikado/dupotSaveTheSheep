@@ -115,6 +115,8 @@ func on_player_water_changed(new_value):
 func on_player_take_damage(damage):
 	GlobalPlayer.decrease_life(damage)
 	hud.set_player_life(GlobalPlayer.get_life() )
+	if GlobalPlayer.get_life() <=0:
+		on_player_gameover()
 
 func on_sheep_take_damage(damage):
 	GlobalSheep.decrease_life(damage)

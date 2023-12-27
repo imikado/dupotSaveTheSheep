@@ -11,11 +11,14 @@ extends Node2D
 
 @onready var _camera:Camera2D=$Camera2D
 
-var is_open=true
+var opened=true
 
 var init=false
 
 var _available=true
+
+func is_open():
+	return opened
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,7 +46,7 @@ func open():
 	_available=false
 	_subBridgeAnimation.play("open")
 	
-	is_open=true
+	opened=true
 
 
 func sub_close():
@@ -79,9 +82,6 @@ func close():
 	_available=false
 	_subBridgeAnimation.play("close")
 	
-	is_open=false
+	opened=false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 

@@ -4,11 +4,9 @@ extends Area2D
 
 @export var bridge:Node2D
 
-var is_open=false
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_animationPlayer.play('open')
+	#_animationPlayer.play('open')
 	pass # Replace with function body.
 
 
@@ -16,7 +14,7 @@ func _ready():
 func _process(_delta):
 	for area in get_overlapping_areas():
 		if area.name == Player.AREA and GlobalInput.is_press_action_button():
-			if bridge.is_open:
+			if bridge.is_open():
 				_animationPlayer.play('close')
 			else:
 				_animationPlayer.play('open')

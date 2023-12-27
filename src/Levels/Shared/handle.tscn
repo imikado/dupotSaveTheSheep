@@ -80,7 +80,6 @@ script = ExtResource("1_v77g5")
 texture = ExtResource("1_vi70r")
 flip_h = true
 hframes = 3
-frame = 2
 region_enabled = true
 region_rect = Rect2(32, 24, 32, 8)
 
