@@ -1,0 +1,149 @@
+[gd_scene load_steps=14 format=3 uid="uid://c2xvn2ee41rkw"]
+
+[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex.gd" id="1_ci1on"]
+[ext_resource type="Texture2D" uid="uid://bbsrwhnd7i3qf" path="res://src/Actors/Enemies/CanonRex/canonrex-idle.png" id="2_c13yj"]
+[ext_resource type="PackedScene" uid="uid://mmsrrnygubar" path="res://src/Actors/Enemies/CanonBall.tscn" id="2_ecwdd"]
+[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRexStateMachine.gd" id="3_8cuwp"]
+[ext_resource type="Texture2D" uid="uid://jwwgtt82sv47" path="res://src/Actors/Enemies/CanonRex/canonrex-shoot.png" id="3_f7nce"]
+[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateIdle.gd" id="4_5v560"]
+[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateShooting.gd" id="5_o7ymy"]
+[ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="5_q7rqy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k6pno"]
+
+[sub_resource type="Animation" id="Animation_717ph"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_c13yj")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_ul871"]
+resource_name = "Shooting"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_f7nce")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fqwky"]
+_data = {
+"Idle": SubResource("Animation_717ph"),
+"Shooting": SubResource("Animation_ul871")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhyhl"]
+size = Vector2(132, 35)
+
+[node name="CanonRex" type="CharacterBody2D"]
+script = ExtResource("1_ci1on")
+FireBall = ExtResource("2_ecwdd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_c13yj")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 16)
+shape = SubResource("CapsuleShape2D_k6pno")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_fqwky")
+}
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "actor")]
+script = ExtResource("3_8cuwp")
+animationPlayer = NodePath("../AnimationPlayer")
+actor = NodePath("..")
+
+[node name="StateIdle" type="Node" parent="StateMachine"]
+script = ExtResource("4_5v560")
+animation_name = "Idle"
+
+[node name="StateShooting" type="Node" parent="StateMachine"]
+script = ExtResource("5_o7ymy")
+animation_name = "Shooting"
+
+[node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("5_q7rqy")]
+state_machine = NodePath("../StateMachine")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-33, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(82, 11.5)
+shape = SubResource("RectangleShape2D_xhyhl")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

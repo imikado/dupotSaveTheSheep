@@ -3,6 +3,7 @@ extends Node2D
 @onready var width=$ColorRect.get_rect().size.x
 @onready var animationPlayer:AnimationPlayer=$AnimationPlayer
 
+
 var opened=true
 
 func open():

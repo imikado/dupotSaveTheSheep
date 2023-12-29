@@ -13,13 +13,15 @@ extends Node2D
 
 @onready var door:Door=$Door
 
+var started=false
+
 var enabled=false
 	
 func spawn_trex():
 	
 	var enemyNumber=_enemyList.get_child_count()
 	
-	if enemyNumber < 2: 
+	if enemyNumber == 0: 
 	
 		door.open()
 		await door.door_opened
@@ -46,14 +48,17 @@ func is_enabled()->bool:
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
 	if !is_enabled():
-		if _enemyList.get_child_count()==0 :
+		if !started :
 			_spawnStartTimer.start()
+			started=true
 		else:
 			_spawnTimer.start()
 		enable_enemy_list()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	disable_enemy_list()
+	_spawnTimer.stop()
+	
 	
 func disable_enemy_list():
 	enabled=false

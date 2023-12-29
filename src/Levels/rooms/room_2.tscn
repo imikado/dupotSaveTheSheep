@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cbqhrx2k2x53o"]
+[gd_scene load_steps=9 format=3 uid="uid://cbqhrx2k2x53o"]
 
 [ext_resource type="Script" path="res://src/Levels/rooms/room_2.gd" id="1_jgm7b"]
 [ext_resource type="PackedScene" uid="uid://c4rt0pnhv86kl" path="res://src/Actors/Enemies/TRex.tscn" id="2_2ormh"]
 [ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="2_d27jb"]
 [ext_resource type="PackedScene" uid="uid://c87l4h2e277ou" path="res://src/Levels/Shared/Gate.tscn" id="3_78nxm"]
 [ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="3_tk8ub"]
+[ext_resource type="Texture2D" uid="uid://cx8elq1hasfcf" path="res://src/Actors/Enemies/TRex/trex-idle.png" id="4_e68yc"]
 [ext_resource type="PackedScene" uid="uid://cluurftsudn5b" path="res://src/Levels/Shared/water_bottle.tscn" id="5_7csw6"]
 [ext_resource type="PackedScene" uid="uid://tbsd6ltwpb46" path="res://src/Levels/Shared/door.tscn" id="7_w8dgg"]
 
@@ -25,6 +26,14 @@ rendering_quadrant_size = 46
 format = 2
 layer_0/name = "building"
 layer_0/tile_data = PackedInt32Array(393223, 131072, 2, 196615, 131072, 0, 196614, 65536, 0, 262150, 65536, 1, 327686, 65536, 1, 327687, 131072, 1, 262151, 131072, 1, 327685, 65536, 1, 262149, 65536, 1, 196613, 65536, 0, 262148, 65536, 1, 262147, 65536, 1, 393222, 65536, 2, 393221, 65536, 2, 393220, 65536, 2, 393219, 65536, 2, 327684, 65536, 1, 327683, 65536, 1, 196612, 65536, 0, 196611, 65536, 0, 196610, 0, 0, 262146, 0, 1, 393218, 0, 2, 327682, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="building"]
+modulate = Color(0.470588, 0.435294, 0.345098, 1)
+position = Vector2(236, 267)
+scale = Vector2(0.195075, 0.195075)
+texture = ExtResource("4_e68yc")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
 
 [node name="gates" type="Node2D" parent="."]
 position = Vector2(-1, 15)
