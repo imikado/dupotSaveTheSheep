@@ -9,6 +9,7 @@ var direction=0
 const SPEED=100
 
 func run(new_direction):
+	$AnimationPlayer.play("default")
 	direction=new_direction
 	if direction==-1:
 		_sprite2d.flip_h=true

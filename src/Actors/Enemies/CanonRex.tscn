@@ -1,15 +1,59 @@
-[gd_scene load_steps=14 format=3 uid="uid://c2xvn2ee41rkw"]
+[gd_scene load_steps=20 format=3 uid="uid://c2xvn2ee41rkw"]
 
 [ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex.gd" id="1_ci1on"]
 [ext_resource type="Texture2D" uid="uid://bbsrwhnd7i3qf" path="res://src/Actors/Enemies/CanonRex/canonrex-idle.png" id="2_c13yj"]
 [ext_resource type="PackedScene" uid="uid://mmsrrnygubar" path="res://src/Actors/Enemies/CanonBall.tscn" id="2_ecwdd"]
+[ext_resource type="Texture2D" uid="uid://2r3wmcompxju" path="res://src/Actors/Enemies/CanonRex/canonrex-die.png" id="3_2kmck"]
 [ext_resource type="Script" path="res://src/Actors/Enemies/CanonRexStateMachine.gd" id="3_8cuwp"]
 [ext_resource type="Texture2D" uid="uid://jwwgtt82sv47" path="res://src/Actors/Enemies/CanonRex/canonrex-shoot.png" id="3_f7nce"]
 [ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateIdle.gd" id="4_5v560"]
+[ext_resource type="Texture2D" uid="uid://cqmw8o82ihpuv" path="res://src/Actors/Enemies/CanonRex/canonrex-damaged.png" id="5_3yumu"]
 [ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateShooting.gd" id="5_o7ymy"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="5_q7rqy"]
+[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateDamaged.gd" id="9_d40lq"]
+[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateDie.gd" id="10_my2h1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k6pno"]
+
+[sub_resource type="Animation" id="Animation_hf3il"]
+resource_name = "Damaged"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_3yumu")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
 
 [sub_resource type="Animation" id="Animation_717ph"]
 resource_name = "Idle"
@@ -89,8 +133,50 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
+[sub_resource type="Animation" id="Animation_2y56w"]
+resource_name = "Die"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_2kmck")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fqwky"]
 _data = {
+"Damaged": SubResource("Animation_hf3il"),
+"Die": SubResource("Animation_2y56w"),
 "Idle": SubResource("Animation_717ph"),
 "Shooting": SubResource("Animation_ul871")
 }
@@ -101,10 +187,12 @@ size = Vector2(132, 35)
 [node name="CanonRex" type="CharacterBody2D"]
 script = ExtResource("1_ci1on")
 FireBall = ExtResource("2_ecwdd")
+points = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_c13yj")
-hframes = 3
+texture = ExtResource("3_2kmck")
+hframes = 4
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 16)
@@ -128,6 +216,14 @@ animation_name = "Idle"
 [node name="StateShooting" type="Node" parent="StateMachine"]
 script = ExtResource("5_o7ymy")
 animation_name = "Shooting"
+
+[node name="StateDamaged" type="Node" parent="StateMachine"]
+script = ExtResource("9_d40lq")
+animation_name = "Damaged"
+
+[node name="StateDie" type="Node" parent="StateMachine"]
+script = ExtResource("10_my2h1")
+animation_name = "Die"
 
 [node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("5_q7rqy")]
 state_machine = NodePath("../StateMachine")

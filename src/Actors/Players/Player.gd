@@ -47,6 +47,12 @@ func _physics_process(delta):
 	
 	if get_current_state().can_shoot:
 		update_gunshoot(delta)
+
+	if _sprite.flip_h:
+		muzzleMarker2d.position.x=-25
+	else:
+		muzzleMarker2d.position.x=25	
+	
 	
 		
 	get_current_state().state_physics_process(delta)
@@ -128,10 +134,6 @@ func update_move(_delta):
 		velocity.x = direction * currentSpeed
 		
 		_sprite.flip_h=(direction==-1)
-		if _sprite.flip_h:
-			muzzleMarker2d.position.x=-25
-		else:
-			muzzleMarker2d.position.x=25	
 		
 	else:
 		if !_raycast.is_colliding():

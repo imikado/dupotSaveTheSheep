@@ -15,7 +15,7 @@ class_name CanonRex
 const INPULSE_LEFT=-25
 const INPULSE_RIGHT=70
 
-var life =5
+var life =10
 
 var current_state_name=""
 var moveVector=Vector2(INPULSE_LEFT,0)
@@ -31,6 +31,13 @@ func finish_die():
 
 func shoot():
 	set_new_state(CanonRexStateMachine.STATE_SHOOTING)
+
+func damage():
+	set_new_state(CanonRexStateMachine.STATE_DAMAGED)
+	life -=1
+	if life <=0:
+		die()
+
 
 func spawn_fireball():
 	var newFireBall=FireBall.instantiate()

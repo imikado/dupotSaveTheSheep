@@ -323,8 +323,8 @@ shape = SubResource("CapsuleShape2D_rkmhm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3, -32)
-texture = ExtResource("6_abglq")
-hframes = 3
+texture = ExtResource("2_o6g7j")
+hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
