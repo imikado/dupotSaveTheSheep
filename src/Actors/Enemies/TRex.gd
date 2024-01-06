@@ -78,9 +78,12 @@ func _physics_process(delta):
 	move_and_slide()
 
 func damage():
+	if !alive:
+		return
 	set_new_state(TRexStateMachine.STATE_DAMAGED)
 	life -=1
 	if life <=0:
+		alive=false
 		die()
 
 func spawn():

@@ -33,9 +33,12 @@ func shoot():
 	set_new_state(CanonRexStateMachine.STATE_SHOOTING)
 
 func damage():
+	if !alive:
+		return
 	set_new_state(CanonRexStateMachine.STATE_DAMAGED)
 	life -=1
 	if life <=0:
+		alive=false
 		die()
 
 

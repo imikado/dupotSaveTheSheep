@@ -13,6 +13,11 @@ var _is_debug := false
 
 var _is_controls_enabled := true
 
+func resetGame():
+	GlobalPlayer.reset_game()
+	GlobalSheep.reset_game()
+	pass
+
 
 func isControlsEnabled():
 	return _is_controls_enabled

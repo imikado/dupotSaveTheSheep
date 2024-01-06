@@ -28,7 +28,7 @@ action = "ui_select"
 position = Vector2(432, 222)
 texture_normal = ExtResource("6_h6yoi")
 texture_pressed = ExtResource("7_elr4w")
-action = "ui_accept"
+action = "player_action"
 
 [node name="joystick-big" parent="." instance=ExtResource("8")]
 position = Vector2(33, 229)
