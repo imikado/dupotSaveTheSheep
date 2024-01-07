@@ -9,6 +9,7 @@ const AREA='PlayerArea'
 
 const SHOOT_WATER_VALUE=1
 
+var pending_water=0
 
 var carry_sheep=false
 
@@ -148,6 +149,9 @@ func update_move(_delta):
 func update_min_move(_delta):
 	if velocity.x!=0:
 		return
+
+	if get_current_state().name==PlayerStateMachine.STATE_TAKINGWATER:
+		return
 		
 	var currentSpeed= get_current_speed()/2
 	
@@ -182,3 +186,13 @@ func hit_damage(damage):
 	GlobalEvents.player_take_damage.emit(damage)
 
 	
+func take_water(water_value):
+	direction=0
+	velocity.x=0
+	#velocity.y=0
+	pending_water=water_value
+	set_new_state(PlayerStateMachine.STATE_TAKINGWATER)
+
+func commit_water():
+	GlobalEvents.emit_signal("player_water_changed",pending_water)
+	pending_water=0

@@ -3,6 +3,7 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimatedSprite2D.play()
 	pass # Replace with function body.
 
 
@@ -12,8 +13,8 @@ func _process(_delta):
 
 
 func _on_body_entered(body):
-	if body is Player:
+	if body is Player and body.is_on_floor():
 		GlobalPlayer.increment_water(10)
-		GlobalEvents.emit_signal("player_water_changed",GlobalPlayer.get_water())
+		GlobalEvents.emit_signal("player_take_water_bottle",GlobalPlayer.get_water())
 		queue_free()
 	pass # Replace with function body.

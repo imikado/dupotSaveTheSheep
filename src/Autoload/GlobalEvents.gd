@@ -4,6 +4,8 @@ signal player_health_changed(new_value)
 
 signal enemy_die(enemy)
 
+signal player_take_water_bottle(new_value)
+
 signal player_water_changed(new_value)
 
 signal actor_took_damage(actor, damage)

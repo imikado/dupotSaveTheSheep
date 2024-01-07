@@ -54,6 +54,9 @@ func _ready():
 	GlobalEvents.player_gameover.connect(on_player_gameover)
 	
 	GlobalEvents.connect("enemy_die",on_enemy_die)
+
+	GlobalEvents.connect("player_take_water_bottle",on_player_take_water_bottle)
+
 	GlobalEvents.connect("player_water_changed",on_player_water_changed)
 
 	GlobalEvents.player_take_damage.connect(on_player_take_damage)
@@ -111,6 +114,9 @@ func on_enemy_die(enemy):
 	
 func on_player_water_changed(new_value):
 	hud.set_water(new_value)
+
+func on_player_take_water_bottle(water_value):
+	player.take_water(water_value)
 
 func on_player_take_damage(damage):
 	GlobalPlayer.decrease_life(damage)
