@@ -28,12 +28,13 @@ func close():
 	_light_arrow.visible=true
 
 func _on_area_2d_gate_opened():
-	if GlobalInput.is_press_action_button():
-		if _is_open:
-			close()
-		else:
-			open()
-	pass # Replace with function body.
+	GlobalPlayer.get_actor().action()
+
+	if _is_open:
+		close()
+	else:
+		open()
+
 
 func switch_light():
 	for childLoop in _light.get_children():

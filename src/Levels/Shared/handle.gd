@@ -14,6 +14,9 @@ func _ready():
 func _process(_delta):
 	for area in get_overlapping_areas():
 		if area.name == Player.AREA and GlobalInput.is_press_action_button():
+			
+			GlobalPlayer.get_actor().action()
+
 			if bridge.is_open():
 				_animationPlayer.play('close')
 			else:

@@ -50,6 +50,8 @@ func get_room():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
+
+	GlobalPlayer.set_actor(player)
 	
 	GlobalEvents.player_gameover.connect(on_player_gameover)
 	

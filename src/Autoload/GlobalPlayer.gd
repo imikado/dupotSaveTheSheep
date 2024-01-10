@@ -10,6 +10,13 @@ var _life = START_LIFE
 var _water = START_WATER
 var _level = 1
 
+var _player:Player
+
+func set_actor(player_:Player):
+	_player=player_
+
+func get_actor()->Player:
+	return _player
 
 func set_level(level):
 	_level = level

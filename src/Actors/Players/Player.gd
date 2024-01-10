@@ -18,6 +18,8 @@ var direction
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+signal action_finished
+
 @onready var _state_machine:PlayerStateMachine = $StateMachine
 @onready var _sprite:Sprite2D = $Sprite2D
 
@@ -150,7 +152,7 @@ func update_min_move(_delta):
 	if velocity.x!=0:
 		return
 
-	if get_current_state().name==PlayerStateMachine.STATE_TAKINGWATER:
+	if  [PlayerStateMachine.STATE_TAKINGWATER,PlayerStateMachine.STATE_ACTION].has(get_current_state().name):
 		return
 		
 	var currentSpeed= get_current_speed()/2
@@ -196,3 +198,14 @@ func take_water(water_value):
 func commit_water():
 	GlobalEvents.emit_signal("player_water_changed",pending_water)
 	pending_water=0
+
+func action():
+	direction=0
+	velocity.x=0
+	set_new_state(PlayerStateMachine.STATE_ACTION)
+
+	await action_finished
+
+
+func commit_action():
+	action_finished.emit()
