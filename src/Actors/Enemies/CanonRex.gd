@@ -62,6 +62,7 @@ func set_new_state(new_state):
 
 func _on_timer_timeout():
 	shoot()
+	shootTimer.start()
 	pass # Replace with function body
 	
 func disable():

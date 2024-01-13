@@ -6,6 +6,9 @@ signal enemy_die(enemy)
 
 signal player_take_water_bottle(new_value)
 
+signal player_take_burger(new_value)
+
+
 signal player_water_changed(new_value)
 
 signal actor_took_damage(actor, damage)
@@ -27,3 +30,5 @@ signal sheep_take_damage(damage)
 signal player_tookadvantage_of_lifebottle
 
 signal player_gameover
+
+signal player_increase_life(value)

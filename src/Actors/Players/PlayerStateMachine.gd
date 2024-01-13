@@ -13,6 +13,7 @@ const STATE_GUNSHOOT="StateGunShoot"
 const STATE_DAMAGED="StateDamaged"
 const STATE_TAKINGWATER='StateTakingWater'
 const STATE_ACTION='StateAction'
+const STATE_TAKINGBURGER='StateTakingBurger'
 
 func _ready():
 	available_state_name_list=[
@@ -27,7 +28,8 @@ func _ready():
 		STATE_GUNSHOOT,
 		STATE_DAMAGED,
 		STATE_TAKINGWATER,
-		STATE_ACTION
+		STATE_ACTION,
+		STATE_TAKINGBURGER
 	]
 	super.init()
 	

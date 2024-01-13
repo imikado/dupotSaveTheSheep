@@ -35,6 +35,15 @@ texture = ExtResource("4_e68yc")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 64)
 
+[node name="spawnAlert" type="Sprite2D" parent="building"]
+visible = false
+modulate = Color(1, 0.309804, 0.835294, 1)
+position = Vector2(236, 267)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_e68yc")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
 [node name="gates" type="Node2D" parent="."]
 position = Vector2(-1, 15)
 

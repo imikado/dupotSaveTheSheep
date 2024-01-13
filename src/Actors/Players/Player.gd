@@ -10,6 +10,7 @@ const AREA='PlayerArea'
 const SHOOT_WATER_VALUE=1
 
 var pending_water=0
+var pending_life=0
 
 var carry_sheep=false
 
@@ -152,7 +153,7 @@ func update_min_move(_delta):
 	if velocity.x!=0:
 		return
 
-	if  [PlayerStateMachine.STATE_TAKINGWATER,PlayerStateMachine.STATE_ACTION].has(get_current_state().name):
+	if  [PlayerStateMachine.STATE_TAKINGWATER,PlayerStateMachine.STATE_ACTION,PlayerStateMachine.STATE_TAKINGBURGER].has(get_current_state().name):
 		return
 		
 	var currentSpeed= get_current_speed()/2
@@ -209,3 +210,14 @@ func action():
 
 func commit_action():
 	action_finished.emit()
+
+func take_burger(value):
+	direction=0
+	velocity.x=0
+	#velocity.y=0
+	pending_life=value
+	set_new_state(PlayerStateMachine.STATE_TAKINGBURGER)
+
+func commit_increase_life():
+	GlobalEvents.player_increase_life.emit(pending_life)
+	pending_life=0

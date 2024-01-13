@@ -1,9 +1,10 @@
-[gd_scene load_steps=43 format=3 uid="uid://dld0jkheienqb"]
+[gd_scene load_steps=46 format=3 uid="uid://dld0jkheienqb"]
 
 [ext_resource type="Script" path="res://src/Actors/Players/Player.gd" id="1_nmcdb"]
 [ext_resource type="Texture2D" uid="uid://cpd0lts7lrx6l" path="res://src/Actors/Players/Player/player-impatient.png" id="2_a4qs2"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="2_ap35m"]
 [ext_resource type="Texture2D" uid="uid://cd1sru7miht31" path="res://src/Actors/Players/Player/player-shoot.png" id="2_bkto8"]
+[ext_resource type="Texture2D" uid="uid://cqggo0ralb340" path="res://src/Actors/Players/Player/player-take-burger.png" id="2_iqfpy"]
 [ext_resource type="Texture2D" uid="uid://wxurabal606c" path="res://src/Actors/Players/Player/player-action.png" id="2_iw2qg"]
 [ext_resource type="Texture2D" uid="uid://b78ytw2eb6kha" path="res://src/Actors/Players/Player/player-take-water.png" id="2_mj2hc"]
 [ext_resource type="Texture2D" uid="uid://134ipqk1sbau" path="res://src/Actors/Players/Player/player-walking.png" id="3_gnjl8"]
@@ -26,10 +27,51 @@
 [ext_resource type="Script" path="res://src/Actors/Players/States/StateDamaged.gd" id="20_8lr7x"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateTakingWater.gd" id="23_k76g4"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateAction.gd" id="25_xm24d"]
+[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateTakingBurger.gd" id="27_7g25p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_moofm"]
 radius = 7.0
 height = 24.0
+
+[sub_resource type="Animation" id="Animation_410p0"]
+resource_name = "Action"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_iw2qg")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
 
 [sub_resource type="Animation" id="Animation_kir8g"]
 resource_name = "Damaged"
@@ -499,9 +541,8 @@ tracks/2/keys = {
 "values": [0, 1, 2]
 }
 
-[sub_resource type="Animation" id="Animation_410p0"]
-resource_name = "Action"
-length = 0.5
+[sub_resource type="Animation" id="Animation_k04vx"]
+resource_name = "TakingBurger"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -512,7 +553,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_iw2qg")]
+"values": [ExtResource("2_iqfpy")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -524,7 +565,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5]
+"values": [9]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -533,10 +574,10 @@ tracks/2/path = NodePath("../Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rw1v"]
@@ -549,6 +590,7 @@ _data = {
 "Impatient": SubResource("Animation_d8j6w"),
 "Jump": SubResource("Animation_1c7kc"),
 "RESET": SubResource("Animation_jg8ng"),
+"TakingBurger": SubResource("Animation_k04vx"),
 "TakingWater": SubResource("Animation_6ugl8"),
 "Walking": SubResource("Animation_getxm"),
 "gunOut": SubResource("Animation_3rms3"),
@@ -565,8 +607,8 @@ muzzleMarker2d = NodePath("muzzleMarker2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
-texture = ExtResource("2_iw2qg")
-hframes = 5
+texture = ExtResource("2_iqfpy")
+hframes = 9
 region_rect = Rect2(0, 0, 64, 64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -657,6 +699,11 @@ animation_name = "TakingWater"
 script = ExtResource("25_xm24d")
 can_idle = false
 animation_name = "Action"
+
+[node name="StateTakingBurger" type="Node" parent="StateMachine"]
+script = ExtResource("27_7g25p")
+can_idle = false
+animation_name = "TakingBurger"
 
 [node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("11_vadop")]
 state_machine = NodePath("../StateMachine")

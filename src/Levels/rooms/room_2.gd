@@ -13,6 +13,8 @@ extends Node2D
 
 @onready var door:Door=$Door
 
+@onready var _spawnAlert:Sprite2D=$building/spawnAlert
+
 var started=false
 
 var enabled=false
@@ -22,6 +24,16 @@ func spawn_trex():
 	var enemyNumber=_enemyList.get_child_count()
 	
 	if enemyNumber == 0: 
+
+		var tween=create_tween()
+		for i in range(2):
+			tween.tween_property(_spawnAlert,"visible",true,0.3)
+			tween.tween_property(_spawnAlert,"visible",false,0.3)
+		
+
+		tween.tween_property(_spawnAlert,"visible",false,0.6)
+
+		await tween.finished
 	
 		door.open()
 		await door.door_opened
@@ -62,11 +74,11 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	
 func disable_enemy_list():
 	enabled=false
-	set_enemy_physics_process(false)
+	#set_enemy_physics_process(false)
 
 func enable_enemy_list():
 	enabled=true
-	set_enemy_physics_process(true)
+	#set_enemy_physics_process(true)
 	
 	
 func set_enemy_physics_process(processEnabled:bool):

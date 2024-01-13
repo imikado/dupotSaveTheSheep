@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://blqbs5g1aiy8m"]
+[gd_scene load_steps=9 format=3 uid="uid://blqbs5g1aiy8m"]
 
 [ext_resource type="Script" path="res://src/Levels/rooms/room_3.gd" id="1_fdb5r"]
 [ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="1_ow6v7"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d2m1rekr4ryxw" path="res://src/Levels/Shared/handle.tscn" id="5_ojdwi"]
 [ext_resource type="PackedScene" uid="uid://b5veltma7osxs" path="res://src/Levels/Shared/drone.tscn" id="6_i0xx1"]
 [ext_resource type="PackedScene" uid="uid://cev5kgjc2i55p" path="res://src/Levels/Shared/wastes.tscn" id="7_dii1g"]
+[ext_resource type="PackedScene" uid="uid://cgrgdyiml1kax" path="res://src/Levels/Shared/burger.tscn" id="8_5bdwh"]
 
 [node name="Room3" type="Node2D"]
 script = ExtResource("1_fdb5r")
@@ -68,6 +69,9 @@ rotation = -0.795242
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(240, 327)
 scale = Vector2(24, 0.9)
+
+[node name="Burger" parent="." instance=ExtResource("8_5bdwh")]
+position = Vector2(421, 144)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

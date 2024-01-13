@@ -65,6 +65,7 @@ func _ready():
 
 	GlobalEvents.sheep_take_damage.connect(on_sheep_take_damage)
 
+	GlobalEvents.player_increase_life.connect(on_player_increase_life)
 	
 
 	hud.set_score(GlobalPlayer.get_score())
@@ -125,6 +126,12 @@ func on_player_take_damage(damage):
 	hud.set_player_life(GlobalPlayer.get_life() )
 	if GlobalPlayer.get_life() <=0:
 		on_player_gameover()
+
+
+func on_player_increase_life(value):
+	GlobalPlayer.increase_life(value)
+	hud.set_player_life(GlobalPlayer.get_life() )
+	
 
 func on_sheep_take_damage(damage):
 	GlobalSheep.decrease_life(damage)

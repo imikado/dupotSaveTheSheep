@@ -69,5 +69,8 @@ func decrease_life(value):
 	_life -= value
 
 
+func increase_life(value):
+	_life += value
+
 func update_life(value):
 	_life = value

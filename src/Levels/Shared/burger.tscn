@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgrgdyiml1kax"]
+
+[ext_resource type="Script" path="res://src/Levels/Shared/burger.gd" id="1_ikbhv"]
+[ext_resource type="Texture2D" uid="uid://binbewqb3nurp" path="res://src/Levels/Shared/burger.png" id="1_s4u8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwyip"]
+size = Vector2(9, 20)
+
+[node name="Burger" type="Area2D"]
+script = ExtResource("1_ikbhv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.470588, 0.435294, 0.345098, 1)
+position = Vector2(-9, -13)
+texture = ExtResource("1_s4u8b")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -10)
+shape = SubResource("RectangleShape2D_bwyip")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
