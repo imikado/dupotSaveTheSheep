@@ -27,14 +27,6 @@ func close():
 	switch_light()
 	_light_arrow.visible=true
 
-func _on_area_2d_gate_opened():
-	GlobalPlayer.get_actor().action()
-
-	if _is_open:
-		close()
-	else:
-		open()
-
 
 func switch_light():
 	for childLoop in _light.get_children():
@@ -44,3 +36,19 @@ func switch_light():
 			_light_opened.visible=true
 		else:
 			_light_closed.visible=true
+
+func action():
+	if _is_open:
+		close()
+	else:
+		open()
+
+
+func _on_area_2d_body_entered(body):
+	if body is Player:
+		body.set_pending_action(self)
+
+
+func _on_area_2d_body_exited(body):
+	if body is Player:
+		body.reset_pending_action()

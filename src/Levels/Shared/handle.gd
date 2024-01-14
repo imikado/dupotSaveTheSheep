@@ -11,17 +11,10 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func off_process(_delta):
 	for area in get_overlapping_areas():
 		if area.name == Player.AREA and GlobalInput.is_press_action_button():
-			
 			GlobalPlayer.get_actor().action()
-
-			if bridge.is_open():
-				_animationPlayer.play('close')
-			else:
-				_animationPlayer.play('open')
-	pass
 
 func remote_open():
 	bridge.open()
@@ -29,4 +22,18 @@ func remote_open():
 func remote_close():
 	bridge.close()
 
+func action():
+	if bridge.is_open():
+		_animationPlayer.play('close')
+	else:
+		_animationPlayer.play('open')
 
+
+func _on_body_entered(body):
+	if body is Player:
+		body.set_pending_action(self)
+
+
+func _on_body_exited(body):
+	if body is Player:
+		body.reset_pending_action()

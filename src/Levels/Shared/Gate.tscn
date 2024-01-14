@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c87l4h2e277ou"]
+[gd_scene load_steps=10 format=3 uid="uid://c87l4h2e277ou"]
 
 [ext_resource type="Texture2D" uid="uid://cfcxilrbu4ub6" path="res://src/Levels/Shared/gate.png" id="1_vgx7k"]
 [ext_resource type="Script" path="res://src/Levels/Shared/Gate.gd" id="1_yson1"]
-[ext_resource type="Script" path="res://src/Levels/Shared/GateArea.gd" id="2_dhavs"]
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="4_2t113"]
 
 [sub_resource type="Animation" id="Animation_l26xd"]
@@ -189,7 +188,6 @@ position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_r4yt7")
 
 [node name="Area2D" type="Area2D" parent="."]
-script = ExtResource("2_dhavs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(8.5, 9)
@@ -225,4 +223,5 @@ color = Color(0.74902, 0, 0.219608, 1)
 position = Vector2(15, -13)
 rotation = 0.523599
 
-[connection signal="gate_opened" from="Area2D" to="." method="_on_area_2d_gate_opened"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

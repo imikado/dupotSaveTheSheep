@@ -107,6 +107,10 @@ func shoot():
 
 
 func update_move(_delta):
+
+	if _pending_action!=null and GlobalInput.is_press_action_button():
+		action()
+
 	var currentSpeed= get_current_speed()
 	
 	_direction = GlobalInput.get_direction()
@@ -182,11 +186,8 @@ func action():
 	velocity.x=0
 	set_new_state(PlayerStateMachine.STATE_ACTION)
 
-	await action_finished
-
-
 func commit_action():
-	action_finished.emit()
+	_pending_action.action()
 
 func take_burger(value):
 	_direction=0
@@ -201,3 +202,6 @@ func commit_increase_life():
 
 func set_pending_action(pending_action):
 	_pending_action=pending_action
+
+func reset_pending_action():
+	_pending_action=null

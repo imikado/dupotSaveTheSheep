@@ -95,3 +95,6 @@ shape = SubResource("RectangleShape2D_jb0ux")
 [node name="LightArrow" parent="." instance=ExtResource("3_vbyle")]
 position = Vector2(12, -14)
 rotation = 0.744042
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
