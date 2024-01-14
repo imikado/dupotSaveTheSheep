@@ -9,15 +9,15 @@ const AREA='PlayerArea'
 
 const SHOOT_WATER_VALUE=1
 
-var pending_water=0
-var pending_life=0
+var _pending_water=0
+var _pending_life=0
 
-var carry_sheep=false
+var _pending_action=null
 
-var direction
+var _direction
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal action_finished
 
@@ -26,9 +26,8 @@ signal action_finished
 
 @onready var _raycast:RayCast2D=$RayCast2D
 
-@export var _sheep:Sheep 
 
-@export var muzzleMarker2d:Marker2D
+@export var _muzzleMarker2d:Marker2D
 
 @onready var Bullet = load("res://src/Actors/Players/Bullet.tscn")
 
@@ -53,9 +52,9 @@ func _process(delta):
 		update_gunshoot(delta)
 
 	if _sprite.flip_h:
-		muzzleMarker2d.position.x=-25
+		_muzzleMarker2d.position.x=-25
 	else:
-		muzzleMarker2d.position.x=25	
+		_muzzleMarker2d.position.x=25	
 	
 	
 		
@@ -72,7 +71,7 @@ func update_gravity(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		set_new_state(PlayerStateMachine.STATE_FALL)
-		velocity.y += gravity * delta
+		velocity.y += _gravity * delta
 
 func update_jump(_delta):
 	if GlobalInput.is_press_jump_button() and is_on_floor():
@@ -95,7 +94,7 @@ func shoot():
 	var bullet=Bullet.instantiate()
 	get_parent().add_child(bullet)
 	
-	bullet.global_position=muzzleMarker2d.global_position
+	bullet.global_position=_muzzleMarker2d.global_position
 	if _sprite.flip_h:
 		bullet.run(-1)
 	else:
@@ -106,38 +105,16 @@ func shoot():
 	GlobalEvents.emit_signal("player_water_changed",GlobalPlayer.get_water())
 
 
-func update_carry_sheep():
-	if !carry_sheep and GlobalInput.is_press_carry_button() and is_on_floor():
-		if abs(_sheep.position.x - position.x) <30:
-			print('carry sheep')
-			
-			_sheep.be_carried()
-			_sheep.position.x=position.x+2
-			_sheep.position.y-=35
-			_sheep.reparent(self)
-			
-			add_child(_sheep)
-			
-			carry_sheep=true
-	elif carry_sheep and GlobalInput.is_press_carry_button() and is_on_floor():
-		_sheep.reparent(get_parent())
-		_sheep.position.x+=10*direction
-		_sheep.position.y+=28
-		_sheep.bring_back()
-		
-		carry_sheep=false
-
-
 
 func update_move(_delta):
 	var currentSpeed= get_current_speed()
 	
-	direction = GlobalInput.get_direction()
-	if direction:
+	_direction = GlobalInput.get_direction()
+	if _direction:
 		set_new_state(PlayerStateMachine.STATE_WALKING)
-		velocity.x = direction * currentSpeed
+		velocity.x = _direction * currentSpeed
 		
-		_sprite.flip_h=(direction==-1)
+		_sprite.flip_h=(_direction==-1)
 		
 	else:
 		if !_raycast.is_colliding():
@@ -158,11 +135,11 @@ func update_min_move(_delta):
 		
 	var currentSpeed= get_current_speed()/2
 	
-	direction = GlobalInput.get_direction()
-	if direction:
-		velocity.x = direction *currentSpeed
+	_direction = GlobalInput.get_direction()
+	if _direction:
+		velocity.x = _direction *currentSpeed
 		
-		_sprite.flip_h=(direction==-1)
+		_sprite.flip_h=(_direction==-1)
 
 
 func process_move():
@@ -190,18 +167,18 @@ func hit_damage(damage):
 
 	
 func take_water(water_value):
-	direction=0
+	_direction=0
 	velocity.x=0
 	#velocity.y=0
-	pending_water=water_value
+	_pending_water=water_value
 	set_new_state(PlayerStateMachine.STATE_TAKINGWATER)
 
 func commit_water():
-	GlobalEvents.emit_signal("player_water_changed",pending_water)
-	pending_water=0
+	GlobalEvents.emit_signal("player_water_changed",_pending_water)
+	_pending_water=0
 
 func action():
-	direction=0
+	_direction=0
 	velocity.x=0
 	set_new_state(PlayerStateMachine.STATE_ACTION)
 
@@ -212,12 +189,15 @@ func commit_action():
 	action_finished.emit()
 
 func take_burger(value):
-	direction=0
+	_direction=0
 	velocity.x=0
 	#velocity.y=0
-	pending_life=value
+	_pending_life=value
 	set_new_state(PlayerStateMachine.STATE_TAKINGBURGER)
 
 func commit_increase_life():
-	GlobalEvents.player_increase_life.emit(pending_life)
-	pending_life=0
+	GlobalEvents.player_increase_life.emit(_pending_life)
+	_pending_life=0
+
+func set_pending_action(pending_action):
+	_pending_action=pending_action

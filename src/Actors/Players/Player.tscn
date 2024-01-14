@@ -601,9 +601,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtpuh"]
 size = Vector2(14, 20)
 
-[node name="PlayerCharacter2D" type="CharacterBody2D" node_paths=PackedStringArray("muzzleMarker2d")]
+[node name="PlayerCharacter2D" type="CharacterBody2D" node_paths=PackedStringArray("_muzzleMarker2d")]
 script = ExtResource("1_p8sjd")
-muzzleMarker2d = NodePath("muzzleMarker2D")
+_muzzleMarker2d = NodePath("muzzleMarker2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
