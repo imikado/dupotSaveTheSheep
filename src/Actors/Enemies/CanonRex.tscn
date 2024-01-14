@@ -185,6 +185,8 @@ _data = {
 size = Vector2(132, 35)
 
 [node name="CanonRex" type="CharacterBody2D"]
+z_index = 14
+z_as_relative = false
 script = ExtResource("1_ci1on")
 FireBall = ExtResource("2_ecwdd")
 points = 10

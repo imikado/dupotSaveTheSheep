@@ -4,20 +4,28 @@ extends Node2D
 
 @onready var _enemyList=$enemyList
 
+@onready var _decor:Node2D=$decor
+
 @onready var _spawnTimer=$Timer
 @onready var _spawnStartTimer=$StartTimer
 
-@onready var _spawnMarker2D=$spawnMarker2D
+@onready var _spawnMarker2D=$decor/spawnMarker2D
 
 @export var TRex:PackedScene
 
-@onready var door:Door=$Door
+@onready var door:Door=$decor/Door
 
-@onready var _spawnAlert:Sprite2D=$building/spawnAlert
+@onready var _spawnAlert:Sprite2D=$decor/building/spawnAlert
 
 var started=false
 
 var enabled=false
+
+func _ready():
+	set_decor_visible(false)
+
+func set_decor_visible(state):
+	_decor.visible=state
 	
 func spawn_trex():
 	
@@ -59,6 +67,8 @@ func is_enabled()->bool:
 	return enabled
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
+	print('visible')
+	set_decor_visible(true)
 	if !is_enabled():
 		if !started :
 			_spawnStartTimer.start()
@@ -68,6 +78,7 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 		enable_enemy_list()
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
+	set_decor_visible(false)
 	disable_enemy_list()
 	_spawnTimer.stop()
 	

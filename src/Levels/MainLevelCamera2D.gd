@@ -57,9 +57,9 @@ func _process(_delta):
 	position.x=min_x+delta_x
 	position.y=min_y+delta_y
 	
-	var zoom_x=clamp(get_viewport_rect().size.x/(max_x-min_x),0.2,1)
+	var zoom_x=clamp(get_viewport_rect().size.x/(max_x-min_x),0.3,1)
 	
-	var zoom_y=clamp(get_viewport_rect().size.y/(min_y-max_y),0.2,1)
+	var zoom_y=clamp(get_viewport_rect().size.y/(min_y-max_y),0.3,1)
 	
 	if zoom_x < zoom_y:
 		zoom=Vector2(zoom_x,zoom_x)

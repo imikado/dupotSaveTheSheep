@@ -35,11 +35,13 @@ func shoot():
 func damage():
 	if !alive:
 		return
-	set_new_state(CanonRexStateMachine.STATE_DAMAGED)
 	life -=1
 	if life <=0:
 		alive=false
 		die()
+	else:
+		set_new_state(CanonRexStateMachine.STATE_DAMAGED)
+	
 
 
 func spawn_fireball():

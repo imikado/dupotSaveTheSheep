@@ -48,8 +48,18 @@ func get_room():
 	
 	return roomList[roomNumber]
 
+	
+func debug_hook():
+	if GlobalGame.is_debug():
+		player.global_position.x+=820
+		#player.global_position.y=0
+		
+		sheep.global_position.x+=820
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():	
+	print('main loaded')
 
 	GlobalPlayer.set_actor(player)
 	
@@ -90,6 +100,9 @@ func _ready():
 		
 		roomLoop.global_position.x=currentX
 		roomLoop.global_position.y=0
+		
+		if i == 1:
+			roomLoop.set_decor_visible(true)
 	
 		currentX+=roomLoop.width
 	
@@ -109,6 +122,8 @@ func _ready():
 	
 	sheep.global_position.x=-10
 	#sheep.global_position.y=0
+
+	debug_hook()
 
 	
 func on_enemy_die(enemy):

@@ -53,6 +53,8 @@ _data = {
 radius = 2.0
 
 [node name="Bullet" type="RigidBody2D"]
+z_index = 14
+z_as_relative = false
 script = ExtResource("1_axmbu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

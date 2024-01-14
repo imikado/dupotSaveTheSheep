@@ -312,7 +312,8 @@ _data = {
 }
 
 [node name="TRex" type="CharacterBody2D"]
-z_index = 10
+z_index = 14
+z_as_relative = false
 script = ExtResource("1_krotj")
 points = 10
 

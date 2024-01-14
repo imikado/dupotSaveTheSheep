@@ -53,6 +53,8 @@ radius = 5.0
 radius = 7.0
 
 [node name="Fireball" type="RigidBody2D"]
+z_index = 12
+z_as_relative = false
 script = ExtResource("1_lqbk5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

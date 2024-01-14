@@ -171,6 +171,8 @@ size = Vector2(3, 38)
 size = Vector2(9, 20)
 
 [node name="Gate" type="StaticBody2D"]
+z_index = 13
+z_as_relative = false
 script = ExtResource("1_yson1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -194,7 +196,7 @@ position = Vector2(8.5, 9)
 shape = SubResource("RectangleShape2D_0uc48")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-z_index = 10
+z_index = 16
 z_as_relative = false
 position = Vector2(-14, -1)
 texture = ExtResource("1_vgx7k")

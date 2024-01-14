@@ -59,8 +59,12 @@ metadata/_edit_vertical_guides_ = [23.0, 8.0]
 [node name="Controls" parent="." instance=ExtResource("4_wa5bp")]
 
 [node name="Player" parent="." instance=ExtResource("6_04vjb")]
+z_index = 14
+z_as_relative = false
 
 [node name="Sheep" parent="." instance=ExtResource("7_f3yar")]
+z_index = 14
+z_as_relative = false
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "sheep")]
 script = ExtResource("12_td7dg")

@@ -109,7 +109,10 @@ func shoot():
 func update_move(_delta):
 
 	if _pending_action!=null and GlobalInput.is_press_action_button():
+		print('action')
 		action()
+	elif GlobalInput.is_press_action_button():
+		print("pending acion is empty")
 
 	var currentSpeed= get_current_speed()
 	
