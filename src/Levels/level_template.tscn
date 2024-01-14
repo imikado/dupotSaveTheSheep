@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtjgk81pko51a"]
-
-[ext_resource type="PackedScene" uid="uid://wy4f66o7eik0" path="res://src/Levels/Shared/level_world.tscn" id="1_m3qq4"]
-
-[node name="LevelTemplate" type="Node2D"]
-
-[node name="LevelWorld" parent="." instance=ExtResource("1_m3qq4")]
-position = Vector2(688, 177)

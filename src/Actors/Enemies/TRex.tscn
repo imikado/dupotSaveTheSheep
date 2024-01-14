@@ -370,5 +370,6 @@ animation_name = "Spawn"
 state_machine = NodePath("../StateMachine")
 
 [node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

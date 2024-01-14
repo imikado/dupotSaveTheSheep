@@ -15,7 +15,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction=1
 var next_direction=0
 
-func _physics_process(delta):
+func _process(delta):
 	# Add the gravity.
 	if get_current_state().has_gravity:
 		if not is_on_floor():
@@ -30,7 +30,7 @@ func _physics_process(delta):
 			set_new_state(SheepStateMachine.STATE_IDLE)
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-		get_current_state().state_physics_process(delta)
+		get_current_state().state_process(delta)
 
 
 		if is_on_wall():

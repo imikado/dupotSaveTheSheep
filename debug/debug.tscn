@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7gf31soavv60"]
+
+[ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="2_g1fp7"]
+[ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="3_8yxh2"]
+[ext_resource type="PackedScene" uid="uid://blqbs5g1aiy8m" path="res://src/Levels/rooms/room_3.tscn" id="3_owbks"]
+
+[node name="Debug" type="Node2D"]
+
+[node name="Room3" parent="." instance=ExtResource("3_owbks")]
+
+[node name="Player" parent="Room3" instance=ExtResource("2_g1fp7")]
+position = Vector2(348, 138)
+
+[node name="Camera2D" type="Camera2D" parent="Room3/Player"]
+position = Vector2(63, -43)
+
+[node name="Sheep" parent="." instance=ExtResource("3_8yxh2")]
+position = Vector2(337, 336)

@@ -25,8 +25,8 @@ func init():
 			current_state = state_loop
 	current_state.enter()
 
-func _physics_process(delta):
-	current_state.state_physics_process(delta)
+func _process(delta):
+	current_state.state_process(delta)
 
 func animation_play(animation:String)->void :
 	animationPlayer.play(animation)

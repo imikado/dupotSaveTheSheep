@@ -33,7 +33,7 @@ signal action_finished
 @onready var Bullet = load("res://src/Actors/Players/Bullet.tscn")
 
 
-func _physics_process(delta):
+func _process(delta):
 	
 	if get_current_state().has_gravity:
 		update_gravity(delta)
@@ -59,7 +59,7 @@ func _physics_process(delta):
 	
 	
 		
-	get_current_state().state_physics_process(delta)
+	get_current_state().state_process(delta)
 
 
 	process_move()
@@ -67,7 +67,7 @@ func _physics_process(delta):
 func process_jump(_delta):
 	velocity.y = JUMP_VELOCITY
 
-#func _physics_process(delta):
+#func _process(delta):
 func update_gravity(delta):
 	# Add the gravity.
 	if not is_on_floor():

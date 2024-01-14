@@ -71,7 +71,3 @@ func set_sheep_life(value):
 	#sheepProgressBar.value=value
 	_sheepLifeValue=value
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass

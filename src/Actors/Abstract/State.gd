@@ -18,7 +18,7 @@ func animation_play(animation_name_to_play:String ):
 func animation_reset():
 	state_machine.animation_reset()
 	
-func state_physics_process(_delta):
+func state_process(_delta):
 	pass
 	
 func exit(next_state):
