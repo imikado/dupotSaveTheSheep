@@ -1,6 +1,5 @@
 extends Enemy
 
-@onready var _animationPlayer=$AnimationPlayer
 @onready var _sprite=$Sprite2D
 
 const SPEED = 60.0
@@ -26,6 +25,9 @@ var can_attack=true
 
 
 func _process(delta):
+	
+	if !_alive:
+		return
 	# Add the gravity.
 	if get_current_state().has_gravity:
 		#if not is_on_floor():
@@ -78,19 +80,18 @@ func _process(delta):
 	move_and_slide()
 
 func damage():
-	if !alive:
-		return
-	life -=1
-	if life <=0:
-		alive=false
-		die()
-	else:
-		set_new_state(TRexStateMachine.STATE_DAMAGED)
+	if _alive:
+		life -=1
+		if life <=0:
+			die()
+		else:
+			set_new_state(TRexStateMachine.STATE_DAMAGED)
 	
 func spawn():
 	set_new_state(TRexStateMachine.STATE_SPAWN)
 
 func die():
+	_alive=false
 	set_new_state(TRexStateMachine.STATE_DIE)
 		
 func finish_die():

@@ -233,6 +233,7 @@ actor = NodePath("..")
 
 [node name="StateIdle" type="Node" parent="StateMachine"]
 script = ExtResource("4_1et44")
+can_move = true
 has_gravity = false
 animation_name = "Idle"
 

@@ -1,7 +1,6 @@
 extends Enemy
 class_name CanonRex
 
-@onready var _animationPlayer=$AnimationPlayer
 @onready var _sprite=$Sprite2D
 
 @onready var _state_machine:CanonRexStateMachine = $StateMachine
@@ -23,6 +22,7 @@ var moveVector=Vector2(INPULSE_LEFT,0)
 
 
 func die():
+	_alive=false
 	set_new_state(CanonRexStateMachine.STATE_DIE)
 		
 func finish_die():
@@ -30,18 +30,16 @@ func finish_die():
 	GlobalEvents.emit_signal("enemy_die",self)
 
 func shoot():
-	set_new_state(CanonRexStateMachine.STATE_SHOOTING)
+	if _alive:
+		set_new_state(CanonRexStateMachine.STATE_SHOOTING)
 
 func damage():
-	if !alive:
-		return
-	life -=1
-	if life <=0:
-		alive=false
-		die()
-	else:
-		set_new_state(CanonRexStateMachine.STATE_DAMAGED)
-	
+	if _alive:
+		life -=1
+		if life <=0:
+			die()
+		else:
+			set_new_state(CanonRexStateMachine.STATE_DAMAGED)
 
 
 func spawn_fireball():
@@ -50,11 +48,11 @@ func spawn_fireball():
 	newFireBall.global_position=spawnFireBall.global_position
 	newFireBall.set_vector(moveVector)
 	print('spawn fire ball')
-	pass
- 
+
 
 func get_current_state()->PlayerState:
 	return _state_machine.current_state
+
 	
 func set_new_state(new_state):
 	current_state_name=new_state

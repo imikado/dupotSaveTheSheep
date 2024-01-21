@@ -5,6 +5,7 @@ extends Node2D
 @export var Room2:PackedScene
 @export var Room3:PackedScene
 @export var Room4:PackedScene
+@export var RoomEnd:PackedScene
 
 @onready var hud=$HUD
 
@@ -93,7 +94,7 @@ func _ready():
 	roomStart.global_position.x=roomStart.width*-1
 	roomStart.global_position.y=0
 	
-	for i in range(1,8):
+	for i in range(1,9):
 		var roomLoop=get_room().instantiate()
 		
 		_rooms.add_child(roomLoop)
@@ -106,16 +107,11 @@ func _ready():
 	
 		currentX+=roomLoop.width
 	
-		var parallaxLayerSpriteLoop=parallaxLayerSprite.duplicate()
-		parallaxLayer.add_child(parallaxLayerSpriteLoop)
-		parallaxLayerSpriteLoop.global_position.x+=480*i
-		
-		var parallaxLayerSpriteLoop2=parallaxLayer2Sprite.duplicate()
-		parallaxLayer2.add_child(parallaxLayerSpriteLoop2)
-		parallaxLayerSpriteLoop2.global_position.x+=480*i
+	var roomEnd=RoomEnd.instantiate()
+	_rooms.add_child(roomEnd)
 	
-	
-	#---------
+	roomEnd.global_position.x=currentX
+	roomEnd.global_position.y=0	
 	
 	player.global_position.x+=20
 	#player.global_position.y=0

@@ -41,7 +41,7 @@ func is_press_attack_button()->bool:
 	
 
 #direction
-func get_direction()->int:
+func get_direction()->float:
 	return Input.get_axis(INPUT_LEFT, INPUT_RIGHT)
 	
 func press_left_button()->void:

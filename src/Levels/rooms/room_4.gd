@@ -1,6 +1,5 @@
-extends Node2D
+extends RoomAbstract
 
-@onready var width=$ColorRect.get_rect().size.x
 @onready var animationPlayer:AnimationPlayer=$decor/AnimationPlayer
 
 @onready var _decor:Node2D=$decor

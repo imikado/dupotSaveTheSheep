@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Enemy
 
-var alive=true
+var _alive=true
 
 
 @export var points:int=0
