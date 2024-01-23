@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://r02wmfgg7m5p"]
+[gd_scene load_steps=5 format=3 uid="uid://r02wmfgg7m5p"]
 
 [ext_resource type="Script" path="res://src/Levels/rooms/room_end.gd" id="1_8sr7q"]
 [ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="2_kss7q"]
 [ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="3_a4ixo"]
+[ext_resource type="PackedScene" uid="uid://0ul2pw20maw5" path="res://src/Actors/Vehicles/motor_bike.tscn" id="4_t4iij"]
 
 [node name="RoomEnd" type="Node2D"]
 script = ExtResource("1_8sr7q")
@@ -26,3 +27,6 @@ visible = false
 offset_right = 636.0
 offset_bottom = 400.0
 color = Color(0, 0.156863, 0.321569, 1)
+
+[node name="MotorBike" parent="." instance=ExtResource("4_t4iij")]
+position = Vector2(200, 319)
