@@ -11,8 +11,8 @@ const SHOOT_WATER_VALUE=1
 
 var _pending_water=0
 var _pending_life=0
-
 var _pending_action=null
+var _pending_vehicle=null
 
 var _direction
 
@@ -111,6 +111,13 @@ func update_move(_delta):
 	if _pending_action!=null and GlobalInput.is_press_action_button():
 		print('action')
 		action()
+	elif _pending_vehicle!=null:
+		
+		queue_free()
+		
+		_pending_vehicle.player_go_from_left()	
+		
+		
 	elif GlobalInput.is_press_action_button():
 		print("pending acion is empty")
 
@@ -208,3 +215,11 @@ func set_pending_action(pending_action):
 
 func reset_pending_action():
 	_pending_action=null
+
+
+func set_pending_vehicle(pending_vehicle):
+	_pending_vehicle=pending_vehicle
+
+func reset_pending_vehicle():
+	_pending_vehicle=null
+	

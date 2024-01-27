@@ -14,8 +14,17 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var direction=1
 var next_direction=0
+var _pending_vehicle=null
 
 func _process(delta):
+
+
+	if _pending_vehicle!=null:
+		
+		queue_free()
+		
+		_pending_vehicle.sheep_go_from_left()	
+
 	# Add the gravity.
 	if get_current_state().has_gravity:
 		if not is_on_floor():
@@ -76,4 +85,11 @@ func hit_damage(damage):
 	set_new_state(SheepStateMachine.STATE_DAMAGED)
 	
 	GlobalEvents.sheep_take_damage.emit(damage)
+	
+
+func set_pending_vehicle(pending_vehicle):
+	_pending_vehicle=pending_vehicle
+
+func reset_pending_vehicle():
+	_pending_vehicle=null
 	

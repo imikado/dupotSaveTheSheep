@@ -29,4 +29,4 @@ offset_bottom = 400.0
 color = Color(0, 0.156863, 0.321569, 1)
 
 [node name="MotorBike" parent="." instance=ExtResource("4_t4iij")]
-position = Vector2(200, 319)
+position = Vector2(311, 330)
