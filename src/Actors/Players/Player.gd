@@ -33,6 +33,11 @@ signal action_finished
 
 
 func _process(delta):
+
+	if _pending_vehicle!=null:
+		queue_free()
+		_pending_vehicle.player_go_from_left()	
+		return
 	
 	if get_current_state().has_gravity:
 		update_gravity(delta)
@@ -111,12 +116,6 @@ func update_move(_delta):
 	if _pending_action!=null and GlobalInput.is_press_action_button():
 		print('action')
 		action()
-	elif _pending_vehicle!=null:
-		
-		queue_free()
-		
-		_pending_vehicle.player_go_from_left()	
-		
 		
 	elif GlobalInput.is_press_action_button():
 		print("pending acion is empty")

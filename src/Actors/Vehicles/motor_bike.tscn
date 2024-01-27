@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://0ul2pw20maw5"]
+[gd_scene load_steps=18 format=3 uid="uid://0ul2pw20maw5"]
 
 [ext_resource type="Texture2D" uid="uid://dsfkp5b2yhdll" path="res://src/Actors/Vehicles/motobike-riding.png" id="1_3o606"]
 [ext_resource type="Script" path="res://src/Actors/Vehicles/motor_bike.gd" id="1_7raf7"]
 [ext_resource type="Texture2D" uid="uid://dmseyqkwcrik4" path="res://src/Actors/Players/Player/player-jump.png" id="3_mn6c5"]
+[ext_resource type="Texture2D" uid="uid://fbwdh14dxymg" path="res://src/Actors/Players/Sheep/sheep-seated.png" id="4_g8lkn"]
 [ext_resource type="Texture2D" uid="uid://cossrdctnpr4x" path="res://src/Actors/Players/Player/player-fall.png" id="4_j7pqk"]
 [ext_resource type="Texture2D" uid="uid://bw86gonylphff" path="res://src/Actors/Players/Player/player-on-motorbike.png" id="5_clilh"]
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="6_ikv5x"]
@@ -13,7 +14,7 @@ radius = 4.0
 height = 60.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s6046"]
-size = Vector2(13, 20)
+size = Vector2(18, 81)
 
 [sub_resource type="Animation" id="Animation_fkd5v"]
 resource_name = "Idle"
@@ -188,10 +189,36 @@ tracks/3/path = NodePath("SheepAnimation/Path2D/PathFollow2D:progress_ratio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5),
+"times": PackedFloat32Array(0, 0.2, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.4827, 1.0]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"finish_install_sheep"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("SheepAnimation/Path2D/PathFollow2D/sheep:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.624023, -0.610865]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pmd13"]
@@ -201,15 +228,15 @@ _data = {
 
 [sub_resource type="Curve2D" id="Curve2D_adfig"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -52, -32, -19.3806, -178.251, 19.3806, 178.251, -21, -40)
+"points": PackedVector2Array(0, 0, 0, 0, -52, -32, -19.3806, -178.251, 19.3806, 178.251, -20, -47)
 }
 point_count = 2
 
-[node name="MotorBike" type="CharacterBody2D" node_paths=PackedStringArray("_playerAnimationPlayer", "_sheepAnimationPlayer", "_camera")]
+[node name="MotorBike" type="CharacterBody2D" node_paths=PackedStringArray("_camera", "_playerAnimationPlayer", "_sheepAnimationPlayer")]
 script = ExtResource("1_7raf7")
+_camera = NodePath("Camera2D")
 _playerAnimationPlayer = NodePath("PlayerAnimation/AnimationPlayer")
 _sheepAnimationPlayer = NodePath("SheepAnimation/AnimationPlayer")
-_camera = NodePath("Camera2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
@@ -222,10 +249,15 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_cogoa")
 
 [node name="playerOnBike" type="Sprite2D" parent="."]
-position = Vector2(-13, -36)
+position = Vector2(-12, -35)
 texture = ExtResource("5_clilh")
 hframes = 3
 frame = 1
+
+[node name="sheepOnBike" type="Sprite2D" parent="."]
+position = Vector2(-21, -45)
+texture = ExtResource("4_g8lkn")
+hframes = 3
 
 [node name="LightArrow" parent="." instance=ExtResource("6_ikv5x")]
 position = Vector2(-45, -30)
@@ -234,7 +266,7 @@ rotation = -0.730388
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-31.5, -10)
+position = Vector2(-29, -40.5)
 shape = SubResource("RectangleShape2D_s6046")
 
 [node name="PlayerAnimation" type="Node2D" parent="."]
@@ -273,14 +305,16 @@ libraries = {
 curve = SubResource("Curve2D_adfig")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="SheepAnimation/Path2D"]
-position = Vector2(-21.715, -46.4432)
+position = Vector2(-20.4197, -50.8114)
 rotation = -0.624023
-progress = 161.032
+progress = 167.499
 rotates = false
 
 [node name="sheep" type="Sprite2D" parent="SheepAnimation/Path2D/PathFollow2D"]
-rotation = 0.624023
+position = Vector2(-14.3804, 21.6842)
+rotation = -0.610865
 texture = ExtResource("7_pm5i5")
+offset = Vector2(-0.999998, -26)
 hframes = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
