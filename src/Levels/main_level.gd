@@ -7,6 +7,8 @@ extends Node2D
 @export var Room4:PackedScene
 @export var RoomEnd:PackedScene
 
+@export var NextLevel:PackedScene
+
 @onready var hud=$HUD
 
 @onready var _rooms:Node2D=$rooms
@@ -22,6 +24,7 @@ extends Node2D
 
 @export var gameOverScene:PackedScene
 
+
 var score:int=0
 
 var roomNumber=-1
@@ -33,6 +36,8 @@ var gameover=false
 var debugN=3
 
 var alt=0
+
+var max_room=9
 
 func get_room():
 	
@@ -52,10 +57,10 @@ func get_room():
 	
 func debug_hook():
 	if GlobalGame.is_debug():
-		player.global_position.x+=820
+		player.global_position.x+=3100
 		#player.global_position.y=0
 		
-		sheep.global_position.x+=820
+		sheep.global_position.x+=3110
 
 
 # Called when the node enters the scene tree for the first time.
@@ -77,6 +82,8 @@ func _ready():
 	GlobalEvents.sheep_take_damage.connect(on_sheep_take_damage)
 
 	GlobalEvents.player_increase_life.connect(on_player_increase_life)
+
+	GlobalEvents.end_level.connect(on_end_level)
 	
 
 	hud.set_score(GlobalPlayer.get_score())
@@ -166,3 +173,7 @@ func _on_label_button_button_down():
 func _on_timer_timeout():
 	on_player_gameover()
 	pass # Replace with function body.
+
+
+func on_end_level():
+	GlobalTransition.change_scene_to_packed(NextLevel)

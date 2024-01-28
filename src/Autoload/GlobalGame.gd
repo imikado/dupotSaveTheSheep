@@ -9,7 +9,7 @@ const PATH_HIGHSCORE := "user://highscore.dat"
 
 enum ENEMY_TYPE_LIST { ANT, SPIDER, BEETLE }
 
-var _is_debug := false
+var _is_debug := true
 
 var _is_controls_enabled := true
 

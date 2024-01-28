@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name motorbike_endlevel
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -19,7 +19,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
 func _ready():
-	_playerAnimationPlayer.play("idle")
+	_playerAnimationPlayer.play("Idle")
 	PlayerFromLeftPath.visible=false
 	SheepFromLeftPath.visible=false
 	PlayerOnBike.visible=false
@@ -29,6 +29,9 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
+
+	if PlayerOnBike.visible and SheepOnBike.visible:
+		velocity.x=10
 
  
 	move_and_slide()

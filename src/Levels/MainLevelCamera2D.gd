@@ -30,42 +30,51 @@ func _process(_delta):
 	var delta_x=0
 	var delta_y=0
 	
-	if  sheep.global_position.x < player.global_position.x:
-		min_x=sheep.global_position.x
-		max_x=player.global_position.x
-	else:
-		max_x=sheep.global_position.x
-		min_x=player.global_position.x
+	if sheep!=null and player!=null:
+		if  sheep.global_position.x < player.global_position.x:
+			min_x=sheep.global_position.x
+			max_x=player.global_position.x
+		else:
+			max_x=sheep.global_position.x
+			min_x=player.global_position.x
+			
+			
+		if  sheep.global_position.y > player.global_position.y:
+			min_y=sheep.global_position.y
+			max_y=player.global_position.y
+		else:
+			max_y=sheep.global_position.y
+			min_y=player.global_position.y
 		
+		min_x-=margin_actor
+		max_x+=margin_actor
 		
-	if  sheep.global_position.y > player.global_position.y:
-		min_y=sheep.global_position.y
-		max_y=player.global_position.y
-	else:
-		max_y=sheep.global_position.y
-		min_y=player.global_position.y
+		min_y+=margin_actor
+		max_y-=margin_actor
 		
-	min_x-=margin_actor
-	max_x+=margin_actor
+		delta_x=(max_x-min_x)/2
+		delta_y=(max_y-min_y)/2
+		
+		position.x=min_x+delta_x
+		position.y=min_y+delta_y
 	
-	min_y+=margin_actor
-	max_y-=margin_actor
-	
-	delta_x=(max_x-min_x)/2
-	delta_y=(max_y-min_y)/2
-	
-	position.x=min_x+delta_x
-	position.y=min_y+delta_y
-	
-	var zoom_x=clamp(get_viewport_rect().size.x/(max_x-min_x),0.3,1)
-	
-	var zoom_y=clamp(get_viewport_rect().size.y/(min_y-max_y),0.3,1)
-	
-	if zoom_x < zoom_y:
-		zoom=Vector2(zoom_x,zoom_x)
-	else:
-		zoom=Vector2(zoom_y,zoom_y)
- 
+		var zoom_x=clamp(get_viewport_rect().size.x/(max_x-min_x),0.3,1)
+		
+		var zoom_y=clamp(get_viewport_rect().size.y/(min_y-max_y),0.3,1)
+		
+		if zoom_x < zoom_y:
+			zoom=Vector2(zoom_x,zoom_x)
+		else:
+			zoom=Vector2(zoom_y,zoom_y)
+	elif player!=null:
+		zoom=Vector2(1,1)
+		position=player.global_position
+	elif sheep!=null:
+		zoom=Vector2(1,1)
+		position=sheep.global_position
+		 
+
+
 func add_target(t):
 	if not t in targets:
 		targets.append(t)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c85diaod7sv51"]
+[gd_scene load_steps=16 format=3 uid="uid://c85diaod7sv51"]
 
 [ext_resource type="Script" path="res://src/Levels/main_level.gd" id="1_82721"]
 [ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_gm6x0"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cp335epdftsej" path="res://src/Levels/rooms/room_4.tscn" id="6_pydal"]
 [ext_resource type="PackedScene" uid="uid://r02wmfgg7m5p" path="res://src/Levels/rooms/room_end.tscn" id="7_esvbt"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="7_f3yar"]
+[ext_resource type="PackedScene" uid="uid://fwrcpg1wdoyt" path="res://src/Levels/bonus_level_1.tscn" id="8_2rmmi"]
 [ext_resource type="Script" path="res://src/Levels/MainLevelCamera2D.gd" id="12_td7dg"]
 
 [node name="MainLevel" type="Node2D"]
@@ -23,6 +24,7 @@ Room2 = ExtResource("4_xv7ay")
 Room3 = ExtResource("5_64ro5")
 Room4 = ExtResource("6_pydal")
 RoomEnd = ExtResource("7_esvbt")
+NextLevel = ExtResource("8_2rmmi")
 gameOverScene = ExtResource("6_idaaj")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -35,7 +37,7 @@ offset_left = -2372.0
 offset_top = -718.0
 offset_right = 4511.0
 offset_bottom = 2578.0
-color = Color(0, 0, 0, 1)
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.5)

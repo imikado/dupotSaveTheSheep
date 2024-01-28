@@ -32,3 +32,5 @@ signal player_tookadvantage_of_lifebottle
 signal player_gameover
 
 signal player_increase_life(value)
+
+signal end_level
