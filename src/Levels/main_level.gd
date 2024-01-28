@@ -130,8 +130,8 @@ func _ready():
 
 	
 func on_enemy_die(enemy):
-	score+=enemy.get_points()
-	hud.set_score(score)
+	GlobalPlayer.increase_score(enemy.get_points())
+	hud.set_score(GlobalPlayer.get_score())
 	
 func on_player_water_changed(new_value):
 	hud.set_water(new_value)
@@ -176,4 +176,8 @@ func _on_timer_timeout():
 
 
 func on_end_level():
+	var screenshotImage = get_viewport().get_texture().get_image()
+	var screenshotTexture = ImageTexture.create_from_image(screenshotImage)
+
+	GlobalGame.set_last_screenshot(screenshotTexture)
 	GlobalTransition.change_scene_to_packed(NextLevel)

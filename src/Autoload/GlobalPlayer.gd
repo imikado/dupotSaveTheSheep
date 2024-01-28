@@ -36,6 +36,8 @@ func reset_game():
 func get_score():
 	return _score
 
+func increase_score(value):
+	_score+=value
 
 func save_score(score):
 	_score = score

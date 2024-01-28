@@ -1,8 +1,82 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd5514wt0rdxf"]
+[gd_scene load_steps=16 format=3 uid="uid://cd5514wt0rdxf"]
 
 [ext_resource type="Script" path="res://src/UI/Screens/Menu.gd" id="1_81gvo"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_bkv4m"]
 [ext_resource type="PackedScene" uid="uid://c85diaod7sv51" path="res://src/Levels/main_level.tscn" id="2_4kpgy"]
+[ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="4_nm624"]
+[ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="5_lkhqs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8an8f"]
+atlas = ExtResource("4_nm624")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgb4y"]
+atlas = ExtResource("4_nm624")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8ch2"]
+atlas = ExtResource("4_nm624")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mcrfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8an8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgb4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8ch2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo72a"]
+atlas = ExtResource("5_lkhqs")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lrryp"]
+atlas = ExtResource("5_lkhqs")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iye27"]
+atlas = ExtResource("5_lkhqs")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2sbf"]
+atlas = ExtResource("5_lkhqs")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_287jy"]
+atlas = ExtResource("5_lkhqs")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0hhe7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo72a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lrryp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iye27")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2sbf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_287jy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -25,5 +99,16 @@ offset_top = 98.0
 offset_right = 447.0
 offset_bottom = 130.0
 _export_label = "play"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(93, 101)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_mcrfk")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(362, 108)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_0hhe7")
+flip_h = true
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

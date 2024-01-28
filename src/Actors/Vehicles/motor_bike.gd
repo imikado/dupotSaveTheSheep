@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name motorbike_endlevel
 
-const SPEED = 300.0
+const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
 
 @export var _camera:Camera2D
@@ -25,15 +25,14 @@ func _ready():
 	PlayerOnBike.visible=false
 	SheepOnBike.visible=false
 
-func _physics_process(delta):
+func _process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
+	
 	if PlayerOnBike.visible and SheepOnBike.visible:
-		velocity.x=10
-
- 
+		velocity.x=SPEED
+	
 	move_and_slide()
 
 

@@ -9,9 +9,11 @@ const PATH_HIGHSCORE := "user://highscore.dat"
 
 enum ENEMY_TYPE_LIST { ANT, SPIDER, BEETLE }
 
-var _is_debug := true
+var _is_debug := false
 
 var _is_controls_enabled := true
+
+var _last_screenshot
 
 func resetGame():
 	GlobalPlayer.reset_game()
@@ -81,4 +83,9 @@ func loadFile(filepath):
 	print(filepath)
 	pass
 	
+func set_last_screenshot(screenshot:Texture)->void:
+	_last_screenshot=screenshot
+
+func get_last_screenshot()->Texture:
+	return _last_screenshot
 

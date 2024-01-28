@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cp335epdftsej" path="res://src/Levels/rooms/room_4.tscn" id="6_pydal"]
 [ext_resource type="PackedScene" uid="uid://r02wmfgg7m5p" path="res://src/Levels/rooms/room_end.tscn" id="7_esvbt"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="7_f3yar"]
-[ext_resource type="PackedScene" uid="uid://fwrcpg1wdoyt" path="res://src/Levels/bonus_level_1.tscn" id="8_2rmmi"]
+[ext_resource type="PackedScene" uid="uid://d3x04dxvstr1p" path="res://src/Levels/end_level.tscn" id="8_r0t77"]
 [ext_resource type="Script" path="res://src/Levels/MainLevelCamera2D.gd" id="12_td7dg"]
 
 [node name="MainLevel" type="Node2D"]
@@ -24,7 +24,7 @@ Room2 = ExtResource("4_xv7ay")
 Room3 = ExtResource("5_64ro5")
 Room4 = ExtResource("6_pydal")
 RoomEnd = ExtResource("7_esvbt")
-NextLevel = ExtResource("8_2rmmi")
+NextLevel = ExtResource("8_r0t77")
 gameOverScene = ExtResource("6_idaaj")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
