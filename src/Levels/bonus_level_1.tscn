@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://fwrcpg1wdoyt"]
+[gd_scene load_steps=3 format=3 uid="uid://fwrcpg1wdoyt"]
+
+[ext_resource type="Texture2D" uid="uid://cedm62g087a3h" path="res://src/Levels/Shared/BonusTileMap.png" id="1_gb050"]
+[ext_resource type="PackedScene" uid="uid://dmsis0enle4w2" path="res://src/Actors/Players/PlayerOnMotorBike.tscn" id="1_lv1jy"]
 
 [node name="BonusLevel1" type="Node2D"]
 
@@ -6,3 +9,11 @@
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Bonus level 1"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gb050")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 64)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_lv1jy")]
+position = Vector2(64, 88)
