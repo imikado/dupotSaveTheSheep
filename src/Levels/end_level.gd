@@ -4,6 +4,7 @@ extends Control
 @onready var _scoreLabel:Label=$VBoxContainer/HBoxContainer/scoreLabel
 
 
+var _nextLevel:String="res://src/Levels/bonus_level_1.tscn"
 
 var _scoreValue=0
 
@@ -23,6 +24,6 @@ func set_score_text(scoreValue:int):
 
 
 func _on_play_button_pressed():
-	get_tree().change_scene_to_file("res://src/UI/Screens/Menu.tscn")
-	#GlobalTransition.change_scene_to_packed(Menu)
+	get_tree().change_scene_to_file(_nextLevel)
+	#GlobalTransition.load
 	

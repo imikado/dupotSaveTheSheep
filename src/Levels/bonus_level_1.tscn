@@ -1,19 +1,79 @@
-[gd_scene load_steps=3 format=3 uid="uid://fwrcpg1wdoyt"]
+[gd_scene load_steps=7 format=3 uid="uid://fwrcpg1wdoyt"]
 
-[ext_resource type="Texture2D" uid="uid://cedm62g087a3h" path="res://src/Levels/Shared/BonusTileMap.png" id="1_gb050"]
+[ext_resource type="PackedScene" uid="uid://c1xgtixrulnpc" path="res://src/Levels/Shared/BonusBackground.tscn" id="1_7ly3b"]
 [ext_resource type="PackedScene" uid="uid://dmsis0enle4w2" path="res://src/Actors/Players/PlayerOnMotorBike.tscn" id="1_lv1jy"]
+[ext_resource type="Script" path="res://src/Levels/bonus_level_1.gd" id="1_u5dm6"]
+[ext_resource type="PackedScene" uid="uid://bcq10jx8k3upu" path="res://src/Levels/Shared/BonusRoad.tscn" id="2_sbkai"]
+[ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="5_c3lah"]
+[ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="5_x24ru"]
 
-[node name="BonusLevel1" type="Node2D"]
+[node name="BonusLevel1" type="Node" node_paths=PackedStringArray("_camera", "_player", "_ground")]
+script = ExtResource("1_u5dm6")
+_camera = NodePath("Camera2D")
+_player = NodePath("CharacterBody2D")
+_ground = NodePath("BonusRoad")
 
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
+[node name="ParallaxBackground" parent="." instance=ExtResource("1_7ly3b")]
+
+[node name="BonusRoad" parent="." instance=ExtResource("2_sbkai")]
+position = Vector2(0, 7)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_lv1jy")]
+position = Vector2(37, 227)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(240, 134)
+
+[node name="Control" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -240.0
+offset_top = -134.0
+offset_right = -200.0
+offset_bottom = -94.0
+
+[node name="Label" type="Label" parent="Camera2D/Control"]
+layout_mode = 0
+offset_right = 102.0
 offset_bottom = 23.0
 text = "Bonus level 1"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_gb050")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 64)
+[node name="timeLeftLabel" type="Label" parent="Camera2D/Control"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 39.0
+offset_right = 245.0
+offset_bottom = 62.0
+theme = ExtResource("5_c3lah")
+horizontal_alignment = 1
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_lv1jy")]
-position = Vector2(64, 88)
+[node name="BonusControl" type="Control" parent="Camera2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -71.0
+offset_top = 90.0
+offset_right = -31.0
+offset_bottom = 130.0
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/BonusControl"]
+modulate = Color(0.352941, 0.352941, 0.352941, 0.686275)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -177.0
+offset_top = -232.0
+offset_right = 283.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" parent="Camera2D/BonusControl" instance=ExtResource("5_x24ru")]
+layout_mode = 0
+_export_label = "Menu"
+
+[node name="countDownTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="pressed" from="Camera2D/BonusControl/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="timeout" from="countDownTimer" to="." method="_on_count_down_timer_timeout"]

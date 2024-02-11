@@ -69,6 +69,6 @@ offset_left = 169.0
 offset_top = 224.0
 offset_right = 297.0
 offset_bottom = 256.0
-_export_label = "Menu"
+_export_label = "Bonus"
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
