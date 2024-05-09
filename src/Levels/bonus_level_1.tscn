@@ -73,7 +73,6 @@ layout_mode = 0
 _export_label = "Menu"
 
 [node name="countDownTimer" type="Timer" parent="."]
-autostart = true
 
 [connection signal="pressed" from="Camera2D/BonusControl/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="timeout" from="countDownTimer" to="." method="_on_count_down_timer_timeout"]

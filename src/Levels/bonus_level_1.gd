@@ -39,10 +39,10 @@ func _process(delta):
 	if distance_between_ground >= GROUND_WIDTH:
 		_ground.position.x+=GROUND_WIDTH
 		
-	print(_camera.position.x)
-	print(_ground.position.x)
-	print("distance_between:",distance_between_ground)
-	print(screen_size.x)
+	#print(_camera.position.x)
+	#print(_ground.position.x)
+	#print("distance_between:",distance_between_ground)
+	#print(screen_size.x)
 
 	pass
 
