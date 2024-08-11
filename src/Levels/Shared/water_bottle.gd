@@ -15,4 +15,11 @@ func _on_body_entered(body):
 		GlobalPlayer.increment_water(_water_value)
 		GlobalEvents.emit_signal("player_take_water_bottle",GlobalPlayer.get_water())
 		queue_free()
+		
+	elif body is PlayerOnMotorBike:
+		GlobalPlayer.increment_water(_water_value)
+		GlobalEvents.emit_signal("player_take_water_bottle",GlobalPlayer.get_water())
+		queue_free()
+		
+		
 	pass # Replace with function body.
