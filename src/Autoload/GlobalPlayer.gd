@@ -4,6 +4,7 @@ const START_SCORE = 0
 const START_LIFE = 100
 const START_WATER = 20
 const MAX_WATER = 80
+const MAX_LIFE=100
 
 var _score = 0
 var _life = START_LIFE
@@ -73,6 +74,8 @@ func decrease_life(value):
 
 func increase_life(value):
 	_life += value
+	if _life >= MAX_LIFE:
+		_life=MAX_LIFE
 
 func update_life(value):
 	_life = value

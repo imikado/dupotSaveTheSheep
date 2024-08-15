@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://fwrcpg1wdoyt"]
+[gd_scene load_steps=12 format=3 uid="uid://fwrcpg1wdoyt"]
 
 [ext_resource type="PackedScene" uid="uid://c1xgtixrulnpc" path="res://src/Levels/Shared/BonusBackground.tscn" id="1_7ly3b"]
 [ext_resource type="PackedScene" uid="uid://dmsis0enle4w2" path="res://src/Actors/Players/PlayerOnMotorBike.tscn" id="1_lv1jy"]
@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://c848gx4cq2m6h" path="res://src/Levels/Shared/BonusObstacle.tscn" id="2_0y5nm"]
 [ext_resource type="PackedScene" uid="uid://bcq10jx8k3upu" path="res://src/Levels/Shared/BonusRoad.tscn" id="2_sbkai"]
 [ext_resource type="PackedScene" uid="uid://cluurftsudn5b" path="res://src/Levels/Shared/water_bottle.tscn" id="3_8f7e0"]
+[ext_resource type="PackedScene" uid="uid://bnleyip0uks5e" path="res://src/Levels/Shared/RoadDesserts.tscn" id="4_na10f"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="5_c3lah"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="5_x24ru"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="8_ke4nq"]
+[ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="11_qxesv"]
 
 [node name="BonusLevel1" type="Node" node_paths=PackedStringArray("_camera", "_player", "_ground")]
 script = ExtResource("1_u5dm6")
@@ -17,6 +19,7 @@ _player = NodePath("CharacterBody2D")
 _ground = NodePath("BonusRoad")
 Obstacle = ExtResource("2_0y5nm")
 WaterBottle = ExtResource("3_8f7e0")
+Desserts = ExtResource("4_na10f")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_7ly3b")]
 
@@ -48,11 +51,12 @@ horizontal_alignment = 2
 
 [node name="timeLeftLabel" type="Label" parent="Camera2D/Control"]
 layout_mode = 0
-offset_left = 205.0
-offset_top = 39.0
-offset_right = 245.0
-offset_bottom = 62.0
+offset_left = 218.0
+offset_top = 93.0
+offset_right = 258.0
+offset_bottom = 116.0
 theme = ExtResource("5_c3lah")
+theme_override_font_sizes/font_size = 14
 horizontal_alignment = 1
 
 [node name="BonusControl" type="Control" parent="Camera2D"]
@@ -83,6 +87,11 @@ _export_label = "Menu"
 [node name="countDownTimer" type="Timer" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("8_ke4nq")]
+
+[node name="Controls" parent="." instance=ExtResource("11_qxesv")]
+joystick = false
+attackButton = false
+actionButton = false
 
 [connection signal="pressed" from="Camera2D/BonusControl/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="timeout" from="countDownTimer" to="." method="_on_count_down_timer_timeout"]

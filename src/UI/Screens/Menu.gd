@@ -9,5 +9,14 @@ func _ready():
 
 func _on_play_button_pressed():
 	GlobalGame.resetGame()
+	GlobalGame._is_debug=false
+	GlobalTransition.change_scene_to_packed(MainLevel)
+	pass # Replace with function body.
+
+
+func _on_play_button_2_pressed():
+	
+	GlobalGame.resetGame()
+	GlobalGame._is_debug=true
 	GlobalTransition.change_scene_to_packed(MainLevel)
 	pass # Replace with function body.

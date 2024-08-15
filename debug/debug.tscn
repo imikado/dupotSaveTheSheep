@@ -9,10 +9,10 @@
 [node name="RoomEnd" parent="." instance=ExtResource("1_3u1eo")]
 
 [node name="Sheep" parent="." instance=ExtResource("3_8yxh2")]
-position = Vector2(337, 336)
+position = Vector2(95, 258)
 
 [node name="Player" parent="." instance=ExtResource("2_g1fp7")]
-position = Vector2(348, 138)
+position = Vector2(129, 139)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(63, -43)

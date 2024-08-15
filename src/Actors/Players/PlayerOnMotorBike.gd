@@ -8,7 +8,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animationPlayer:=$AnimationPlayer
 
-enum STATE{RIDING,JUMP_START,JUMPING,JUMP_END,TAKE_WATER,OBSTACLE}
+enum STATE{RIDING,JUMP_START,JUMPING,JUMP_END,TAKE_WATER,OBSTACLE,TAKE_DESSERTS}
 
 
 var _state=STATE.RIDING
@@ -18,7 +18,8 @@ var _animationList={
 	STATE.JUMPING:'riding',
 	STATE.JUMP_END:'JumpEnd',
 	STATE.TAKE_WATER:'TakeWater',
-	STATE.OBSTACLE:'obstacle'
+	STATE.OBSTACLE:'obstacle',
+	STATE.TAKE_DESSERTS:'TakeDesserts'
 }
 
 var jumping=false
@@ -64,6 +65,9 @@ func ride():
 	setState(STATE.RIDING)
 	#animationPlayer.play("riding")
 	
+func take_desserts(life):
+	setState(STATE.TAKE_DESSERTS)
+	
 func take_water(water_value):
 	_pending_water=water_value
 	setState(STATE.TAKE_WATER)
@@ -72,6 +76,14 @@ func take_water(water_value):
 func commit_water():
 	GlobalEvents.emit_signal("player_water_changed",_pending_water)
 	_pending_water=0
+	
+func commit_desserts():
+	print(GlobalPlayer.get_life())
+	GlobalPlayer.increase_life(10)
+	GlobalSheep.increase_life(10)
+	print(GlobalPlayer.get_life())
+	GlobalEvents.emit_signal("player_health_changed",GlobalPlayer.get_life())
+	GlobalEvents.emit_signal("sheep_health_changed",GlobalSheep.get_life())
 
 func isState(stateToCheck)->bool:
 	if _state == stateToCheck:
@@ -139,4 +151,11 @@ func _on_animation_player_animation_finished(anim_name):
 	elif anim_name == getAnimation(STATE.TAKE_WATER):
 		commit_water()
 		setState(STATE.RIDING)
+	elif anim_name == getAnimation(STATE.TAKE_DESSERTS):
+		#commit_water()
+		commit_desserts()
+		setState(STATE.RIDING)
+	elif anim_name == getAnimation(STATE.OBSTACLE):
+		GlobalEvents.emit_signal("player_gameover")
+	
 	pass # Replace with function body.

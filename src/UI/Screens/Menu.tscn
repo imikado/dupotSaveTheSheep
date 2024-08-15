@@ -100,6 +100,14 @@ offset_right = 447.0
 offset_bottom = 130.0
 _export_label = "play"
 
+[node name="PlayButton2" parent="." instance=ExtResource("1_bkv4m")]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 153.0
+offset_right = 447.0
+offset_bottom = 185.0
+_export_label = "bonus"
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(93, 101)
 scale = Vector2(5, 5)
@@ -112,3 +120,4 @@ sprite_frames = SubResource("SpriteFrames_0hhe7")
 flip_h = true
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="PlayButton2" to="." method="_on_play_button_2_pressed"]

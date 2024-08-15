@@ -4,8 +4,10 @@ extends Node
 @export var _player:CharacterBody2D
 @export var _ground:StaticBody2D
 
-const MAX_SPEED := 150.0
+const MAX_SPEED := 170.0
 const GROUND_WIDTH:=500.0
+
+var currentSpeed:=MAX_SPEED
 
 var screen_size:Vector2i
 var camera_start_x=0
@@ -18,16 +20,20 @@ var camera_start_x=0
 
 @export var Obstacle:PackedScene
 @export var WaterBottle:PackedScene
+@export var Desserts:PackedScene
 
 var _nextLevel="res://src/UI/Screens/Menu.tscn"
 
-var _countDown=10
+var _countDown=60
 
 const XBETWEEN_OBSTACLE=250
 var _xBetweenObstacle=50
 
 const XBETWEEN_WATERBOTTLE=1240
 var _xBetweenWaterbottle=50
+
+
+var _switchWaterDesserts=0
 
 var _yStart=0
 
@@ -43,9 +49,26 @@ func _ready():
 	
 	GlobalEvents.connect("player_water_changed",on_player_water_changed)
 	
+	GlobalEvents.connect("player_health_changed",on_player_health_changed)
+	GlobalEvents.connect("sheep_health_changed",on_sheep_health_changed)
+	
+	GlobalEvents.connect("player_gameover",end)
+	
 	hud.set_score(GlobalPlayer.get_score())
 	hud.set_water(GlobalPlayer.get_water())
 	hud.set_player_life(GlobalPlayer.get_life())
+	hud.set_sheep_life(GlobalSheep.get_life())
+	
+	_countDownTimer.start()
+	
+func on_player_health_changed(newvalue):
+	print('hud player')
+	print(GlobalPlayer.get_life())
+	hud.set_player_life(GlobalPlayer.get_life())
+	
+func on_sheep_health_changed(newvalue):
+	print('hud sheep')
+	print(GlobalSheep.get_life())
 	hud.set_sheep_life(GlobalSheep.get_life())
 
 func on_player_take_water_bottle(water_value):
@@ -53,17 +76,21 @@ func on_player_take_water_bottle(water_value):
 
 func on_player_water_changed(new_value):
 	hud.set_water(new_value)
+	
+	GlobalPlayer.increase_score(10)
+	hud.set_score(GlobalPlayer.get_score())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	var speed=MAX_SPEED*delta
+	var speed=currentSpeed*delta
 
 	_player.position.x+=speed
 	_camera.position.x+=speed
 	
 	shouldSpawnObstacle()
-	shouldSpawnWaterBottle()
+	shouldSpawnWaterBottleOrDesserts()
+
 	
 	var distance_between_ground=_camera.position.x - camera_start_x - _ground.position.x 
 	
@@ -89,29 +116,48 @@ func shouldSpawnObstacle():
 		newObstacle.position.x=_player.position.x+XBETWEEN_OBSTACLE+GROUND_WIDTH
 		newObstacle.position.y=_yStart+34
 		
-func shouldSpawnWaterBottle():
+		currentSpeed+=20
+		
+func shouldSpawnWaterBottleOrDesserts():
 	_xBetweenWaterbottle-=1
 	
 	if _xBetweenWaterbottle<=0:
 		_xBetweenWaterbottle=XBETWEEN_WATERBOTTLE
+
+		if _switchWaterDesserts==0:
+			var newWaterBottle=WaterBottle.instantiate()
+			add_child(newWaterBottle)
+			
+			newWaterBottle.position.x=_player.position.x+XBETWEEN_WATERBOTTLE+GROUND_WIDTH
+			newWaterBottle.position.y=_yStart+30
 		
-		var newWaterBottle=WaterBottle.instantiate()
-		add_child(newWaterBottle)
+			_switchWaterDesserts=1
+		else:
+			var newDessert=Desserts.instantiate()
+			add_child(newDessert)
+			
+			newDessert.position.x=_player.position.x+XBETWEEN_WATERBOTTLE+GROUND_WIDTH
+			newDessert.position.y=_yStart+30
+			
+			_switchWaterDesserts=0
 		
-		newWaterBottle.position.x=_player.position.x+XBETWEEN_WATERBOTTLE+GROUND_WIDTH
-		newWaterBottle.position.y=_yStart+30
+
 
 func _on_play_button_pressed():
 	get_tree().change_scene_to_file(_nextLevel)
 	pass # Replace with function body.
 
 
+func end():
+	_countDownTimer.stop()
+	set_process(false)
+	_endBonusLayer.visible=true
+
+
 func _on_count_down_timer_timeout():
 	_countDown-=1
 	if _countDown<0:
-		_countDownTimer.stop()
-		set_process(false)
-		_endBonusLayer.visible=true
+		end()
 		return
 	
 	_timeLeftLabel.text=str(_countDown)
