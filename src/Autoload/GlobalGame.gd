@@ -88,4 +88,3 @@ func set_last_screenshot(screenshot:Texture)->void:
 
 func get_last_screenshot()->Texture:
 	return _last_screenshot
-

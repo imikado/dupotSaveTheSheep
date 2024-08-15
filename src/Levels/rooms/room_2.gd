@@ -103,4 +103,3 @@ func _on_start_timer_timeout():
 	if is_enabled():
 		print('timer 5s')
 		spawn_trex()
-

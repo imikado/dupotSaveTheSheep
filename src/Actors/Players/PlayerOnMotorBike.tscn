@@ -10,6 +10,7 @@ height = 60.0
 
 [sub_resource type="Animation" id="Animation_j47tq"]
 resource_name = "JumpEnd"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -382,14 +383,15 @@ _data = {
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(-16, 16)
+rotation = -0.785398
 script = ExtResource("1_u46h8")
 
 [node name="motorbike" type="Sprite2D" parent="."]
 position = Vector2(-23, 25)
-texture = ExtResource("4_7ad3k")
+texture = ExtResource("1_i8ugu")
 offset = Vector2(23, -25)
-hframes = 4
-frame = 1
+hframes = 3
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 22)

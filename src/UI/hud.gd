@@ -70,4 +70,3 @@ func set_sheep_life(value):
 	tween.chain().tween_property(_sheepLifeIcon,"modulate",Color.WHITE,0.3)
 	#sheepProgressBar.value=value
 	_sheepLifeValue=value
-

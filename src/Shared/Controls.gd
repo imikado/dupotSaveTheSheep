@@ -23,4 +23,3 @@ func _on_attack_pressed():
 
 func _on_action_pressed():
 	GlobalInput.press_action_button()
-
