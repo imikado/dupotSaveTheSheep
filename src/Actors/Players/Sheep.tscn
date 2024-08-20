@@ -11,9 +11,9 @@
 [ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/SheepStateTurn.gd" id="8_ahxuj"]
 [ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/StateDamaged.gd" id="9_rn3ht"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7cnq6"]
-radius = 6.0
-height = 24.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivymj"]
+radius = 5.99316
+height = 20.0
 
 [sub_resource type="Animation" id="Animation_2pql4"]
 resource_name = "Damaged"
@@ -208,7 +208,6 @@ _data = {
 }
 
 [node name="Sheep" type="CharacterBody2D"]
-floor_stop_on_slope = false
 script = ExtResource("1_2bi6n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -217,9 +216,9 @@ texture = ExtResource("2_t1trx")
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -6)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_7cnq6")
+position = Vector2(0, -6)
+rotation = -1.52305
+shape = SubResource("CapsuleShape2D_ivymj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -233,7 +232,6 @@ actor = NodePath("..")
 
 [node name="StateIdle" type="Node" parent="StateMachine"]
 script = ExtResource("4_1et44")
-can_move = true
 has_gravity = false
 animation_name = "Idle"
 

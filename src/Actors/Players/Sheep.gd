@@ -13,8 +13,13 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var direction=1
+var last_direction=0
 var next_direction=0
 var _pending_vehicle=null
+
+func walk_right():
+	direction=1
+	set_new_state(_state_machine.STATE_WALKING)
 
 func _process(delta):
 
@@ -35,9 +40,9 @@ func _process(delta):
 			velocity.x = direction * get_current_speed()
 			set_new_state(SheepStateMachine.STATE_WALKING)
 			_sprite.flip_h=(direction==-1)
-		else:
-			set_new_state(SheepStateMachine.STATE_IDLE)
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+		#else:
+		#	set_new_state(SheepStateMachine.STATE_IDLE)
+		#	velocity.x = move_toward(velocity.x, 0, SPEED)
 
 		get_current_state().state_process(delta)
 
@@ -64,6 +69,7 @@ func turn():
 
 func be_carried():
 	set_new_state(SheepStateMachine.STATE_IDLE)
+	last_direction=direction
 	direction=0
 	velocity.x=0
 

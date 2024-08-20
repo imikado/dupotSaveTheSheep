@@ -3,8 +3,9 @@ extends Node2D
 @onready var platformAnimation : AnimationPlayer =get_node("platform/AnimationPlayer")
 @onready var handleAnimation : AnimationPlayer = get_node("handle/AnimationPlayer")
 
-@onready var sheepBlocker :StaticBody2D = get_node("platform/block")
-@onready var sheepBlockerCollision :CollisionShape2D = get_node("platform/block/CollisionShape2D")
+
+
+var pendingCarried=null
 
 #enum PLATFORM_ANIM {UP="move_up",DOWN="move_down"}
 #enum HANDLE_ANIM {UP="turn_up",DOWN="turn_down"}
@@ -29,21 +30,21 @@ func _ready() -> void:
 	platformAnimation.play("RESET")
 	handleAnimation.play("RESET")
 	
-	sheepBlockerCollision.disabled=true
-	pass # Replace with function body.
-
+ 
 
 func turned_up():
-	
 	platformAnimation.play(platformAnimList[STATE.UP])
 
 func turned_down():
-	sheepBlockerCollision.disabled=false
 	platformAnimation.play(platformAnimList[STATE.DOWN])
 
 func action():
 	if isAnimationRunning:
 		return
+	
+	if pendingCarried:
+		pendingCarried.be_carried()
+		
 	isAnimationRunning=true
 	if state == STATE.UP:
 		handleAnimation.play(handleAnimList[STATE.DOWN])
@@ -68,4 +69,17 @@ func switch_state():
 		state=STATE.UP
 	
 	isAnimationRunning=false
-	sheepBlockerCollision.disabled=true
+	if pendingCarried:
+		pendingCarried.walk_right()
+
+
+func _on_carry_area_2d_body_entered(body: Node2D) -> void:
+	if body is Sheep:
+		pendingCarried=body
+	pass # Replace with function body.
+
+
+func _on_carry_area_2d_body_exited(body: Node2D) -> void:
+	if body is Sheep:
+		pendingCarried=null
+	pass # Replace with function body.
