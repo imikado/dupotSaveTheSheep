@@ -1,0 +1,234 @@
+[gd_scene load_steps=15 format=3 uid="uid://d1yresjwln4t"]
+
+[ext_resource type="Script" path="res://src/Levels/Level2/elevator.gd" id="1_kdvyh"]
+[ext_resource type="Texture2D" uid="uid://dreh6jhle2n0j" path="res://src/Levels/Level2/Elevator.png" id="1_wdjn3"]
+[ext_resource type="Texture2D" uid="uid://bjl3h6cgdk141" path="res://src/Levels/Level2/handleElevator.png" id="3_lu6xg"]
+
+[sub_resource type="Animation" id="Animation_jcmmw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("platform/platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-14, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_vut6i"]
+resource_name = "moving_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("platform/platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-14, -1), Vector2(-14, -32)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.933333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"switch_state"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jrns5"]
+resource_name = "moving_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("platform/platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-14, -32), Vector2(-14, -1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"switch_state"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iv4bl"]
+_data = {
+"RESET": SubResource("Animation_jcmmw"),
+"moving_down": SubResource("Animation_jrns5"),
+"moving_up": SubResource("Animation_vut6i")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6ijn"]
+size = Vector2(26, 1.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vh36"]
+size = Vector2(3, 20)
+
+[sub_resource type="Animation" id="Animation_m8kkg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_076rc"]
+resource_name = "turn_up"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.133333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"turned_up"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ac3tn"]
+resource_name = "turn_down"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.133333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 1, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"turned_down"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ftvt7"]
+_data = {
+"RESET": SubResource("Animation_m8kkg"),
+"turn_down": SubResource("Animation_ac3tn"),
+"turn_up": SubResource("Animation_076rc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyxpn"]
+size = Vector2(13, 20)
+
+[node name="Elevator" type="Node2D"]
+script = ExtResource("1_kdvyh")
+
+[node name="Elevator" type="Sprite2D" parent="."]
+position = Vector2(18, -32)
+texture = ExtResource("1_wdjn3")
+region_enabled = true
+region_rect = Rect2(28, 0, 36, 64)
+
+[node name="platform" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="platform"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_iv4bl")
+}
+
+[node name="platform" type="StaticBody2D" parent="platform"]
+position = Vector2(-14, -1)
+
+[node name="Elevator-platform" type="Sprite2D" parent="platform/platform"]
+texture = ExtResource("1_wdjn3")
+region_enabled = true
+region_rect = Rect2(7, 63, 21, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform/platform"]
+position = Vector2(1, 0.25)
+shape = SubResource("RectangleShape2D_h6ijn")
+
+[node name="block" type="StaticBody2D" parent="platform"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="platform/block"]
+position = Vector2(-27.5, -10)
+shape = SubResource("RectangleShape2D_8vh36")
+
+[node name="handle" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="handle"]
+root_node = NodePath("../HandleElevator")
+libraries = {
+"": SubResource("AnimationLibrary_ftvt7")
+}
+
+[node name="handleArea" type="Area2D" parent="handle"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="handle/handleArea"]
+position = Vector2(11.5, -44)
+shape = SubResource("RectangleShape2D_pyxpn")
+
+[node name="HandleElevator" type="Sprite2D" parent="handle"]
+position = Vector2(7, -44)
+texture = ExtResource("3_lu6xg")
+hframes = 3
+
+[connection signal="body_entered" from="handle/handleArea" to="." method="_on_handle_area_body_entered"]
+[connection signal="body_exited" from="handle/handleArea" to="." method="_on_handle_area_body_exited"]

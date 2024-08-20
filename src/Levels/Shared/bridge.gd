@@ -83,5 +83,3 @@ func close():
 	_subBridgeAnimation.play("close")
 	
 	opened=false
-
-
