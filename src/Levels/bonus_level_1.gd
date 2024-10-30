@@ -22,8 +22,9 @@ var camera_start_x=0
 @export var WaterBottle:PackedScene
 @export var Desserts:PackedScene
 
-var _nextLevel="res://src/UI/Screens/Menu.tscn"
+@export var nextLevel:PackedScene
 
+ 
 var _countDown=60
 
 const XBETWEEN_OBSTACLE=250
@@ -144,7 +145,7 @@ func shouldSpawnWaterBottleOrDesserts():
 
 
 func _on_play_button_pressed():
-	get_tree().change_scene_to_file(_nextLevel)
+	get_tree().change_scene_to_packed(nextLevel)
 	pass # Replace with function body.
 
 

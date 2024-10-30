@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fwrcpg1wdoyt"]
+[gd_scene load_steps=13 format=3 uid="uid://fwrcpg1wdoyt"]
 
 [ext_resource type="PackedScene" uid="uid://c1xgtixrulnpc" path="res://src/Levels/Shared/BonusBackground.tscn" id="1_7ly3b"]
 [ext_resource type="PackedScene" uid="uid://dmsis0enle4w2" path="res://src/Actors/Players/PlayerOnMotorBike.tscn" id="1_lv1jy"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bcq10jx8k3upu" path="res://src/Levels/Shared/BonusRoad.tscn" id="2_sbkai"]
 [ext_resource type="PackedScene" uid="uid://cluurftsudn5b" path="res://src/Levels/Shared/water_bottle.tscn" id="3_8f7e0"]
 [ext_resource type="PackedScene" uid="uid://bnleyip0uks5e" path="res://src/Levels/Shared/RoadDesserts.tscn" id="4_na10f"]
+[ext_resource type="PackedScene" uid="uid://civ7xjgrjc0wb" path="res://src/Levels/level_2.tscn" id="5_52j72"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="5_c3lah"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="5_x24ru"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="8_ke4nq"]
@@ -20,6 +21,7 @@ _ground = NodePath("BonusRoad")
 Obstacle = ExtResource("2_0y5nm")
 WaterBottle = ExtResource("3_8f7e0")
 Desserts = ExtResource("4_na10f")
+nextLevel = ExtResource("5_52j72")
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("1_7ly3b")]
 
@@ -82,7 +84,8 @@ grow_vertical = 2
 
 [node name="PlayButton" parent="Camera2D/BonusControl" instance=ExtResource("5_x24ru")]
 layout_mode = 0
-_export_label = "Menu"
+offset_right = 178.0
+_export_label = "Next level"
 
 [node name="countDownTimer" type="Timer" parent="."]
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cd5514wt0rdxf"]
+[gd_scene load_steps=17 format=3 uid="uid://cd5514wt0rdxf"]
 
 [ext_resource type="Script" path="res://src/UI/Screens/Menu.gd" id="1_81gvo"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_bkv4m"]
 [ext_resource type="PackedScene" uid="uid://c85diaod7sv51" path="res://src/Levels/main_level.tscn" id="2_4kpgy"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="4_nm624"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="5_lkhqs"]
+[ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="6_j0ooc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8an8f"]
 atlas = ExtResource("4_nm624")
@@ -118,6 +119,16 @@ position = Vector2(362, 108)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_0hhe7")
 flip_h = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 214.0
+offset_top = 50.0
+offset_right = 438.0
+offset_bottom = 73.0
+theme = ExtResource("6_j0ooc")
+text = "USE CURSOR AND KEYS  A,Z,E"
+horizontal_alignment = 2
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="PlayButton2" to="." method="_on_play_button_2_pressed"]
