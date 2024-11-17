@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+@export var player:Player
+@export var sheep:Sheep
+
 @onready var _scoreLabel:Label=$scoreLabel
 
 @onready var _playerProgressBar:ProgressBar=$Player/lifeBar
@@ -14,6 +17,15 @@ extends CanvasLayer
 @onready var _sheepLifeIcon:TextureRect=$Sheep/icon
 @onready var _waterLifeIcon:TextureRect=$Water/icon
 
+@onready var _minPosition:Marker2D=$LevelProgression/Marker2D
+@onready var _maxPosition:Marker2D=$LevelProgression/Marker2D2
+
+@onready var _playerProgression:TextureRect=$LevelProgression/player
+@onready var _sheepProgression:TextureRect=$LevelProgression/sheep
+
+
+var min_x=0
+var max_x=0
 
 var _scoreValue=0
 var _playerLifeValue=0
@@ -21,9 +33,21 @@ var _sheepLifeValue=0
 var _waterValue=0
 
 
+@onready var  _progressionMinX:float=$LevelProgression/Marker2D.global_position.x
+@onready var  _progressionMaX:float=$LevelProgression/Marker2D2.global_position.x
+
+@onready var _progressionRelativeX=_progressionMaX-_progressionMinX
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	
+func _process(delta:float):
+	if player:
+		_playerProgression.global_position.x= _progressionRelativeX* ( player.global_position.x/max_x)+_progressionMinX 
+	if sheep:
+		_sheepProgression.global_position.x= _progressionRelativeX* ( sheep.global_position.x/max_x)+_progressionMinX 
+ 		
 
 func set_score(newScore:int):
 	#var tween=create_tween()
@@ -68,5 +92,11 @@ func set_sheep_life(value):
 
 	tween.chain().tween_property(_sheepLifeColorRect,"modulate",Color.WHITE,0.3)
 	tween.chain().tween_property(_sheepLifeIcon,"modulate",Color.WHITE,0.3)
-	#sheepProgressBar.value=value
+
+	var tween2=create_tween().set_parallel(true)
+	tween2.tween_property(_sheepProgression,"modulate",Color.RED,0.5)
+	tween2.chain().tween_property(_sheepProgression,"modulate",Color.WHITE,0.3)
+	tween2.tween_property(_sheepProgression,"modulate",Color.RED,0.5)
+	tween2.chain().tween_property(_sheepProgression,"modulate",Color.WHITE,0.3)
+
 	_sheepLifeValue=value

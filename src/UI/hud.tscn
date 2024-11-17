@@ -143,3 +143,40 @@ size_flags_horizontal = 8
 theme = ExtResource("2_g12wp")
 text = "0"
 horizontal_alignment = 1
+
+[node name="LevelProgression" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="LevelProgression"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 13.0
+offset_right = 480.0
+offset_bottom = 15.0
+
+[node name="player" type="TextureRect" parent="LevelProgression"]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 6.0
+offset_right = 306.0
+offset_bottom = 22.0
+scale = Vector2(0.495824, 0.5)
+texture = ExtResource("1_rd6rf")
+
+[node name="sheep" type="TextureRect" parent="LevelProgression"]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 14.0
+offset_right = 306.0
+offset_bottom = 30.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_ebnga")
+
+[node name="Marker2D" type="Marker2D" parent="LevelProgression"]
+position = Vector2(292, 14)
+
+[node name="Marker2D2" type="Marker2D" parent="LevelProgression"]
+position = Vector2(477, 15)

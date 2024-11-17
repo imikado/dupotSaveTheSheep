@@ -15,6 +15,21 @@ var _is_controls_enabled := true
 
 var _last_screenshot
 
+enum CAMERA_MODE_LIST {  ZOOMED_CAMERA,PLAYER_CAMERA }
+
+var camera_mode=CAMERA_MODE_LIST.PLAYER_CAMERA
+
+func isPlayerCameraMode():
+	if camera_mode == CAMERA_MODE_LIST.PLAYER_CAMERA:
+		return true
+	return false
+
+func isZoomedCameraMode():
+	if camera_mode == CAMERA_MODE_LIST.PLAYER_CAMERA:
+		return true
+	return false
+
+
 func resetGame():
 	GlobalPlayer.reset_game()
 	GlobalSheep.reset_game()
