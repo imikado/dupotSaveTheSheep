@@ -98,4 +98,3 @@ func set_pending_vehicle(pending_vehicle):
 
 func reset_pending_vehicle():
 	_pending_vehicle=null
-	

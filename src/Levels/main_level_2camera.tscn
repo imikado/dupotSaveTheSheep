@@ -36,13 +36,6 @@ render_target_update_mode = 4
 
 [node name="rooms" type="Node2D" parent="SubViewportContainer/SubViewport"]
 
-[node name="HUD" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("player", "sheep") instance=ExtResource("3_551fq")]
-player = NodePath("../Player")
-sheep = NodePath("../../../SubViewportContainer2/SubViewport/Sheep")
-metadata/_edit_vertical_guides_ = [23.0, 8.0]
-
-[node name="Controls" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_6nqc5")]
-
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_ywn7s")]
 z_index = 14
 z_as_relative = false
@@ -134,3 +127,10 @@ motion_scale = Vector2(0.3, 0.3)
 position = Vector2(-266, -172)
 texture = ExtResource("2_shrth")
 centered = false
+
+[node name="HUD" parent="." node_paths=PackedStringArray("player", "sheep") instance=ExtResource("3_551fq")]
+player = NodePath("../SubViewportContainer/SubViewport/Player")
+sheep = NodePath("../SubViewportContainer2/SubViewport/Sheep")
+metadata/_edit_vertical_guides_ = [23.0, 8.0]
+
+[node name="Controls" parent="." instance=ExtResource("4_6nqc5")]

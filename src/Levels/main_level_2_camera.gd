@@ -9,7 +9,7 @@ extends Node2D
 
 @export var NextLevel:PackedScene
 
-@onready var hud=$SubViewportContainer/SubViewport/HUD
+@onready var hud=$HUD
 
 @onready var _rooms:Node2D=$SubViewportContainer/SubViewport/rooms
 
@@ -36,6 +36,9 @@ var alt=0
 
 var max_room=9
 
+const DISTANCE_TO_PLAYER_X=230
+const DISTANCE_TO_PLAYER_Y=60
+
 func get_room():
 	
 	roomNumber+=1
@@ -58,6 +61,15 @@ func debug_hook():
 		#player.global_position.y=0
 		
 		sheep.global_position.x+=3110
+
+func _process(delta: float) -> void:
+	if abs(sheep.global_position.x - player.global_position.x) > DISTANCE_TO_PLAYER_X or abs(sheep.global_position.y - player.global_position.y) > DISTANCE_TO_PLAYER_Y:
+		$SubViewportContainer2.visible=true
+		$ColorRect.visible=true
+	else:
+		$SubViewportContainer2.visible=false
+		$ColorRect.visible=false
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -85,6 +97,8 @@ func _ready():
 	GlobalEvents.player_increase_life.connect(on_player_increase_life)
 
 	GlobalEvents.end_level.connect(on_end_level)
+	
+	GlobalEvents.sheep_is_visible.connect(on_sheep_change_visibility)
 	
 
 	hud.set_score(GlobalPlayer.get_score())
@@ -131,6 +145,9 @@ func _ready():
 
 	debug_hook()
 
+func on_sheep_change_visibility(value):
+	print('change visibility')
+	print(value)
 	
 func on_enemy_die(enemy):
 	GlobalPlayer.increase_score(enemy.get_points())

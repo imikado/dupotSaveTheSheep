@@ -36,3 +36,5 @@ signal player_gameover
 signal player_increase_life(value)
 
 signal end_level
+
+signal sheep_is_visible(value)
