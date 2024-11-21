@@ -1,14 +1,12 @@
 extends Node
 
 const START_SCORE = 0
-const START_LIFE = 100
-const START_WATER = 20
 const MAX_WATER = 80
 const MAX_LIFE=100
 
 var _score = 0
-var _life = START_LIFE
-var _water = START_WATER
+var _life = GlobalGame.player_start_life
+var _water = GlobalGame.player_start_water
 var _level = 1
 
 var _player:Player
@@ -30,8 +28,8 @@ func get_level():
 func reset_game():
 	_level = 1
 	_score = START_SCORE
-	_life = START_LIFE
-	_water = START_WATER
+	_life = GlobalGame.player_start_life
+	_water = GlobalGame.player_start_water
 
 
 func get_score():

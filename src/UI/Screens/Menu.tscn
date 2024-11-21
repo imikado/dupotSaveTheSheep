@@ -98,17 +98,17 @@ skew = -0.760964
 [node name="PlayButton" parent="." instance=ExtResource("1_bkv4m")]
 layout_mode = 0
 offset_left = 319.0
-offset_top = 55.0
+offset_top = 40.0
 offset_right = 447.0
-offset_bottom = 87.0
+offset_bottom = 72.0
 _export_label = "play"
 
 [node name="PlayButton2" parent="." instance=ExtResource("1_bkv4m")]
 layout_mode = 0
 offset_left = 319.0
-offset_top = 110.0
+offset_top = 77.0
 offset_right = 447.0
-offset_bottom = 142.0
+offset_bottom = 109.0
 _export_label = "bonus"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -125,9 +125,9 @@ flip_h = true
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 offset_left = 214.0
-offset_top = 15.0
+offset_top = 7.0
 offset_right = 438.0
-offset_bottom = 38.0
+offset_bottom = 30.0
 theme = ExtResource("6_j0ooc")
 text = "USE CURSOR AND KEYS  A,Z,E"
 horizontal_alignment = 2
@@ -135,9 +135,9 @@ horizontal_alignment = 2
 [node name="cameraMode" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 318.0
-offset_top = 160.0
+offset_top = 115.0
 offset_right = 474.0
-offset_bottom = 191.0
+offset_bottom = 146.0
 theme = ExtResource("6_j0ooc")
 selected = 1
 item_count = 2
@@ -145,6 +145,20 @@ popup/item_0/text = "zoomed camera"
 popup/item_1/text = "player camera"
 popup/item_1/id = 1
 
+[node name="levelDifficulty" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 318.0
+offset_top = 154.0
+offset_right = 474.0
+offset_bottom = 185.0
+theme = ExtResource("6_j0ooc")
+selected = 1
+item_count = 2
+popup/item_0/text = "easy"
+popup/item_1/text = "normal"
+popup/item_1/id = 1
+
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="PlayButton2" to="." method="_on_play_button_2_pressed"]
 [connection signal="item_selected" from="cameraMode" to="." method="_on_camera_mode_item_selected"]
+[connection signal="item_selected" from="levelDifficulty" to="." method="_on_level_difficulty_item_selected"]

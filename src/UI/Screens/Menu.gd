@@ -31,3 +31,7 @@ func launch_level():
 func _on_camera_mode_item_selected(index: int) -> void:
 	GlobalGame.camera_mode=index
 	pass # Replace with function body.
+
+
+func _on_level_difficulty_item_selected(index: int) -> void:
+	GlobalGame.loadDifficulty(index)

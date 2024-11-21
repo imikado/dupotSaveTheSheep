@@ -1,14 +1,12 @@
 extends Area2D
 
-@export var _water_value=20
+@export var _water_value=20*GlobalGame.player_coef_water
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite2D.play()
 	pass # Replace with function body.
-
-
 
 func _on_body_entered(body):
 	if body is Player and body.is_on_floor():

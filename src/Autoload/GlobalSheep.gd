@@ -1,12 +1,11 @@
 extends Node
 
-const START_LIFE = 50
 const MAX_LIFE=50
 
-var _life = START_LIFE
+var _life = GlobalGame.sheep_start_life
 
 func reset_game():
-	_life = START_LIFE
+	_life = GlobalGame.sheep_start_life
 
 func get_life():
 	return _life

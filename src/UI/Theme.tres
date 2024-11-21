@@ -20,12 +20,11 @@ bg_color = Color(0.164706, 0.172549, 0.4, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rinq6"]
 bg_color = Color(0.164706, 0.172549, 0.4, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqmwe"]
-bg_color = Color(0.164706, 0.172549, 0.4, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ea6eq"]
+bg_color = Color(0.527676, 0.0814642, 0.196928, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_htycl"]
-bg_color = Color(0.164706, 0.172549, 0.4, 1)
-anti_aliasing = false
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l41en"]
+bg_color = Color(0.198557, 0.760091, 0.280453, 1)
 
 [resource]
 default_font = ExtResource("1_qyltp")
@@ -37,5 +36,5 @@ OptionButton/styles/normal = SubResource("StyleBoxFlat_ygkhk")
 OptionButton/styles/normal_mirrored = SubResource("StyleBoxFlat_q5r3g")
 OptionButton/styles/pressed = SubResource("StyleBoxFlat_uv8bs")
 OptionButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_rinq6")
-ProgressBar/styles/background = SubResource("StyleBoxFlat_kqmwe")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_htycl")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_ea6eq")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_l41en")

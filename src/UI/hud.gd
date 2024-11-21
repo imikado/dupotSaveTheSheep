@@ -72,6 +72,7 @@ func set_water(value):
 	_waterValue=value
 
 func set_player_life(value):
+	
 	var tween=create_tween().set_parallel(true)
 	tween.tween_property(_playerLifeColorRect,"modulate",Color.RED,0.5)
 	tween.tween_property(_playerLifeIcon,"modulate",Color.RED,0.5)
@@ -80,9 +81,8 @@ func set_player_life(value):
 	tween.chain().tween_property(_playerLifeColorRect,"modulate",Color.WHITE,0.3)
 	tween.chain().tween_property(_playerLifeIcon,"modulate",Color.WHITE,0.3)
 
-	
-	#playerProgressBar.value=value
 	_playerLifeValue=value
+	
 
 func set_sheep_life(value):
 	var tween=create_tween().set_parallel(true)
