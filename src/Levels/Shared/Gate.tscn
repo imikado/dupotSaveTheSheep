@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c87l4h2e277ou"]
 
 [ext_resource type="Texture2D" uid="uid://cfcxilrbu4ub6" path="res://src/Levels/Shared/gate.png" id="1_vgx7k"]
-[ext_resource type="Script" path="res://src/Levels/Shared/Gate.gd" id="1_yson1"]
+[ext_resource type="Script" uid="uid://wuci4tl4rgds" path="res://src/Levels/Shared/Gate.gd" id="1_yson1"]
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="4_2t113"]
 
 [sub_resource type="Animation" id="Animation_l26xd"]
@@ -159,9 +159,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eylr4"]
 _data = {
-"Close": SubResource("Animation_l26xd"),
-"Closed": SubResource("Animation_83yic"),
-"Open": SubResource("Animation_gwnl4")
+&"Close": SubResource("Animation_l26xd"),
+&"Closed": SubResource("Animation_83yic"),
+&"Open": SubResource("Animation_gwnl4")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r4yt7"]

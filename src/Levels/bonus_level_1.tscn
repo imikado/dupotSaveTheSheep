@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c1xgtixrulnpc" path="res://src/Levels/Shared/BonusBackground.tscn" id="1_7ly3b"]
 [ext_resource type="PackedScene" uid="uid://dmsis0enle4w2" path="res://src/Actors/Players/PlayerOnMotorBike.tscn" id="1_lv1jy"]
-[ext_resource type="Script" path="res://src/Levels/bonus_level_1.gd" id="1_u5dm6"]
+[ext_resource type="Script" uid="uid://nh7kor86fulk" path="res://src/Levels/bonus_level_1.gd" id="1_u5dm6"]
 [ext_resource type="PackedScene" uid="uid://c848gx4cq2m6h" path="res://src/Levels/Shared/BonusObstacle.tscn" id="2_0y5nm"]
 [ext_resource type="PackedScene" uid="uid://bcq10jx8k3upu" path="res://src/Levels/Shared/BonusRoad.tscn" id="2_sbkai"]
 [ext_resource type="PackedScene" uid="uid://cluurftsudn5b" path="res://src/Levels/Shared/water_bottle.tscn" id="3_8f7e0"]

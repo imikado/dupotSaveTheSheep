@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://dld0jkheienqb"]
 
-[ext_resource type="Script" path="res://src/Actors/Players/Player.gd" id="1_p8sjd"]
+[ext_resource type="Script" uid="uid://b3wtrbjlqowwv" path="res://src/Actors/Players/Player.gd" id="1_p8sjd"]
 [ext_resource type="Texture2D" uid="uid://cpd0lts7lrx6l" path="res://src/Actors/Players/Player/player-impatient.png" id="2_a4qs2"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="2_ap35m"]
 [ext_resource type="Texture2D" uid="uid://cd1sru7miht31" path="res://src/Actors/Players/Player/player-shoot.png" id="2_bkto8"]
@@ -9,25 +9,25 @@
 [ext_resource type="Texture2D" uid="uid://b78ytw2eb6kha" path="res://src/Actors/Players/Player/player-take-water.png" id="2_mj2hc"]
 [ext_resource type="Texture2D" uid="uid://134ipqk1sbau" path="res://src/Actors/Players/Player/player-walking.png" id="3_gnjl8"]
 [ext_resource type="Texture2D" uid="uid://dmseyqkwcrik4" path="res://src/Actors/Players/Player/player-jump.png" id="4_02sqv"]
-[ext_resource type="Script" path="res://src/Actors/Players/PlayerStateMachine.gd" id="4_kq3e8"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateIdle.gd" id="5_c6jvt"]
+[ext_resource type="Script" uid="uid://cwsyaii1gsaqx" path="res://src/Actors/Players/PlayerStateMachine.gd" id="4_kq3e8"]
+[ext_resource type="Script" uid="uid://dcyuklrw2qkqd" path="res://src/Actors/Players/States/PlayerStateIdle.gd" id="5_c6jvt"]
 [ext_resource type="Texture2D" uid="uid://cossrdctnpr4x" path="res://src/Actors/Players/Player/player-fall.png" id="5_jntdo"]
 [ext_resource type="Texture2D" uid="uid://bbyarrg5m2ayk" path="res://src/Actors/Players/Player/player-edge.png" id="6_6xbsm"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateWalking.gd" id="6_vgc3e"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateJump.gd" id="7_xh0im"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateEdge.gd" id="8_vy1bf"]
+[ext_resource type="Script" uid="uid://bhfj4dng6fj6v" path="res://src/Actors/Players/States/PlayerStateWalking.gd" id="6_vgc3e"]
+[ext_resource type="Script" uid="uid://cv8nky5epdswb" path="res://src/Actors/Players/States/PlayerStateJump.gd" id="7_xh0im"]
+[ext_resource type="Script" uid="uid://dkuutso6mchd8" path="res://src/Actors/Players/States/PlayerStateEdge.gd" id="8_vy1bf"]
 [ext_resource type="Texture2D" uid="uid://chkeo82jqtwwt" path="res://src/Actors/Players/Player/player-preshoot.png" id="8_xpmiw"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateFall.gd" id="9_pdt5t"]
+[ext_resource type="Script" uid="uid://dxpirw8fxpnhn" path="res://src/Actors/Players/States/PlayerStateFall.gd" id="9_pdt5t"]
 [ext_resource type="Texture2D" uid="uid://dwgtnytv618hp" path="res://src/Actors/Players/Player/player-damaged.png" id="10_bnd8c"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="11_vadop"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateImpatient.gd" id="14_1xsim"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/StateTakeOutGun.gd" id="17_rgjwc"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/StateGunOut.gd" id="18_h7gu6"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/StateGunShoot.gd" id="19_4ugtj"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/StateDamaged.gd" id="20_8lr7x"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateTakingWater.gd" id="23_k76g4"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateAction.gd" id="25_xm24d"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateTakingBurger.gd" id="27_7g25p"]
+[ext_resource type="Script" uid="uid://c6g2nk4i86m68" path="res://src/Actors/Players/States/PlayerStateImpatient.gd" id="14_1xsim"]
+[ext_resource type="Script" uid="uid://c5nsnn64otgyk" path="res://src/Actors/Players/States/StateTakeOutGun.gd" id="17_rgjwc"]
+[ext_resource type="Script" uid="uid://diy7trbbpx5pd" path="res://src/Actors/Players/States/StateGunOut.gd" id="18_h7gu6"]
+[ext_resource type="Script" uid="uid://b1usq7557xxo4" path="res://src/Actors/Players/States/StateGunShoot.gd" id="19_4ugtj"]
+[ext_resource type="Script" uid="uid://byjvvjt8fn2k2" path="res://src/Actors/Players/States/StateDamaged.gd" id="20_8lr7x"]
+[ext_resource type="Script" uid="uid://bvdylwsbyus0q" path="res://src/Actors/Players/States/PlayerStateTakingWater.gd" id="23_k76g4"]
+[ext_resource type="Script" uid="uid://b0tplmx8nidk8" path="res://src/Actors/Players/States/PlayerStateAction.gd" id="25_xm24d"]
+[ext_resource type="Script" uid="uid://emex2pu1si3e" path="res://src/Actors/Players/States/PlayerStateTakingBurger.gd" id="27_7g25p"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_moofm"]
 radius = 7.0
@@ -582,20 +582,20 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7rw1v"]
 _data = {
-"Action": SubResource("Animation_410p0"),
-"Damaged": SubResource("Animation_kir8g"),
-"Edge": SubResource("Animation_r1fmr"),
-"Fall": SubResource("Animation_nm7gl"),
-"Idle": SubResource("Animation_1yvd8"),
-"Impatient": SubResource("Animation_d8j6w"),
-"Jump": SubResource("Animation_1c7kc"),
-"RESET": SubResource("Animation_jg8ng"),
-"TakingBurger": SubResource("Animation_k04vx"),
-"TakingWater": SubResource("Animation_6ugl8"),
-"Walking": SubResource("Animation_getxm"),
-"gunOut": SubResource("Animation_3rms3"),
-"gunShoot": SubResource("Animation_vf8ux"),
-"takeOutGun": SubResource("Animation_85dsr")
+&"Action": SubResource("Animation_410p0"),
+&"Damaged": SubResource("Animation_kir8g"),
+&"Edge": SubResource("Animation_r1fmr"),
+&"Fall": SubResource("Animation_nm7gl"),
+&"Idle": SubResource("Animation_1yvd8"),
+&"Impatient": SubResource("Animation_d8j6w"),
+&"Jump": SubResource("Animation_1c7kc"),
+&"RESET": SubResource("Animation_jg8ng"),
+&"TakingBurger": SubResource("Animation_k04vx"),
+&"TakingWater": SubResource("Animation_6ugl8"),
+&"Walking": SubResource("Animation_getxm"),
+&"gunOut": SubResource("Animation_3rms3"),
+&"gunShoot": SubResource("Animation_vf8ux"),
+&"takeOutGun": SubResource("Animation_85dsr")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtpuh"]

@@ -1,20 +1,20 @@
 [gd_scene load_steps=26 format=3 uid="uid://c4rt0pnhv86kl"]
 
-[ext_resource type="Script" path="res://src/Actors/Enemies/TRex.gd" id="1_krotj"]
+[ext_resource type="Script" uid="uid://cmbqqichw5vio" path="res://src/Actors/Enemies/TRex.gd" id="1_krotj"]
 [ext_resource type="Texture2D" uid="uid://cg8eqmidubnku" path="res://src/Actors/Enemies/TRex/trex-die.png" id="2_5jear"]
 [ext_resource type="Texture2D" uid="uid://cyd4bsfqi7at3" path="res://src/Actors/Enemies/TRex/trex-turn.png" id="2_b0ppb"]
 [ext_resource type="Texture2D" uid="uid://cx8elq1hasfcf" path="res://src/Actors/Enemies/TRex/trex-idle.png" id="2_fy7u7"]
 [ext_resource type="Texture2D" uid="uid://do0w43nvowi10" path="res://src/Actors/Enemies/TRex/trex-damaged.png" id="2_o6g7j"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/TRexStateMachine.gd" id="3_s8b5v"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateIdle.gd" id="4_m62k6"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateWalking.gd" id="5_hhe6l"]
+[ext_resource type="Script" uid="uid://b1wbtupydjg6x" path="res://src/Actors/Enemies/TRexStateMachine.gd" id="3_s8b5v"]
+[ext_resource type="Script" uid="uid://75c5clu8w8j3" path="res://src/Actors/Enemies/TRex/StateIdle.gd" id="4_m62k6"]
+[ext_resource type="Script" uid="uid://b71bpnbix5dxw" path="res://src/Actors/Enemies/TRex/StateWalking.gd" id="5_hhe6l"]
 [ext_resource type="Texture2D" uid="uid://doxed8miam4tj" path="res://src/Actors/Enemies/TRex/trex-attack.png" id="6_abglq"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateTurn.gd" id="6_giupj"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/StateDamaged.gd" id="8_bfywx"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateDie.gd" id="11_34qpt"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateAttack.gd" id="13_5biad"]
+[ext_resource type="Script" uid="uid://deqc04ikch0lk" path="res://src/Actors/Enemies/TRex/StateTurn.gd" id="6_giupj"]
+[ext_resource type="Script" uid="uid://rvlujqr2n55m" path="res://src/Actors/Enemies/StateDamaged.gd" id="8_bfywx"]
+[ext_resource type="Script" uid="uid://b04f8k52yp2q3" path="res://src/Actors/Enemies/TRex/StateDie.gd" id="11_34qpt"]
+[ext_resource type="Script" uid="uid://dn8qnwviam4l8" path="res://src/Actors/Enemies/TRex/StateAttack.gd" id="13_5biad"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="14_b7p82"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/TRex/StateSpawn.gd" id="14_pkt0k"]
+[ext_resource type="Script" uid="uid://j5afjmhvo1cs" path="res://src/Actors/Enemies/TRex/StateSpawn.gd" id="14_pkt0k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkmhm"]
 radius = 15.0
@@ -302,13 +302,13 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_73yow"]
 _data = {
-"Attack": SubResource("Animation_6tvqd"),
-"Damaged": SubResource("Animation_7wfsr"),
-"Die": SubResource("Animation_mtifj"),
-"Idle": SubResource("Animation_rhii5"),
-"Spawn": SubResource("Animation_snpe6"),
-"Turn": SubResource("Animation_64fgd"),
-"Walking": SubResource("Animation_noxqi")
+&"Attack": SubResource("Animation_6tvqd"),
+&"Damaged": SubResource("Animation_7wfsr"),
+&"Die": SubResource("Animation_mtifj"),
+&"Idle": SubResource("Animation_rhii5"),
+&"Spawn": SubResource("Animation_snpe6"),
+&"Turn": SubResource("Animation_64fgd"),
+&"Walking": SubResource("Animation_noxqi")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_67xgt"]

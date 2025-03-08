@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnleyip0uks5e"]
 
 [ext_resource type="Texture2D" uid="uid://di1gfbmyjh5pg" path="res://src/Levels/Shared/road_desserts.png" id="1_dl3mn"]
-[ext_resource type="Script" path="res://src/Levels/Shared/RoadDesserts.gd" id="1_wi7ta"]
+[ext_resource type="Script" uid="uid://cd5hr43nsdk2o" path="res://src/Levels/Shared/RoadDesserts.gd" id="1_wi7ta"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5fxeg"]
 

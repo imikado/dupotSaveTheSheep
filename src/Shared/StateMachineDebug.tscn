@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dthmsw8atnen"]
 
-[ext_resource type="Script" path="res://src/Actors/Players/DebugLabel.gd" id="1_qn4xf"]
+[ext_resource type="Script" uid="uid://chimet2t268l6" path="res://src/Actors/Players/DebugLabel.gd" id="1_qn4xf"]
 
 [node name="StateMachineDebug" type="Label"]
 offset_left = -41.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dmsis0enle4w2"]
 
 [ext_resource type="Texture2D" uid="uid://dsfkp5b2yhdll" path="res://src/Actors/Vehicles/motobike-riding.png" id="1_i8ugu"]
-[ext_resource type="Script" path="res://src/Actors/Players/PlayerOnMotorBike.gd" id="1_u46h8"]
+[ext_resource type="Script" uid="uid://dlkasfoj6ob1" path="res://src/Actors/Players/PlayerOnMotorBike.gd" id="1_u46h8"]
 [ext_resource type="Texture2D" uid="uid://bubna8h74do7x" path="res://src/Actors/Vehicles/motobike-take-water.png" id="3_2c2os"]
 [ext_resource type="Texture2D" uid="uid://to7s8e2k5n1s" path="res://src/Actors/Vehicles/motobike-take-desserts.png" id="4_7ad3k"]
 
@@ -373,12 +373,12 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7016l"]
 _data = {
-"JumpEnd": SubResource("Animation_j47tq"),
-"JumpStart": SubResource("Animation_ydac7"),
-"TakeDesserts": SubResource("Animation_cmxv4"),
-"TakeWater": SubResource("Animation_wcomi"),
-"obstacle": SubResource("Animation_5ha3v"),
-"riding": SubResource("Animation_x3elm")
+&"JumpEnd": SubResource("Animation_j47tq"),
+&"JumpStart": SubResource("Animation_ydac7"),
+&"TakeDesserts": SubResource("Animation_cmxv4"),
+&"TakeWater": SubResource("Animation_wcomi"),
+&"obstacle": SubResource("Animation_5ha3v"),
+&"riding": SubResource("Animation_x3elm")
 }
 
 [node name="CharacterBody2D" type="CharacterBody2D"]

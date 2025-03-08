@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://cluurftsudn5b"]
 
-[ext_resource type="Script" path="res://src/Levels/Shared/water_bottle.gd" id="1_xqaxp"]
+[ext_resource type="Script" uid="uid://cb8s4uli30e7s" path="res://src/Levels/Shared/water_bottle.gd" id="1_xqaxp"]
 [ext_resource type="Texture2D" uid="uid://bemoy0jopsrw3" path="res://src/Levels/Shared/water_bottle.png" id="2_ltnlp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3x7ur"]

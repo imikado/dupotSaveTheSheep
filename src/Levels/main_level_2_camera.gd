@@ -19,7 +19,7 @@ var score: int = 0
 
 var roomNumber = -1
 
-@onready var roomList: Array[Variant] = [Room1,Room2, Room3]
+@onready var roomList: Array[Variant] = [Room1, Room2, Room3]
 
 var gameover = false
 
@@ -33,7 +33,6 @@ const DISTANCE_TO_PLAYER_X = 230
 const DISTANCE_TO_PLAYER_Y = 60
 
 func get_room() -> Variant:
-	
 	roomNumber += 1
 	if roomNumber >= roomList.size():
 		roomNumber = 0
@@ -48,12 +47,11 @@ func get_room() -> Variant:
 	return roomList[roomNumber]
 
 	
-func debug_hook():
+func debug_hook(room_end_x: float):
 	if GlobalGame.is_debug():
-		player.global_position.x += 3100
-		#player.global_position.y=0
+		player.global_position.x += room_end_x
 		
-		sheep.global_position.x += 3110
+		sheep.global_position.x += room_end_x + 100
 
 func _process(_delta: float) -> void:
 	if sheep != null and player != null and (abs(sheep.global_position.x - player.global_position.x) > DISTANCE_TO_PLAYER_X or abs(sheep.global_position.y - player.global_position.y) > DISTANCE_TO_PLAYER_Y):
@@ -66,12 +64,9 @@ func _process(_delta: float) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	var world = subviewPortMain.find_world_2d()
 	subViewPortSheep.world_2d = world
 	
-	print('main loaded')
-
 	GlobalPlayer.set_actor(player)
 	
 	GlobalEvents.player_gameover.connect(on_player_gameover)
@@ -101,7 +96,7 @@ func _ready():
 	#rooms
 	var currentX = 0
 	
-	var roomStart : RoomAbstract = RoomStart.create()
+	var roomStart: RoomAbstract = RoomStart.create()
 	
 	_rooms.add_child(roomStart)
 	
@@ -127,21 +122,19 @@ func _ready():
 	
 		currentX += roomLoop.width
 	
-	var roomEnd : RoomAbstract = RoomEnd.create()
+	var roomEnd: RoomAbstract = RoomEnd.create()
 	_rooms.add_child(roomEnd)
 	
 	roomEnd.global_position.x = currentX
 	roomEnd.global_position.y = 0
 	
-	player.global_position.x += 20
-	#player.global_position.y=0
+	player.global_position.x += 30
 	
-	sheep.global_position.x = -10
-	#sheep.global_position.y=0
+	sheep.global_position.x = -20
 	
 	hud.max_x = currentX + roomEnd.width
 
-	debug_hook()
+	debug_hook(currentX)
 
 func on_sheep_change_visibility(value):
 	print('change visibility')

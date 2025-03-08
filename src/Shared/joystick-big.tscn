@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dobs1y15qptxf"]
 
-[ext_resource type="Script" path="res://src/Shared/Controls/joystick-big.gd" id="1"]
+[ext_resource type="Script" uid="uid://dg7l2k14w643i" path="res://src/Shared/Controls/joystick-big.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhoaj7yxt5vom" path="res://src/Shared/Controls/joystick-small.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://1dym120ddcn6" path="res://src/Shared/Controls/joystick-big.png" id="3"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d1cvbpf3twb26"]
 
-[ext_resource type="Script" path="res://src/Autoload/GlobalTransition.gd" id="1_m23nx"]
+[ext_resource type="Script" uid="uid://chn8boo1spfhf" path="res://src/Autoload/GlobalTransition.gd" id="1_m23nx"]
 
 [sub_resource type="Animation" id="Animation_tyxsu"]
 length = 0.001
@@ -34,8 +34,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oujxr"]
 _data = {
-"RESET": SubResource("Animation_tyxsu"),
-"dissolve": SubResource("Animation_v4bcn")
+&"RESET": SubResource("Animation_tyxsu"),
+&"dissolve": SubResource("Animation_v4bcn")
 }
 
 [node name="GlobalTransition" type="CanvasLayer"]

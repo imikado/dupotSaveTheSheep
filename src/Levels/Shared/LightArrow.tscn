@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqic0pk5o1d2c"]
 
 [ext_resource type="Texture2D" uid="uid://bnw0d8fjdxu1r" path="res://src/Levels/Shared/lightArrow.png" id="1_vrqh4"]
-[ext_resource type="Script" path="res://src/Levels/Shared/LightArrow.gd" id="1_wsruc"]
+[ext_resource type="Script" uid="uid://d0v366sp7om4h" path="res://src/Levels/Shared/LightArrow.gd" id="1_wsruc"]
 
 [sub_resource type="Animation" id="Animation_ylefb"]
 resource_name = "running"
@@ -33,7 +33,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ervsl"]
 _data = {
-"running": SubResource("Animation_ylefb")
+&"running": SubResource("Animation_ylefb")
 }
 
 [node name="LightArrow" type="Node2D"]

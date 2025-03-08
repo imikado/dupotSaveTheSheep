@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c848gx4cq2m6h"]
 
-[ext_resource type="Script" path="res://src/Levels/Shared/BonusObstacle.gd" id="1_hti5x"]
+[ext_resource type="Script" uid="uid://u6dhm6vk40gd" path="res://src/Levels/Shared/BonusObstacle.gd" id="1_hti5x"]
 [ext_resource type="Texture2D" uid="uid://dr7m2k20aoby2" path="res://src/Levels/Shared/BonusObstacles.png" id="1_nt015"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_udgie"]

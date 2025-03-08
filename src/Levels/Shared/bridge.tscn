@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dekcjwb6n7f7q"]
 
 [ext_resource type="Texture2D" uid="uid://dbnhotclb7nrj" path="res://src/Levels/Shared/BuildingWorkTileMap.png" id="1_3cee2"]
-[ext_resource type="Script" path="res://src/Levels/Shared/bridge.gd" id="1_vn2hk"]
+[ext_resource type="Script" uid="uid://6sainmqv4uux" path="res://src/Levels/Shared/bridge.gd" id="1_vn2hk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqpoh"]
 size = Vector2(28, 1)
@@ -43,8 +43,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c0251"]
 _data = {
-"close": SubResource("Animation_fmjbj"),
-"open": SubResource("Animation_e7rwx")
+&"close": SubResource("Animation_fmjbj"),
+&"open": SubResource("Animation_e7rwx")
 }
 
 [node name="bridge" type="Node2D"]

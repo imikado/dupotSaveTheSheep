@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://yob4um0n673p"]
 
 [ext_resource type="Texture2D" uid="uid://x8cuq78vtr4p" path="res://src/UI/Controls/Shared/button.png" id="1_usd74"]
-[ext_resource type="Script" path="res://src/UI/Controls/LabelButton.gd" id="2_buitg"]
+[ext_resource type="Script" uid="uid://drmw6emogbfmd" path="res://src/UI/Controls/LabelButton.gd" id="2_buitg"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="3_nsutb"]
 
 [node name="LabelButton" type="TextureButton"]

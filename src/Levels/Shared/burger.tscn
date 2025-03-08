@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgrgdyiml1kax"]
 
-[ext_resource type="Script" path="res://src/Levels/Shared/burger.gd" id="1_ikbhv"]
+[ext_resource type="Script" uid="uid://c1w0rlg6tp4hk" path="res://src/Levels/Shared/burger.gd" id="1_ikbhv"]
 [ext_resource type="Texture2D" uid="uid://binbewqb3nurp" path="res://src/Levels/Shared/burger.png" id="1_s4u8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bwyip"]

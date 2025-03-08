@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://0ul2pw20maw5"]
 
-[ext_resource type="Script" path="res://src/Actors/Vehicles/motor_bike.gd" id="1_7raf7"]
+[ext_resource type="Script" uid="uid://dtmac8ob0ww0m" path="res://src/Actors/Vehicles/motor_bike.gd" id="1_7raf7"]
 [ext_resource type="Texture2D" uid="uid://ujla1yog2dyi" path="res://src/Actors/Vehicles/motobike-alone.png" id="2_rh4on"]
 [ext_resource type="Texture2D" uid="uid://dmseyqkwcrik4" path="res://src/Actors/Players/Player/player-jump.png" id="3_mn6c5"]
 [ext_resource type="Texture2D" uid="uid://fbwdh14dxymg" path="res://src/Actors/Players/Sheep/sheep-seated.png" id="4_g8lkn"]
@@ -136,8 +136,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7twub"]
 _data = {
-"Idle": SubResource("Animation_fkd5v"),
-"player_go_from_left": SubResource("Animation_1vajq")
+&"Idle": SubResource("Animation_fkd5v"),
+&"player_go_from_left": SubResource("Animation_1vajq")
 }
 
 [sub_resource type="Curve2D" id="Curve2D_y1rdq"]
@@ -225,7 +225,7 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pmd13"]
 _data = {
-"sheep_go_from_left": SubResource("Animation_xgb7p")
+&"sheep_go_from_left": SubResource("Animation_xgb7p")
 }
 
 [sub_resource type="Curve2D" id="Curve2D_adfig"]

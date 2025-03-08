@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d2m1rekr4ryxw"]
 
-[ext_resource type="Script" path="res://src/Levels/Shared/handle.gd" id="1_v77g5"]
+[ext_resource type="Script" uid="uid://bbnsx4jywd3fm" path="res://src/Levels/Shared/handle.gd" id="1_v77g5"]
 [ext_resource type="Texture2D" uid="uid://dbnhotclb7nrj" path="res://src/Levels/Shared/BuildingWorkTileMap.png" id="1_vi70r"]
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="3_vbyle"]
 
@@ -66,8 +66,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4pxcw"]
 _data = {
-"close": SubResource("Animation_qfcgf"),
-"open": SubResource("Animation_ttcwx")
+&"close": SubResource("Animation_qfcgf"),
+&"open": SubResource("Animation_ttcwx")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jb0ux"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://mmsrrnygubar"]
 
-[ext_resource type="Script" path="res://src/Actors/Enemies/CanonBall.gd" id="1_lqbk5"]
+[ext_resource type="Script" uid="uid://b4bv3rslp1lt8" path="res://src/Actors/Enemies/CanonBall.gd" id="1_lqbk5"]
 [ext_resource type="Texture2D" uid="uid://csd4bo7m3vggt" path="res://src/Actors/Enemies/CanonRex/fireball.png" id="1_x7k3o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8r3yf"]

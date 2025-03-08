@@ -1,17 +1,17 @@
 [gd_scene load_steps=20 format=3 uid="uid://c2xvn2ee41rkw"]
 
-[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex.gd" id="1_ci1on"]
+[ext_resource type="Script" uid="uid://bdq73fgqo042x" path="res://src/Actors/Enemies/CanonRex.gd" id="1_ci1on"]
 [ext_resource type="Texture2D" uid="uid://bbsrwhnd7i3qf" path="res://src/Actors/Enemies/CanonRex/canonrex-idle.png" id="2_c13yj"]
 [ext_resource type="PackedScene" uid="uid://mmsrrnygubar" path="res://src/Actors/Enemies/CanonBall.tscn" id="2_ecwdd"]
 [ext_resource type="Texture2D" uid="uid://2r3wmcompxju" path="res://src/Actors/Enemies/CanonRex/canonrex-die.png" id="3_2kmck"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRexStateMachine.gd" id="3_8cuwp"]
+[ext_resource type="Script" uid="uid://bpqqvcrfhqbci" path="res://src/Actors/Enemies/CanonRexStateMachine.gd" id="3_8cuwp"]
 [ext_resource type="Texture2D" uid="uid://jwwgtt82sv47" path="res://src/Actors/Enemies/CanonRex/canonrex-shoot.png" id="3_f7nce"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateIdle.gd" id="4_5v560"]
+[ext_resource type="Script" uid="uid://dueijr0pig5un" path="res://src/Actors/Enemies/CanonRex/StateIdle.gd" id="4_5v560"]
 [ext_resource type="Texture2D" uid="uid://cqmw8o82ihpuv" path="res://src/Actors/Enemies/CanonRex/canonrex-damaged.png" id="5_3yumu"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateShooting.gd" id="5_o7ymy"]
+[ext_resource type="Script" uid="uid://b3502px231ph" path="res://src/Actors/Enemies/CanonRex/StateShooting.gd" id="5_o7ymy"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="5_q7rqy"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateDamaged.gd" id="9_d40lq"]
-[ext_resource type="Script" path="res://src/Actors/Enemies/CanonRex/StateDie.gd" id="10_my2h1"]
+[ext_resource type="Script" uid="uid://bho3jayp0iwxq" path="res://src/Actors/Enemies/CanonRex/StateDamaged.gd" id="9_d40lq"]
+[ext_resource type="Script" uid="uid://dcyov5jmgc4h3" path="res://src/Actors/Enemies/CanonRex/StateDie.gd" id="10_my2h1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k6pno"]
 
@@ -175,10 +175,10 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fqwky"]
 _data = {
-"Damaged": SubResource("Animation_hf3il"),
-"Die": SubResource("Animation_2y56w"),
-"Idle": SubResource("Animation_717ph"),
-"Shooting": SubResource("Animation_ul871")
+&"Damaged": SubResource("Animation_hf3il"),
+&"Die": SubResource("Animation_2y56w"),
+&"Idle": SubResource("Animation_717ph"),
+&"Shooting": SubResource("Animation_ul871")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xhyhl"]

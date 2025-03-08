@@ -1,15 +1,15 @@
 [gd_scene load_steps=18 format=3 uid="uid://detnxs05jctwf"]
 
-[ext_resource type="Script" path="res://src/Actors/Players/Sheep.gd" id="1_2bi6n"]
+[ext_resource type="Script" uid="uid://duewwv7h46dqf" path="res://src/Actors/Players/Sheep.gd" id="1_2bi6n"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="1_87buc"]
-[ext_resource type="Script" path="res://src/Actors/Players/SheepStateMachine.gd" id="1_i67k0"]
+[ext_resource type="Script" uid="uid://bs04cenf608is" path="res://src/Actors/Players/SheepStateMachine.gd" id="1_i67k0"]
 [ext_resource type="Texture2D" uid="uid://whcx481cqqfs" path="res://src/Actors/Players/Sheep/sheep-walking.png" id="2_a6gni"]
 [ext_resource type="Texture2D" uid="uid://bds1nqik5coe8" path="res://src/Actors/Players/Sheep/sheep-turn.png" id="2_t1trx"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/SheepStateIdle.gd" id="4_1et44"]
+[ext_resource type="Script" uid="uid://cuheb0jhpgd4q" path="res://src/Actors/Players/States/Sheep/SheepStateIdle.gd" id="4_1et44"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="4_a756p"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/SheepStateWalking.gd" id="6_n3c7p"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/SheepStateTurn.gd" id="8_ahxuj"]
-[ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/StateDamaged.gd" id="9_rn3ht"]
+[ext_resource type="Script" uid="uid://fjwnyjherbvu" path="res://src/Actors/Players/States/Sheep/SheepStateWalking.gd" id="6_n3c7p"]
+[ext_resource type="Script" uid="uid://bokplaf44gtn7" path="res://src/Actors/Players/States/Sheep/SheepStateTurn.gd" id="8_ahxuj"]
+[ext_resource type="Script" uid="uid://n84vqtrbs4lk" path="res://src/Actors/Players/States/Sheep/StateDamaged.gd" id="9_rn3ht"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivymj"]
 radius = 5.94543
@@ -201,10 +201,10 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d0gjw"]
 _data = {
-"Damaged": SubResource("Animation_2pql4"),
-"Idle": SubResource("Animation_6naan"),
-"Turn": SubResource("Animation_bvars"),
-"Walking": SubResource("Animation_5280c")
+&"Damaged": SubResource("Animation_2pql4"),
+&"Idle": SubResource("Animation_6naan"),
+&"Turn": SubResource("Animation_bvars"),
+&"Walking": SubResource("Animation_5280c")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wy4de"]

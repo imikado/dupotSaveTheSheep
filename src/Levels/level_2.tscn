@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=4 uid="uid://civ7xjgrjc0wb"]
 
 [ext_resource type="Texture2D" uid="uid://ckbloaswrck6f" path="res://src/Levels/Level2/TileMap.png" id="1_0aggg"]
-[ext_resource type="Script" path="res://src/Levels/level_2.gd" id="1_c0e88"]
+[ext_resource type="Script" uid="uid://dthoejpru65fq" path="res://src/Levels/level_2.gd" id="1_c0e88"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="1_kmvu2"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="2_7gvb4"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="3_5au25"]
 [ext_resource type="PackedScene" uid="uid://d1yresjwln4t" path="res://src/Levels/Level2/elevator.tscn" id="3_sht7v"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="4_lgj03"]
-[ext_resource type="Script" path="res://src/Levels/MainLevelCamera2D.gd" id="5_1hkgj"]
+[ext_resource type="Script" uid="uid://i7b0bocch6v7" path="res://src/Levels/MainLevelCamera2D.gd" id="5_1hkgj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pyf33"]
 texture = ExtResource("1_0aggg")

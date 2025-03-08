@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://d1yresjwln4t"]
 
-[ext_resource type="Script" path="res://src/Levels/Level2/elevator.gd" id="1_kdvyh"]
+[ext_resource type="Script" uid="uid://c3rdh8dodnyap" path="res://src/Levels/Level2/elevator.gd" id="1_kdvyh"]
 [ext_resource type="Texture2D" uid="uid://dreh6jhle2n0j" path="res://src/Levels/Level2/Elevator.png" id="1_wdjn3"]
 [ext_resource type="Texture2D" uid="uid://bjl3h6cgdk141" path="res://src/Levels/Level2/handleElevator.png" id="3_lu6xg"]
 
@@ -79,9 +79,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iv4bl"]
 _data = {
-"RESET": SubResource("Animation_jcmmw"),
-"moving_down": SubResource("Animation_jrns5"),
-"moving_up": SubResource("Animation_vut6i")
+&"RESET": SubResource("Animation_jcmmw"),
+&"moving_down": SubResource("Animation_jrns5"),
+&"moving_up": SubResource("Animation_vut6i")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h6ijn"]
@@ -167,9 +167,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ftvt7"]
 _data = {
-"RESET": SubResource("Animation_m8kkg"),
-"turn_down": SubResource("Animation_ac3tn"),
-"turn_up": SubResource("Animation_076rc")
+&"RESET": SubResource("Animation_m8kkg"),
+&"turn_down": SubResource("Animation_ac3tn"),
+&"turn_up": SubResource("Animation_076rc")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pyxpn"]

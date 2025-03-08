@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://de1kx1n0m1bex"]
 
-[ext_resource type="Script" path="res://src/Actors/Players/Bullet.gd" id="1_axmbu"]
+[ext_resource type="Script" uid="uid://cggkppmhockgf" path="res://src/Actors/Players/Bullet.gd" id="1_axmbu"]
 [ext_resource type="Texture2D" uid="uid://bng163kjwis0r" path="res://src/Actors/Players/Player/bullet.png" id="1_luqag"]
 
 [sub_resource type="Animation" id="Animation_ol5cr"]
@@ -46,7 +46,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u3w26"]
 _data = {
-"default": SubResource("Animation_ol5cr")
+&"default": SubResource("Animation_ol5cr")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2lj5l"]

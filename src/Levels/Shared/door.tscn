@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://tbsd6ltwpb46"]
 
-[ext_resource type="Script" path="res://src/Levels/Shared/door.gd" id="1_4l40c"]
+[ext_resource type="Script" uid="uid://dynjb5fnkqaj3" path="res://src/Levels/Shared/door.gd" id="1_4l40c"]
 [ext_resource type="Texture2D" uid="uid://df2i3qy7ge3su" path="res://src/Levels/Shared/DoorOpening.png" id="1_h3mlg"]
 
 [sub_resource type="Animation" id="Animation_yrxvj"]
@@ -98,8 +98,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1kfhv"]
 _data = {
-"Closed": SubResource("Animation_yrxvj"),
-"Opening": SubResource("Animation_jewbf")
+&"Closed": SubResource("Animation_yrxvj"),
+&"Opening": SubResource("Animation_jewbf")
 }
 
 [node name="Door" type="Node2D"]

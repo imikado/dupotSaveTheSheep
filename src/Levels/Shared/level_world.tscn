@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://wy4f66o7eik0"]
 
-[ext_resource type="Script" path="res://src/Levels/Shared/level_world.gd" id="1_lw4wr"]
+[ext_resource type="Script" uid="uid://dyq1fhcw7khml" path="res://src/Levels/Shared/level_world.gd" id="1_lw4wr"]
 [ext_resource type="Texture2D" uid="uid://ckkdsi6wklxwl" path="res://src/Levels/Shared/BuildingTileMap.png" id="3_c3nex"]
 [ext_resource type="PackedScene" uid="uid://c87l4h2e277ou" path="res://src/Levels/Shared/Gate.tscn" id="3_smtuv"]
 [ext_resource type="PackedScene" uid="uid://cev5kgjc2i55p" path="res://src/Levels/Shared/wastes.tscn" id="5_rnay1"]

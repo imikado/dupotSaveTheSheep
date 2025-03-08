@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://b5veltma7osxs"]
 
-[ext_resource type="Script" path="res://src/Levels/Shared/drone.gd" id="1_cd1wr"]
+[ext_resource type="Script" uid="uid://sy0img8nqvjk" path="res://src/Levels/Shared/drone.gd" id="1_cd1wr"]
 [ext_resource type="Texture2D" uid="uid://djnqhaomlflab" path="res://src/Levels/Shared/drone.png" id="1_exec8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oqymw"]

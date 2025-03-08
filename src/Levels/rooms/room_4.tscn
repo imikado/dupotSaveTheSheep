@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=4 uid="uid://cp335epdftsej"]
 
-[ext_resource type="Script" path="res://src/Levels/rooms/room_4.gd" id="1_jo65y"]
+[ext_resource type="Script" uid="uid://b7rraqfjalgsm" path="res://src/Levels/rooms/room_4.gd" id="1_jo65y"]
 [ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="2_yghf3"]
 [ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="3_dhhov"]
 [ext_resource type="TileSet" uid="uid://bj8v80sh2i24v" path="res://src/Levels/rooms/shared/craneTileSet.tres" id="4_qcevo"]
@@ -64,8 +64,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jxvj2"]
 _data = {
-"RESET": SubResource("Animation_xv0ku"),
-"goup": SubResource("Animation_33bw6")
+&"RESET": SubResource("Animation_xv0ku"),
+&"goup": SubResource("Animation_33bw6")
 }
 
 [node name="Room4" type="Node2D"]

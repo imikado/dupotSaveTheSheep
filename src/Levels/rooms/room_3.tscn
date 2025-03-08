@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=4 uid="uid://blqbs5g1aiy8m"]
 
-[ext_resource type="Script" path="res://src/Levels/rooms/room_3.gd" id="1_fdb5r"]
+[ext_resource type="Script" uid="uid://dxcv0djhl5kcv" path="res://src/Levels/rooms/room_3.gd" id="1_fdb5r"]
 [ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="1_ow6v7"]
 [ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="3_77cwb"]
 [ext_resource type="PackedScene" uid="uid://dekcjwb6n7f7q" path="res://src/Levels/Shared/bridge.tscn" id="4_ajfhn"]

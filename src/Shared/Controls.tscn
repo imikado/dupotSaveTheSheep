@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c1mvj56pgyil6"]
 
 [ext_resource type="Texture2D" uid="uid://cj1dhhmlm1lvc" path="res://src/Shared/Controls/Attack01.png" id="2"]
-[ext_resource type="Script" path="res://src/Shared/Controls.gd" id="4"]
+[ext_resource type="Script" uid="uid://bqdos6sbkc4df" path="res://src/Shared/Controls.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://d1do45qpur1kk" path="res://src/Shared/Controls/Jump.png" id="6_ce0ci"]
 [ext_resource type="Texture2D" uid="uid://u2ha1n7j424t" path="res://src/Shared/Controls/Action.png" id="6_h6yoi"]
 [ext_resource type="Texture2D" uid="uid://ciw1bwtarrvlf" path="res://src/Shared/Controls/Attack01Pressed.png" id="7"]
