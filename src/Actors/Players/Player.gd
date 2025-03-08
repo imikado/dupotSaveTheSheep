@@ -5,14 +5,16 @@ class_name Player
 const SPEED = 100.0
 const JUMP_VELOCITY = -150.0
 
-const AREA='PlayerArea'
+const AREA = 'PlayerArea'
 
-const SHOOT_WATER_VALUE=1
+const SHOOT_WATER_VALUE = 1
 
-var _pending_water=0
-var _pending_life=0
-var _pending_action=null
-var _pending_vehicle=null
+var _pending_water = 0
+var _pending_life = 0
+var _pending_action = null
+var _pending_vehicle = null
+
+var _can_fall = false
 
 var _direction
 
@@ -21,22 +23,22 @@ var _gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 signal action_finished
 
-@onready var _state_machine:PlayerStateMachine = $StateMachine
-@onready var _sprite:Sprite2D = $Sprite2D
+@onready var _state_machine: PlayerStateMachine = $StateMachine
+@onready var _sprite: Sprite2D = $Sprite2D
 
-@onready var _raycast:RayCast2D=$RayCast2D
+@onready var _raycast: RayCast2D = $RayCast2D
 
 
-@export var _muzzleMarker2d:Marker2D
+@export var _muzzleMarker2d: Marker2D
 
 @onready var Bullet = load("res://src/Actors/Players/Bullet.tscn")
 
 
 func _process(delta):
 
-	if _pending_vehicle!=null:
+	if _pending_vehicle != null:
 		queue_free()
-		_pending_vehicle.player_go_from_left()	
+		_pending_vehicle.player_go_from_left()
 		return
 	
 	if get_current_state().has_gravity:
@@ -57,12 +59,11 @@ func _process(delta):
 		update_gunshoot(delta)
 
 	if _sprite.flip_h:
-		_muzzleMarker2d.position.x=-25
+		_muzzleMarker2d.position.x = -25
 	else:
-		_muzzleMarker2d.position.x=25	
+		_muzzleMarker2d.position.x = 25
 	
 	
-		
 	get_current_state().state_process(delta)
 
 
@@ -75,8 +76,16 @@ func process_jump(_delta):
 func update_gravity(delta):
 	# Add the gravity.
 	if not is_on_floor():
-		set_new_state(PlayerStateMachine.STATE_FALL)
-		velocity.y += _gravity * delta
+		if get_current_state().name != PlayerStateMachine.STATE_FALL:
+			_can_fall = false
+			set_new_state(PlayerStateMachine.STATE_FALL)
+			get_tree().create_timer(0.1).connect("timeout", enable_falling)
+			return
+		if _can_fall:
+			velocity.y += _gravity * delta
+
+func enable_falling():
+	_can_fall = true
 
 func update_jump(_delta):
 	if GlobalInput.is_press_jump_button() and is_on_floor():
@@ -93,13 +102,13 @@ func update_gunshoot(_delta):
 func shoot():
 
 	if !GlobalPlayer.can_use_amount_water(SHOOT_WATER_VALUE):
-		print('cannot user water '+str(SHOOT_WATER_VALUE))
+		print('cannot user water ' + str(SHOOT_WATER_VALUE))
 		return
 
-	var bullet=Bullet.instantiate()
+	var bullet = Bullet.instantiate()
 	get_parent().add_child(bullet)
 	
-	bullet.global_position=_muzzleMarker2d.global_position
+	bullet.global_position = _muzzleMarker2d.global_position
 	if _sprite.flip_h:
 		bullet.run(-1)
 	else:
@@ -107,27 +116,26 @@ func shoot():
 
 	GlobalPlayer.use_amount_water(SHOOT_WATER_VALUE)
 
-	GlobalEvents.emit_signal("player_water_changed",GlobalPlayer.get_water())
-
+	GlobalEvents.emit_signal("player_water_changed", GlobalPlayer.get_water())
 
 
 func update_move(_delta):
 
-	if _pending_action!=null and GlobalInput.is_press_action_button():
+	if _pending_action != null and GlobalInput.is_press_action_button():
 		print('action')
 		action()
 		
 	elif GlobalInput.is_press_action_button():
 		print("pending acion is empty")
 
-	var currentSpeed= get_current_speed()
+	var currentSpeed = get_current_speed()
 	
 	_direction = GlobalInput.get_direction()
 	if _direction:
 		set_new_state(PlayerStateMachine.STATE_WALKING)
 		velocity.x = _direction * currentSpeed
 		
-		_sprite.flip_h=(_direction==-1)
+		_sprite.flip_h = (_direction == -1)
 		
 	else:
 		if !_raycast.is_colliding():
@@ -140,19 +148,24 @@ func update_move(_delta):
 			velocity.x = move_toward(velocity.x, 0, currentSpeed)
 
 func update_min_move(_delta):
-	if velocity.x!=0:
+	if velocity.x != 0:
 		return
 
-	if  [PlayerStateMachine.STATE_TAKINGWATER,PlayerStateMachine.STATE_ACTION,PlayerStateMachine.STATE_TAKINGBURGER].has(get_current_state().name):
+	if [PlayerStateMachine.STATE_TAKINGWATER, PlayerStateMachine.STATE_ACTION, PlayerStateMachine.STATE_TAKINGBURGER].has(get_current_state().name):
 		return
 		
-	var currentSpeed= get_current_speed()/2
+	var currentSpeed = 0
 	
+	if get_current_state().name == PlayerStateMachine.STATE_JUMP:
+		currentSpeed = get_current_speed()
+	else:
+		currentSpeed = get_current_speed() / 2
+
 	_direction = GlobalInput.get_direction()
 	if _direction:
-		velocity.x = _direction *currentSpeed
+		velocity.x = _direction * currentSpeed
 		
-		_sprite.flip_h=(_direction==-1)
+		_sprite.flip_h = (_direction == -1)
 
 
 func process_move():
@@ -161,7 +174,7 @@ func process_move():
 func set_new_state(new_state):
 	_state_machine.set_state(new_state)
 
-func get_current_state()->State:
+func get_current_state() -> State:
 	return _state_machine.current_state
 	
 func get_current_speed():
@@ -171,54 +184,53 @@ func get_current_speed():
 func hit_damage(damage):
 	set_new_state(PlayerStateMachine.STATE_DAMAGED)
 	var tween := create_tween()
-	tween.tween_property(self,"modulate",Color.RED,0.3)
-	tween.tween_property(self,"modulate",Color.WHITE,0.2)
-	tween.tween_property(self,"modulate",Color.RED,0.3)
-	tween.tween_property(self,"modulate",Color.WHITE,0.2)
+	tween.tween_property(self, "modulate", Color.RED, 0.3)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
+	tween.tween_property(self, "modulate", Color.RED, 0.3)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 	
 	GlobalEvents.player_take_damage.emit(damage)
 
 	
 func take_water(water_value):
-	_direction=0
-	velocity.x=0
+	_direction = 0
+	velocity.x = 0
 	#velocity.y=0
-	_pending_water=water_value
+	_pending_water = water_value
 	set_new_state(PlayerStateMachine.STATE_TAKINGWATER)
 
 func commit_water():
-	GlobalEvents.emit_signal("player_water_changed",_pending_water)
-	_pending_water=0
+	GlobalEvents.emit_signal("player_water_changed", _pending_water)
+	_pending_water = 0
 
 func action():
-	_direction=0
-	velocity.x=0
+	_direction = 0
+	velocity.x = 0
 	set_new_state(PlayerStateMachine.STATE_ACTION)
 
 func commit_action():
 	_pending_action.action()
 
 func take_burger(value):
-	_direction=0
-	velocity.x=0
+	_direction = 0
+	velocity.x = 0
 	#velocity.y=0
-	_pending_life=value
+	_pending_life = value
 	set_new_state(PlayerStateMachine.STATE_TAKINGBURGER)
 
 func commit_increase_life():
 	GlobalEvents.player_increase_life.emit(_pending_life)
-	_pending_life=0
+	_pending_life = 0
 
 func set_pending_action(pending_action):
-	_pending_action=pending_action
+	_pending_action = pending_action
 
 func reset_pending_action():
-	_pending_action=null
+	_pending_action = null
 
 
 func set_pending_vehicle(pending_vehicle):
-	_pending_vehicle=pending_vehicle
+	_pending_vehicle = pending_vehicle
 
 func reset_pending_vehicle():
-	_pending_vehicle=null
-	
+	_pending_vehicle = null

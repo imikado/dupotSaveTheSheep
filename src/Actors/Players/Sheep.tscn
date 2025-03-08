@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://detnxs05jctwf"]
+[gd_scene load_steps=18 format=3 uid="uid://detnxs05jctwf"]
 
 [ext_resource type="Script" path="res://src/Actors/Players/Sheep.gd" id="1_2bi6n"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="1_87buc"]
@@ -12,8 +12,8 @@
 [ext_resource type="Script" path="res://src/Actors/Players/States/Sheep/StateDamaged.gd" id="9_rn3ht"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivymj"]
-radius = 5.99316
-height = 20.0
+radius = 5.94543
+height = 22.0
 
 [sub_resource type="Animation" id="Animation_2pql4"]
 resource_name = "Damaged"
@@ -207,6 +207,9 @@ _data = {
 "Walking": SubResource("Animation_5280c")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy4de"]
+size = Vector2(20, 2)
+
 [node name="Sheep" type="CharacterBody2D"]
 script = ExtResource("1_2bi6n")
 
@@ -217,8 +220,9 @@ hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -6)
-rotation = -1.52305
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ivymj")
+metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -254,3 +258,11 @@ offset_top = -41.0
 offset_right = 57.0
 offset_bottom = -15.0
 state_machine = NodePath("../StateMachine")
+
+[node name="jumpOnHeadArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jumpOnHeadArea"]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_wy4de")
+
+[connection signal="body_entered" from="jumpOnHeadArea" to="." method="_on_jump_on_head_area_body_entered"]

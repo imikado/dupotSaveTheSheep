@@ -1,4 +1,4 @@
-extends Enemy
+class_name TRex extends Enemy
 
 @onready var _sprite=$Sprite2D
 
@@ -22,6 +22,12 @@ var current_state_name=""
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var can_attack=true
+
+const SCENE:PackedScene=preload("res://src/Actors/Enemies/TRex.tscn")
+
+static func create()->TRex:
+	var room=SCENE.instantiate()
+	return room
 
 
 func _process(delta):
@@ -119,3 +125,7 @@ func get_current_speed():
 func _on_attack_timer_timeout():
 	can_attack=true
 	pass # Replace with function body.
+	
+func _on_jump_on_head_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.process_jump(1) # 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c4rt0pnhv86kl"]
+[gd_scene load_steps=26 format=3 uid="uid://c4rt0pnhv86kl"]
 
 [ext_resource type="Script" path="res://src/Actors/Enemies/TRex.gd" id="1_krotj"]
 [ext_resource type="Texture2D" uid="uid://cg8eqmidubnku" path="res://src/Actors/Enemies/TRex/trex-die.png" id="2_5jear"]
@@ -311,6 +311,9 @@ _data = {
 "Walking": SubResource("Animation_noxqi")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67xgt"]
+size = Vector2(45, 2)
+
 [node name="TRex" type="CharacterBody2D"]
 z_index = 14
 z_as_relative = false
@@ -373,4 +376,11 @@ state_machine = NodePath("../StateMachine")
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="jumpOnHeadArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jumpOnHeadArea"]
+position = Vector2(2.5, -32)
+shape = SubResource("RectangleShape2D_67xgt")
+
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="jumpOnHeadArea" to="." method="_on_jump_on_head_area_body_entered"]

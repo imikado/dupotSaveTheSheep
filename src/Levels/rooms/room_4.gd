@@ -1,20 +1,27 @@
-extends RoomAbstract
+class_name Room4 extends RoomAbstract
 
-@onready var animationPlayer:AnimationPlayer=$decor/AnimationPlayer
 
-@onready var _decor:Node2D=$decor
+@onready var animationPlayer: AnimationPlayer = $decor/AnimationPlayer
 
-var opened=true
+@onready var _decor: Node2D = $decor
+
+var opened = true
+
+const SCENE: PackedScene = preload("res://src/Levels/rooms/room_4.tscn")
+
+static func create() -> Room4:
+	var room = SCENE.instantiate()
+	return room
 
 func _ready():
 	set_decor_visible(false)
 	
 func set_decor_visible(state):
-	_decor.visible=state
+	_decor.visible = state
 
 func open():
 	print('open')
-	opened=true
+	opened = true
 	animationPlayer.play_backwards("goup")
 
 
@@ -23,7 +30,7 @@ func is_open():
 	
 func close():
 	print('close')
-	opened=false
+	opened = false
 	animationPlayer.play("goup")
 	return
 

@@ -4,19 +4,19 @@ class_name StateMachine
 
 var current_state: Object
 
-@export var animationPlayer:AnimationPlayer
-@export var actor:CharacterBody2D
+@export var animationPlayer: AnimationPlayer
+@export var actor: CharacterBody2D
 
 
-var available_state_name_list=[]
+var available_state_name_list = []
 var state_list = {}
 
 func init():
 	
-	animationPlayer.connect("animation_finished",_on_animation_player_animation_finished)
+	animationPlayer.connect("animation_finished", _on_animation_player_animation_finished)
 	
 	for available_state_name_loop in available_state_name_list:
-		var state_loop=get_node(available_state_name_loop)
+		var state_loop = get_node(available_state_name_loop)
 		state_loop.state_machine = self
 		state_list[state_loop.name] = state_loop
 		if current_state:
@@ -28,13 +28,13 @@ func init():
 func _process(delta):
 	current_state.state_process(delta)
 
-func animation_play(animation:String)->void :
+func animation_play(animation: String) -> void:
 	animationPlayer.play(animation)
 	
-func animation_reset()->void:
+func animation_reset() -> void:
 	animationPlayer.stop(false)
 
-func animation_stop()->void:
+func animation_stop() -> void:
 	animationPlayer.stop()
 
 func change_to(state_name):
@@ -42,7 +42,7 @@ func change_to(state_name):
 
 
 func set_state(state_name):
-	if(state_name == current_state.name):
+	if (state_name == current_state.name):
 		return
 	remove_child(current_state)
 	current_state = state_list[state_name]

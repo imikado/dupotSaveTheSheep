@@ -6,7 +6,7 @@
 size = Vector2(33.5, 1.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkxer"]
-size = Vector2(27, 3)
+size = Vector2(27, 2.5)
 
 [node name="Elevator" type="Node2D"]
 
@@ -33,7 +33,7 @@ shape = SubResource("RectangleShape2D_m1s74")
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(2, 20)
+position = Vector2(-0.75, 20)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_hkxer")
 one_way_collision = true

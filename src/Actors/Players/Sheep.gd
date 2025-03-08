@@ -98,3 +98,7 @@ func set_pending_vehicle(pending_vehicle):
 
 func reset_pending_vehicle():
 	_pending_vehicle=null
+
+func _on_jump_on_head_area_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.process_jump(1) # # Replace with function body.
