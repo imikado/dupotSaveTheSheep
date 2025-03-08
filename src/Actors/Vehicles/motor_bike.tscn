@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://0ul2pw20maw5"]
+[gd_scene load_steps=19 format=3 uid="uid://0ul2pw20maw5"]
 
 [ext_resource type="Script" uid="uid://dtmac8ob0ww0m" path="res://src/Actors/Vehicles/motor_bike.gd" id="1_7raf7"]
 [ext_resource type="Texture2D" uid="uid://ujla1yog2dyi" path="res://src/Actors/Vehicles/motobike-alone.png" id="2_rh4on"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bw86gonylphff" path="res://src/Actors/Players/Player/player-on-motorbike.png" id="5_clilh"]
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="6_ikv5x"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="7_pm5i5"]
+[ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="9_xlbk5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogoa"]
 radius = 4.0
@@ -277,7 +278,7 @@ shape = SubResource("RectangleShape2D_s6046")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAnimation"]
 root_node = NodePath("../../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_7twub")
+&"": SubResource("AnimationLibrary_7twub")
 }
 
 [node name="FromLeftPath2D" type="Path2D" parent="PlayerAnimation"]
@@ -300,7 +301,7 @@ hframes = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SheepAnimation"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_pmd13")
+&"": SubResource("AnimationLibrary_pmd13")
 }
 
 [node name="Path2D" type="Path2D" parent="SheepAnimation"]
@@ -320,6 +321,36 @@ offset = Vector2(-0.999998, -26)
 hframes = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]
+
+[node name="sky" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/ParallaxBackground/sky"]
+z_as_relative = false
+offset_left = -2372.0
+offset_top = -718.0
+offset_right = 4511.0
+offset_bottom = 2578.0
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer"]
+modulate = Color(0.235294, 0.360784, 0.45098, 1)
+position = Vector2(-212, -161)
+texture = ExtResource("9_xlbk5")
+centered = false
+flip_h = true
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer2"]
+position = Vector2(-266, -172)
+texture = ExtResource("9_xlbk5")
+centered = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
