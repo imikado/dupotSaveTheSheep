@@ -6,42 +6,42 @@ const JUMP_VELOCITY = -300.0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var animationPlayer:=$AnimationPlayer
+@onready var animationPlayer := $AnimationPlayer
 
-enum STATE{RIDING,JUMP_START,JUMPING,JUMP_END,TAKE_WATER,OBSTACLE,TAKE_DESSERTS}
+enum STATE {RIDING, JUMP_START, JUMPING, JUMP_END, TAKE_WATER, OBSTACLE, TAKE_DESSERTS, HITED}
 
 
-var _state=STATE.RIDING
-var _animationList={
-	STATE.RIDING:'riding',
-	STATE.JUMP_START:'JumpStart',
-	STATE.JUMPING:'riding',
-	STATE.JUMP_END:'JumpEnd',
-	STATE.TAKE_WATER:'TakeWater',
-	STATE.OBSTACLE:'obstacle',
-	STATE.TAKE_DESSERTS:'TakeDesserts'
+var _state = STATE.RIDING
+var _animationList = {
+	STATE.RIDING: 'riding',
+	STATE.JUMP_START: 'JumpStart',
+	STATE.JUMPING: 'riding',
+	STATE.JUMP_END: 'JumpEnd',
+	STATE.TAKE_WATER: 'TakeWater',
+	STATE.OBSTACLE: 'obstacle',
+	STATE.TAKE_DESSERTS: 'TakeDesserts',
+	STATE.HITED: 'hited'
 }
 
-var jumping=false
-var startJumping=false
-var canJump=true
-var jumpX=100
-var deltaX=0
-var groundPositionY=0.0
-var isHitingObstacle=false
+var jumping = false
+var startJumping = false
+var canJump = true
+var jumpX = 100
+var deltaX = 0
+var groundPositionY = 0.0
+var isHitingObstacle = false
 
-var _pending_water=0
+var _pending_water = 0
 
 func _ready():
-	
-	groundPositionY=position.y
+	groundPositionY = position.y
 	ride()
 	
-func getAnimation(stateToCheck)->String:
+func getAnimation(stateToCheck) -> String:
 	return _animationList[stateToCheck]
 
 func processJump():
-	velocity.y=JUMP_VELOCITY
+	velocity.y = JUMP_VELOCITY
 	setState(STATE.JUMP_START)
 	#startJumping=true
 	#jumping=true
@@ -53,7 +53,7 @@ func processEndJump():
 	#ride()
 
 func isOnTheFloor():
-	return (velocity.y==0)
+	return (velocity.y == 0)
 	
 func hitedObstacle():
 	setState(STATE.OBSTACLE)
@@ -67,52 +67,55 @@ func ride():
 	
 func take_desserts(life):
 	setState(STATE.TAKE_DESSERTS)
+
+func hited():
+	setState(STATE.HITED)
 	
 func take_water(water_value):
-	_pending_water=water_value
+	_pending_water = water_value
 	setState(STATE.TAKE_WATER)
-	print('player get value'+str(water_value))
+	print('player get value' + str(water_value))
 	
 func commit_water():
-	GlobalEvents.emit_signal("player_water_changed",_pending_water)
-	_pending_water=0
+	GlobalEvents.emit_signal("player_water_changed", _pending_water)
+	_pending_water = 0
 	
 func commit_desserts():
 	print(GlobalPlayer.get_life())
 	GlobalPlayer.increase_life(10)
 	GlobalSheep.increase_life(10)
 	print(GlobalPlayer.get_life())
-	GlobalEvents.emit_signal("player_health_changed",GlobalPlayer.get_life())
-	GlobalEvents.emit_signal("sheep_health_changed",GlobalSheep.get_life())
+	GlobalEvents.emit_signal("player_health_changed", GlobalPlayer.get_life())
+	GlobalEvents.emit_signal("sheep_health_changed", GlobalSheep.get_life())
 
-func isState(stateToCheck)->bool:
+func isState(stateToCheck) -> bool:
 	if _state == stateToCheck:
 		return true
 	return false
 
 func setState(newState):
-	_state=newState
+	_state = newState
 	animationPlayer.play(_animationList[newState])
 
 func _process(delta):
 	# Add the gravity.
 	if not isOnTheFloor():
-		velocity.y += gravity * delta*0.8
+		velocity.y += gravity * delta * 0.8
 		
-	var jumpSizeX=jumpX*delta
+	var jumpSizeX = jumpX * delta
 		
 	if isState(STATE.JUMP_START):
-		position.x+=jumpSizeX
-		deltaX+=jumpSizeX
+		position.x += jumpSizeX
+		deltaX += jumpSizeX
 		
-	if !isState(STATE.JUMP_START) and deltaX>0:
-		jumpSizeX=jumpSizeX/2
+	if !isState(STATE.JUMP_START) and deltaX > 0:
+		jumpSizeX = jumpSizeX / 2
 		if jumpSizeX > deltaX:
-			position.x-=deltaX
-			deltaX=0
+			position.x -= deltaX
+			deltaX = 0
 		else:
-			position.x-=jumpSizeX
-			deltaX-=jumpSizeX
+			position.x -= jumpSizeX
+			deltaX -= jumpSizeX
 	
 	#print(velocity.y)
 	#print(position.y)
@@ -143,7 +146,6 @@ func _process(delta):
 	#	velocity.x = move_toward(velocity.x, 0, SPEED)
 	move_and_slide()
 	
-
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == getAnimation(STATE.JUMP_START):

@@ -38,3 +38,6 @@ signal player_increase_life(value)
 signal end_level
 
 signal sheep_is_visible(value)
+
+signal motorbike_hit_obstacle
+signal bonus_animation_gameover

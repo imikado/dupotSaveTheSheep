@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://1abyt4tsap5d"]
+
+[ext_resource type="Script" uid="uid://diumdvr3dcywi" path="res://src/UI/hud_bonus.gd" id="1_vx4ed"]
+[ext_resource type="Texture2D" uid="uid://ujla1yog2dyi" path="res://src/Actors/Vehicles/motobike-alone.png" id="1_x6i0w"]
+
+[node name="motorBikeLifes" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vx4ed")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15.247, 21.4712)
+rotation = -0.834169
+scale = Vector2(0.306429, 0.409759)
+texture = ExtResource("1_x6i0w")
+region_enabled = true
+region_rect = Rect2(0, 28, 65, 37)
+
+[node name="lifes" type="Node2D" parent="."]

@@ -12,8 +12,8 @@ func _process(delta):
 
 
 func _on_body_entered(body):
-	
 	if body is PlayerOnMotorBike:
-		body.hitedObstacle()
+		GlobalEvents.motorbike_hit_obstacle.emit()
+		
 	
 	pass # Replace with function body.
