@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=4 uid="uid://cp335epdftsej"]
 
-[ext_resource type="Script" uid="uid://b7rraqfjalgsm" path="res://src/Levels/rooms/room_4.gd" id="1_jo65y"]
-[ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="2_yghf3"]
-[ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="3_dhhov"]
-[ext_resource type="TileSet" uid="uid://bj8v80sh2i24v" path="res://src/Levels/rooms/shared/craneTileSet.tres" id="4_qcevo"]
+[ext_resource type="Script" uid="uid://b7rraqfjalgsm" path="res://src/Levels/Level1/rooms/room_4.gd" id="1_jo65y"]
+[ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/Level1/rooms/shared/buildingTileSet.tres" id="2_yghf3"]
+[ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/Level1/rooms/shared/groundTileSet.tres" id="3_dhhov"]
+[ext_resource type="TileSet" uid="uid://bj8v80sh2i24v" path="res://src/Levels/Level1/rooms/shared/craneTileSet.tres" id="4_qcevo"]
 [ext_resource type="PackedScene" uid="uid://cod74mh86m8jt" path="res://src/Levels/Shared/elevator.tscn" id="5_lpeci"]
 [ext_resource type="PackedScene" uid="uid://d2m1rekr4ryxw" path="res://src/Levels/Shared/handle.tscn" id="6_bay80"]
 

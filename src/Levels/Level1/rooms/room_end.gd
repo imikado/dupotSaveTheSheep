@@ -1,7 +1,7 @@
 class_name RoomEnd extends RoomAbstract
 
 
-const SCENE: PackedScene = preload("res://src/Levels/rooms/room_end.tscn")
+const SCENE: PackedScene = preload("res://src/Levels/Level1/rooms/room_end.tscn")
 
 static func create() -> RoomEnd:
 	var room = SCENE.instantiate()

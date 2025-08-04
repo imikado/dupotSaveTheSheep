@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=4 uid="uid://dbtci2wi7fxc5"]
 
-[ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="1_8mr27"]
-[ext_resource type="Script" uid="uid://ifhhrso4grf4" path="res://src/Levels/rooms/room_start.gd" id="1_ida4a"]
-[ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="2_v73vl"]
+[ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/Level1/rooms/shared/buildingTileSet.tres" id="1_8mr27"]
+[ext_resource type="Script" uid="uid://ifhhrso4grf4" path="res://src/Levels/Level1/rooms/room_start.gd" id="1_ida4a"]
+[ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/Level1/rooms/shared/groundTileSet.tres" id="2_v73vl"]
 
 [node name="RoomStart" type="Node2D"]
 script = ExtResource("1_ida4a")

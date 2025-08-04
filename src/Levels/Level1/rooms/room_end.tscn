@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=4 uid="uid://r02wmfgg7m5p"]
 
-[ext_resource type="Script" uid="uid://c6ylw8oo3yefm" path="res://src/Levels/rooms/room_end.gd" id="1_8sr7q"]
-[ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="2_kss7q"]
-[ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="3_a4ixo"]
+[ext_resource type="Script" uid="uid://c6ylw8oo3yefm" path="res://src/Levels/Level1/rooms/room_end.gd" id="1_8sr7q"]
+[ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/Level1/rooms/shared/buildingTileSet.tres" id="2_kss7q"]
+[ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/Level1/rooms/shared/groundTileSet.tres" id="3_a4ixo"]
 [ext_resource type="PackedScene" uid="uid://0ul2pw20maw5" path="res://src/Actors/Vehicles/motor_bike.tscn" id="4_t4iij"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tyiwv"]

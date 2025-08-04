@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=4 uid="uid://cs0lw5ouwumj3"]
 
-[ext_resource type="Script" uid="uid://bkmbrdpxs44dj" path="res://src/Levels/rooms/room_1.gd" id="1_qv0e2"]
+[ext_resource type="Script" uid="uid://bkmbrdpxs44dj" path="res://src/Levels/Level1/rooms/room_1.gd" id="1_qv0e2"]
 [ext_resource type="PackedScene" uid="uid://c87l4h2e277ou" path="res://src/Levels/Shared/Gate.tscn" id="2_61ble"]
-[ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="2_w2phm"]
-[ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="3_4isbu"]
+[ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/Level1/rooms/shared/buildingTileSet.tres" id="2_w2phm"]
+[ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/Level1/rooms/shared/groundTileSet.tres" id="3_4isbu"]
 [ext_resource type="PackedScene" uid="uid://c2xvn2ee41rkw" path="res://src/Actors/Enemies/CanonRex.tscn" id="5_k67tc"]
 
 [node name="Room1" type="Node2D"]

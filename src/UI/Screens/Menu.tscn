@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://u5s8goxqdyoo" path="res://src/UI/Screens/Menu.gd" id="1_81gvo"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_bkv4m"]
-[ext_resource type="PackedScene" uid="uid://ddb64nkhhqu10" path="res://src/Levels/main_level_2camera.tscn" id="2_wl5y4"]
+[ext_resource type="PackedScene" uid="uid://ddb64nkhhqu10" path="res://src/Levels/level_1.tscn" id="2_wl5y4"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="4_nm624"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="5_lkhqs"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="6_j0ooc"]
@@ -87,7 +87,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_81gvo")
-MainLevelPlayerCamera = ExtResource("2_wl5y4")
+mainLevel = ExtResource("2_wl5y4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(241, 128)

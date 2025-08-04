@@ -1,6 +1,6 @@
 extends Control
 
-@export var MainLevelPlayerCamera: PackedScene
+@export var mainLevel: PackedScene
 
 func _ready():
 	$AnimatedSprite2D.play()
@@ -22,7 +22,7 @@ func _on_play_button_2_pressed():
 	pass # Replace with function body.
 
 func launch_level():
-	GlobalTransition.change_scene_to_packed(MainLevelPlayerCamera)
+	GlobalTransition.change_scene_to_packed(mainLevel)
 
 
 func _on_level_difficulty_item_selected(index: int) -> void:

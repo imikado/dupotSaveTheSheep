@@ -7,7 +7,7 @@ class_name Room3 extends RoomAbstract
 
 var enabled = false
 
-const SCENE: PackedScene = preload("res://src/Levels/rooms/room_3.tscn")
+const SCENE: PackedScene = preload("res://src/Levels/Level1/rooms/room_3.tscn")
 
 static func create() -> Room3:
 	var room = SCENE.instantiate()

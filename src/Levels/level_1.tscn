@@ -1,18 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddb64nkhhqu10"]
+[gd_scene load_steps=7 format=3 uid="uid://ddb64nkhhqu10"]
 
-[ext_resource type="Script" uid="uid://cebojn86fvrxg" path="res://src/Levels/main_level_2_camera.gd" id="1_g5188"]
+[ext_resource type="Script" uid="uid://cebojn86fvrxg" path="res://src/Levels/level_1.gd" id="1_dueoc"]
 [ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_shrth"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="3_551fq"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="4_6nqc5"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="5_ywn7s"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="6_egxy8"]
-[ext_resource type="PackedScene" uid="uid://d3x04dxvstr1p" path="res://src/Levels/end_level.tscn" id="8_m4jd6"]
-[ext_resource type="PackedScene" uid="uid://tum3fvl70kwc" path="res://src/UI/Screens/game_over.tscn" id="9_kutct"]
 
-[node name="MainLevel2Camera" type="Node2D"]
-script = ExtResource("1_g5188")
-NextLevel = ExtResource("8_m4jd6")
-gameOverScene = ExtResource("9_kutct")
+[node name="Level_1" type="Node2D"]
+script = ExtResource("1_dueoc")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0

@@ -5,7 +5,7 @@ class_name Room1 extends RoomAbstract
 
 @onready var _decor: Node2D = $decor
 
-const SCENE: PackedScene = preload("res://src/Levels/rooms/room_1.tscn")
+const SCENE: PackedScene = preload("res://src/Levels/Level1/rooms/room_1.tscn")
 
 static func create() -> Room1:
 	var room = SCENE.instantiate()

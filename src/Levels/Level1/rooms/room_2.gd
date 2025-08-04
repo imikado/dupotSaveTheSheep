@@ -18,7 +18,7 @@ var started = false
 
 var enabled = false
 
-const SCENE: PackedScene = preload("res://src/Levels/rooms/room_2.tscn")
+const SCENE: PackedScene = preload("res://src/Levels/Level1/rooms/room_2.tscn")
 
 static func create() -> Room2:
 	var room = SCENE.instantiate()

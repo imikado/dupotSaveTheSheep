@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7gf31soavv60"]
 
-[ext_resource type="PackedScene" uid="uid://r02wmfgg7m5p" path="res://src/Levels/rooms/room_end.tscn" id="1_3u1eo"]
+[ext_resource type="PackedScene" uid="uid://r02wmfgg7m5p" path="res://src/Levels/Level1/rooms/room_end.tscn" id="1_3u1eo"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="2_g1fp7"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="3_8yxh2"]
 
