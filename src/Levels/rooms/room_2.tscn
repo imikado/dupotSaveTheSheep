@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://cbqhrx2k2x53o"]
+[gd_scene load_steps=8 format=4 uid="uid://cbqhrx2k2x53o"]
 
 [ext_resource type="Script" uid="uid://bmb16rlydp28a" path="res://src/Levels/rooms/room_2.gd" id="1_jgm7b"]
-[ext_resource type="PackedScene" uid="uid://c4rt0pnhv86kl" path="res://src/Actors/Enemies/TRex.tscn" id="2_2ormh"]
 [ext_resource type="TileSet" uid="uid://5gomx1uvq0tm" path="res://src/Levels/rooms/shared/buildingTileSet.tres" id="2_d27jb"]
 [ext_resource type="PackedScene" uid="uid://c87l4h2e277ou" path="res://src/Levels/Shared/Gate.tscn" id="3_78nxm"]
 [ext_resource type="TileSet" uid="uid://cp1nkfymf0wa5" path="res://src/Levels/rooms/shared/groundTileSet.tres" id="3_tk8ub"]
@@ -11,7 +10,6 @@
 
 [node name="Room2" type="Node2D"]
 script = ExtResource("1_jgm7b")
-TRex = ExtResource("2_2ormh")
 
 [node name="decor" type="Node2D" parent="."]
 

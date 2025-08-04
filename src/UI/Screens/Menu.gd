@@ -6,6 +6,8 @@ func _ready():
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D2.play()
 
+	GlobalGame.loadDifficulty(GlobalGame.LEVEL_DIFFICULTY.NORMAL)
+
 func _on_play_button_pressed():
 	GlobalGame.resetGame()
 	GlobalGame._is_debug = false

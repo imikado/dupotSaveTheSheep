@@ -618,7 +618,7 @@ shape = SubResource("CapsuleShape2D_moofm")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../StateMachine")
 libraries = {
-"": SubResource("AnimationLibrary_7rw1v")
+&"": SubResource("AnimationLibrary_7rw1v")
 }
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "actor")]
