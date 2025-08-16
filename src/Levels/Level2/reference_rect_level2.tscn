@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bvsbu2ssrim0a"]
+
+[node name="ReferenceRectLevel2" type="ReferenceRect"]
+offset_right = 384.0
+offset_bottom = 768.0
