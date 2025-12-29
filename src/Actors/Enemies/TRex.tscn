@@ -332,7 +332,7 @@ hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_73yow")
+&"": SubResource("AnimationLibrary_73yow")
 }
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "actor")]

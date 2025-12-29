@@ -1,0 +1,216 @@
+[gd_scene load_steps=18 format=3 uid="uid://bw507hfhfjon2"]
+
+[ext_resource type="Script" uid="uid://djohfcnd1nf5v" path="res://src/Actors/Enemies/Spider.gd" id="1_pa4ls"]
+[ext_resource type="PackedScene" uid="uid://cvyru30slgcj5" path="res://src/Actors/Enemies/Spider/spiderBall.tscn" id="2_l71e8"]
+[ext_resource type="Texture2D" uid="uid://bfnity8ayy1oa" path="res://src/Actors/Enemies/Spider/spider-idle.png" id="3_1exr0"]
+[ext_resource type="Texture2D" uid="uid://csm4nie0d3pl3" path="res://src/Actors/Enemies/Spider/spider-damaged.png" id="3_243si"]
+[ext_resource type="Script" uid="uid://bpqqvcrfhqbci" path="res://src/Actors/Enemies/CanonRexStateMachine.gd" id="7_ddylk"]
+[ext_resource type="Script" uid="uid://dueijr0pig5un" path="res://src/Actors/Enemies/CanonRex/StateIdle.gd" id="8_c88bg"]
+[ext_resource type="Script" uid="uid://b3502px231ph" path="res://src/Actors/Enemies/CanonRex/StateShooting.gd" id="9_c6gja"]
+[ext_resource type="Script" uid="uid://bho3jayp0iwxq" path="res://src/Actors/Enemies/CanonRex/StateDamaged.gd" id="10_u3ra2"]
+[ext_resource type="Texture2D" uid="uid://cek24inuovigj" path="res://src/Actors/Enemies/Spider/spider-wire.png" id="11_6agw8"]
+[ext_resource type="Script" uid="uid://dcyov5jmgc4h3" path="res://src/Actors/Enemies/CanonRex/StateDie.gd" id="11_62p77"]
+[ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="12_1rj31"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k6pno"]
+
+[sub_resource type="Animation" id="Animation_717ph"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_1exr0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6666667, 0.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_q6bhu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_ul871"]
+resource_name = "Shooting"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_1exr0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_6agw8"]
+resource_name = "Damaged"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_243si")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.1, 0.16666667, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fqwky"]
+_data = {
+&"Damaged": SubResource("Animation_6agw8"),
+&"Idle": SubResource("Animation_717ph"),
+&"RESET": SubResource("Animation_q6bhu"),
+&"Shooting": SubResource("Animation_ul871")
+}
+
+[node name="Spider" type="CharacterBody2D"]
+z_index = 14
+z_as_relative = false
+script = ExtResource("1_pa4ls")
+FireBall = ExtResource("2_l71e8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_243si")
+hframes = 3
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_k6pno")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+&"": SubResource("AnimationLibrary_fqwky")
+}
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("animationPlayer", "actor")]
+script = ExtResource("7_ddylk")
+animationPlayer = NodePath("../AnimationPlayer")
+actor = NodePath("..")
+
+[node name="StateIdle" type="Node" parent="StateMachine"]
+script = ExtResource("8_c88bg")
+animation_name = "Idle"
+
+[node name="StateShooting" type="Node" parent="StateMachine"]
+script = ExtResource("9_c6gja")
+animation_name = "Shooting"
+
+[node name="StateDamaged" type="Node" parent="StateMachine"]
+script = ExtResource("10_u3ra2")
+animation_name = "Damaged"
+
+[node name="StateDie" type="Node" parent="StateMachine"]
+script = ExtResource("11_62p77")
+animation_name = "Die"
+
+[node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("12_1rj31")]
+visible = false
+state_machine = NodePath("../StateMachine")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="SpiderWire" type="Sprite2D" parent="."]
+position = Vector2(-2.5, -180)
+texture = ExtResource("11_6agw8")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

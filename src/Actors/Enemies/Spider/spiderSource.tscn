@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://b47w35w0bkjta"]
+
+[ext_resource type="Script" uid="uid://c3weh7xjxhbb3" path="res://src/Actors/Enemies/Spider/spider_source.gd" id="1_x5j2l"]
+[ext_resource type="Texture2D" uid="uid://csd4bo7m3vggt" path="res://src/Actors/Enemies/CanonRex/fireball.png" id="2_n2c7k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r3yf"]
+atlas = ExtResource("2_n2c7k")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lukly"]
+atlas = ExtResource("2_n2c7k")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on4m7"]
+atlas = ExtResource("2_n2c7k")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw7ls"]
+atlas = ExtResource("2_n2c7k")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwwge"]
+atlas = ExtResource("2_n2c7k")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tin4k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r3yf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lukly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on4m7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw7ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwwge")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w3eve"]
+size = Vector2(31, 11)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2bmx"]
+radius = 7.071068
+
+[node name="Fireball" type="RigidBody2D"]
+z_index = 12
+z_as_relative = false
+script = ExtResource("1_x5j2l")
+
+[node name="animations" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="animations"]
+sprite_frames = SubResource("SpriteFrames_tin4k")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="animations"]
+position = Vector2(11, 0)
+sprite_frames = SubResource("SpriteFrames_tin4k")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="animations"]
+position = Vector2(22, 0)
+sprite_frames = SubResource("SpriteFrames_tin4k")
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="animations"]
+position = Vector2(33, 0)
+sprite_frames = SubResource("SpriteFrames_tin4k")
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="animations"]
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_tin4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11.5, 2.5)
+shape = SubResource("RectangleShape2D_w3eve")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(31, 0)
+shape = SubResource("CircleShape2D_e2bmx")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

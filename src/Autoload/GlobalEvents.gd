@@ -39,5 +39,8 @@ signal end_level
 
 signal sheep_is_visible(value)
 
+signal enemy_spider_health_changed(new_value)
+
+
 signal motorbike_hit_obstacle
 signal bonus_animation_gameover

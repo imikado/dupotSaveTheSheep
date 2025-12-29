@@ -183,28 +183,24 @@ script = ExtResource("1_swc05")
 
 [node name="Elevator" type="Sprite2D" parent="."]
 position = Vector2(18, -32)
-scale = Vector2(1, 1)
 texture = ExtResource("2_rttuy")
 region_enabled = true
 region_rect = Rect2(28, 0, 36, 64)
 
 [node name="Elevator" type="Sprite2D" parent="Elevator"]
 position = Vector2(0, 45)
-scale = Vector2(1, 1)
 texture = ExtResource("2_rttuy")
 region_enabled = true
 region_rect = Rect2(28, 38, 36, 26)
 
 [node name="Elevator2" type="Sprite2D" parent="Elevator"]
 position = Vector2(0, 71)
-scale = Vector2(1, 1)
 texture = ExtResource("2_rttuy")
 region_enabled = true
 region_rect = Rect2(28, 38, 36, 26)
 
 [node name="Elevator3" type="Sprite2D" parent="Elevator"]
 position = Vector2(0, 83)
-scale = Vector2(1, 1)
 texture = ExtResource("2_rttuy")
 region_enabled = true
 region_rect = Rect2(28, 38, 36, 26)

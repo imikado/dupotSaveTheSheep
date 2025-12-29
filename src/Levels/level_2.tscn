@@ -26,7 +26,7 @@ z_as_relative = false
 position = Vector2(93, 99)
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/Player"]
-position = Vector2(1, 51)
+position = Vector2(1, 21)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer/SubViewport/Player/Camera2D"]
 
@@ -78,5 +78,7 @@ color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
 [node name="Controls" parent="." instance=ExtResource("2_7gvb4")]
 
-[node name="HUD" parent="." instance=ExtResource("1_kmvu2")]
+[node name="HUD" parent="." node_paths=PackedStringArray("player", "sheep") instance=ExtResource("1_kmvu2")]
+player = NodePath("../SubViewportContainer/SubViewport/Player")
+sheep = NodePath("../SubViewportContainer2/SubViewport/Sheep")
 metadata/_edit_vertical_guides_ = [23.0, 8.0]

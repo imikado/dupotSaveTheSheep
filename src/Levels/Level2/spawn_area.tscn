@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://berosfvvwbux1"]
+
+[ext_resource type="Script" uid="uid://18eqfwch4gqd" path="res://src/Levels/Level2/spawn_area.gd" id="1_ceu6u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhwfq"]
+size = Vector2(82, 58)
+
+[node name="spawnArea" type="Node2D"]
+script = ExtResource("1_ceu6u")
+
+[node name="spawnArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spawnArea"]
+position = Vector2(31, 19)
+shape = SubResource("RectangleShape2D_uhwfq")
+
+[node name="spawnPosition" type="Marker2D" parent="spawnArea"]
+position = Vector2(246, 16)
+
+[node name="enemies" type="Node2D" parent="."]
+
+[connection signal="body_entered" from="spawnArea" to="." method="_on_spawn_area_body_entered"]

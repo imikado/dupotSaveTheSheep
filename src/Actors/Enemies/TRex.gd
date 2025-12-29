@@ -85,6 +85,16 @@ func _process(delta):
 
 	move_and_slide()
 
+func go_back():
+	set_new_state(TRexStateMachine.STATE_TURN)
+	if direction == -1:
+		position.x+=2
+		next_direction=1
+	else:
+		position.x-=2
+		next_direction=-1
+
+
 func damage():
 	if _alive:
 		life -=1

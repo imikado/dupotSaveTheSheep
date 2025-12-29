@@ -23,6 +23,8 @@ extends CanvasLayer
 @onready var _playerProgression: TextureRect = $LevelProgression/player
 @onready var _sheepProgression: TextureRect = $LevelProgression/sheep
 
+@onready var levelProgression = $LevelProgression
+
 
 var min_x = 0
 var max_x = 0
@@ -41,6 +43,9 @@ var _waterValue = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+	
+func disableProgression():
+	levelProgression.visible=false
 	
 func _process(delta: float):
 	if player != null:

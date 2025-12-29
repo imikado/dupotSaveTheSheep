@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bsgolewxjdxcu"]
+[gd_scene load_steps=12 format=4 uid="uid://bsgolewxjdxcu"]
 
 [ext_resource type="PackedScene" uid="uid://db6pg40451uu4" path="res://src/Levels/Level2/cells/come_down_45.tscn" id="1_lpkut"]
 [ext_resource type="Texture2D" uid="uid://ckbloaswrck6f" path="res://src/Levels/Level2/TileMap.png" id="1_qes3x"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c664m1l2y8w4v" path="res://src/Levels/Level2/cells/come_180_empty.tscn" id="3_c6pm5"]
 [ext_resource type="PackedScene" uid="uid://75vi0dalfiqh" path="res://src/Levels/Level2/cells/come_180_elevator.tscn" id="4_c6pm5"]
 [ext_resource type="PackedScene" uid="uid://beh6j4rc7a3d4" path="res://src/Levels/Level2/cells/come_up_left.tscn" id="6_qes3x"]
+[ext_resource type="PackedScene" uid="uid://berosfvvwbux1" path="res://src/Levels/Level2/spawn_area.tscn" id="7_2bdnh"]
+[ext_resource type="PackedScene" uid="uid://tqa2tcjeipuu" path="res://src/Levels/Level2/limit_enemy.tscn" id="8_2bdnh"]
+[ext_resource type="PackedScene" uid="uid://c2h7235ibjlyy" path="res://src/Levels/Level2/cells/come_boss.tscn" id="9_m1xn1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3fttp"]
 texture = ExtResource("1_qes3x")
@@ -72,3 +75,23 @@ position = Vector2(1918, 0)
 
 [node name="come180Empty2" parent="." instance=ExtResource("3_c6pm5")]
 position = Vector2(1534, 384)
+
+[node name="spawnEnemies" type="Node2D" parent="."]
+
+[node name="spawnArea" parent="spawnEnemies" instance=ExtResource("7_2bdnh")]
+position = Vector2(800, 528)
+
+[node name="spawnArea2" parent="spawnEnemies" instance=ExtResource("7_2bdnh")]
+position = Vector2(1600, 528)
+
+[node name="limitEnemy" parent="spawnEnemies" instance=ExtResource("8_2bdnh")]
+position = Vector2(752, 544)
+
+[node name="limitEnemy3" parent="spawnEnemies" instance=ExtResource("8_2bdnh")]
+position = Vector2(1480, 544)
+
+[node name="limitEnemy2" parent="spawnEnemies" instance=ExtResource("8_2bdnh")]
+position = Vector2(2182, 544)
+
+[node name="comeBoss" parent="." instance=ExtResource("9_m1xn1")]
+position = Vector2(1153, -384)

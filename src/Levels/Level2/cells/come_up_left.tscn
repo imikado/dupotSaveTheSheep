@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://beh6j4rc7a3d4"]
+[gd_scene load_steps=9 format=4 uid="uid://beh6j4rc7a3d4"]
 
 [ext_resource type="Texture2D" uid="uid://ckbloaswrck6f" path="res://src/Levels/Level2/TileMap.png" id="1_hnmw6"]
+[ext_resource type="Script" uid="uid://dpaqr251x1sin" path="res://src/Levels/Level2/cells/come_up_left.gd" id="1_ycl8c"]
 [ext_resource type="PackedScene" uid="uid://bvsbu2ssrim0a" path="res://src/Levels/Level2/reference_rect_level2.tscn" id="2_agls0"]
 [ext_resource type="PackedScene" uid="uid://bjmtpq00p3a8s" path="res://src/Levels/Level2/elevatorComeUp.tscn" id="3_yrmrf"]
+[ext_resource type="PackedScene" uid="uid://c2xvn2ee41rkw" path="res://src/Actors/Enemies/CanonRex.tscn" id="4_0vl7y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f17kh"]
 texture = ExtResource("1_hnmw6")
@@ -42,7 +44,10 @@ tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_f17kh")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfxqa"]
+
 [node name="comeUpLeft" type="Node2D"]
+script = ExtResource("1_ycl8c")
 
 [node name="tileMap" type="TileMapLayer" parent="."]
 use_parent_material = true
@@ -102,3 +107,15 @@ position = Vector2(0, -768)
 position = Vector2(223, 512)
 rotation = 3.14159
 scale = Vector2(1, -1)
+
+[node name="CanonRex" parent="." instance=ExtResource("4_0vl7y")]
+position = Vector2(24, -320)
+
+[node name="startEnemyShoot" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="startEnemyShoot"]
+position = Vector2(32, 559)
+shape = SubResource("RectangleShape2D_rfxqa")
+
+[connection signal="body_entered" from="startEnemyShoot" to="." method="_on_start_enemy_shoot_body_entered"]
+[connection signal="body_shape_entered" from="startEnemyShoot" to="." method="_on_start_enemy_shoot_body_shape_entered"]

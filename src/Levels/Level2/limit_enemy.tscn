@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://tqa2tcjeipuu"]
+
+[ext_resource type="Script" uid="uid://dnh1l1agg7li8" path="res://src/Levels/Level2/limit_enemy.gd" id="1_bxvjm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5m5r2"]
+size = Vector2(34, 42)
+
+[node name="limitEnemy" type="Area2D"]
+script = ExtResource("1_bxvjm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, 11)
+shape = SubResource("RectangleShape2D_5m5r2")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
