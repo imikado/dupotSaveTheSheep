@@ -67,6 +67,12 @@ func _process(delta):
 func turn():
 	direction=next_direction
 
+func stop():
+	set_new_state(SheepStateMachine.STATE_IDLE)
+	last_direction=direction
+	direction=0
+	velocity.x=0
+
 func be_carried():
 	set_new_state(SheepStateMachine.STATE_IDLE)
 	last_direction=direction

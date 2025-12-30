@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://c2h7235ibjlyy"]
+[gd_scene load_steps=16 format=4 uid="uid://c2h7235ibjlyy"]
 
 [ext_resource type="Texture2D" uid="uid://ckbloaswrck6f" path="res://src/Levels/Level2/TileMap.png" id="1_7wcvo"]
 [ext_resource type="Script" uid="uid://b3vkgi7osuiqh" path="res://src/Levels/Level2/cells/come_boss.gd" id="1_v7x2q"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b47w35w0bkjta" path="res://src/Actors/Enemies/Spider/spiderSource.tscn" id="5_qcq41"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="6_bhgqj"]
 [ext_resource type="Texture2D" uid="uid://b1qap3me66h8a" path="res://src/UI/Controls/Shared/icon-spider.png" id="7_q7o2f"]
+[ext_resource type="PackedScene" uid="uid://3coyyycx2ub3" path="res://src/Levels/Shared/key.tscn" id="8_w8nvi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s7jm8"]
 texture = ExtResource("1_7wcvo")
@@ -135,7 +136,7 @@ size = Vector2(80, 176)
 script = ExtResource("1_v7x2q")
 
 [node name="Spider" parent="." instance=ExtResource("3_h6gwk")]
-z_index = 12
+z_index = 1
 position = Vector2(-96, 64)
 
 [node name="lifeBar" type="Control" parent="Spider"]
@@ -203,6 +204,9 @@ position = Vector2(-110, 248)
 [node name="TimerHideLifeBar" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="key" parent="." instance=ExtResource("8_w8nvi")]
+position = Vector2(-52, 248)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="TimerHideLifeBar" to="." method="_on_timer_hide_life_bar_timeout"]

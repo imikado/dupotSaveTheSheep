@@ -6,6 +6,10 @@ extends Node2D
 @onready var lifeBar:ProgressBar= $Spider/lifeBar/lifeBar
 @onready var timerHide:Timer=$TimerHideLifeBar
 
+@onready var key:Area2D=$key
+
+const KEY_Y=200
+
 var enabled:bool=false
 
 var alive=true
@@ -14,6 +18,11 @@ func _ready() -> void:
 	GlobalEvents.enemy_spider_health_changed.connect(on_enemy_spider_health_changed)
 	GlobalEvents.enemy_spider_health_changed.emit(100)
 	hide_lifebar()
+	
+	#key.visible=false
+	key.position.y-=KEY_Y
+	
+	display_key()
 	
 
 func load_source():
@@ -34,9 +43,14 @@ func on_enemy_spider_health_changed(newValue:int):
 	lifeBar.value=newValue
 	if(newValue<=0):
 		alive=false
+		display_key()
+		return
 	display_lifebar()
-	
 
+func display_key():
+	#key.visible=true
+	key.position.y+=KEY_Y
+	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if(!alive):
 		return

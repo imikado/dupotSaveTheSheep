@@ -34,6 +34,8 @@ func _ready() -> void:
 	GlobalEvents.player_increase_life.connect(on_player_increase_life)
 
 	GlobalEvents.enemy_die.connect(on_enemy_die)
+	
+	GlobalEvents.get_key.connect(on_get_key)
 
 	
 	hud.set_score(GlobalPlayer.get_score())
@@ -43,7 +45,7 @@ func _ready() -> void:
 
 	player.position.x += 1600
 	player.position.y -= 400
-	#sheep.position = player.position + Vector2(-20, 0)
+	sheep.position = player.position + Vector2(-20, 0)
 
 	hud.disableProgression()
 
@@ -58,6 +60,8 @@ func _process(_delta: float) -> void:
 		$SubViewportContainer2.visible = false
 		$ColorRect.visible = false
 
+func on_get_key():
+	hud.enable_key()
 
 func on_enemy_die(enemy):
 	GlobalPlayer.increase_score(enemy.get_points())

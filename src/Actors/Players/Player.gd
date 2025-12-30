@@ -33,6 +33,7 @@ signal action_finished
 
 @onready var Bullet = load("res://src/Actors/Players/Bullet.tscn")
 
+var _hasKey:bool= false
 
 func _process(delta):
 
@@ -68,7 +69,13 @@ func _process(delta):
 
 
 	process_move()
-	
+
+func get_key():
+	_hasKey=true
+
+func has_key():
+	return _hasKey
+
 func process_jump(_delta):
 	velocity.y = JUMP_VELOCITY
 

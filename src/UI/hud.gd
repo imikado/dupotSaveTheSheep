@@ -25,6 +25,7 @@ extends CanvasLayer
 
 @onready var levelProgression = $LevelProgression
 
+@onready var key= $Items/keyIcon
 
 var min_x = 0
 var max_x = 0
@@ -42,6 +43,7 @@ var _waterValue = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	key.visible=false
 	pass # Replace with function body.
 	
 func disableProgression():
@@ -105,3 +107,6 @@ func set_sheep_life(value):
 	tween2.chain().tween_property(_sheepProgression, "modulate", Color.WHITE, 0.3)
 
 	_sheepLifeValue = value
+
+func enable_key():
+	key.visible=true
