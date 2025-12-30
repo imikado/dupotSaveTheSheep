@@ -14,6 +14,8 @@ class_name Spider
 const INPULSE_BOTTOM=-25
 const INPULSE_RIGHT=70
 
+const LIFE_DAMAGED=50
+
 var life =100
 
 var current_state_name=""
@@ -35,7 +37,7 @@ func shoot():
 
 func damage():
 	if _alive:
-		life -=5
+		life -=LIFE_DAMAGED
 		GlobalEvents.enemy_spider_health_changed.emit(life)
 		if life <=0:
 			die()

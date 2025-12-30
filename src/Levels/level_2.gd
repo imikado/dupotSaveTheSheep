@@ -33,6 +33,8 @@ func _ready() -> void:
 
 	GlobalEvents.player_increase_life.connect(on_player_increase_life)
 
+	GlobalEvents.enemy_die.connect(on_enemy_die)
+
 	
 	hud.set_score(GlobalPlayer.get_score())
 	hud.set_water(GlobalPlayer.get_water())

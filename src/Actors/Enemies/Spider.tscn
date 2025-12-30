@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://bw507hfhfjon2"]
+[gd_scene load_steps=20 format=3 uid="uid://bw507hfhfjon2"]
 
 [ext_resource type="Script" uid="uid://djohfcnd1nf5v" path="res://src/Actors/Enemies/Spider.gd" id="1_pa4ls"]
 [ext_resource type="PackedScene" uid="uid://cvyru30slgcj5" path="res://src/Actors/Enemies/Spider/spiderBall.tscn" id="2_l71e8"]
 [ext_resource type="Texture2D" uid="uid://bfnity8ayy1oa" path="res://src/Actors/Enemies/Spider/spider-idle.png" id="3_1exr0"]
 [ext_resource type="Texture2D" uid="uid://csm4nie0d3pl3" path="res://src/Actors/Enemies/Spider/spider-damaged.png" id="3_243si"]
+[ext_resource type="Texture2D" uid="uid://daxhyatvvlhvw" path="res://src/Actors/Enemies/Spider/spider-die.png" id="3_q6bhu"]
 [ext_resource type="Script" uid="uid://bpqqvcrfhqbci" path="res://src/Actors/Enemies/CanonRexStateMachine.gd" id="7_ddylk"]
 [ext_resource type="Script" uid="uid://dueijr0pig5un" path="res://src/Actors/Enemies/CanonRex/StateIdle.gd" id="8_c88bg"]
 [ext_resource type="Script" uid="uid://b3502px231ph" path="res://src/Actors/Enemies/CanonRex/StateShooting.gd" id="9_c6gja"]
@@ -13,6 +14,46 @@
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="12_1rj31"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k6pno"]
+
+[sub_resource type="Animation" id="Animation_6agw8"]
+resource_name = "Damaged"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_243si")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.1, 0.16666667, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 0]
+}
 
 [sub_resource type="Animation" id="Animation_717ph"]
 resource_name = "Idle"
@@ -108,9 +149,9 @@ tracks/2/keys = {
 "values": [2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_6agw8"]
-resource_name = "Damaged"
-length = 0.3
+[sub_resource type="Animation" id="Animation_bgxa4"]
+resource_name = "Die"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -121,7 +162,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_243si")]
+"values": [ExtResource("3_q6bhu")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -133,7 +174,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3]
+"values": [7]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -142,15 +183,16 @@ tracks/2/path = NodePath(".:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.1, 0.16666667, 0.23333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.26666668, 0.33333334, 0.4, 0.46666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 0, 1, 0]
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fqwky"]
 _data = {
 &"Damaged": SubResource("Animation_6agw8"),
+&"Die": SubResource("Animation_bgxa4"),
 &"Idle": SubResource("Animation_717ph"),
 &"RESET": SubResource("Animation_q6bhu"),
 &"Shooting": SubResource("Animation_ul871")
@@ -161,10 +203,11 @@ z_index = 14
 z_as_relative = false
 script = ExtResource("1_pa4ls")
 FireBall = ExtResource("2_l71e8")
+points = 50
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_243si")
-hframes = 3
+texture = ExtResource("3_q6bhu")
+hframes = 7
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
