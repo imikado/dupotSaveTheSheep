@@ -14,9 +14,13 @@ const JUMP_VELOCITY = -400.0
 @onready var SheepFromLeftPath:Path2D=$SheepAnimation/Path2D
 @onready var SheepOnBike:Sprite2D=$sheepOnBike
 
+@onready var sheepPanelAnim:AnimationPlayer=$panel_sheep/AnimationPlayer
+@onready var sheepPanel:Sprite2D=$panel_sheep/panel
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var _has_sheep=false
 
 func _ready():
 	_playerAnimationPlayer.play("Idle")
@@ -24,6 +28,8 @@ func _ready():
 	SheepFromLeftPath.visible=false
 	PlayerOnBike.visible=false
 	SheepOnBike.visible=false
+	
+	hide_sheep_panel()
 
 func _process(delta):
 	# Add the gravity.
@@ -37,9 +43,15 @@ func _process(delta):
 
 
 func _on_area_2d_body_entered(body):
-	if body is Player or body is Sheep:
+	if body is Sheep:
 		body.set_pending_vehicle(self)
-
+		_has_sheep=true
+	
+	if body is Player:
+		if _has_sheep:
+			body.set_pending_vehicle(self)
+		else:
+			display_sheep_panel()
 
 func _on_area_2d_body_exited(body):
 	if body is Player or body is Sheep:
@@ -65,3 +77,11 @@ func sheep_go_from_left():
 func finish_install_sheep():
 	SheepFromLeftPath.visible=false
 	SheepOnBike.visible=true
+	
+func hide_sheep_panel():
+	sheepPanel.visible=false
+	
+func display_sheep_panel():
+	sheepPanel.visible=true
+	sheepPanelAnim.play("display")
+	

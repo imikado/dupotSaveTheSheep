@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0ul2pw20maw5"]
+[gd_scene load_steps=23 format=3 uid="uid://0ul2pw20maw5"]
 
 [ext_resource type="Script" uid="uid://dtmac8ob0ww0m" path="res://src/Actors/Vehicles/motor_bike.gd" id="1_7raf7"]
 [ext_resource type="Texture2D" uid="uid://ujla1yog2dyi" path="res://src/Actors/Vehicles/motobike-alone.png" id="2_rh4on"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="6_ikv5x"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="7_pm5i5"]
 [ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="9_xlbk5"]
+[ext_resource type="Texture2D" uid="uid://d31q6xg5t6k4e" path="res://src/Levels/Level2/panel_sheep.png" id="10_igqgw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogoa"]
 radius = 4.0
@@ -235,6 +236,56 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Animation" id="Animation_spv01"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -40)]
+}
+
+[sub_resource type="Animation" id="Animation_igqgw"]
+resource_name = "display"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0679717, 0.12412223, 0.5260418, 0.9944555),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -40), Vector2(0, -29), Vector2(0, -39), Vector2(0, -39), Vector2(0, -87)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide_sheep_panel"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c3rv8"]
+_data = {
+&"RESET": SubResource("Animation_spv01"),
+&"display": SubResource("Animation_igqgw")
+}
+
 [node name="MotorBike" type="CharacterBody2D" node_paths=PackedStringArray("_camera", "_playerAnimationPlayer", "_sheepAnimationPlayer")]
 script = ExtResource("1_7raf7")
 _camera = NodePath("Camera2D")
@@ -286,7 +337,7 @@ visible = false
 curve = SubResource("Curve2D_y1rdq")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="PlayerAnimation/FromLeftPath2D"]
-position = Vector2(-43.9684, -75.9473)
+position = Vector2(-43.96841, -75.94733)
 rotation = 1.34941
 progress = 48.3512
 rotates = false
@@ -308,7 +359,7 @@ libraries = {
 curve = SubResource("Curve2D_adfig")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="SheepAnimation/Path2D"]
-position = Vector2(-20, -47)
+position = Vector2(-20.000002, -47.000008)
 rotation = -0.624023
 progress = 171.339
 rotates = false
@@ -351,6 +402,17 @@ motion_scale = Vector2(0.3, 0.3)
 position = Vector2(-266, -172)
 texture = ExtResource("9_xlbk5")
 centered = false
+
+[node name="panel_sheep" type="Node2D" parent="."]
+
+[node name="panel" type="Sprite2D" parent="panel_sheep"]
+position = Vector2(0, -40)
+texture = ExtResource("10_igqgw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="panel_sheep"]
+libraries = {
+&"": SubResource("AnimationLibrary_c3rv8")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

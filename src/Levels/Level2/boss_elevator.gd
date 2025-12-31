@@ -44,7 +44,7 @@ func hide_sheep_panel():
 	
 func display_sheep_panel():
 	sheepPanel.visible=true
-	sheepPanelAnim.play("display_sheep")
+	sheepPanelAnim.play("display")
 
 func check_elevator():
 	if _pendingSheep != null:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://cd5514wt0rdxf"]
+[gd_scene load_steps=18 format=3 uid="uid://cd5514wt0rdxf"]
 
 [ext_resource type="Script" uid="uid://u5s8goxqdyoo" path="res://src/UI/Screens/Menu.gd" id="1_81gvo"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_bkv4m"]
 [ext_resource type="PackedScene" uid="uid://ddb64nkhhqu10" path="res://src/Levels/level_1.tscn" id="2_wl5y4"]
+[ext_resource type="Texture2D" uid="uid://qod1olovotcd" path="res://src/UI/Screens/title.png" id="3_rrifp"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="4_nm624"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="5_lkhqs"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="6_j0ooc"]
@@ -89,19 +90,24 @@ grow_vertical = 2
 script = ExtResource("1_81gvo")
 mainLevel = ExtResource("2_wl5y4")
 
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(238, 135)
+texture = ExtResource("3_rrifp")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(241, 128)
 skew = -0.760964
 
 [node name="PlayButton" parent="." instance=ExtResource("1_bkv4m")]
 layout_mode = 0
-offset_left = 319.0
-offset_top = 40.0
-offset_right = 447.0
-offset_bottom = 72.0
+offset_left = 315.0
+offset_top = 17.0
+offset_right = 443.0
+offset_bottom = 49.0
 _export_label = "play"
 
 [node name="PlayButton2" parent="." instance=ExtResource("1_bkv4m")]
+visible = false
 layout_mode = 0
 offset_left = 319.0
 offset_top = 77.0
@@ -110,32 +116,34 @@ offset_bottom = 109.0
 _export_label = "bonus"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(93, 101)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_mcrfk")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(362, 108)
+visible = false
+position = Vector2(348.00003, -12.999996)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_0hhe7")
 flip_h = true
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 214.0
-offset_top = 7.0
-offset_right = 438.0
-offset_bottom = 30.0
+offset_left = 112.0
+offset_top = 263.0
+offset_right = 336.0
+offset_bottom = 286.0
 theme = ExtResource("6_j0ooc")
 text = "USE CURSOR AND KEYS  A,Z,E"
 horizontal_alignment = 2
 
 [node name="levelDifficulty" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 318.0
-offset_top = 154.0
-offset_right = 474.0
-offset_bottom = 185.0
+offset_left = 305.0
+offset_top = 60.0
+offset_right = 461.0
+offset_bottom = 91.0
 theme = ExtResource("6_j0ooc")
 selected = 1
 item_count = 2

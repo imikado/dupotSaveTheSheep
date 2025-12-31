@@ -51,8 +51,8 @@ func _ready() -> void:
 	hud.set_player_life(GlobalPlayer.get_life())
 	hud.set_sheep_life(GlobalSheep.get_life())
 
-	player.position.x += 1600
-	player.position.y -= 400
+	#player.position.x += 1600
+	#player.position.y -= 400
 	#sheep.position = player.position + Vector2(-20, 0)
 
 	hud.disableProgression()

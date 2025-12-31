@@ -15,7 +15,7 @@ class_name Spider
 const INPULSE_BOTTOM=-25
 const INPULSE_RIGHT=70
 
-const LIFE_DAMAGED=50
+const LIFE_DAMAGED=10
 
 var life =100
 
