@@ -1,5 +1,9 @@
 extends Node2D
 
+@export var NextLevel: PackedScene
+@export var gameOverScene: PackedScene
+
+
 @onready var hud = $HUD
 
 @onready var player: Player = $SubViewportContainer/SubViewport/Player
@@ -9,7 +13,6 @@ extends Node2D
 @onready var subViewPortSheep = $SubViewportContainer2/SubViewport
 
 
-@export var gameOverScene: PackedScene
 
 var gameover = false
 
@@ -32,11 +35,16 @@ func _ready() -> void:
 	GlobalEvents.sheep_take_damage.connect(on_sheep_take_damage)
 
 	GlobalEvents.player_increase_life.connect(on_player_increase_life)
+	
+	GlobalEvents.player_take_water_bottle.connect(on_player_take_water_bottle)
+
+	GlobalEvents.player_water_changed.connect(on_player_water_changed)
 
 	GlobalEvents.enemy_die.connect(on_enemy_die)
 	
 	GlobalEvents.get_key.connect(on_get_key)
 
+	GlobalEvents.end_level.connect(on_end_level)
 	
 	hud.set_score(GlobalPlayer.get_score())
 	hud.set_water(GlobalPlayer.get_water())
@@ -45,7 +53,7 @@ func _ready() -> void:
 
 	player.position.x += 1600
 	player.position.y -= 400
-	sheep.position = player.position + Vector2(-20, 0)
+	#sheep.position = player.position + Vector2(-20, 0)
 
 	hud.disableProgression()
 
@@ -113,4 +121,4 @@ func on_end_level():
 	var screenshotTexture = ImageTexture.create_from_image(screenshotImage)
 
 	GlobalGame.set_last_screenshot(screenshotTexture)
-	#GlobalTransition.change_scene_to_packed(NextLevel)
+	GlobalTransition.change_scene_to_packed(NextLevel)

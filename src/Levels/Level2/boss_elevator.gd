@@ -67,7 +67,8 @@ func _on_gate_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body is Player:
 		if _hasSheep:
-			body.queue_free()
+			body.set_process(false)
+			GlobalEvents.end_level.emit()
 			print('END')
 		else:
 			display_sheep_panel()

@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var NextLevel: PackedScene
+@export var gameOverScene: PackedScene
 
 @onready var hud = $HUD
 
@@ -12,7 +13,6 @@ extends Node2D
 @onready var subviewPortMain = $SubViewportContainer/SubViewport
 @onready var subViewPortSheep = $SubViewportContainer2/SubViewport
 
-@export var gameOverScene: PackedScene
 
 
 var score: int = 0
@@ -71,11 +71,11 @@ func _ready():
 	
 	GlobalEvents.player_gameover.connect(on_player_gameover)
 	
-	GlobalEvents.connect("enemy_die", on_enemy_die)
+	GlobalEvents.enemy_die.connect(on_enemy_die)
 
-	GlobalEvents.connect("player_take_water_bottle", on_player_take_water_bottle)
+	GlobalEvents.player_take_water_bottle.connect(on_player_take_water_bottle)
 
-	GlobalEvents.connect("player_water_changed", on_player_water_changed)
+	GlobalEvents.player_water_changed.connect(on_player_water_changed)
 
 	GlobalEvents.player_take_damage.connect(on_player_take_damage)
 

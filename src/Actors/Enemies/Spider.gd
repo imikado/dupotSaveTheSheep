@@ -1,20 +1,21 @@
 extends Enemy
 class_name Spider
 
+@export var FireBall:PackedScene
+@export var KeyItem:PackedScene
+
 @onready var _sprite=$Sprite2D
 
 @onready var _state_machine:CanonRexStateMachine = $StateMachine
 
-@export var FireBall:PackedScene
 
 @onready var spawnFireBall:Marker2D=$Marker2D
 @onready var shootTimer:Timer=$Timer
 
-
 const INPULSE_BOTTOM=-25
 const INPULSE_RIGHT=70
 
-const LIFE_DAMAGED=10
+const LIFE_DAMAGED=50
 
 var life =100
 
@@ -28,6 +29,10 @@ func die():
 	set_new_state(CanonRexStateMachine.STATE_DIE)
 		
 func finish_die():
+	var newKeyItem=KeyItem.instantiate()
+	get_parent().add_child(newKeyItem)
+	newKeyItem.global_position=global_position-Vector2(10,30)
+	
 	queue_free()
 	GlobalEvents.emit_signal("enemy_die",self)
 

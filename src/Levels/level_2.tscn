@@ -1,14 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://bshg2fnxc2fve"]
+[gd_scene load_steps=9 format=3 uid="uid://bshg2fnxc2fve"]
 
 [ext_resource type="Script" uid="uid://c3wbigkuhw8r3" path="res://src/Levels/level_2.gd" id="1_c0e88"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="1_kmvu2"]
 [ext_resource type="PackedScene" uid="uid://bsgolewxjdxcu" path="res://src/Levels/Level2/map_normal.tscn" id="2_1gqea"]
+[ext_resource type="PackedScene" uid="uid://bdhuu5btjtkvr" path="res://src/Levels/end_game.tscn" id="2_2sxkx"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="2_7gvb4"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="3_5au25"]
+[ext_resource type="PackedScene" uid="uid://tum3fvl70kwc" path="res://src/UI/Screens/game_over.tscn" id="3_u63wh"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="4_lgj03"]
 
 [node name="Level_2" type="Node2D"]
 script = ExtResource("1_c0e88")
+NextLevel = ExtResource("2_2sxkx")
+gameOverScene = ExtResource("3_u63wh")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 512.0
@@ -16,6 +20,8 @@ offset_bottom = 512.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
 render_target_update_mode = 4
 
 [node name="MapNormal" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_1gqea")]
@@ -54,6 +60,8 @@ offset_bottom = 716.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer2"]
 handle_input_locally = false
+snap_2d_transforms_to_pixel = true
+snap_2d_vertices_to_pixel = true
 size = Vector2i(120, 60)
 render_target_update_mode = 4
 

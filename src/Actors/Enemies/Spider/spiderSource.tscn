@@ -66,16 +66,20 @@ sprite_frames = SubResource("SpriteFrames_tin4k")
 position = Vector2(11, 0)
 sprite_frames = SubResource("SpriteFrames_tin4k")
 
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="animations"]
+position = Vector2(4, -7)
+sprite_frames = SubResource("SpriteFrames_tin4k")
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="animations"]
+position = Vector2(15, -7)
+sprite_frames = SubResource("SpriteFrames_tin4k")
+
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="animations"]
 position = Vector2(22, 0)
 sprite_frames = SubResource("SpriteFrames_tin4k")
 
 [node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="animations"]
 position = Vector2(33, 0)
-sprite_frames = SubResource("SpriteFrames_tin4k")
-
-[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="animations"]
-position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_tin4k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
