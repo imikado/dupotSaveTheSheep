@@ -13,7 +13,7 @@ enum LEVEL_DIFFICULTY {EASY, NORMAL}
 
 var _is_debug := true
 
-var _is_controls_enabled := true
+var _is_controls_enabled := false
 
 var _last_screenshot
 

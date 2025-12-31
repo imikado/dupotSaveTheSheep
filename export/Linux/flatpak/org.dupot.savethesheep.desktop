@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Save the Sheep
+Exec=savethesheep
+Type=Application
+Icon=org.dupot.savethesheep
+Categories=Game;ArcadeGame
+Keywords=game;arcade;action;
