@@ -22,15 +22,15 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_start.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_start.png</image>
       <caption>Level 01, start</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_trex.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_trex.png</image>
       <caption>Level 01, with enemy</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_elevator.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_elevator.png</image>
       <caption>Level 01, with elevator</caption>
     </screenshot>
  
