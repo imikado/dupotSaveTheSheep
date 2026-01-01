@@ -69,3 +69,5 @@ android/build/res/values-zh-rHK/godot_project_name_string.xml
 android/build/res/values-zh-rTW/godot_project_name_string.xml
 android/build/src/com/godot/game/GodotApp.java
 export/Linux/dupotSaveTheSheep.x86_64
+export/Linux/bundle/dupotSaveTheSheep.x86_64
+export/Linux/bundle.tar.gz
