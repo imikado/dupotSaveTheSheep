@@ -11,13 +11,13 @@
   <summary>Protect the sheep on each level</summary>
   <description>
     <p>
+       Gordon needs to protect the sheep so that he can go on to the end of each level
+    </p>
+    <p>
+      Use your water gun to kill enemies, the action handler to open the gate, and enable the elevator to help the sheep to pass
+    </p>
+    <p>
   This Game was made with Godot 4.5
-    </p>
-    <p>
-       Gordon need to protect the sheep to let him go on end of each levels
-    </p>
-    <p>
-      Use your water gun to kill enemies, action handler to open gate, enable elevator to help sheep to pass
     </p>
   </description>
   <screenshots>
@@ -36,6 +36,7 @@
  
   </screenshots>
   <url type="homepage">https://www.dupot.org/games.html</url>
+  <url type="bugtracker">https://github.com/imikado/dupotSaveTheSheep/issues</url>
   <url type="vcs-browser">https://github.com/imikado/dupotSaveTheSheep/</url>
   <update_contact>imikado@gmail.com</update_contact>
   <content_rating type="oars-1.1"/>
