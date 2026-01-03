@@ -27,8 +27,8 @@ const LEVEL_NORMAL_START_WATER = 20
 const LEVEL_EASY_COEF_WATER = 2
 const LEVEL_NORMAL_COEF_WATER = 1
 
-const LEVEL_EASY_PLAYER_START_LIFE = 200
-const LEVEL_NORMAL_PLAYER_START_LIFE = 100
+const LEVEL_EASY_PLAYER_START_LIFE = 100
+const LEVEL_NORMAL_PLAYER_START_LIFE = 90
 
 const LEVEL_EASY_SHEEP_START_LIFE = 50
 const LEVEL_NORMAL_SHEEP_START_LIFE = 20
@@ -39,6 +39,43 @@ var player_start_life = LEVEL_NORMAL_PLAYER_START_LIFE
 var sheep_start_life = LEVEL_NORMAL_SHEEP_START_LIFE
 
 var _level_difficulty = LEVEL_DIFFICULTY.EASY
+
+var levelPlayerLife=0
+var levelSheepLife=0
+var levelWaterValue=0
+var levelScore=0
+
+var currentLevel=0
+
+func saveLevel(newLevel):
+	currentLevel=newLevel
+	
+func getLevel():
+	return currentLevel
+
+func saveLevelPlayerLife(levelValue):
+	levelPlayerLife=levelValue
+
+func saveLevelSheepLife(levelValue):
+	levelSheepLife=levelValue
+
+func saveLevelWaterValue(levelValue):
+	levelWaterValue=levelValue
+
+func saveLevelScore(levelValue):
+	levelScore=levelValue
+
+func getLevelPlayerLife():
+	return levelPlayerLife
+	
+func getLevelSheepLife():
+	return levelSheepLife
+	
+func getLevelWaterValue():
+	return levelWaterValue
+	
+func getLevelScore():
+	return levelScore
 
 func isLevelDifficultyEasy():
 	return _level_difficulty == LEVEL_DIFFICULTY.EASY

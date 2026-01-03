@@ -61,6 +61,8 @@ func _ready():
 
 	GlobalEvents.motorbike_hit_obstacle.connect(motorbike_hit_obstacle)
 	
+	hud.disableProgression()
+	
 	hud.set_score(GlobalPlayer.get_score())
 	hud.set_water(GlobalPlayer.get_water())
 	hud.set_player_life(GlobalPlayer.get_life())

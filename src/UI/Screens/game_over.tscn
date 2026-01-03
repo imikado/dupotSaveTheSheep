@@ -22,6 +22,13 @@ offset_right = 313.0
 offset_bottom = 219.0
 _export_label = "menu"
 
+[node name="replayButton" parent="." instance=ExtResource("1_16ec8")]
+offset_left = 185.0
+offset_top = 223.0
+offset_right = 313.0
+offset_bottom = 257.0
+_export_label = "Replay"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -51,3 +58,4 @@ text = "0"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="LabelButton" to="." method="_on_label_button_pressed"]
+[connection signal="pressed" from="replayButton" to="." method="_on_replay_button_pressed"]

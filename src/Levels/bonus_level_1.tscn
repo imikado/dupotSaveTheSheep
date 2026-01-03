@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://fwrcpg1wdoyt"]
+[gd_scene load_steps=16 format=3 uid="uid://fwrcpg1wdoyt"]
 
 [ext_resource type="PackedScene" uid="uid://c1xgtixrulnpc" path="res://src/Levels/Shared/BonusBackground.tscn" id="1_7ly3b"]
 [ext_resource type="PackedScene" uid="uid://dmsis0enle4w2" path="res://src/Actors/Players/PlayerOnMotorBike.tscn" id="1_lv1jy"]
@@ -11,8 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://bshg2fnxc2fve" path="res://src/Levels/level_2.tscn" id="5_i8lm0"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="5_x24ru"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="8_ke4nq"]
+[ext_resource type="FontFile" uid="uid://clvttg6gbi4aq" path="res://src/UI/Controls/Shared/Pixeled.ttf" id="9_nv4ko"]
 [ext_resource type="PackedScene" uid="uid://1abyt4tsap5d" path="res://src/UI/hud_bonus.tscn" id="11_i8lm0"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="11_qxesv"]
+
+[sub_resource type="Theme" id="Theme_i8lm0"]
 
 [node name="BonusLevel1" type="Node" node_paths=PackedStringArray("_camera", "_player", "_ground")]
 script = ExtResource("1_u5dm6")
@@ -47,9 +50,13 @@ offset_bottom = -94.0
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 23.0
+offset_left = -8.0
+offset_right = -8.0
+offset_bottom = 46.0
 grow_horizontal = 2
-text = "Bonus level"
+theme = SubResource("Theme_i8lm0")
+theme_override_fonts/font = ExtResource("9_nv4ko")
+text = "Bonus Level"
 horizontal_alignment = 2
 
 [node name="timeLeftLabel" type="Label" parent="Camera2D/Control"]

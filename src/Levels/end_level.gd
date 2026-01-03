@@ -9,7 +9,6 @@ extends Control
 
 @onready var _totalScoreLabel:Label= $VBoxContainer2/totalScoreLabel
 
-@onready var _levelLabel:Label=$levelLabel
 
 var _nextLevel:String="res://src/Levels/bonus_level_1.tscn"
 

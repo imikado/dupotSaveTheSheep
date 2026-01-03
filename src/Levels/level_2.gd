@@ -25,7 +25,7 @@ func _ready() -> void:
 	var world = subviewPortMain.find_world_2d()
 	subViewPortSheep.world_2d = world
 
-	 
+	GlobalGame.saveLevel(2)
 
 	GlobalPlayer.set_actor(player)
 	
@@ -44,6 +44,11 @@ func _ready() -> void:
 	GlobalEvents.get_key.connect(on_get_key)
 
 	GlobalEvents.end_level.connect(on_end_level)
+	
+	GlobalGame.saveLevelPlayerLife(GlobalPlayer.get_life())
+	GlobalGame.saveLevelSheepLife(GlobalSheep.get_life())
+	GlobalGame.saveLevelWaterValue(GlobalPlayer.get_water())
+	GlobalGame.saveLevelScore(GlobalPlayer.get_score())
 	
 	hud.set_score(GlobalPlayer.get_score())
 	hud.set_water(GlobalPlayer.get_water())

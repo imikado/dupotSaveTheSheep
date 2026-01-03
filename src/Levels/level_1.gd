@@ -133,6 +133,9 @@ func _ready():
 	
 	hud.max_x = currentX + roomEnd.width
 
+	#player.global_position.x += 760
+	#sheep.global_position.x += 740
+
 	debug_hook(currentX)
 
 func on_sheep_change_visibility(value):

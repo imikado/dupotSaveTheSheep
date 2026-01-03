@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cod74mh86m8jt"]
+[gd_scene load_steps=6 format=3 uid="uid://cod74mh86m8jt"]
 
+[ext_resource type="Script" uid="uid://c2lf0wq0f8tti" path="res://src/Levels/Shared/elevator.gd" id="1_f40hs"]
 [ext_resource type="Texture2D" uid="uid://mt1rm8u1igv0" path="res://src/Levels/Shared/crane.png" id="1_xwijh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1s74"]
@@ -8,7 +9,10 @@ size = Vector2(33.5, 1.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hkxer"]
 size = Vector2(27, 2.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_872xr"]
+
 [node name="Elevator" type="Node2D"]
+script = ExtResource("1_f40hs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xwijh")
@@ -27,13 +31,21 @@ region_rect = Rect2(1, 22, 36, 36)
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(18, 34.75)
+position = Vector2(17, 35)
 shape = SubResource("RectangleShape2D_m1s74")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(-0.75, 20)
+position = Vector2(-1.75, 20)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_hkxer")
 one_way_collision = true
+
+[node name="sheepArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sheepArea"]
+position = Vector2(12, 24)
+shape = SubResource("RectangleShape2D_872xr")
+
+[connection signal="body_entered" from="sheepArea" to="." method="_on_sheep_area_body_entered"]
