@@ -4,7 +4,6 @@ extends Control
 @onready var _line:=$line
 @onready var _table:=$ScrollContainer/table
 
-@export var menuLevel: PackedScene
 
 
 var scoreListOff=[
@@ -82,7 +81,7 @@ func build(scoreList):
 		
 		var newLine=_line.duplicate()
 		newLine.get_node("date").text=scoreLoop.date;
-		newLine.get_node("score").text=str(scoreLoop.score);
+		newLine.get_node("score").text=str(int( scoreLoop.score));
 		newLine.visible=true
 		
 		_table.add_child(newLine)
@@ -93,6 +92,6 @@ func build(scoreList):
 	
 
 func _on_menu_button_pressed() -> void:
-	GlobalTransition.change_scene_to_packed(menuLevel)
+	get_tree().change_scene_to_file("res://src/UI/Screens/Menu.tscn")
 
 	pass # Replace with function body.

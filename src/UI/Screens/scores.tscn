@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ho2gxbustjcg"]
+[gd_scene load_steps=4 format=3 uid="uid://ho2gxbustjcg"]
 
 [ext_resource type="Script" uid="uid://r4glg42fbnsu" path="res://src/UI/Screens/scores.gd" id="1_lv778"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="1_rf2oh"]
-[ext_resource type="PackedScene" uid="uid://cd5514wt0rdxf" path="res://src/UI/Screens/Menu.tscn" id="2_k206g"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="2_lv778"]
 
 [node name="Scores" type="Control"]
@@ -13,7 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lv778")
-menuLevel = ExtResource("2_k206g")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1

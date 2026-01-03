@@ -101,19 +101,18 @@ skew = -0.760964
 [node name="PlayButton" parent="." instance=ExtResource("1_bkv4m")]
 layout_mode = 0
 offset_left = 315.0
-offset_top = 17.0
+offset_top = -4.0
 offset_right = 443.0
-offset_bottom = 49.0
+offset_bottom = 28.0
 _export_label = "play"
 
-[node name="PlayButton2" parent="." instance=ExtResource("1_bkv4m")]
-visible = false
+[node name="ScoreButton" parent="." instance=ExtResource("1_bkv4m")]
 layout_mode = 0
-offset_left = 319.0
-offset_top = 77.0
-offset_right = 447.0
-offset_bottom = 109.0
-_export_label = "bonus"
+offset_left = 315.0
+offset_top = 30.0
+offset_right = 443.0
+offset_bottom = 62.0
+_export_label = "Scores"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -141,9 +140,9 @@ horizontal_alignment = 2
 [node name="levelDifficulty" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 305.0
-offset_top = 60.0
+offset_top = 65.0
 offset_right = 461.0
-offset_bottom = 91.0
+offset_bottom = 96.0
 theme = ExtResource("6_j0ooc")
 selected = 1
 item_count = 2
@@ -153,5 +152,5 @@ popup/item_1/text = "normal"
 popup/item_1/id = 1
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="PlayButton2" to="." method="_on_play_button_2_pressed"]
+[connection signal="pressed" from="ScoreButton" to="." method="_on_score_button_pressed"]
 [connection signal="item_selected" from="levelDifficulty" to="." method="_on_level_difficulty_item_selected"]
