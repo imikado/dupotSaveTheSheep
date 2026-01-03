@@ -31,29 +31,35 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.576471)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = -11.5
-offset_right = 26.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = 169.0
+offset_top = 50.0
+offset_right = 310.0
+offset_bottom = 100.0
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="userScoreLabel" type="Label" parent="VBoxContainer2"]
 layout_mode = 2
 theme = ExtResource("2_181es")
-text = "Score: "
+text = "Level completed: +100"
 
-[node name="scoreLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="bonusUserScoreLabel" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_181es")
+text = "Level completed: +100"
+
+[node name="bonusSheepScoreLabel" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_181es")
+text = "Level completed: +100"
+
+[node name="bonusLevelScoreLabel" type="Label" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_181es")
+text = "Level completed: +100"
+
+[node name="totalScoreLabel" type="Label" parent="VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme = ExtResource("2_181es")

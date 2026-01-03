@@ -14,7 +14,6 @@ extends Node2D
 @onready var subViewPortSheep = $SubViewportContainer2/SubViewport
 
 
-
 var score: int = 0
 
 var roomNumber = -1
@@ -186,6 +185,7 @@ func _on_timer_timeout():
 
 
 func on_end_level():
+		
 	var screenshotImage = get_viewport().get_texture().get_image()
 	var screenshotTexture = ImageTexture.create_from_image(screenshotImage)
 

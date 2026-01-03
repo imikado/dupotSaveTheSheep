@@ -13,7 +13,6 @@ extends Node2D
 @onready var subViewPortSheep = $SubViewportContainer2/SubViewport
 
 
-
 var gameover = false
 
 
@@ -26,7 +25,7 @@ func _ready() -> void:
 	var world = subviewPortMain.find_world_2d()
 	subViewPortSheep.world_2d = world
 
-
+	 
 
 	GlobalPlayer.set_actor(player)
 	
@@ -53,7 +52,7 @@ func _ready() -> void:
 
 	#player.position.x += 1600
 	#player.position.y -= 400
-	#sheep.position = player.position + Vector2(-20, 0)
+	#sheep.position = player.position + Vector2(300, -50)
 
 	hud.disableProgression()
 
@@ -117,6 +116,8 @@ func _on_timer_timeout():
 
 
 func on_end_level():
+	GlobalPlayer.increase_score(100)
+
 	var screenshotImage = get_viewport().get_texture().get_image()
 	var screenshotTexture = ImageTexture.create_from_image(screenshotImage)
 

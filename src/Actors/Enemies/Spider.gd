@@ -22,6 +22,9 @@ var life =100
 var current_state_name=""
 var moveVector=Vector2(0,INPULSE_BOTTOM)
 
+func _ready() -> void:
+	if GlobalGame.isLevelDifficultyEasy():
+		life=50
 
 
 func die():
