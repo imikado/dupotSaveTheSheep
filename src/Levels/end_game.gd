@@ -12,6 +12,8 @@ var _scoreValue=0
 func _ready():
 	_backgroundTexture.texture=GlobalGame.get_last_screenshot()
 	set_score(GlobalPlayer.get_score())
+	
+	GlobalGame.saveHighScore(GlobalPlayer.get_score())
 
 
 func set_score(newScore:int):

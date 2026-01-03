@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://ho2gxbustjcg"]
+
+[ext_resource type="Script" uid="uid://r4glg42fbnsu" path="res://src/UI/Screens/scores.gd" id="1_lv778"]
+[ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="1_rf2oh"]
+[ext_resource type="PackedScene" uid="uid://cd5514wt0rdxf" path="res://src/UI/Screens/Menu.tscn" id="2_k206g"]
+[ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="2_lv778"]
+
+[node name="Scores" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lv778")
+menuLevel = ExtResource("2_k206g")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18359044, 0.18359044, 0.18359044, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 30.0
+grow_horizontal = 2
+color = Color(0.12225223, 0.12225223, 0.12225223, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme = ExtResource("1_rf2oh")
+text = "SCORES"
+horizontal_alignment = 1
+
+[node name="menuButton" parent="." instance=ExtResource("2_lv778")]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 5.0
+offset_right = 515.0
+offset_bottom = 37.0
+scale = Vector2(0.60000014, 0.60000014)
+_export_label = "menu"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 36.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="table" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="line" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 368.0
+offset_bottom = 40.0
+alignment = 2
+
+[node name="date" type="Label" parent="line"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme = ExtResource("1_rf2oh")
+text = "testaaaa"
+
+[node name="score" type="Label" parent="line"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_rf2oh")
+text = "testaaaa"
+horizontal_alignment = 2
+
+[connection signal="pressed" from="menuButton" to="." method="_on_menu_button_pressed"]

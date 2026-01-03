@@ -1,6 +1,7 @@
 extends Control
 
 @export var mainLevel: PackedScene
+@export var score: PackedScene
 
 func _ready():
 	$AnimatedSprite2D.play()
@@ -27,3 +28,9 @@ func launch_level():
 
 func _on_level_difficulty_item_selected(index: int) -> void:
 	GlobalGame.loadDifficulty(index)
+
+
+func _on_score_button_pressed() -> void:
+	GlobalTransition.change_scene_to_packed(score)
+
+	pass # Replace with function body.

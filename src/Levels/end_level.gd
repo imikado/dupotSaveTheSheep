@@ -18,6 +18,9 @@ func set_score(newScore:int):
 	var tween = create_tween()
 	tween.tween_method(set_score_text, _scoreValue,newScore, 1)
 	_scoreValue=newScore
+	
+	GlobalGame.saveHighScore(newScore)
+
 
 func set_score_text(scoreValue:int):
 	_scoreLabel.text=str(scoreValue)

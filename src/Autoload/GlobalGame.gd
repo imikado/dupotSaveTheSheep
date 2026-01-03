@@ -92,9 +92,11 @@ func is_debug():
 
 
 func saveHighScore(newScoreValue):
-	#var datetimeNow = OS.get_datetime()
-
-	var dateTimeString = ""
+	var dt := Time.get_datetime_dict_from_system()
+	var dateTimeString := "%04d-%02d-%02d %02d:%02d:%02d" % [
+		dt.year, dt.month, dt.day,
+		dt.hour, dt.minute, dt.second
+	]
 
 	var highScoreList = getHighScoreList()
 
@@ -105,8 +107,8 @@ func saveHighScore(newScoreValue):
 
 	highScoreList.append(newScoreObj)
 
-	#var jsonList = JSON.print(highScoreList)
-	#saveFile(PATH_HIGHSCORE, jsonList)
+	var jsonList = JSON.stringify(highScoreList)
+	saveFile(PATH_HIGHSCORE, jsonList)
 
 	pass
 
@@ -128,18 +130,31 @@ func isHighestScore(highScoreList, askScore):
 	return false
 
 
-func getHighScoreList():
+func getHighScoreList() -> Array:
+	if not FileAccess.file_exists(PATH_HIGHSCORE):
+		return []
+
+	var content := load_file(PATH_HIGHSCORE)
+
+	var parsed = JSON.parse_string(content)
+	if parsed is Array:
+		return parsed
+
 	return []
-	
 
-func saveFile(filepath, content):
-	print(filepath)
-	print(content)
-	pass
 
-func loadFile(filepath):
-	print(filepath)
-	pass
+func saveFile(filepath: String, content: String) -> void:
+	var file := FileAccess.open(filepath, FileAccess.WRITE)
+	if file == null:
+		return
+	file.store_string(content)
+
+
+func load_file(filepath: String) -> String:
+	var file := FileAccess.open(filepath, FileAccess.READ)
+	if file == null:
+		return ""
+	return file.get_as_text()
 	
 func set_last_screenshot(screenshot: Texture) -> void:
 	_last_screenshot = screenshot
