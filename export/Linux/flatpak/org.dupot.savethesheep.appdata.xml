@@ -33,7 +33,7 @@
       <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_elevator.png</image>
       <caption>Level 01, with elevator</caption>
     </screenshot>
- 
+
   </screenshots>
   <url type="homepage">https://www.dupot.org/games.html</url>
   <url type="bugtracker">https://github.com/imikado/dupotSaveTheSheep/issues</url>
@@ -41,6 +41,17 @@
   <update_contact>imikado@gmail.com</update_contact>
   <content_rating type="oars-1.1"/>
   <releases>
+
+
+    <release date="2026-09-06" version="1.8.0">
+      <description>
+        <ul>
+          <li>Regenerate with godot 4.7</li>
+        </ul>
+      </description>
+    </release>
+
+
 
     <release date="2026-01-04" version="1.1.1">
       <description>
@@ -51,6 +62,6 @@
     </release>
 
 
-    
+
   </releases>
 </component>

@@ -74,3 +74,9 @@ export/Linux/bundle.tar.gz
 export/Linux/bundle/*
 export/Linux/flatpak/icons/*.import
 export/Linux/*.pck
+export/Linux/*.x86_64
+export/Linux/snap/*.pck
+export/Linux/snap/*.x86_64
+export/Linux/snap/*.snap
+
+

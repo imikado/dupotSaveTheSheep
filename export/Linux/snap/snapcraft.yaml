@@ -1,0 +1,44 @@
+title: Save the sheep
+name: dupot-save-the-sheep
+base: core22
+version: "1.8.0"
+summary: Save the sheep
+description: |
+  Gordon needs to protect the sheep so that he can go on to the end of each level
+  Use your water gun to kill enemies, the action handler to open the gate, and enable the elevator to help the sheep to pass
+  This Game was made with Godot 4.7.2
+
+grade: stable
+confinement: strict
+contact: imikado@gmail.com
+license: LGPL-2.1-only
+issues: https://github.com/imikado/dupotSaveTheSheep/issues
+source-code: https://github.com/imikado/dupotSaveTheSheep/
+website: https://www.dupot.org/games.html
+
+apps:
+  dupot-save-the-sheep:
+    command: dupotSaveTheSheep.x86_64
+    extensions: [gnome]
+    plugs:
+      - opengl
+      - audio-playback
+      - x11
+      - wayland
+      - joystick
+
+parts:
+  game:
+    plugin: dump
+    source: .
+    organize:
+      dupotSaveTheSheep.x86_64: dupotSaveTheSheep.x86_64
+      dupotSaveTheSheep.pck: dupotSaveTheSheep.pck
+    stage:
+      - dupotSaveTheSheep.x86_64
+      - dupotSaveTheSheep.pck
+    prime:
+      - dupotSaveTheSheep.x86_64
+      - dupotSaveTheSheep.pck
+    stage-packages:
+      - libc6
