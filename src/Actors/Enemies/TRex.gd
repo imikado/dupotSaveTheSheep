@@ -97,6 +97,7 @@ func go_back():
 
 func damage():
 	if _alive:
+		hit_feedback()
 		life -=1
 		if life <=0:
 			die()
@@ -111,13 +112,14 @@ func die():
 	set_new_state(TRexStateMachine.STATE_DIE)
 		
 func finish_die():
+	die_feedback()
 	queue_free()
 	GlobalEvents.emit_signal("enemy_die",self)
 
 func turn():
 	direction=next_direction
 
-func get_current_state()->PlayerState:
+func get_current_state()->EnemyState:
 	return _state_machine.current_state
 	
 func set_new_state(new_state):

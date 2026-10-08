@@ -139,8 +139,7 @@ func _ready():
 	debug_hook(currentX)
 
 func on_sheep_change_visibility(value):
-	print('change visibility')
-	print(value)
+	pass
 	
 func on_enemy_die(enemy):
 	GlobalPlayer.increase_score(enemy.get_points())
@@ -172,7 +171,6 @@ func on_sheep_take_damage(damage):
 
 func on_player_gameover():
 	if !gameover:
-		print("game over level")
 		gameover = true
 		get_tree().change_scene_to_packed(gameOverScene)
 	

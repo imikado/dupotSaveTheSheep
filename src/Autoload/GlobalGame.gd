@@ -11,7 +11,7 @@ enum ENEMY_TYPE_LIST {ANT, SPIDER, BEETLE}
 
 enum LEVEL_DIFFICULTY {EASY, NORMAL}
 
-var _is_debug := true
+var _is_debug := false
 
 var _is_controls_enabled := false
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddb64nkhhqu10"]
+[gd_scene load_steps=11 format=3 uid="uid://ddb64nkhhqu10"]
 
 [ext_resource type="Script" uid="uid://cebojn86fvrxg" path="res://src/Levels/level_1.gd" id="1_dueoc"]
 [ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_shrth"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="4_6nqc5"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="5_ywn7s"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="6_egxy8"]
+[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_material.tres" id="7_nsky"]
+[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_minimap_material.tres" id="8_nsky"]
 
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_dueoc")
@@ -35,6 +37,11 @@ position = Vector2(19, 0)
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/Player"]
 position = Vector2(0, -48)
 offset = Vector2(0, 100)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+drag_vertical_enabled = true
+drag_top_margin = 0.6
+drag_bottom_margin = 0.1
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer/SubViewport/Player/Camera2D"]
 
@@ -46,10 +53,12 @@ offset_left = -2372.0
 offset_top = -718.0
 offset_right = 4511.0
 offset_bottom = 2578.0
+material = ExtResource("7_nsky")
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground/ParallaxLayer"]
 modulate = Color(0.235294, 0.360784, 0.45098, 1)
@@ -60,6 +69,7 @@ flip_h = true
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground"]
 motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground/ParallaxLayer2"]
 position = Vector2(-266, -172)
@@ -102,10 +112,12 @@ offset_left = -2372.0
 offset_top = -718.0
 offset_right = 4511.0
 offset_bottom = 2578.0
+material = ExtResource("8_nsky")
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground/ParallaxLayer"]
 modulate = Color(0.235294, 0.360784, 0.45098, 1)
@@ -116,6 +128,7 @@ flip_h = true
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground"]
 motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground/ParallaxLayer2"]
 position = Vector2(-266, -172)

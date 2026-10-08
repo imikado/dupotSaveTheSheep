@@ -11,6 +11,8 @@ signal player_take_burger(new_value)
 
 signal player_water_changed(new_value)
 
+signal player_out_of_water
+
 signal actor_took_damage(actor, damage)
 
 signal actor_took_damage_by_bullet(actor, damage, bullet)

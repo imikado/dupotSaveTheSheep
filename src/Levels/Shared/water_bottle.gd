@@ -10,6 +10,7 @@ func _ready():
 
 func _on_body_entered(body):
 	if body is Player and body.is_on_floor():
+		Fx.sparkle(get_parent(), global_position, Fx.COLOR_WATER)
 		GlobalPlayer.increment_water(_water_value)
 		GlobalEvents.emit_signal("player_take_water_bottle",GlobalPlayer.get_water())
 		queue_free()

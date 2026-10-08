@@ -105,7 +105,6 @@ func on_sheep_take_damage(damage):
 
 func on_player_gameover():
 	if !gameover:
-		print("game over level")
 		gameover = true
 		get_tree().change_scene_to_packed(gameOverScene)
 	

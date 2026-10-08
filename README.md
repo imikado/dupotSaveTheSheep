@@ -6,7 +6,13 @@
 
 **An arcade action game where you keep the sheep alive to finish every level.**
 
-Free · Age 3+ · Linux x86_64 & aarch64 · Made with Godot 4.7
+<a href="https://dupot-org.itch.io/save-the-sheep"><img src="export/promo/save_the_sheep.gif" alt="Save the Sheep gameplay: Gordon runs through the city at night, blasts a T-Rex with his water gun and lifts the sheep with the crane elevator" width="720" /></a>
+
+*Run, jump, blast dinosaurs with your water gun and get the sheep home safe.*
+
+**[▶ Play it now in your browser](https://dupot-org.itch.io/save-the-sheep)** · **[Get it on Flathub](https://flathub.org/apps/org.dupot.savethesheep)**
+
+Free · Age 3+ · Linux x86_64 & aarch64 · Web · Made with Godot 4.7
 
 [![Flathub](https://img.shields.io/flathub/v/org.dupot.savethesheep?logo=flathub&logoColor=white&label=Flathub&color=4a90d9)](https://flathub.org/apps/org.dupot.savethesheep)
 [![Snap Store](https://img.shields.io/badge/Snap%20Store-dupot--save--the--sheep-82BEA0?logo=snapcraft&logoColor=white)](https://snapcraft.io/dupot-save-the-sheep)
@@ -25,6 +31,7 @@ Free · Age 3+ · Linux x86_64 & aarch64 · Made with Godot 4.7
 
 Gordon has one job: **protect the sheep**. The sheep walks on its own, and Gordon has to clear the way so it can reach the end of each level in one piece.
 
+- 🌃 **A city at night**: run and jump across rooftops, streets and building sites under a starry sky
 - 💦 **Water gun**: blast the enemies (dinosaurs included!) before they reach the sheep
 - 🚪 **Action handle**: open gates to let the sheep through
 - 🛗 **Elevators**: turn them on to carry the sheep over obstacles

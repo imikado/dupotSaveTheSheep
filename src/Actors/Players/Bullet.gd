@@ -6,7 +6,8 @@ var direction=0
 
 @onready var _sprite2d=$Sprite2D
 
-const SPEED=100
+const SPEED=220
+const LIFETIME=0.7
 
 func run(new_direction):
 	$AnimationPlayer.play("default")
@@ -14,11 +15,12 @@ func run(new_direction):
 	if direction==-1:
 		_sprite2d.flip_h=true
 		
-	await get_tree().create_timer(1.0).timeout
-	queue_free()
+	await get_tree().create_timer(LIFETIME).timeout
+	if is_inside_tree():
+		Fx.burst(get_parent(), global_position, Fx.COLOR_WATER, 4, 20.0)
+		queue_free()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	var collidedCollisionBody=move_and_collide(Vector2(SPEED*delta*direction,0.1))
 	
 	if collidedCollisionBody:
@@ -26,5 +28,5 @@ func _process(delta):
 		if collidedActor is Enemy:
 			collidedActor.damage()
 			
+		Fx.splash(get_parent(), global_position)
 		queue_free()
-	

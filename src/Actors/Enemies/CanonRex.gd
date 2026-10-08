@@ -26,6 +26,7 @@ func die():
 	set_new_state(CanonRexStateMachine.STATE_DIE)
 		
 func finish_die():
+	die_feedback()
 	queue_free()
 	GlobalEvents.emit_signal("enemy_die",self)
 
@@ -35,6 +36,7 @@ func shoot():
 
 func damage():
 	if _alive:
+		hit_feedback()
 		life -=1
 		if life <=0:
 			die()
@@ -50,7 +52,7 @@ func spawn_fireball():
 	print('spawn fire ball')
 
 
-func get_current_state()->PlayerState:
+func get_current_state()->EnemyState:
 	return _state_machine.current_state
 
 	

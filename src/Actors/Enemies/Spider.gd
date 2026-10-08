@@ -32,6 +32,7 @@ func die():
 	set_new_state(CanonRexStateMachine.STATE_DIE)
 		
 func finish_die():
+	die_feedback()
 	var newKeyItem=KeyItem.instantiate()
 	get_parent().add_child(newKeyItem)
 	newKeyItem.global_position=global_position-Vector2(10,30)
@@ -45,6 +46,7 @@ func shoot():
 
 func damage():
 	if _alive:
+		hit_feedback()
 		life -=LIFE_DAMAGED
 		GlobalEvents.enemy_spider_health_changed.emit(life)
 		if life <=0:
@@ -61,7 +63,7 @@ func spawn_fireball():
 	print('spawn fire ball')
 
 
-func get_current_state()->PlayerState:
+func get_current_state()->EnemyState:
 	return _state_machine.current_state
 
 	

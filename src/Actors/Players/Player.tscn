@@ -651,7 +651,6 @@ animation_name = "Walking"
 [node name="StateJump" type="Node" parent="StateMachine"]
 script = ExtResource("7_xh0im")
 can_idle = false
-has_gravity = false
 animation_name = "Jump"
 
 [node name="StateFall" type="Node" parent="StateMachine"]
@@ -682,7 +681,6 @@ animation_name = "gunOut"
 [node name="StateGunShoot" type="Node" parent="StateMachine"]
 script = ExtResource("19_4ugtj")
 can_idle = false
-can_move = true
 animation_name = "gunShoot"
 
 [node name="StateDamaged" type="Node" parent="StateMachine"]

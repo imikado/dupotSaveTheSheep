@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://0ul2pw20maw5"]
+[gd_scene load_steps=24 format=3 uid="uid://0ul2pw20maw5"]
 
 [ext_resource type="Script" uid="uid://dtmac8ob0ww0m" path="res://src/Actors/Vehicles/motor_bike.gd" id="1_7raf7"]
 [ext_resource type="Texture2D" uid="uid://ujla1yog2dyi" path="res://src/Actors/Vehicles/motobike-alone.png" id="2_rh4on"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="9_xlbk5"]
 [ext_resource type="Texture2D" uid="uid://d31q6xg5t6k4e" path="res://src/Levels/Level2/panel_sheep.png" id="10_igqgw"]
 
+[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_material.tres" id="99_nsky"]
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogoa"]
 radius = 4.0
 height = 60.0
@@ -383,10 +384,12 @@ offset_left = -2372.0
 offset_top = -718.0
 offset_right = 4511.0
 offset_bottom = 2578.0
+material = ExtResource("99_nsky")
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
 motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer"]
 modulate = Color(0.235294, 0.360784, 0.45098, 1)
@@ -397,6 +400,7 @@ flip_h = true
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
 motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer2"]
 position = Vector2(-266, -172)

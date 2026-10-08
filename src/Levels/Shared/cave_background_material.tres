@@ -1,0 +1,6 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://src/Levels/Shared/cave_background.gdshader" id="1_cave"]
+
+[resource]
+shader = ExtResource("1_cave")

@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://src/Levels/Shared/night_sky.gdshader" id="1_nsky"]
+
+[resource]
+shader = ExtResource("1_nsky")
+shader_parameter/virtual_size = Vector2(120, 60)
+shader_parameter/star_cell = 6.0
+shader_parameter/star_density = 0.1
+shader_parameter/show_moon = false

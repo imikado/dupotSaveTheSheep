@@ -3,6 +3,9 @@ class_name Sheep
 
 const SPEED = 30.0
 const JUMP_VELOCITY = -400.0
+const DAMAGE_INVULNERABILITY_TIME = 0.8
+const DAMAGE_KNOCKBACK = 140.0
+const DAMAGE_UPWARD_BOUNCE = -60.0
 
 @export var speed:float = SPEED
 
@@ -16,6 +19,7 @@ var direction=1
 var last_direction=0
 var next_direction=0
 var _pending_vehicle=null
+var _damage_invulnerability_timer := 0.0
 
 func walk_right():
 	direction=1
@@ -23,6 +27,12 @@ func walk_right():
 
 func _process(delta):
 
+	if _damage_invulnerability_timer > 0.0:
+		_damage_invulnerability_timer = max(_damage_invulnerability_timer - delta, 0.0)
+		if _damage_invulnerability_timer > 0.0:
+			modulate = Color.WHITE if int(_damage_invulnerability_timer * 20.0) % 2 == 0 else Color(1.2, 0.8, 0.8)
+		else:
+			modulate = Color.WHITE
 
 	if _pending_vehicle!=null:
 		
@@ -83,7 +93,7 @@ func bring_back():
 	set_new_state(SheepStateMachine.STATE_WALKING)
 	direction=1
 	
-func get_current_state()->PlayerState:
+func get_current_state()->SheepState:
 	return _state_machine.current_state
 	
 func set_new_state(new_state):
@@ -94,7 +104,23 @@ func get_current_speed():
 	
 
 func hit_damage(damage):
+	if _damage_invulnerability_timer > 0.0:
+		return
+
+	_damage_invulnerability_timer = DAMAGE_INVULNERABILITY_TIME
 	set_new_state(SheepStateMachine.STATE_DAMAGED)
+	var knockback_direction := 1.0
+	if direction != 0:
+		knockback_direction = -direction
+	elif last_direction != 0:
+		knockback_direction = -last_direction
+	else:
+		knockback_direction = -1.0
+	velocity.x = knockback_direction * DAMAGE_KNOCKBACK
+	velocity.y = min(velocity.y, DAMAGE_UPWARD_BOUNCE)
+	Fx.flash(self, Color(2.5, 0.5, 0.5))
+	Fx.burst(get_parent(), global_position + Vector2(0, -8), Color.WHITE, 6, 30.0)
+	Fx.shake(GlobalPlayer.get_actor(), 3.0, 0.25)
 	
 	GlobalEvents.sheep_take_damage.emit(damage)
 	
