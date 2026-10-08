@@ -31,6 +31,8 @@ func set_decor_visible(state):
 	_decor.visible = state
 	
 func spawn_trex():
+	# only now the first spawn is really done, see screen_entered
+	started = true
 	var enemyNumber = _enemyList.get_child_count()
 	
 	if enemyNumber == 0:
@@ -69,7 +71,6 @@ func _on_visible_on_screen_notifier_2d_screen_entered():
 	if !is_enabled():
 		if !started:
 			_spawnStartTimer.start()
-			started = true
 		else:
 			_spawnTimer.start()
 		enable_enemy_list()
@@ -78,6 +79,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	set_decor_visible(false)
 	disable_enemy_list()
 	_spawnTimer.stop()
+	_spawnStartTimer.stop()
 	
 	
 func disable_enemy_list():
@@ -100,5 +102,5 @@ func _on_timer_timeout():
 
 func _on_start_timer_timeout():
 	if is_enabled():
-		print('timer 5s')
+		print('timer 2s')
 		spawn_trex()

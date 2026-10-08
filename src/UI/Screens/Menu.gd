@@ -5,6 +5,7 @@ extends Control
 func _ready():
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D2.play()
+	$PlayButton.grab_focus()
 
 	GlobalGame.loadDifficulty(GlobalGame.LEVEL_DIFFICULTY.NORMAL)
 

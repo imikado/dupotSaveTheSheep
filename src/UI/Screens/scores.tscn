@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ho2gxbustjcg"]
+[gd_scene load_steps=5 format=3 uid="uid://ho2gxbustjcg"]
 
 [ext_resource type="Script" uid="uid://r4glg42fbnsu" path="res://src/UI/Screens/scores.gd" id="1_lv778"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="1_rf2oh"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="2_lv778"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_row"]
+content_margin_left = 6.0
+content_margin_top = 1.0
+content_margin_right = 6.0
+content_margin_bottom = 1.0
+bg_color = Color(0.0196078, 0.0392157, 0.172549, 0.6)
+anti_aliasing = false
 
 [node name="Scores" type="Control"]
 layout_mode = 3
@@ -20,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.18359044, 0.18359044, 0.18359044, 1)
+color = Color(0, 0.207843, 0.309804, 1)
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect"]
 layout_mode = 1
@@ -28,17 +36,32 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 30.0
 grow_horizontal = 2
-color = Color(0.12225223, 0.12225223, 0.12225223, 1)
+color = Color(0.0196078, 0.0392157, 0.172549, 1)
+
+[node name="border" type="ColorRect" parent="ColorRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.360784, 0.380392, 0.835294, 1)
 
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 23.0
+offset_top = -10.0
+offset_bottom = 20.0
 grow_horizontal = 2
 theme = ExtResource("1_rf2oh")
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_font_sizes/font_size = 16
 text = "SCORES"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="menuButton" parent="." instance=ExtResource("2_lv778")]
 layout_mode = 0
@@ -57,27 +80,38 @@ anchor_bottom = 1.0
 offset_left = 10.0
 offset_top = 36.0
 offset_right = -10.0
+offset_bottom = -6.0
+theme = ExtResource("1_rf2oh")
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="table" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 2
+theme_override_constants/separation = 2
 
-[node name="line" type="HBoxContainer" parent="."]
+[node name="line" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 368.0
-offset_bottom = 40.0
-alignment = 2
+offset_right = 460.0
+offset_bottom = 18.0
+theme_override_styles/panel = SubResource("StyleBox_row")
 
-[node name="date" type="Label" parent="line"]
-custom_minimum_size = Vector2(300, 0)
+[node name="row" type="HBoxContainer" parent="line"]
+layout_mode = 2
+
+[node name="rank" type="Label" parent="line/row"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme = ExtResource("1_rf2oh")
+text = "1."
+
+[node name="date" type="Label" parent="line/row"]
+custom_minimum_size = Vector2(260, 0)
 layout_mode = 2
 theme = ExtResource("1_rf2oh")
 text = "testaaaa"
 
-[node name="score" type="Label" parent="line"]
+[node name="score" type="Label" parent="line/row"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_rf2oh")

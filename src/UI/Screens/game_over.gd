@@ -18,6 +18,18 @@ func _ready():
 	if GlobalGame.getLevel() ==2:
 		_replayButton.visible=true
 
+	_animate_title()
+
+
+# Title falls and bounces, focus comes after so a held key does not skip the screen
+func _animate_title():
+	var title: Label = $Label
+	var target_y = title.position.y
+	title.position.y = target_y - 60
+	var tween = create_tween()
+	tween.tween_property(title, "position:y", target_y, 0.6).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.tween_callback($LabelButton.grab_focus)
+
 
 func set_score(newScore:int):
 	var tween = create_tween()
