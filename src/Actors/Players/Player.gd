@@ -98,6 +98,7 @@ func has_key():
 # Bounce (on the sheep or an enemy head)
 func process_jump(_delta):
 	velocity.y = BOUNCE_VELOCITY
+	GlobalAudio.play_sfx("jump", 0.05, 0.0, 1.25)
 	stretch()
 
 func start_jump():
@@ -105,6 +106,7 @@ func start_jump():
 	_coyote_timer = 0
 	_jump_buffer_timer = 0
 	Fx.dust(get_parent(), global_position)
+	GlobalAudio.play_sfx("jump", 0.05)
 	stretch()
 
 func is_in_air_state() -> bool:
@@ -142,6 +144,7 @@ func update_landing():
 	var on_floor = is_on_floor()
 	if on_floor and !_was_on_floor:
 		Fx.dust(get_parent(), global_position)
+		GlobalAudio.play_sfx("land", 0.1)
 		squash()
 	_was_on_floor = on_floor
 
@@ -181,6 +184,7 @@ func shoot():
 
 	if !GlobalPlayer.can_use_amount_water(SHOOT_WATER_VALUE):
 		GlobalEvents.player_out_of_water.emit()
+		GlobalAudio.play_sfx("empty")
 		return
 
 	var bullet = Bullet.instantiate()
@@ -192,6 +196,7 @@ func shoot():
 	else:
 		bullet.run(1)
 
+	GlobalAudio.play_sfx("shoot", 0.08)
 	GlobalPlayer.use_amount_water(SHOOT_WATER_VALUE)
 
 	GlobalEvents.emit_signal("player_water_changed", GlobalPlayer.get_water())
@@ -274,6 +279,7 @@ func hit_damage(damage):
 	tween.tween_property(self, "modulate", Color.RED, 0.1)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 	Fx.shake(self, 4.0, 0.3)
+	GlobalAudio.play_sfx("player_hurt")
 	
 	GlobalEvents.player_take_damage.emit(damage)
 
@@ -290,6 +296,7 @@ func commit_water():
 	_pending_water = 0
 
 func action():
+	GlobalAudio.play_sfx("action")
 	_direction = 0
 	velocity.x = 0
 	set_new_state(PlayerStateMachine.STATE_ACTION)

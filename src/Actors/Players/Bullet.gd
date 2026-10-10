@@ -27,6 +27,8 @@ func _physics_process(delta):
 		var collidedActor=collidedCollisionBody.get_collider()
 		if collidedActor is Enemy:
 			collidedActor.damage()
-			
+		else:
+			GlobalAudio.play_sfx("splash", 0.1)
+
 		Fx.splash(get_parent(), global_position)
 		queue_free()

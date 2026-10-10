@@ -23,6 +23,7 @@ func remote_close():
 	bridge.close()
 
 func action():
+	GlobalAudio.play_sfx("gate")
 	if bridge.is_open():
 		_animationPlayer.play('close')
 	else:

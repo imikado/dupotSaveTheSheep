@@ -56,6 +56,7 @@ func isOnTheFloor():
 	return (velocity.y == 0)
 	
 func hitedObstacle():
+	GlobalAudio.play_sfx("bike_crash", 0.0, 0.0, 0.7)
 	setState(STATE.OBSTACLE)
 	#isHitingObstacle=true
 	print('obstacle')
@@ -69,6 +70,7 @@ func take_desserts(life):
 	setState(STATE.TAKE_DESSERTS)
 
 func hited():
+	GlobalAudio.play_sfx("bike_crash", 0.05)
 	setState(STATE.HITED)
 	
 func take_water(water_value):
@@ -129,6 +131,7 @@ func _process(delta):
 	
 	
 	if isState(STATE.RIDING) and GlobalInput.is_press_jump_button():
+		GlobalAudio.play_sfx("jump", 0.05, 0.0, 0.85)
 		setState(STATE.JUMP_START)
 		#$AnimationPlayer.play('JumpStart')
 		#canJump=false

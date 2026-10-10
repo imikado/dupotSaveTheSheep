@@ -60,6 +60,7 @@ func spawn_fireball():
 	get_parent().add_child(newFireBall)
 	newFireBall.global_position=spawnFireBall.global_position
 	#newFireBall.set_vector(moveVector)
+	GlobalAudio.play_sfx("fireball", 0.1, -4.0, 1.6)
 	print('spawn fire ball')
 
 

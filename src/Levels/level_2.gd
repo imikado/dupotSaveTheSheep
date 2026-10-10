@@ -28,6 +28,7 @@ func _ready() -> void:
 	GlobalGame.saveLevel(2)
 
 	GlobalPlayer.set_actor(player)
+	GlobalAudio.play_music("level")
 	
 	GlobalEvents.player_take_damage.connect(on_player_take_damage)
 

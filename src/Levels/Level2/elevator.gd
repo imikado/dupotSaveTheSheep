@@ -46,6 +46,7 @@ func action():
 		pendingCarried.be_carried()
 		
 	isAnimationRunning=true
+	GlobalAudio.play_sfx("gate", 0.0, 0.0, 0.8)
 	if state == STATE.UP:
 		handleAnimation.play(handleAnimList[STATE.DOWN])
 	elif state == STATE.DOWN:

@@ -1,12 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://cd5514wt0rdxf"]
+[gd_scene format=3 uid="uid://cd5514wt0rdxf"]
 
 [ext_resource type="Script" uid="uid://u5s8goxqdyoo" path="res://src/UI/Screens/Menu.gd" id="1_81gvo"]
 [ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_bkv4m"]
 [ext_resource type="PackedScene" uid="uid://ddb64nkhhqu10" path="res://src/Levels/level_1.tscn" id="2_wl5y4"]
+[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_material.tres" id="3_nrxk5"]
 [ext_resource type="Texture2D" uid="uid://qod1olovotcd" path="res://src/UI/Screens/title.png" id="3_rrifp"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="4_nm624"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="5_lkhqs"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="6_j0ooc"]
+[ext_resource type="Script" uid="uid://c24nlod1y5kue" path="res://src/UI/Controls/SoundToggle.gd" id="7_sound"]
+[ext_resource type="Texture2D" uid="uid://diy5y25bagh17" path="res://src/UI/Controls/Shared/icon-sound-on.png" id="8_sndon"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8an8f"]
 atlas = ExtResource("4_nm624")
@@ -32,7 +35,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y8ch2")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 2.0
 }]
@@ -75,12 +78,12 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_287jy")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 2.0
 }]
 
-[node name="Menu" type="Control"]
+[node name="Menu" type="Control" unique_id=12628824]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,15 +93,28 @@ grow_vertical = 2
 script = ExtResource("1_81gvo")
 mainLevel = ExtResource("2_wl5y4")
 
-[node name="Title" type="Sprite2D" parent="."]
+[node name="Parallax2D" type="ParallaxBackground" parent="." unique_id=1747117339]
+
+[node name="sky" type="ParallaxLayer" parent="Parallax2D" unique_id=1302207245]
+
+[node name="ColorRect" type="ColorRect" parent="Parallax2D/sky" unique_id=1705289563]
+z_as_relative = false
+material = ExtResource("3_nrxk5")
+offset_left = -2445.0
+offset_top = -715.0
+offset_right = 4438.0
+offset_bottom = 2581.0
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+
+[node name="Title" type="Sprite2D" parent="." unique_id=1370661012]
 position = Vector2(238, 135)
 texture = ExtResource("3_rrifp")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2105202518]
 position = Vector2(241, 128)
 skew = -0.760964
 
-[node name="PlayButton" parent="." instance=ExtResource("1_bkv4m")]
+[node name="PlayButton" parent="." unique_id=1821791874 instance=ExtResource("1_bkv4m")]
 layout_mode = 0
 offset_left = 315.0
 offset_top = -4.0
@@ -106,7 +122,7 @@ offset_right = 443.0
 offset_bottom = 28.0
 _export_label = "play"
 
-[node name="ScoreButton" parent="." instance=ExtResource("1_bkv4m")]
+[node name="ScoreButton" parent="." unique_id=1603152831 instance=ExtResource("1_bkv4m")]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 30.0
@@ -114,30 +130,121 @@ offset_right = 443.0
 offset_bottom = 62.0
 _export_label = "Scores"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=694567454]
 visible = false
 position = Vector2(93, 101)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_mcrfk")
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=2131906700]
 visible = false
 position = Vector2(348.00003, -12.999996)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_0hhe7")
 flip_h = true
 
-[node name="Label" type="Label" parent="."]
+[node name="Controls" type="PanelContainer" parent="." unique_id=1043794303]
 layout_mode = 0
-offset_left = 112.0
-offset_top = 263.0
-offset_right = 336.0
-offset_bottom = 286.0
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 474.0
+offset_bottom = 228.0
 theme = ExtResource("6_j0ooc")
-text = "USE CURSOR AND KEYS  A,Z,E"
-horizontal_alignment = 2
 
-[node name="levelDifficulty" type="OptionButton" parent="."]
+[node name="rows" type="VBoxContainer" parent="Controls" unique_id=405026378]
+layout_mode = 2
+theme_override_constants/separation = -10
+
+[node name="row0" type="HBoxContainer" parent="Controls/rows" unique_id=1872534240]
+layout_mode = 2
+
+[node name="key" type="Label" parent="Controls/rows/row0" unique_id=290876055]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+text = "<>"
+
+[node name="action" type="Label" parent="Controls/rows/row0" unique_id=808596241]
+layout_mode = 2
+text = "MOVE"
+
+[node name="row1" type="HBoxContainer" parent="Controls/rows" unique_id=1721300752]
+layout_mode = 2
+
+[node name="key" type="Label" parent="Controls/rows/row1" unique_id=1219382403]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+text = "A"
+
+[node name="action" type="Label" parent="Controls/rows/row1" unique_id=1920480178]
+layout_mode = 2
+text = "SHOOT"
+
+[node name="row2" type="HBoxContainer" parent="Controls/rows" unique_id=2048274455]
+layout_mode = 2
+
+[node name="key" type="Label" parent="Controls/rows/row2" unique_id=836080140]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+text = "Z"
+
+[node name="action" type="Label" parent="Controls/rows/row2" unique_id=1048819944]
+layout_mode = 2
+text = "JUMP"
+
+[node name="row3" type="HBoxContainer" parent="Controls/rows" unique_id=214275330]
+layout_mode = 2
+
+[node name="key" type="Label" parent="Controls/rows/row3" unique_id=236664261]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+text = "E"
+
+[node name="action" type="Label" parent="Controls/rows/row3" unique_id=457187601]
+layout_mode = 2
+text = "ACTION"
+
+[node name="row4" type="HBoxContainer" parent="Controls/rows" unique_id=664661511]
+layout_mode = 2
+
+[node name="key" type="Label" parent="Controls/rows/row4" unique_id=1086250684]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+text = "ESC"
+
+[node name="action" type="Label" parent="Controls/rows/row4" unique_id=630343270]
+layout_mode = 2
+text = "PAUSE"
+
+[node name="row5" type="HBoxContainer" parent="Controls/rows" unique_id=25016017]
+layout_mode = 2
+
+[node name="key" type="Label" parent="Controls/rows/row5" unique_id=326994925]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+text = "M"
+
+[node name="action" type="Label" parent="Controls/rows/row5" unique_id=315027600]
+layout_mode = 2
+text = "SOUND"
+
+[node name="SoundToggle" type="Button" parent="." unique_id=816417202]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 234.0
+offset_right = 474.0
+offset_bottom = 256.0
+theme = ExtResource("6_j0ooc")
+text = "ON"
+icon = ExtResource("8_sndon")
+script = ExtResource("7_sound")
+
+[node name="levelDifficulty" type="OptionButton" parent="." unique_id=67166632]
 layout_mode = 0
 offset_left = 305.0
 offset_top = 65.0

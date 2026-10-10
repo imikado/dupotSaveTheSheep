@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgq1d870da82h"
-path="res://.godot/imported/level_01_elevator.png-769193d0d22b69387933e29d93fdb83e.ctex"
+uid="uid://cot8js5udgrf6"
+path="res://.godot/imported/panel.png-b58728631ebd8996715a090e98a03645.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://export/Linux/screenshots/level_01_elevator.png"
-dest_files=["res://.godot/imported/level_01_elevator.png-769193d0d22b69387933e29d93fdb83e.ctex"]
+source_file="res://src/UI/Controls/Shared/panel.png"
+dest_files=["res://.godot/imported/panel.png-b58728631ebd8996715a090e98a03645.ctex"]
 
 [params]
 

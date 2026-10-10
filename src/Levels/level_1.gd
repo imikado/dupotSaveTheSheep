@@ -67,6 +67,7 @@ func _ready():
 	subViewPortSheep.world_2d = world
 	
 	GlobalPlayer.set_actor(player)
+	GlobalAudio.play_music("level")
 	
 	GlobalEvents.player_gameover.connect(on_player_gameover)
 	

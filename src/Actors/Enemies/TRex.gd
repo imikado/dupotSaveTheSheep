@@ -51,6 +51,7 @@ func _process(delta):
 					if collider is Player or collider is Sheep:
 						if can_attack:
 							set_new_state(TRexStateMachine.STATE_ATTACK)
+							GlobalAudio.play_sfx("roar", 0.1)
 							move_and_slide()
 							collider.hit_damage(10)
 							can_attack=false

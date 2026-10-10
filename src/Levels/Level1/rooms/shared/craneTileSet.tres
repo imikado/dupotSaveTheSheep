@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bj8v80sh2i24v"]
+[gd_resource type="TileSet" format=3 uid="uid://bj8v80sh2i24v"]
 
 [ext_resource type="Texture2D" uid="uid://mt1rm8u1igv0" path="res://src/Levels/Shared/crane.png" id="1_ooau5"]
 

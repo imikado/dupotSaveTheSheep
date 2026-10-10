@@ -121,6 +121,7 @@ func hit_damage(damage):
 	Fx.flash(self, Color(2.5, 0.5, 0.5))
 	Fx.burst(get_parent(), global_position + Vector2(0, -8), Color.WHITE, 6, 30.0)
 	Fx.shake(GlobalPlayer.get_actor(), 3.0, 0.25)
+	GlobalAudio.play_sfx("sheep_hurt", 0.06)
 	
 	GlobalEvents.sheep_take_damage.emit(damage)
 	

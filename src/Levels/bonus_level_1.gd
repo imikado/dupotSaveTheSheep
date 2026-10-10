@@ -14,7 +14,16 @@ var camera_start_x = 0
 
 @onready var _endBonusLayer: Control = $Camera2D/BonusControl
 @onready var _countDownTimer: Timer = $countDownTimer
-@onready var _timeLeftLabel: Label = $Camera2D/Control/timeLeftLabel
+@onready var _timeLeftLabel: Label = $Camera2D/Control/timePanel/row/timeLeftLabel
+@onready var _timePanel: Control = $Camera2D/Control/timePanel
+@onready var _banner: Label = $Camera2D/Control/Label
+@onready var _endTitle: Label = $Camera2D/BonusControl/endTitle
+@onready var _endScoreLabel: Label = $Camera2D/BonusControl/scorePanel/row/scoreLabel
+@onready var _playButton: TextureButton = $Camera2D/BonusControl/PlayButton
+
+# Under this many seconds the timer turns red and ticks
+const HURRY_TIME = 10
+const COLOR_HURRY = Color(1, 0.27451, 0.27451)
 
 @onready var hud = $HUD
 
@@ -69,6 +78,22 @@ func _ready():
 	hud.set_sheep_life(GlobalSheep.get_life())
 	
 	_countDownTimer.start()
+	GlobalAudio.play_music("bonus")
+	_timeLeftLabel.text = str(_countDown)
+	_show_banner()
+
+
+# "BONUS LEVEL" slides in, blinks, then leaves the screen
+func _show_banner():
+	var target_x = _banner.position.x
+	_banner.position.x = target_x + 480
+	var tween = create_tween()
+	tween.tween_property(_banner, "position:x", target_x, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	for i in 3:
+		tween.tween_property(_banner, "modulate:a", 0.3, 0.0).set_delay(0.25)
+		tween.tween_property(_banner, "modulate:a", 1.0, 0.0).set_delay(0.25)
+	tween.tween_property(_banner, "position:x", target_x - 480, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_callback(_banner.hide)
 	
 func on_player_health_changed(newvalue):
 	print('hud player')
@@ -160,14 +185,26 @@ func shouldSpawnWaterBottleOrDesserts():
 		
 
 func _on_play_button_pressed():
-	get_tree().change_scene_to_packed(nextLevel)
+	GlobalTransition.change_scene_to_packed(nextLevel)
 	pass # Replace with function body.
 
 
 func end():
+	if _endBonusLayer.visible:
+		return
 	_countDownTimer.stop()
 	set_process(false)
+	_endTitle.text = "TIME UP!" if _countDown < 0 else "CRASH!"
+	_endScoreLabel.text = str(GlobalPlayer.get_score())
 	_endBonusLayer.visible = true
+	_banner.hide()
+	GlobalAudio.play_jingle("level_complete" if _countDown < 0 else "game_over")
+
+	var target_y = _endTitle.position.y
+	_endTitle.position.y = target_y - 50
+	var tween = create_tween()
+	tween.tween_property(_endTitle, "position:y", target_y, 0.6).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(_playButton.grab_focus)
 
 
 func _on_count_down_timer_timeout():
@@ -177,5 +214,11 @@ func _on_count_down_timer_timeout():
 		return
 	
 	_timeLeftLabel.text = str(_countDown)
-	
-	pass # Replace with function body.
+
+	if _countDown <= HURRY_TIME:
+		GlobalAudio.play_sfx("tick")
+		_timeLeftLabel.add_theme_color_override("font_color", COLOR_HURRY)
+		var tween = create_tween()
+		_timePanel.pivot_offset = _timePanel.size / 2
+		_timePanel.scale = Vector2(1.2, 1.2)
+		tween.tween_property(_timePanel, "scale", Vector2.ONE, 0.2)

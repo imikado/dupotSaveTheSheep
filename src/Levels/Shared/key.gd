@@ -10,6 +10,7 @@ func _ready() -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		Fx.sparkle(get_parent(), global_position, Fx.COLOR_HEAL)
+		GlobalAudio.play_sfx("pickup_key")
 		GlobalEvents.get_key.emit()
 		queue_free()
 		body.get_key()

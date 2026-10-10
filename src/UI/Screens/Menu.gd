@@ -6,6 +6,7 @@ func _ready():
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D2.play()
 	$PlayButton.grab_focus()
+	GlobalAudio.play_music("menu")
 
 	GlobalGame.loadDifficulty(GlobalGame.LEVEL_DIFFICULTY.NORMAL)
 
@@ -31,5 +32,5 @@ func _on_level_difficulty_item_selected(index: int) -> void:
 
 
 func _on_score_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/UI/Screens/scores.tscn")
+	GlobalTransition.change_scene_to_packed(load("res://src/UI/Screens/scores.tscn"))
 	pass # Replace with function body.

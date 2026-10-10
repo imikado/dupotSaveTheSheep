@@ -5,6 +5,7 @@ var life=10
 
 func _on_body_entered(body):
 	if body is PlayerOnMotorBike:
+		GlobalAudio.play_sfx("pickup_life")
 		body.take_desserts(life)
 		queue_free()
 	pass # Replace with function body.

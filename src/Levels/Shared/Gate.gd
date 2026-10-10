@@ -38,6 +38,7 @@ func switch_light():
 			_light_closed.visible=true
 
 func action():
+	GlobalAudio.play_sfx("gate")
 	if _is_open:
 		close()
 	else:

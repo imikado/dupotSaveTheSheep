@@ -87,6 +87,8 @@ func toggle_pause():
 	get_tree().paused = is_paused
 	if _pause_overlay != null:
 		_pause_overlay.visible = is_paused
+	GlobalAudio.play_sfx("pause")
+	GlobalAudio.duck_music(is_paused)
 
 func _create_pause_overlay():
 	_pause_overlay = ColorRect.new()
@@ -121,10 +123,20 @@ func _create_pause_overlay():
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(hint)
 
+	var sound = Label.new()
+	sound.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	sound.add_theme_color_override("font_color", Color(0.627451, 0.647059, 0.960784))
+	box.add_child(sound)
+	_update_sound_label(GlobalAudio.is_sound_enabled(), sound)
+	GlobalAudio.sound_toggled.connect(_update_sound_label.bind(sound))
+
 	# blink the hint while paused
 	var tween = hint.create_tween().set_loops()
 	tween.tween_property(hint, "modulate:a", 0.2, 0.0).set_delay(0.6)
 	tween.tween_property(hint, "modulate:a", 1.0, 0.0).set_delay(0.4)
+
+func _update_sound_label(enabled: bool, label: Label):
+	label.text = "M  SOUND " + ("ON" if enabled else "OFF")
 	
 func _process(delta: float):
 	if player != null:

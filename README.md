@@ -6,7 +6,7 @@
 
 **An arcade action game where you keep the sheep alive to finish every level.**
 
-<a href="https://dupot-org.itch.io/save-the-sheep"><img src="export/promo/save_the_sheep.gif" alt="Save the Sheep gameplay: Gordon runs through the city at night, blasts a T-Rex with his water gun and lifts the sheep with the crane elevator" width="720" /></a>
+<a href="https://dupot-org.itch.io/save-the-sheep"><img src="export/promo/save_the_sheep.gif" alt="Save the Sheep gameplay: Gordon jumps over a gate to open it for the sheep, blasts a T-Rex with his water gun, then rides his motorbike in the bonus level" width="720" /></a>
 
 *Run, jump, blast dinosaurs with your water gun and get the sheep home safe.*
 
@@ -35,7 +35,7 @@ Gordon has one job: **protect the sheep**. The sheep walks on its own, and Gordo
 - 💦 **Water gun**: blast the enemies (dinosaurs included!) before they reach the sheep
 - 🚪 **Action handle**: open gates to let the sheep through
 - 🛗 **Elevators**: turn them on to carry the sheep over obstacles
-- 🎁 **Bonus level**: an extra challenge for those who make it
+- 🏍️ **Bonus level**: ride the motorbike, jump the rocks and grab water and desserts before time runs out
 
 If the sheep doesn't make it, neither do you.
 
@@ -43,9 +43,13 @@ If the sheep doesn't make it, neither do you.
 
 <div align="center">
 
-| Level start | Watch out for the T-Rex! | Elevator time |
+| Level start | Jump the gate, then open it | Watch out for the T-Rex! |
 |:---:|:---:|:---:|
-| ![Level 01 start](export/Linux/screenshots/level_01_start.png) | ![Level 01 with enemy](export/Linux/screenshots/level_01_trex.png) | ![Level 01 with elevator](export/Linux/screenshots/level_01_elevator.png) |
+| ![Level 01 start](export/Linux/screenshots/level_01_start.png) | ![Gordon jumps over a gate](export/Linux/screenshots/level_01_gate.png) | ![Gordon fights a T-Rex](export/Linux/screenshots/level_01_trex.png) |
+
+| Main menu | Bonus level |
+|:---:|:---:|
+| ![Main menu](export/Linux/screenshots/menu.png) | ![Motorbike bonus level](export/Linux/screenshots/bonus_level.png) |
 
 </div>
 
@@ -57,6 +61,8 @@ If the sheep doesn't make it, neither do you.
 | Jump | `Space` or `Z` |
 | Shoot | `Enter` or `A` |
 | Action (gates, elevators) | `Tab` or `E` |
+| Pause | `Esc` |
+| Sound on/off | `M` |
 
 🎮 Gamepads are supported too, and Android gets on-screen touch controls.
 
@@ -93,6 +99,14 @@ Play it in your browser, no install needed: **[dupot-org.itch.io/save-the-sheep]
 3. Open `project.godot` in Godot and press **F5** to play.
 
 Export presets for **Linux**, **Android** and **HTML5** are included in `export_presets.cfg`.
+
+Helper scripts (set `GODOT` if Godot isn't in your `PATH`):
+
+| Script | What it does |
+|---|---|
+| `./export_html5.sh` | Exports the web build and zips it for itch.io |
+| `./export_flathub.sh` | Exports the `.pck` and builds `export/Linux/bundle.tar.gz` for the Flathub manifest |
+| `tools/capture/capture.sh` | Plays an automated run and regenerates the screenshots and the promo GIF (needs `ffmpeg`) |
 
 ## 🕹️ More from dupot.org
 

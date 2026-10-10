@@ -22,18 +22,25 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_start.png</image>
-      <caption>Level 01, start</caption>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/level_01_start.png</image>
+      <caption>Gordon and the sheep at the start of level 1</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_trex.png</image>
-      <caption>Level 01, with enemy</caption>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/level_01_gate.png</image>
+      <caption>Jump over the gate, then open it for the sheep</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/f85959dc69610855be0ab0de29329ab891aadaed/export/Linux/screenshots/level_01_elevator.png</image>
-      <caption>Level 01, with elevator</caption>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/level_01_trex.png</image>
+      <caption>Blast the T-Rex with the water gun</caption>
     </screenshot>
-
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/bonus_level.png</image>
+      <caption>Motorbike bonus level</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/menu.png</image>
+      <caption>Main menu</caption>
+    </screenshot>
   </screenshots>
   <url type="homepage">https://www.dupot.org/games.html</url>
   <url type="bugtracker">https://github.com/imikado/dupotSaveTheSheep/issues</url>
@@ -41,6 +48,15 @@
   <update_contact>imikado@gmail.com</update_contact>
   <content_rating type="oars-1.1"/>
   <releases>
+
+
+    <release date="2026-10-10" version="1.9.0">
+      <description>
+        <ul>
+          <li>Improvments</li>
+        </ul>
+      </description>
+    </release>
 
 
     <release date="2026-09-06" version="1.8.0">

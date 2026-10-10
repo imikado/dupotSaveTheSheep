@@ -1,92 +1,95 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdhuu5btjtkvr"]
+[gd_scene load_steps=4 format=3 uid="uid://bdhuu5btjtkvr"]
 
-[ext_resource type="Script" uid="uid://ct8bjfomj1x4x" path="res://src/Levels/end_game.gd" id="1_galue"]
-[ext_resource type="PackedScene" uid="uid://cd5514wt0rdxf" path="res://src/UI/Screens/Menu.tscn" id="2_2r3cd"]
-[ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="2_ml0vc"]
-[ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="3_2r3cd"]
+[ext_resource type="Script" uid="uid://ct8bjfomj1x4x" path="res://src/Levels/end_game.gd" id="1_script"]
+[ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="3_button"]
 
-[node name="EndLevel" type="Control"]
+[node name="EndGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_galue")
-NextLevel = ExtResource("2_2r3cd")
+theme = ExtResource("2_theme")
+script = ExtResource("1_script")
+next_scene_path = "res://src/UI/Screens/Menu.tscn"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 3
+expand_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Overlay" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.576471)
+color = Color(0, 0, 0.0588235, 0.72)
 
-[node name="Label2" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 layout_mode = 0
-offset_left = 185.0
-offset_top = 5.5
-offset_right = 295.0
-offset_bottom = 45.5
-theme = ExtResource("2_ml0vc")
-theme_override_font_sizes/font_size = 14
+offset_top = -12.0
+offset_right = 480.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 24
 text = "THE END !!"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 169.0
-offset_top = 50.0
-offset_right = 310.0
-offset_bottom = 181.0
-alignment = 1
-
-[node name="userScoreLabel" type="Label" parent="VBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("2_ml0vc")
-text = "Level completed: +100"
-
-[node name="bonusUserScoreLabel" type="Label" parent="VBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("2_ml0vc")
-text = "Level completed: +100"
-
-[node name="bonusSheepScoreLabel" type="Label" parent="VBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("2_ml0vc")
-text = "Level completed: +100"
-
-[node name="bonusLevelScoreLabel" type="Label" parent="VBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("2_ml0vc")
-text = "Level completed: +100"
-
-[node name="totalScoreLabel" type="Label" parent="VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme = ExtResource("2_ml0vc")
-text = "0"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(240, 134)
-
-[node name="PlayButton" parent="." instance=ExtResource("3_2r3cd")]
+[node name="Panel" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_left = 169.0
-offset_top = 224.0
-offset_right = 297.0
-offset_bottom = 256.0
-_export_label = "Menu"
+offset_left = 126.0
+offset_top = 54.0
+offset_right = 354.0
+offset_bottom = 200.0
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[node name="Content" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Rows" type="VBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Separator" type="ColorRect" parent="Panel/Content"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.360784, 0.380392, 0.835294, 1)
+
+[node name="Total" type="HBoxContainer" parent="Panel/Content"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Content/Total"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.92549, 0.937255, 1, 1)
+text = "TOTAL"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Panel/Content/Total"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 2
+
+[node name="NextButton" parent="." instance=ExtResource("3_button")]
+layout_mode = 0
+offset_left = 176.0
+offset_top = 214.0
+offset_right = 304.0
+offset_bottom = 246.0
+pivot_offset = Vector2(64, 16)
+_export_label = "menu"
+
+[connection signal="pressed" from="NextButton" to="." method="_on_play_button_pressed"]

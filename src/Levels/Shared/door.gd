@@ -10,6 +10,7 @@ func _ready():
 
 func open():
 	animationPlayer.play("Opening")
+	GlobalAudio.play_sfx("gate")
 	pass
 
 func emit_signal_opened():

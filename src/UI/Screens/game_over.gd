@@ -1,24 +1,39 @@
 extends Node2D
 
 var _scoreValue=0
-@onready var _scoreLabel:Label=$VBoxContainer/HBoxContainer/scoreLabel
+@onready var _scoreLabel:Label=$scorePanel/VBoxContainer/score/scoreLabel
+@onready var _bestLabel:Label=$scorePanel/VBoxContainer/best/bestLabel
+@onready var _recordLabel:Label=$recordLabel
 
 @onready var _replayButton:TextureButton=$replayButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print('save')
-	GlobalGame.saveHighScore(GlobalPlayer.get_score())
-	set_score(GlobalPlayer.get_score())
-	
-	GlobalGame.saveHighScore(GlobalPlayer.get_score())
-	
+	var score = GlobalPlayer.get_score()
+	var previousBest = GlobalGame.getHighestScore(GlobalGame.getHighScoreList())
+	GlobalGame.saveHighScore(score)
+	set_score(score)
+	_bestLabel.text = str(int(max(previousBest, score)))
+
+	GlobalAudio.play_jingle("game_over")
+
 	_replayButton.visible=false
 	
 	if GlobalGame.getLevel() ==2:
 		_replayButton.visible=true
 
 	_animate_title()
+
+	if score > previousBest and score > 0:
+		_show_record()
+
+
+# Blinking stamp on the score panel
+func _show_record():
+	_recordLabel.visible = true
+	var tween = _recordLabel.create_tween().set_loops()
+	tween.tween_property(_recordLabel, "modulate:a", 0.2, 0.0).set_delay(0.5)
+	tween.tween_property(_recordLabel, "modulate:a", 1.0, 0.0).set_delay(0.3)
 
 
 # Title falls and bounces, focus comes after so a held key does not skip the screen
@@ -42,7 +57,7 @@ func set_score_text(scoreValue:int):
 
 
 func _on_label_button_pressed():
-	get_tree().change_scene_to_file('res://src/UI/Screens/Menu.tscn')
+	GlobalTransition.change_scene_to_packed(load('res://src/UI/Screens/Menu.tscn'))
 	pass # Replace with function body.
 
 

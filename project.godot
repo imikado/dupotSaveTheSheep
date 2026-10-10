@@ -15,6 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="dupotSaveTheSheep"
+config/version="1.9.0"
 config/tags=PackedStringArray("current")
 run/main_scene="res://src/UI/Screens/Boot.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
@@ -28,6 +29,7 @@ GlobalEvents="*res://src/Autoload/GlobalEvents.gd"
 GlobalPlayer="*res://src/Autoload/GlobalPlayer.gd"
 GlobalSheep="*res://src/Autoload/GlobalSheep.gd"
 GlobalTransition="*res://src/Autoload/global_transition.tscn"
+GlobalAudio="*res://src/Autoload/GlobalAudio.gd"
 
 [debug]
 

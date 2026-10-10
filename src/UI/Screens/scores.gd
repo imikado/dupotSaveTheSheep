@@ -2,7 +2,7 @@ extends Control
 
 @onready var _menuButton:=$menuButton
 @onready var _line:=$line
-@onready var _table:=$ScrollContainer/table
+@onready var _table:=$Panel/Content/ScrollContainer/table
 
 
 
@@ -64,12 +64,15 @@ func sort_descending(a, b):
 		return false
 
 func _ready() -> void:
+	GlobalAudio.play_music("menu")
 	var scoreList=GlobalGame.getHighScoreList()
 	
 	_line.visible=false
 	#var scoreList=Game.getHighScoreList()
 	
 	scoreList.sort_custom(sort_descending)
+
+	$empty.visible = scoreList.is_empty()
 
 	
 	build(scoreList)
@@ -100,6 +103,6 @@ func build(scoreList):
 	_menuButton.grab_focus()
 
 func _on_menu_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://src/UI/Screens/Menu.tscn")
+	GlobalTransition.change_scene_to_packed(load("res://src/UI/Screens/Menu.tscn"))
 
 	pass # Replace with function body.
