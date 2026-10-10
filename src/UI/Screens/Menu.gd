@@ -6,6 +6,7 @@ func _ready():
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D2.play()
 	$PlayButton.grab_focus()
+	$VersionLabel.text = "v" + ProjectSettings.get_setting("application/config/version", "")
 	GlobalAudio.play_music("menu")
 
 	GlobalGame.loadDifficulty(GlobalGame.LEVEL_DIFFICULTY.NORMAL)

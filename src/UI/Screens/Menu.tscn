@@ -258,6 +258,17 @@ popup/item_0/id = 0
 popup/item_1/text = "normal"
 popup/item_1/id = 1
 
+[node name="VersionLabel" type="Label" parent="." unique_id=1457203968]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 234.0
+offset_right = 126.0
+offset_bottom = 256.0
+theme = ExtResource("6_j0ooc")
+theme_override_colors/font_color = Color(1, 1, 1, 0.6)
+text = "v0.0.0"
+vertical_alignment = 1
+
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="ScoreButton" to="." method="_on_score_button_pressed"]
 [connection signal="item_selected" from="levelDifficulty" to="." method="_on_level_difficulty_item_selected"]
