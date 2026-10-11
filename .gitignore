@@ -80,3 +80,4 @@ export/Linux/snap/*.x86_64
 export/Linux/snap/*.snap
 
 
+export/promo/*.mp4

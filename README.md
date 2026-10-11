@@ -107,6 +107,7 @@ Helper scripts (set `GODOT` if Godot isn't in your `PATH`):
 | `./export_html5.sh` | Exports the web build and zips it for itch.io |
 | `./export_flathub.sh` | Exports the `.pck` and builds `export/Linux/bundle.tar.gz` for the Flathub manifest |
 | `tools/capture/capture.sh` | Plays an automated run and regenerates the screenshots and the promo GIF (needs `ffmpeg`) |
+| `tools/capture/promo_video.sh` | Records the automated run in 1080p60 with sound and edits the YouTube trailer `export/promo/save_the_sheep.mp4` (needs `ffmpeg`) |
 
 ## 🕹️ More from dupot.org
 

@@ -22,23 +22,23 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/level_01_start.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/e5ebc88b80e1a9802c7117507cf08739b5b47398/export/Linux/screenshots/level_01_start.png</image>
       <caption>Gordon and the sheep at the start of level 1</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/level_01_gate.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/e5ebc88b80e1a9802c7117507cf08739b5b47398/export/Linux/screenshots/level_01_gate.png</image>
       <caption>Jump over the gate, then open it for the sheep</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/level_01_trex.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/e5ebc88b80e1a9802c7117507cf08739b5b47398/export/Linux/screenshots/level_01_trex.png</image>
       <caption>Blast the T-Rex with the water gun</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/bonus_level.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/e5ebc88b80e1a9802c7117507cf08739b5b47398/export/Linux/screenshots/bonus_level.png</image>
       <caption>Motorbike bonus level</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/main/export/Linux/screenshots/menu.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/e5ebc88b80e1a9802c7117507cf08739b5b47398/export/Linux/screenshots/menu.png</image>
       <caption>Main menu</caption>
     </screenshot>
   </screenshots>
@@ -48,6 +48,16 @@
   <update_contact>imikado@gmail.com</update_contact>
   <content_rating type="oars-1.1"/>
   <releases>
+
+
+
+    <release date="2026-10-11" version="1.9.1">
+      <description>
+        <ul>
+          <li>Update screenshots</li>
+        </ul>
+      </description>
+    </release>
 
 
     <release date="2026-10-10" version="1.9.0">
