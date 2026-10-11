@@ -1,18 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://g6loon2js4i6"]
+[gd_scene format=3 uid="uid://g6loon2js4i6"]
 
 [ext_resource type="Script" uid="uid://cdgc12fic0tp4" path="res://src/UI/hud.gd" id="1_j2vg7"]
 [ext_resource type="Texture2D" uid="uid://cu7k7lf7s13xt" path="res://src/UI/Controls/Shared/icon-player.png" id="1_rd6rf"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="2_g12wp"]
 [ext_resource type="Texture2D" uid="uid://bdia6rq4j7acw" path="res://src/UI/Controls/Shared/icon-sheep.png" id="3_ebnga"]
-[ext_resource type="Script" path="res://src/UI/Controls/PixelBar.gd" id="4_pxbar"]
+[ext_resource type="Script" uid="uid://doxs6thpe8c7n" path="res://src/UI/Controls/PixelBar.gd" id="4_pxbar"]
 [ext_resource type="Texture2D" uid="uid://lsjrtiaxlhgk" path="res://src/UI/Controls/Shared/icon-water.png" id="5_l1ffq"]
 [ext_resource type="Texture2D" uid="uid://cwqvxktp1g6x5" path="res://src/UI/Controls/Shared/icon-key.png" id="6_aqumb"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=1152574838]
 script = ExtResource("1_j2vg7")
 metadata/_edit_vertical_guides_ = [19.0, 5.0]
 
-[node name="StatsPanel" type="Panel" parent="."]
+[node name="StatsPanel" type="Panel" parent="." unique_id=1484435202]
 self_modulate = Color(1, 1, 1, 0.85)
 offset_left = 2.0
 offset_top = 2.0
@@ -20,7 +20,7 @@ offset_right = 130.0
 offset_bottom = 58.0
 theme = ExtResource("2_g12wp")
 
-[node name="Player" type="Control" parent="."]
+[node name="Player" type="Control" parent="." unique_id=218478371]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 5.0
@@ -28,22 +28,22 @@ offset_top = 5.0
 offset_right = 125.0
 offset_bottom = 21.0
 
-[node name="icon" type="TextureRect" parent="Player"]
+[node name="icon" type="TextureRect" parent="Player" unique_id=1129494698]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 pivot_offset = Vector2(8, 8)
 texture = ExtResource("1_rd6rf")
 
-[node name="lifeBar" type="Control" parent="Player"]
-layout_mode = 0
+[node name="lifeBar" type="Control" parent="Player" unique_id=1357915054]
+anchors_preset = 0
 offset_left = 18.0
 offset_top = 4.0
 offset_right = 120.0
 offset_bottom = 12.0
 script = ExtResource("4_pxbar")
 
-[node name="Sheep" type="Control" parent="."]
+[node name="Sheep" type="Control" parent="." unique_id=819595799]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 5.0
@@ -51,15 +51,15 @@ offset_top = 22.0
 offset_right = 75.0
 offset_bottom = 38.0
 
-[node name="icon" type="TextureRect" parent="Sheep"]
+[node name="icon" type="TextureRect" parent="Sheep" unique_id=1706994659]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 pivot_offset = Vector2(8, 8)
 texture = ExtResource("3_ebnga")
 
-[node name="lifeBar" type="Control" parent="Sheep"]
-layout_mode = 0
+[node name="lifeBar" type="Control" parent="Sheep" unique_id=773988694]
+anchors_preset = 0
 offset_left = 18.0
 offset_top = 4.0
 offset_right = 70.0
@@ -68,7 +68,7 @@ script = ExtResource("4_pxbar")
 max_value = 50.0
 segment_size = 5.0
 
-[node name="Water" type="Control" parent="."]
+[node name="Water" type="Control" parent="." unique_id=946161868]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 5.0
@@ -76,15 +76,15 @@ offset_top = 39.0
 offset_right = 75.0
 offset_bottom = 55.0
 
-[node name="icon" type="TextureRect" parent="Water"]
+[node name="icon" type="TextureRect" parent="Water" unique_id=1641298679]
 layout_mode = 0
 offset_right = 16.0
 offset_bottom = 16.0
 pivot_offset = Vector2(8, 8)
 texture = ExtResource("5_l1ffq")
 
-[node name="lifeBar" type="Control" parent="Water"]
-layout_mode = 0
+[node name="lifeBar" type="Control" parent="Water" unique_id=2029993754]
+anchors_preset = 0
 offset_left = 18.0
 offset_top = 4.0
 offset_right = 70.0
@@ -98,22 +98,24 @@ heal_color = Color(0.67451, 0.913725, 1, 1)
 low_ratio = 0.0
 show_numbers = false
 
-[node name="scorePanel" type="Panel" parent="."]
+[node name="scorePanel" type="Panel" parent="." unique_id=1804145073]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -30.0
 offset_top = 2.0
 offset_right = 30.0
-offset_bottom = 18.0
+offset_bottom = 24.0
 grow_horizontal = 2
 theme = ExtResource("2_g12wp")
 
-[node name="scoreLabel" type="Label" parent="scorePanel"]
+[node name="scoreLabel" type="Label" parent="scorePanel" unique_id=1168882906]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
@@ -121,13 +123,13 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Items" type="Control" parent="."]
+[node name="Items" type="Control" parent="." unique_id=1976266743]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="keyIcon" type="TextureRect" parent="Items"]
+[node name="keyIcon" type="TextureRect" parent="Items" unique_id=2034855872]
 layout_mode = 0
 offset_left = 82.0
 offset_top = 39.0
@@ -136,13 +138,13 @@ offset_bottom = 55.0
 pivot_offset = Vector2(8, 8)
 texture = ExtResource("6_aqumb")
 
-[node name="LevelProgression" type="Control" parent="."]
+[node name="LevelProgression" type="Control" parent="." unique_id=927249]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="trackOutline" type="ColorRect" parent="LevelProgression"]
+[node name="trackOutline" type="ColorRect" parent="LevelProgression" unique_id=1813200441]
 layout_mode = 0
 offset_left = 290.0
 offset_top = 12.0
@@ -150,7 +152,7 @@ offset_right = 479.0
 offset_bottom = 17.0
 color = Color(0, 0, 0.0588235, 0.85)
 
-[node name="ColorRect" type="ColorRect" parent="LevelProgression"]
+[node name="ColorRect" type="ColorRect" parent="LevelProgression" unique_id=798303935]
 layout_mode = 0
 offset_left = 291.0
 offset_top = 13.0
@@ -158,7 +160,7 @@ offset_right = 478.0
 offset_bottom = 16.0
 color = Color(0.360784, 0.380392, 0.835294, 1)
 
-[node name="trackLight" type="ColorRect" parent="LevelProgression"]
+[node name="trackLight" type="ColorRect" parent="LevelProgression" unique_id=1325512797]
 layout_mode = 0
 offset_left = 291.0
 offset_top = 13.0
@@ -166,7 +168,7 @@ offset_right = 478.0
 offset_bottom = 14.0
 color = Color(0.627451, 0.647059, 0.960784, 1)
 
-[node name="flagPole" type="ColorRect" parent="LevelProgression"]
+[node name="flagPole" type="ColorRect" parent="LevelProgression" unique_id=1632223243]
 layout_mode = 0
 offset_left = 476.0
 offset_top = 4.0
@@ -174,7 +176,7 @@ offset_right = 477.0
 offset_bottom = 13.0
 color = Color(0.92549, 0.937255, 1, 1)
 
-[node name="flag" type="ColorRect" parent="LevelProgression"]
+[node name="flag" type="ColorRect" parent="LevelProgression" unique_id=426779286]
 layout_mode = 0
 offset_left = 472.0
 offset_top = 4.0
@@ -182,7 +184,7 @@ offset_right = 476.0
 offset_bottom = 7.0
 color = Color(1, 0.27451, 0.27451, 1)
 
-[node name="player" type="TextureRect" parent="LevelProgression"]
+[node name="player" type="TextureRect" parent="LevelProgression" unique_id=229738199]
 layout_mode = 0
 offset_left = 290.0
 offset_top = 6.0
@@ -191,7 +193,7 @@ offset_bottom = 22.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_rd6rf")
 
-[node name="sheep" type="TextureRect" parent="LevelProgression"]
+[node name="sheep" type="TextureRect" parent="LevelProgression" unique_id=40653150]
 layout_mode = 0
 offset_left = 290.0
 offset_top = 14.0
@@ -200,8 +202,8 @@ offset_bottom = 30.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_ebnga")
 
-[node name="Marker2D" type="Marker2D" parent="LevelProgression"]
+[node name="Marker2D" type="Marker2D" parent="LevelProgression" unique_id=1846604305]
 position = Vector2(292, 14)
 
-[node name="Marker2D2" type="Marker2D" parent="LevelProgression"]
+[node name="Marker2D2" type="Marker2D" parent="LevelProgression" unique_id=1833092029]
 position = Vector2(477, 15)

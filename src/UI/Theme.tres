@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://x8cuq78vtr4p" path="res://src/UI/Controls/Shared/button.png" id="2_btn"]
 [ext_resource type="Texture2D" uid="uid://cgbo2336t260y" path="res://src/UI/Controls/Shared/buttonPressed.png" id="3_btnp"]
 [ext_resource type="Texture2D" uid="uid://indmu7kpkbfk" path="res://src/UI/Controls/Shared/buttonHover.png" id="4_btnh"]
-[ext_resource type="Texture2D" path="res://src/UI/Controls/Shared/panel.png" id="5_panel"]
+[ext_resource type="Texture2D" uid="uid://cot8js5udgrf6" path="res://src/UI/Controls/Shared/panel.png" id="5_panel"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBox_disabled"]
 content_margin_left = 6.0

@@ -27,6 +27,29 @@ for f in "$FLATPAK_DIR/$APP_ID.appdata.xml" "$FLATPAK_DIR/$APP_ID.desktop" "$FLA
 	fi
 done
 
+# Screenshots de l'appdata : Flathub refuse les URL sur une branche (main), qui
+# casseraient les liens si les fichiers changent. On les fait pointer sur le
+# dernier commit (déjà poussé) qui a modifié les screenshots.
+APPDATA="$FLATPAK_DIR/$APP_ID.appdata.xml"
+SCREENSHOTS_DIR="$LINUX_DIR/screenshots"
+if [ -n "$(git status --porcelain -- "$SCREENSHOTS_DIR")" ]; then
+	echo "Screenshots modifiés non commités ($SCREENSHOTS_DIR) : commiter et pousser d'abord" >&2
+	exit 1
+fi
+SCREENSHOTS_COMMIT="$(git log -1 --format=%H -- "$SCREENSHOTS_DIR")"
+if [ -z "$(git branch -r --contains "$SCREENSHOTS_COMMIT")" ]; then
+	echo "Le commit $SCREENSHOTS_COMMIT des screenshots n'est pas poussé : git push d'abord" >&2
+	exit 1
+fi
+sed -i -E "s|(https://raw\.githubusercontent\.com/[^/]+/[^/]+/)[^/]+(/$SCREENSHOTS_DIR/)|\1$SCREENSHOTS_COMMIT\2|g" "$APPDATA"
+for image in $(grep -oP "raw\.githubusercontent\.com/[^/]+/[^/]+/$SCREENSHOTS_COMMIT/\K[^<]+" "$APPDATA"); do
+	if ! git cat-file -e "$SCREENSHOTS_COMMIT:$image" 2>/dev/null; then
+		echo "Screenshot absent du commit $SCREENSHOTS_COMMIT : $image" >&2
+		exit 1
+	fi
+done
+echo "Screenshots : commit $SCREENSHOTS_COMMIT"
+
 # Godot ne doit pas importer (ni embarquer dans le .pck) les fichiers exportés
 mkdir -p export
 touch export/.gdignore
