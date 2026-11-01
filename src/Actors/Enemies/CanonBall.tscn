@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4bv3rslp1lt8" path="res://src/Actors/Enemies/CanonBall.gd" id="1_lqbk5"]
 [ext_resource type="Texture2D" uid="uid://csd4bo7m3vggt" path="res://src/Actors/Enemies/CanonRex/fireball.png" id="1_x7k3o"]
+[ext_resource type="Material" path="res://src/Shared/outline_enemy.tres" id="outline_mat"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8r3yf"]
 atlas = ExtResource("1_x7k3o")
@@ -58,6 +59,7 @@ z_as_relative = false
 script = ExtResource("1_lqbk5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("outline_mat")
 sprite_frames = SubResource("SpriteFrames_tin4k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

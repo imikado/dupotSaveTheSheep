@@ -72,7 +72,7 @@ func _create_buses():
 
 
 func _unhandled_input(event):
-	if event is InputEventKey and event.pressed and !event.echo and event.physical_keycode == KEY_M:
+	if event is InputEventKey and event.pressed and !event.echo and event.keycode == KEY_M:
 		toggle_sound()
 
 

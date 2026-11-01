@@ -5,11 +5,20 @@ extends Control
 func _ready():
 	$AnimatedSprite2D.play()
 	$AnimatedSprite2D2.play()
-	$PlayButton.grab_focus()
+	%PlayButton.grab_focus()
+	%levelDifficulty.get_popup().theme_type_variation = &"BigPopup"
 	$VersionLabel.text = "v" + ProjectSettings.get_setting("application/config/version", "")
 	GlobalAudio.play_music("menu")
 
-	GlobalGame.loadDifficulty(GlobalGame.LEVEL_DIFFICULTY.NORMAL)
+	# Keep the difficulty chosen before the last game
+	%levelDifficulty.selected = GlobalGame.getLevelDifficulty()
+
+	# No keyboard help when playing with touch controls
+	GlobalInput.touch_mode_changed.connect(_on_touch_mode_changed)
+	_on_touch_mode_changed(GlobalInput.is_touch_mode())
+
+func _on_touch_mode_changed(enabled: bool):
+	%KeysPanel.visible = !enabled
 
 func _on_play_button_pressed():
 	GlobalGame.resetGame()

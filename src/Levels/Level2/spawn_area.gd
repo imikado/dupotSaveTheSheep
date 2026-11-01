@@ -13,14 +13,14 @@ func _on_spawn_area_body_entered(body: Node2D) -> void:
 	if (body is not Player):
 		return
 
+	if enemies.get_child_count() > 0:
+		return
+
 	var new_enemy: Enemy;
 
 	if (enemy_type == EnemyType.TREX):
 		new_enemy = TRex.create()
 	else:
-		return
-
-	if enemies.get_child_count() > 0:
 		return
 
  

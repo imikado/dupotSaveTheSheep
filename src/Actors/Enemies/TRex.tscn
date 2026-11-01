@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dn8qnwviam4l8" path="res://src/Actors/Enemies/TRex/StateAttack.gd" id="13_5biad"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="14_b7p82"]
 [ext_resource type="Script" uid="uid://j5afjmhvo1cs" path="res://src/Actors/Enemies/TRex/StateSpawn.gd" id="14_pkt0k"]
+[ext_resource type="Material" path="res://src/Shared/outline_enemy.tres" id="outline_mat"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rkmhm"]
 radius = 15.0
@@ -326,6 +327,7 @@ rotation = -1.63805
 shape = SubResource("CapsuleShape2D_rkmhm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("outline_mat")
 position = Vector2(3, -32)
 texture = ExtResource("2_o6g7j")
 hframes = 2

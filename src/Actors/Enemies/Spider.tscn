@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://dcyov5jmgc4h3" path="res://src/Actors/Enemies/CanonRex/StateDie.gd" id="11_62p77"]
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="12_1rj31"]
 [ext_resource type="PackedScene" uid="uid://3coyyycx2ub3" path="res://src/Levels/Shared/key.tscn" id="13_q6bhu"]
+[ext_resource type="Material" path="res://src/Shared/outline_enemy.tres" id="outline_mat"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k6pno"]
 
@@ -213,6 +214,7 @@ position = Vector2(0, -32)
 texture = ExtResource("4_bgxa4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("outline_mat")
 texture = ExtResource("3_q6bhu")
 hframes = 7
 frame = 2

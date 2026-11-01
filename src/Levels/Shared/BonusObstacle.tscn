@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c848gx4cq2m6h"]
+[gd_scene load_steps=5 format=3 uid="uid://c848gx4cq2m6h"]
 
 [ext_resource type="Script" uid="uid://u6dhm6vk40gd" path="res://src/Levels/Shared/BonusObstacle.gd" id="1_hti5x"]
-[ext_resource type="Texture2D" uid="uid://dr7m2k20aoby2" path="res://src/Levels/Shared/BonusObstacles.png" id="1_nt015"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/bonus_obstacles.png" id="1_nt015"]
+[ext_resource type="Material" path="res://src/Shared/outline_enemy.tres" id="outline_mat"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_udgie"]
 radius = 8.0
@@ -11,10 +12,10 @@ height = 18.0
 script = ExtResource("1_hti5x")
 
 [node name="BonusObstacles" type="Sprite2D" parent="."]
-position = Vector2(-1, -20)
+material = ExtResource("outline_mat")
+position = Vector2(-4, -10)
 texture = ExtResource("1_nt015")
-region_enabled = true
-region_rect = Rect2(0, 160, 64, 40)
+hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4, -4)

@@ -119,7 +119,7 @@ func _create_pause_overlay():
 	box.add_child(title)
 
 	var hint = Label.new()
-	hint.text = "ESC TO RESUME"
+	hint.text = "TAP II TO RESUME" if GlobalInput.is_touch_mode() else "ESC TO RESUME"
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(hint)
 

@@ -12,7 +12,9 @@ func _process(_delta):
 
 
 func _on_body_entered(body):
-	if body is Player or body is Sheep:
+	if body is Player:
+		body.die()
+	elif body is Sheep:
 		GlobalEvents.player_gameover.emit()
 	if body is Enemy and body.has_method('die'):
 		body.die()

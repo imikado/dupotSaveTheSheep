@@ -1,6 +1,7 @@
 extends LevelBase
 
 @onready var _rooms: Node2D = $SubViewportContainer/SubViewport/rooms
+@onready var _sky: ColorRect = $SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground/sky/ColorRect
 
 var score: int = 0
 
@@ -86,6 +87,11 @@ func _ready():
 	#sheep.global_position.x += 740
 
 	debug_hook(currentX)
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	# The moon rises with the buildings when the camera goes down
+	_sky.material.set_shader_parameter("camera_y", -subviewPortMain.canvas_transform.origin.y)
 
 func on_sheep_change_visibility(value):
 	pass

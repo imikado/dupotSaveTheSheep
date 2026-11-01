@@ -18,6 +18,8 @@ const SHOOT_WATER_VALUE = 1
 const DAMAGE_INVULNERABILITY_TIME = 1.0
 const DAMAGE_KNOCKBACK = 160.0
 const DAMAGE_UPWARD_BOUNCE = -90.0
+const DEATH_HOP_VELOCITY = -220.0
+const DEATH_DURATION = 1.2
 
 var _pending_water = 0
 var _pending_life = 0
@@ -26,6 +28,7 @@ var _pending_vehicle = null
 
 var _direction
 var _damage_invulnerability_timer := 0.0
+var _dying := false
 
 var _coyote_timer := 0.0
 var _jump_buffer_timer := 0.0
@@ -49,6 +52,10 @@ signal action_finished
 var _hasKey:bool= false
 
 func _physics_process(delta):
+
+	if _dying:
+		update_dying(delta)
+		return
 
 	if _damage_invulnerability_timer > 0.0:
 		_damage_invulnerability_timer = max(_damage_invulnerability_timer - delta, 0.0)
@@ -261,10 +268,15 @@ func get_current_speed():
 
 
 func hit_damage(damage):
-	if _damage_invulnerability_timer > 0.0:
+	if _dying or _damage_invulnerability_timer > 0.0:
 		return
 
 	_damage_invulnerability_timer = DAMAGE_INVULNERABILITY_TIME
+	# The hit cuts the eating/drinking animation, do not lose what was taken
+	if _pending_life:
+		commit_increase_life()
+	if _pending_water:
+		commit_water()
 	set_new_state(PlayerStateMachine.STATE_DAMAGED)
 	var knockback_direction := 1.0
 	if _direction != 0:
@@ -284,7 +296,44 @@ func hit_damage(damage):
 	GlobalEvents.player_take_damage.emit(damage)
 
 	
+# Fatal fall (wastes): pain hop, then drop through the floor before the game over
+func die():
+	if _dying:
+		return
+	_dying = true
+	_pending_action = null
+	modulate = Color.WHITE
+	velocity = Vector2(0, DEATH_HOP_VELOCITY)
+	collision_layer = 0
+	collision_mask = 0
+	$PlayerArea.set_deferred("monitorable", false)
+	$PlayerArea.set_deferred("monitoring", false)
+	# The level camera follows the player: freeze it so he drops out of the screen
+	var camera := get_viewport().get_camera_2d()
+	if camera != null and camera.get_parent() == self:
+		var camera_position := camera.global_position
+		camera.top_level = true
+		camera.global_position = camera_position
+	set_new_state(PlayerStateMachine.STATE_DYING)
+	var tween := create_tween()
+	tween.tween_property(self, "modulate", Color.RED, 0.1)
+	tween.tween_property(self, "modulate", Color(1.0, 0.6, 0.6), 0.3)
+	Fx.shake(self, 6.0, 0.4)
+	GlobalAudio.play_sfx("player_hurt")
+	get_tree().create_timer(DEATH_DURATION).timeout.connect(GlobalEvents.player_gameover.emit)
+
+func update_dying(delta):
+	velocity.y = min(velocity.y + _gravity * delta, MAX_FALL_SPEED)
+	# Knocked out: upside down once the hop starts falling
+	if velocity.y > 0:
+		_sprite.flip_v = true
+		# Sinks behind the ground instead of falling in front of it
+		z_index = -1
+	position += velocity * delta
+
 func take_water(water_value):
+	if _dying:
+		return
 	_direction = 0
 	velocity.x = 0
 	#velocity.y=0
@@ -305,6 +354,8 @@ func commit_action():
 	_pending_action.action()
 
 func take_burger(value):
+	if _dying:
+		return
 	_direction = 0
 	velocity.x = 0
 	#velocity.y=0

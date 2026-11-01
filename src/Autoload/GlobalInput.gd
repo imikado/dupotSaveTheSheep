@@ -1,5 +1,8 @@
 extends Node
 
+# Emitted when the on-screen touch controls must be shown (true) or hidden (false)
+signal touch_mode_changed(enabled: bool)
+
 const INPUT_CARRY='carry_sheep'
 const INPUT_ATTACK='player_attack'
 const INPUT_JUMP='player_jump'
@@ -11,6 +14,32 @@ const INPUT_LEFT='ui_left'
 const INPUT_RIGHT='ui_right'
 const INPUT_UP='ui_up'
 const INPUT_DOWN='ui_down'
+
+var _touch_mode := false
+
+func _ready() -> void:
+	# Keep listening while the game is paused
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	# Touch controls by default on phones/tablets, the first key or pad button hides them
+	_touch_mode = OS.has_feature("mobile") or OS.has_feature("web_android") or OS.has_feature("web_ios") \
+		or DisplayServer.is_touchscreen_available()
+
+func _input(event: InputEvent) -> void:
+	# Touch events emulated from the mouse (emulate_touch_from_mouse) don't count
+	if event is InputEventScreenTouch and event.pressed and event.device != InputEvent.DEVICE_ID_EMULATION:
+		set_touch_mode(true)
+	elif (event is InputEventKey or event is InputEventJoypadButton) and event.pressed:
+		set_touch_mode(false)
+
+#touch controls
+func is_touch_mode() -> bool:
+	return _touch_mode
+
+func set_touch_mode(enabled: bool) -> void:
+	if enabled == _touch_mode:
+		return
+	_touch_mode = enabled
+	touch_mode_changed.emit(enabled)
 
 func press_jump_button()->void:
 	Input.action_press(INPUT_JUMP)

@@ -48,6 +48,9 @@ var levelScore=0
 
 var currentLevel=0
 
+# Identifies the current game in the high scores
+var _run_id := ""
+
 func saveLevel(newLevel):
 	currentLevel=newLevel
 	
@@ -84,6 +87,9 @@ func isLevelDifficultyEasy():
 func isLevelDifficultyNormal():
 	return _level_difficulty == LEVEL_DIFFICULTY.NORMAL
 
+func getLevelDifficulty() -> LEVEL_DIFFICULTY:
+	return _level_difficulty
+
 
 func loadDifficulty(levelDifficulty: LEVEL_DIFFICULTY):
 	_level_difficulty = levelDifficulty
@@ -110,6 +116,9 @@ func isZoomedCameraMode():
 
 
 func resetGame():
+	# Otherwise game over still offers to replay level 2 from a previous game
+	currentLevel = 0
+	_run_id = str(Time.get_unix_time_from_system())
 	GlobalPlayer.reset_game()
 	GlobalSheep.reset_game()
 
@@ -138,7 +147,13 @@ func saveHighScore(newScoreValue):
 	if newScoreValue <= 0:
 		return
 
-	var newScoreObj = {"score": newScoreValue, "date": dateTimeString}
+	# One line per game: a replay of level 2 updates the line of its game
+	for scoreLoop in highScoreList.duplicate():
+		if _run_id != "" and scoreLoop.get("run", "") == _run_id:
+			newScoreValue = max(newScoreValue, scoreLoop.score)
+			highScoreList.erase(scoreLoop)
+
+	var newScoreObj = {"score": newScoreValue, "date": dateTimeString, "run": _run_id}
 
 	highScoreList.append(newScoreObj)
 	highScoreList.sort_custom(func(a, b): return a.score > b.score)

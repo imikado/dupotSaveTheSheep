@@ -14,6 +14,7 @@ script = ExtResource("1_jgm7b")
 [node name="decor" type="Node2D" parent="."]
 
 [node name="building" type="TileMapLayer" parent="decor"]
+self_modulate = Color(0.78, 0.78, 0.86, 1)
 use_parent_material = true
 position = Vector2(0, 16)
 tile_map_data = PackedByteArray("AAAHAAYAAAACAAIAAAAHAAMAAAACAAAAAAAGAAMAAAABAAAAAAAGAAQAAAABAAEAAAAGAAUAAAABAAEAAAAHAAUAAAACAAEAAAAHAAQAAAACAAEAAAAFAAUAAAABAAEAAAAFAAQAAAABAAEAAAAFAAMAAAABAAAAAAAEAAQAAAABAAEAAAADAAQAAAABAAEAAAAGAAYAAAABAAIAAAAFAAYAAAABAAIAAAAEAAYAAAABAAIAAAADAAYAAAABAAIAAAAEAAUAAAABAAEAAAADAAUAAAABAAEAAAAEAAMAAAABAAAAAAADAAMAAAABAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAEAAAACAAYAAAAAAAIAAAACAAUAAAAAAAEAAAA=")
@@ -41,7 +42,7 @@ region_rect = Rect2(0, 0, 64, 64)
 position = Vector2(-1, 15)
 
 [node name="Gate" parent="decor/gates" instance=ExtResource("3_78nxm")]
-position = Vector2(285, 303)
+position = Vector2(285, 302)
 
 [node name="Ground" type="TileMapLayer" parent="decor" groups=["ground"]]
 use_parent_material = true
@@ -53,7 +54,7 @@ rendering_quadrant_size = 32
 position = Vector2(236, 334)
 
 [node name="WaterBottle" parent="decor" instance=ExtResource("5_7csw6")]
-position = Vector2(113, 185)
+position = Vector2(113, 184)
 
 [node name="Door" parent="decor" instance=ExtResource("7_w8dgg")]
 position = Vector2(237.5, 316.5)

@@ -155,13 +155,13 @@ _export_label = "Next level"
 [node name="HUD" parent="." instance=ExtResource("8_ke4nq")]
 
 [node name="motorBikeLifes" parent="HUD" instance=ExtResource("11_i8lm0")]
-offset_left = -1.0
-offset_top = 46.0
-offset_right = 39.0
-offset_bottom = 86.0
+offset_left = 2.0
+offset_top = 60.0
+offset_right = 88.0
+offset_bottom = 80.0
 
 [node name="Controls" parent="." instance=ExtResource("11_qxesv")]
-joystick = false
+moveButtons = false
 attackButton = false
 actionButton = false
 

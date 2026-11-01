@@ -1,59 +1,74 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1xgtixrulnpc"]
+[gd_scene load_steps=11 format=3 uid="uid://c1xgtixrulnpc"]
 
-[ext_resource type="Texture2D" uid="uid://ok037v16yv23" path="res://src/Levels/Shared/BonusBackground.png" id="1_jdxgx"]
-[ext_resource type="Texture2D" uid="uid://dboaqd1fqmcop" path="res://src/Levels/Shared/BonusBackground2.png" id="2_ntpup"]
-[ext_resource type="Texture2D" uid="uid://dcx6ic2clucjh" path="res://src/Levels/Shared/BonusBackground1.png" id="3_qdu4j"]
-[ext_resource type="Texture2D" uid="uid://durhismdkjit2" path="res://src/Levels/Shared/BonusBackground3.png" id="4_aujni"]
-[ext_resource type="Texture2D" uid="uid://dcudk15ji4t0o" path="res://src/Levels/Shared/BonusRoad.png" id="5_q8iyv"]
+[ext_resource type="Shader" path="res://src/Levels/Shared/sunset_sky.gdshader" id="1_sky"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/bonus_clouds.png" id="2_clouds"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/bonus_mesas_far.png" id="3_mesas"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/bonus_buttes.png" id="4_buttes"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/bonus_dunes.png" id="5_dunes"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/bonus_cacti.png" id="6_cacti"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/bonus_road.png" id="7_road"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
+shader = ExtResource("1_sky")
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(224.5, 138.5)
-scale = Vector2(1.4175, 0.8675)
-texture = ExtResource("1_jdxgx")
+[node name="Sky" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_sky")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+[node name="Clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.2, 1)
+motion_mirroring = Vector2(500, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Clouds"]
+texture = ExtResource("2_clouds")
+centered = false
+
+[node name="Mesas" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.4, 1)
+motion_mirroring = Vector2(500, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Mesas"]
+position = Vector2(0, 47)
+texture = ExtResource("3_mesas")
+centered = false
+
+[node name="Buttes" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.6, 1)
 motion_mirroring = Vector2(500, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
-position = Vector2(0, 24)
-texture = ExtResource("2_ntpup")
+[node name="Sprite2D" type="Sprite2D" parent="Buttes"]
+position = Vector2(0, 47)
+texture = ExtResource("4_buttes")
 centered = false
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
-motion_scale = Vector2(0.7, 1)
+[node name="Dunes" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.75, 1)
 motion_mirroring = Vector2(500, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
-position = Vector2(0, 12)
-texture = ExtResource("3_qdu4j")
+[node name="Sprite2D" type="Sprite2D" parent="Dunes"]
+position = Vector2(0, 47)
+texture = ExtResource("5_dunes")
 centered = false
 
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
-motion_scale = Vector2(0.8, 1)
-motion_mirroring = Vector2(500, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
-self_modulate = Color(0.407843, 0.219608, 0.0627451, 1)
-position = Vector2(0, 46)
-texture = ExtResource("4_aujni")
-centered = false
-flip_h = true
-
-[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+[node name="Cacti" type="ParallaxLayer" parent="."]
 motion_scale = Vector2(0.9, 1)
 motion_mirroring = Vector2(500, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
-position = Vector2(0, 46)
-texture = ExtResource("4_aujni")
+[node name="Sprite2D" type="Sprite2D" parent="Cacti"]
+position = Vector2(0, 47)
+texture = ExtResource("6_cacti")
 centered = false
 
-[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+[node name="Road" type="ParallaxLayer" parent="."]
 motion_mirroring = Vector2(1000, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer5"]
+[node name="Sprite2D" type="Sprite2D" parent="Road"]
 position = Vector2(501, 262)
-texture = ExtResource("5_q8iyv")
+texture = ExtResource("7_road")

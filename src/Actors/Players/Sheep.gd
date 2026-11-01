@@ -20,6 +20,7 @@ var last_direction=0
 var next_direction=0
 var _pending_vehicle=null
 var _damage_invulnerability_timer := 0.0
+var _state_before_damage=SheepStateMachine.STATE_WALKING
 
 func walk_right():
 	direction=1
@@ -109,6 +110,8 @@ func hit_damage(damage):
 		return
 
 	_damage_invulnerability_timer = DAMAGE_INVULNERABILITY_TIME
+	if get_current_state().name != SheepStateMachine.STATE_DAMAGED:
+		_state_before_damage=get_current_state().name
 	set_new_state(SheepStateMachine.STATE_DAMAGED)
 	var knockback_direction := 1.0
 	if direction != 0:
@@ -118,6 +121,9 @@ func hit_damage(damage):
 	else:
 		knockback_direction = -1.0
 	velocity.x = knockback_direction * DAMAGE_KNOCKBACK
+	# Waiting on an elevator: a knockback would throw it off the platform
+	if _state_before_damage == SheepStateMachine.STATE_IDLE:
+		velocity.x = 0
 	velocity.y = min(velocity.y, DAMAGE_UPWARD_BOUNCE)
 	Fx.flash(self, Color(2.5, 0.5, 0.5))
 	Fx.burst(get_parent(), global_position + Vector2(0, -8), Color.WHITE, 6, 30.0)
@@ -125,7 +131,12 @@ func hit_damage(damage):
 	GlobalAudio.play_sfx("sheep_hurt", 0.06)
 	
 	GlobalEvents.sheep_take_damage.emit(damage)
-	
+
+# Knockback is over: back to what the sheep was doing (walking, turning,
+# waiting on an elevator...), otherwise a stopped sheep keeps sliding
+func end_damage():
+	velocity.x=0
+	set_new_state(_state_before_damage)
 
 func set_pending_vehicle(pending_vehicle):
 	_pending_vehicle=pending_vehicle

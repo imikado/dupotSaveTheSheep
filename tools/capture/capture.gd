@@ -39,6 +39,9 @@ func _initialize():
 	GlobalSheep = root.get_node("GlobalSheep")
 	GlobalInput = root.get_node("GlobalInput")
 	GlobalTransition = root.get_node("GlobalTransition")
+	# Keyboard look (keys help, no touch buttons) even on a touchscreen PC.
+	# Deferred: GlobalInput detects the touchscreen in its _ready, after this
+	GlobalInput.set_touch_mode.call_deferred(false)
 	change_scene_to_file("res://src/UI/Screens/Menu.tscn")
 
 func _process(delta):

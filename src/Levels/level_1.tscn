@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://ddb64nkhhqu10"]
 
 [ext_resource type="Script" uid="uid://cebojn86fvrxg" path="res://src/Levels/level_1.gd" id="1_dueoc"]
-[ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="2_shrth"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/city_far.png" id="2_cfar"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/city_mid.png" id="2_cmid"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/city_near.png" id="2_cnear"]
 [ext_resource type="PackedScene" uid="uid://d3x04dxvstr1p" path="res://src/Levels/end_level.tscn" id="3_7yc5k"]
 [ext_resource type="PackedScene" uid="uid://g6loon2js4i6" path="res://src/UI/hud.tscn" id="3_551fq"]
 [ext_resource type="PackedScene" uid="uid://tum3fvl70kwc" path="res://src/UI/Screens/game_over.tscn" id="3_hfvnw"]
 [ext_resource type="PackedScene" uid="uid://c1mvj56pgyil6" path="res://src/Shared/Controls.tscn" id="4_6nqc5"]
 [ext_resource type="PackedScene" uid="uid://dld0jkheienqb" path="res://src/Actors/Players/Player.tscn" id="5_ywn7s"]
 [ext_resource type="PackedScene" uid="uid://detnxs05jctwf" path="res://src/Actors/Players/Sheep.tscn" id="6_egxy8"]
-[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_material.tres" id="7_nsky"]
+[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_level_material.tres" id="7_nsky"]
 [ext_resource type="Material" path="res://src/Levels/Shared/night_sky_minimap_material.tres" id="8_nsky"]
 
 [node name="Level_1" type="Node2D" unique_id=791372167]
@@ -56,24 +58,34 @@ offset_right = 4511.0
 offset_bottom = 2578.0
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground" unique_id=1341608829]
-motion_scale = Vector2(0.5, 0.5)
+[node name="Far" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground"]
+modulate = Color(0.66, 0.64, 0.74, 1)
+motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(1920, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground/ParallaxLayer" unique_id=815719841]
-modulate = Color(0.235294, 0.360784, 0.45098, 1)
-position = Vector2(-212, -161)
-texture = ExtResource("2_shrth")
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground/Far"]
+position = Vector2(0, -200)
+texture = ExtResource("2_cfar")
 centered = false
-flip_h = true
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground" unique_id=1205248342]
+[node name="Mid" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground"]
+modulate = Color(0.66, 0.66, 0.82, 1)
 motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(1920, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground/ParallaxLayer2" unique_id=212498247]
-position = Vector2(-266, -172)
-texture = ExtResource("2_shrth")
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground/Mid"]
+position = Vector2(0, -172)
+texture = ExtResource("2_cmid")
+centered = false
+
+[node name="Near" type="ParallaxLayer" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground"]
+modulate = Color(0.3, 0.31, 0.42, 1)
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/Player/Camera2D/ParallaxBackground/Near"]
+position = Vector2(0, -161)
+texture = ExtResource("2_cnear")
 centered = false
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1492661788]
@@ -115,24 +127,34 @@ offset_right = 4511.0
 offset_bottom = 2578.0
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground" unique_id=547372524]
-motion_scale = Vector2(0.5, 0.5)
+[node name="Far" type="ParallaxLayer" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground"]
+modulate = Color(0.66, 0.64, 0.74, 1)
+motion_scale = Vector2(0.2, 0.2)
 motion_mirroring = Vector2(1920, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground/ParallaxLayer" unique_id=1941373754]
-modulate = Color(0.235294, 0.360784, 0.45098, 1)
-position = Vector2(-212, -161)
-texture = ExtResource("2_shrth")
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground/Far"]
+position = Vector2(0, -200)
+texture = ExtResource("2_cfar")
 centered = false
-flip_h = true
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground" unique_id=763077353]
+[node name="Mid" type="ParallaxLayer" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground"]
+modulate = Color(0.66, 0.66, 0.82, 1)
 motion_scale = Vector2(0.3, 0.3)
 motion_mirroring = Vector2(1920, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground/ParallaxLayer2" unique_id=1776635739]
-position = Vector2(-266, -172)
-texture = ExtResource("2_shrth")
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground/Mid"]
+position = Vector2(0, -172)
+texture = ExtResource("2_cmid")
+centered = false
+
+[node name="Near" type="ParallaxLayer" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground"]
+modulate = Color(0.3, 0.31, 0.42, 1)
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D/ParallaxBackground/Near"]
+position = Vector2(0, -161)
+texture = ExtResource("2_cnear")
 centered = false
 
 [node name="HUD" parent="." unique_id=1283993506 node_paths=PackedStringArray("player", "sheep") instance=ExtResource("3_551fq")]

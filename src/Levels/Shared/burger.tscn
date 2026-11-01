@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1w0rlg6tp4hk" path="res://src/Levels/Shared/burger.gd" id="1_ikbhv"]
 [ext_resource type="Texture2D" uid="uid://binbewqb3nurp" path="res://src/Levels/Shared/burger.png" id="1_s4u8b"]
+[ext_resource type="Material" path="res://src/Shared/outline_pickup.tres" id="outline_mat"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bwyip"]
 size = Vector2(9, 20)
@@ -10,6 +11,7 @@ size = Vector2(9, 20)
 script = ExtResource("1_ikbhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("outline_mat")
 modulate = Color(0.470588, 0.435294, 0.345098, 1)
 position = Vector2(-9, -13)
 texture = ExtResource("1_s4u8b")

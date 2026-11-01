@@ -1,11 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://tum3fvl70kwc"]
+[gd_scene format=3 uid="uid://tum3fvl70kwc"]
 
-[ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_16ec8"]
 [ext_resource type="Script" uid="uid://bi3u1otqxlfos" path="res://src/UI/Screens/game_over.gd" id="1_hyqxp"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="3_mrugd"]
 [ext_resource type="Material" path="res://src/Levels/Shared/night_sky_material.tres" id="4_sky"]
 [ext_resource type="Texture2D" uid="uid://dwgtnytv618hp" path="res://src/Actors/Players/Player/player-damaged.png" id="5_player"]
 [ext_resource type="Texture2D" uid="uid://fbwdh14dxymg" path="res://src/Actors/Players/Sheep/sheep-seated.png" id="6_sheep"]
+[ext_resource type="Shader" path="res://src/UI/Screens/title_outline.gdshader" id="7_outline"]
+[ext_resource type="FontFile" uid="uid://clvttg6gbi4aq" path="res://src/UI/Controls/Shared/Pixeled.ttf" id="8_font"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_outline"]
+shader = ExtResource("7_outline")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_outline_flipped"]
+shader = ExtResource("7_outline")
+shader_parameter/shadow_offset = Vector2(-1, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_table"]
+base_font = ExtResource("8_font")
+spacing_top = -8
+spacing_bottom = -5
+
+[sub_resource type="Theme" id="Theme_table"]
+Label/fonts/font = SubResource("FontVariation_table")
 
 [node name="GameOver" type="Node2D"]
 script = ExtResource("1_hyqxp")
@@ -20,55 +36,61 @@ color = Color(0, 0.207843, 0.309804, 1)
 
 [node name="ground" type="ColorRect" parent="."]
 offset_left = 150.0
-offset_top = 118.0
+offset_top = 116.0
 offset_right = 330.0
-offset_bottom = 122.0
+offset_bottom = 120.0
 color = Color(0.12, 0.1, 0.24, 1)
 
 [node name="groundTop" type="ColorRect" parent="ground"]
-layout_mode = 0
 offset_right = 180.0
 offset_bottom = 1.0
 color = Color(0.360784, 0.380392, 0.835294, 1)
 
 [node name="player" type="Sprite2D" parent="."]
-position = Vector2(210, 56)
+material = SubResource("ShaderMaterial_outline")
+position = Vector2(210, 54)
 scale = Vector2(2, 2)
 texture = ExtResource("5_player")
 hframes = 3
 frame = 2
 
 [node name="sheep" type="Sprite2D" parent="."]
-position = Vector2(272, 56)
+material = SubResource("ShaderMaterial_outline_flipped")
+position = Vector2(272, 54)
 scale = Vector2(2, 2)
 texture = ExtResource("6_sheep")
 flip_h = true
 hframes = 3
 frame = 2
 
-[node name="Label" type="Label" parent="."]
-offset_top = 0.0
+[node name="Title" type="Label" parent="."]
+offset_top = -8.0
 offset_right = 480.0
-offset_bottom = 36.0
+offset_bottom = 32.0
 theme = ExtResource("3_mrugd")
 theme_override_colors/font_color = Color(1, 0.27451, 0.27451, 1)
+theme_override_colors/font_shadow_color = Color(0.290196, 0.0313726, 0.0745098, 1)
+theme_override_colors/font_outline_color = Color(0.0392157, 0.054902, 0.164706, 1)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
 theme_override_font_sizes/font_size = 24
 text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="scorePanel" type="PanelContainer" parent="."]
-offset_left = 160.0
-offset_top = 128.0
-offset_right = 320.0
+offset_left = 164.0
+offset_top = 126.0
+offset_right = 316.0
 offset_bottom = 176.0
 theme = ExtResource("3_mrugd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="scorePanel"]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme = SubResource("Theme_table")
+theme_override_constants/separation = 3
 alignment = 1
 
 [node name="score" type="HBoxContainer" parent="scorePanel/VBoxContainer"]
@@ -86,6 +108,11 @@ theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
 text = "0"
 horizontal_alignment = 2
 
+[node name="Separator" type="ColorRect" parent="scorePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.360784, 0.380392, 0.835294, 0.5)
+
 [node name="best" type="HBoxContainer" parent="scorePanel/VBoxContainer"]
 layout_mode = 2
 
@@ -101,33 +128,64 @@ theme_override_colors/font_color = Color(0.92549, 0.937255, 1, 1)
 text = "0"
 horizontal_alignment = 2
 
+[node name="Separator2" type="ColorRect" parent="scorePanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.360784, 0.380392, 0.835294, 0.5)
+
+[node name="rank" type="HBoxContainer" parent="scorePanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="scorePanel/VBoxContainer/rank"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.627451, 0.647059, 0.960784, 1)
+text = "RANK"
+
+[node name="rankLabel" type="Label" parent="scorePanel/VBoxContainer/rank"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92549, 0.937255, 1, 1)
+text = "-"
+horizontal_alignment = 2
+
 [node name="recordLabel" type="Label" parent="."]
 visible = false
-offset_left = 250.0
-offset_top = 116.0
-offset_right = 340.0
-offset_bottom = 136.0
-rotation = 0.0872665
+offset_left = 318.0
+offset_top = 128.0
+offset_right = 398.0
+offset_bottom = 144.0
+pivot_offset = Vector2(40, 8)
+rotation = 0.10472
 theme = ExtResource("3_mrugd")
-theme_override_colors/font_color = Color(0.5, 1, 0.5, 1)
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.0784314, 0.0784314, 1)
+theme_override_constants/outline_size = 4
 text = "NEW RECORD!"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LabelButton" parent="." instance=ExtResource("1_16ec8")]
-offset_left = 176.0
-offset_top = 186.0
-offset_right = 304.0
-offset_bottom = 218.0
-focus_neighbor_bottom = NodePath("../replayButton")
-_export_label = "menu"
+[node name="Buttons" type="HBoxContainer" parent="."]
+offset_left = 120.0
+offset_top = 188.0
+offset_right = 360.0
+offset_bottom = 216.0
+theme = ExtResource("3_mrugd")
+theme_override_constants/separation = 8
+alignment = 1
 
-[node name="replayButton" parent="." instance=ExtResource("1_16ec8")]
-offset_left = 176.0
-offset_top = 224.0
-offset_right = 304.0
-offset_bottom = 256.0
-focus_neighbor_top = NodePath("../LabelButton")
-_export_label = "Replay"
+[node name="menuButton" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(104, 28)
+layout_mode = 2
+focus_neighbor_right = NodePath("../replayButton")
+theme_type_variation = &"BigButton"
+text = "MENU"
 
-[connection signal="pressed" from="LabelButton" to="." method="_on_label_button_pressed"]
-[connection signal="pressed" from="replayButton" to="." method="_on_replay_button_pressed"]
+[node name="replayButton" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(104, 28)
+layout_mode = 2
+focus_neighbor_left = NodePath("../menuButton")
+theme_type_variation = &"BigButton"
+text = "REPLAY"
+
+[connection signal="pressed" from="Buttons/menuButton" to="." method="_on_label_button_pressed"]
+[connection signal="pressed" from="Buttons/replayButton" to="." method="_on_replay_button_pressed"]

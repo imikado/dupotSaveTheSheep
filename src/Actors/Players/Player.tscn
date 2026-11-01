@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dld0jkheienqb"]
+[gd_scene load_steps=48 format=3 uid="uid://dld0jkheienqb"]
 
 [ext_resource type="Script" uid="uid://b3wtrbjlqowwv" path="res://src/Actors/Players/Player.gd" id="1_p8sjd"]
 [ext_resource type="Texture2D" uid="uid://cpd0lts7lrx6l" path="res://src/Actors/Players/Player/player-impatient.png" id="2_a4qs2"]
@@ -28,6 +28,8 @@
 [ext_resource type="Script" uid="uid://bvdylwsbyus0q" path="res://src/Actors/Players/States/PlayerStateTakingWater.gd" id="23_k76g4"]
 [ext_resource type="Script" uid="uid://b0tplmx8nidk8" path="res://src/Actors/Players/States/PlayerStateAction.gd" id="25_xm24d"]
 [ext_resource type="Script" uid="uid://emex2pu1si3e" path="res://src/Actors/Players/States/PlayerStateTakingBurger.gd" id="27_7g25p"]
+[ext_resource type="Material" path="res://src/Shared/outline_ally.tres" id="outline_mat"]
+[ext_resource type="Script" path="res://src/Actors/Players/States/PlayerStateDying.gd" id="28_dying"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_moofm"]
 radius = 7.0
@@ -111,6 +113,47 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_dying"]
+resource_name = "Dying"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("10_bnd8c")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_r1fmr"]
@@ -584,6 +627,7 @@ tracks/2/keys = {
 _data = {
 &"Action": SubResource("Animation_410p0"),
 &"Damaged": SubResource("Animation_kir8g"),
+&"Dying": SubResource("Animation_dying"),
 &"Edge": SubResource("Animation_r1fmr"),
 &"Fall": SubResource("Animation_nm7gl"),
 &"Idle": SubResource("Animation_1yvd8"),
@@ -606,6 +650,7 @@ script = ExtResource("1_p8sjd")
 _muzzleMarker2d = NodePath("muzzleMarker2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("outline_mat")
 position = Vector2(0, -32)
 texture = ExtResource("2_iw2qg")
 hframes = 5
@@ -702,6 +747,12 @@ animation_name = "Action"
 script = ExtResource("27_7g25p")
 can_idle = false
 animation_name = "TakingBurger"
+
+[node name="StateDying" type="Node" parent="StateMachine"]
+script = ExtResource("28_dying")
+can_idle = false
+has_gravity = false
+animation_name = "Dying"
 
 [node name="StateMachineDebug" parent="." node_paths=PackedStringArray("state_machine") instance=ExtResource("11_vadop")]
 state_machine = NodePath("../StateMachine")

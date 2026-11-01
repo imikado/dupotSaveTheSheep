@@ -1,15 +1,46 @@
 [gd_scene format=3 uid="uid://cd5514wt0rdxf"]
 
 [ext_resource type="Script" uid="uid://u5s8goxqdyoo" path="res://src/UI/Screens/Menu.gd" id="1_81gvo"]
-[ext_resource type="PackedScene" uid="uid://yob4um0n673p" path="res://src/UI/Controls/LabelButton.tscn" id="1_bkv4m"]
 [ext_resource type="PackedScene" uid="uid://ddb64nkhhqu10" path="res://src/Levels/level_1.tscn" id="2_wl5y4"]
-[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_material.tres" id="3_nrxk5"]
+[ext_resource type="Shader" path="res://src/Levels/Shared/night_sky.gdshader" id="3_nrxk5"]
 [ext_resource type="Texture2D" uid="uid://qod1olovotcd" path="res://src/UI/Screens/title.png" id="3_rrifp"]
 [ext_resource type="Texture2D" uid="uid://cog4f1neemeqw" path="res://src/Actors/Players/Player/player-idle.png" id="4_nm624"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="5_lkhqs"]
 [ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="6_j0ooc"]
 [ext_resource type="Script" uid="uid://c24nlod1y5kue" path="res://src/UI/Controls/SoundToggle.gd" id="7_sound"]
 [ext_resource type="Texture2D" uid="uid://diy5y25bagh17" path="res://src/UI/Controls/Shared/icon-sound-on.png" id="8_sndon"]
+[ext_resource type="Shader" path="res://src/UI/Screens/title_outline.gdshader" id="9_outline"]
+[ext_resource type="FontFile" path="res://src/UI/Controls/Shared/Pixeled.ttf" id="10_font"]
+[ext_resource type="Texture2D" path="res://src/UI/Controls/Shared/keycap.png" id="11_keycap"]
+[ext_resource type="Texture2D" path="res://src/UI/Controls/Shared/keycap-left.png" id="12_kleft"]
+[ext_resource type="Texture2D" path="res://src/UI/Controls/Shared/keycap-right.png" id="13_kright"]
+
+[sub_resource type="FontVariation" id="FontVariation_keys"]
+base_font = ExtResource("10_font")
+spacing_top = -8
+spacing_bottom = -5
+
+[sub_resource type="StyleBoxTexture" id="StyleBox_keycap"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+texture = ExtResource("11_keycap")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
+shader = ExtResource("3_nrxk5")
+shader_parameter/star_cell = 8.0
+shader_parameter/star_density = 0.12
+shader_parameter/show_moon = true
+shader_parameter/moon_position = Vector2(0.06, 0.12)
+shader_parameter/moon_radius = 9.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_outline"]
+shader = ExtResource("9_outline")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8an8f"]
 atlas = ExtResource("4_nm624")
@@ -99,7 +130,7 @@ mainLevel = ExtResource("2_wl5y4")
 
 [node name="ColorRect" type="ColorRect" parent="Parallax2D/sky" unique_id=1705289563]
 z_as_relative = false
-material = ExtResource("3_nrxk5")
+material = SubResource("ShaderMaterial_sky")
 offset_left = -2445.0
 offset_top = -715.0
 offset_right = 4438.0
@@ -107,156 +138,254 @@ offset_bottom = 2581.0
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
 [node name="Title" type="Sprite2D" parent="." unique_id=1370661012]
-position = Vector2(238, 135)
+position = Vector2(252, 131)
 texture = ExtResource("3_rrifp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2105202518]
 position = Vector2(241, 128)
-skew = -0.760964
-
-[node name="PlayButton" parent="." unique_id=1821791874 instance=ExtResource("1_bkv4m")]
-layout_mode = 0
-offset_left = 315.0
-offset_top = -4.0
-offset_right = 443.0
-offset_bottom = 28.0
-_export_label = "play"
-
-[node name="ScoreButton" parent="." unique_id=1603152831 instance=ExtResource("1_bkv4m")]
-layout_mode = 0
-offset_left = 315.0
-offset_top = 30.0
-offset_right = 443.0
-offset_bottom = 62.0
-_export_label = "Scores"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=694567454]
-visible = false
-position = Vector2(93, 101)
-scale = Vector2(5, 5)
+material = SubResource("ShaderMaterial_outline")
+position = Vector2(40, 65)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_mcrfk")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=2131906700]
-visible = false
-position = Vector2(348.00003, -12.999996)
-scale = Vector2(5, 5)
+material = SubResource("ShaderMaterial_outline")
+position = Vector2(235, 65)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_0hhe7")
 flip_h = true
 
-[node name="Controls" type="PanelContainer" parent="." unique_id=1043794303]
+[node name="MenuColumn" type="VBoxContainer" parent="." unique_id=1293320987]
 layout_mode = 0
-offset_left = 384.0
-offset_top = 128.0
-offset_right = 474.0
-offset_bottom = 228.0
+offset_left = 344.0
+offset_top = -1.0
+offset_right = 472.0
+offset_bottom = 257.0
 theme = ExtResource("6_j0ooc")
+theme_override_constants/separation = 4
 
-[node name="rows" type="VBoxContainer" parent="Controls" unique_id=405026378]
+[node name="PlayButton" type="Button" parent="MenuColumn" unique_id=1821791874]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
-theme_override_constants/separation = -10
+theme_type_variation = &"BigButton"
+text = "PLAY"
 
-[node name="row0" type="HBoxContainer" parent="Controls/rows" unique_id=1872534240]
+[node name="ScoreButton" type="Button" parent="MenuColumn" unique_id=1603152831]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_type_variation = &"BigButton"
+text = "SCORES"
+
+[node name="levelDifficulty" type="OptionButton" parent="MenuColumn" unique_id=67166632]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_type_variation = &"BigOptionButton"
+alignment = 1
+selected = 1
+item_count = 2
+popup/item_0/text = "EASY"
+popup/item_0/id = 0
+popup/item_1/text = "NORMAL"
+popup/item_1/id = 1
+
+[node name="Spacer" type="Control" parent="MenuColumn" unique_id=466992899]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="KeysPanel" type="PanelContainer" parent="MenuColumn" unique_id=1043794303]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="key" type="Label" parent="Controls/rows/row0" unique_id=290876055]
-custom_minimum_size = Vector2(24, 0)
+[node name="rows" type="VBoxContainer" parent="MenuColumn/KeysPanel" unique_id=405026378]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
-text = "<>"
+size_flags_horizontal = 4
+theme_override_constants/separation = 2
 
-[node name="action" type="Label" parent="Controls/rows/row0" unique_id=808596241]
+[node name="move" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043802222]
 layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/move" unique_id=1043810141]
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="cap0" type="TextureRect" parent="MenuColumn/KeysPanel/rows/move/keys" unique_id=1043818060]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("12_kleft")
+stretch_mode = 2
+
+[node name="cap1" type="TextureRect" parent="MenuColumn/KeysPanel/rows/move/keys" unique_id=1043825979]
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("13_kright")
+stretch_mode = 2
+
+[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/move" unique_id=1043833898]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "MOVE"
+vertical_alignment = 1
 
-[node name="row1" type="HBoxContainer" parent="Controls/rows" unique_id=1721300752]
+[node name="shoot" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043841817]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="key" type="Label" parent="Controls/rows/row1" unique_id=1219382403]
-custom_minimum_size = Vector2(24, 0)
+[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/shoot" unique_id=1043849736]
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/shoot/keys" unique_id=1043857655]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_keycap")
+
+[node name="label" type="Label" parent="MenuColumn/KeysPanel/rows/shoot/keys/cap0" unique_id=1043865574]
+custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "A"
+horizontal_alignment = 1
 
-[node name="action" type="Label" parent="Controls/rows/row1" unique_id=1920480178]
+[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/shoot" unique_id=1043873493]
 layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "SHOOT"
+vertical_alignment = 1
 
-[node name="row2" type="HBoxContainer" parent="Controls/rows" unique_id=2048274455]
+[node name="jump" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043881412]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="key" type="Label" parent="Controls/rows/row2" unique_id=836080140]
-custom_minimum_size = Vector2(24, 0)
+[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/jump" unique_id=1043889331]
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/jump/keys" unique_id=1043897250]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_keycap")
+
+[node name="label" type="Label" parent="MenuColumn/KeysPanel/rows/jump/keys/cap0" unique_id=1043905169]
+custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "Z"
+horizontal_alignment = 1
 
-[node name="action" type="Label" parent="Controls/rows/row2" unique_id=1048819944]
+[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/jump" unique_id=1043913088]
 layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "JUMP"
+vertical_alignment = 1
 
-[node name="row3" type="HBoxContainer" parent="Controls/rows" unique_id=214275330]
+[node name="action" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043921007]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="key" type="Label" parent="Controls/rows/row3" unique_id=236664261]
-custom_minimum_size = Vector2(24, 0)
+[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/action" unique_id=1043928926]
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/action/keys" unique_id=1043936845]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_keycap")
+
+[node name="label" type="Label" parent="MenuColumn/KeysPanel/rows/action/keys/cap0" unique_id=1043944764]
+custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "E"
+horizontal_alignment = 1
 
-[node name="action" type="Label" parent="Controls/rows/row3" unique_id=457187601]
+[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/action" unique_id=1043952683]
 layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "ACTION"
+vertical_alignment = 1
 
-[node name="row4" type="HBoxContainer" parent="Controls/rows" unique_id=664661511]
+[node name="pause" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043960602]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="key" type="Label" parent="Controls/rows/row4" unique_id=1086250684]
-custom_minimum_size = Vector2(24, 0)
+[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/pause" unique_id=1043968521]
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/pause/keys" unique_id=1043976440]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_keycap")
+
+[node name="label" type="Label" parent="MenuColumn/KeysPanel/rows/pause/keys/cap0" unique_id=1043984359]
+custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "ESC"
+horizontal_alignment = 1
 
-[node name="action" type="Label" parent="Controls/rows/row4" unique_id=630343270]
+[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/pause" unique_id=1043992278]
 layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "PAUSE"
+vertical_alignment = 1
 
-[node name="row5" type="HBoxContainer" parent="Controls/rows" unique_id=25016017]
+[node name="sound" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1044000197]
 layout_mode = 2
+theme_override_constants/separation = 4
 
-[node name="key" type="Label" parent="Controls/rows/row5" unique_id=326994925]
-custom_minimum_size = Vector2(24, 0)
+[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/sound" unique_id=1044008116]
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/sound/keys" unique_id=1044016035]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBox_keycap")
+
+[node name="SoundKey" type="Label" parent="MenuColumn/KeysPanel/rows/sound/keys/cap0" unique_id=1044023954]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "M"
+horizontal_alignment = 1
 
-[node name="action" type="Label" parent="Controls/rows/row5" unique_id=315027600]
+[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/sound" unique_id=1044031873]
 layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_keys")
 text = "SOUND"
+vertical_alignment = 1
 
-[node name="SoundToggle" type="Button" parent="." unique_id=816417202]
-layout_mode = 0
-offset_left = 384.0
-offset_top = 234.0
-offset_right = 474.0
-offset_bottom = 256.0
-theme = ExtResource("6_j0ooc")
+[node name="SoundToggle" type="Button" parent="MenuColumn" unique_id=816417202]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_type_variation = &"BigButton"
 text = "ON"
 icon = ExtResource("8_sndon")
 script = ExtResource("7_sound")
-
-[node name="levelDifficulty" type="OptionButton" parent="." unique_id=67166632]
-layout_mode = 0
-offset_left = 305.0
-offset_top = 65.0
-offset_right = 461.0
-offset_bottom = 96.0
-theme = ExtResource("6_j0ooc")
-selected = 1
-item_count = 2
-popup/item_0/text = "easy"
-popup/item_0/id = 0
-popup/item_1/text = "normal"
-popup/item_1/id = 1
 
 [node name="VersionLabel" type="Label" parent="." unique_id=1457203968]
 layout_mode = 0
@@ -269,6 +398,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.6)
 text = "v0.0.0"
 vertical_alignment = 1
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="ScoreButton" to="." method="_on_score_button_pressed"]
-[connection signal="item_selected" from="levelDifficulty" to="." method="_on_level_difficulty_item_selected"]
+[connection signal="pressed" from="MenuColumn/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuColumn/ScoreButton" to="." method="_on_score_button_pressed"]
+[connection signal="item_selected" from="MenuColumn/levelDifficulty" to="." method="_on_level_difficulty_item_selected"]

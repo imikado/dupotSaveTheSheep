@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://indmu7kpkbfk" path="res://src/UI/Controls/Shared/buttonHover.png" id="4_btnh"]
 [ext_resource type="Texture2D" uid="uid://cot8js5udgrf6" path="res://src/UI/Controls/Shared/panel.png" id="5_panel"]
 
+[sub_resource type="FontVariation" id="FontVariation_menu"]
+base_font = ExtResource("1_qyltp")
+spacing_top = -16
+spacing_bottom = -10
+
 [sub_resource type="StyleBoxTexture" id="StyleBox_disabled"]
 content_margin_left = 6.0
 content_margin_top = 2.0
@@ -132,6 +137,18 @@ anti_aliasing = false
 [resource]
 default_font = ExtResource("1_qyltp")
 default_font_size = 8
+BigButton/base_type = &"Button"
+BigButton/font_sizes/font_size = 16
+BigButton/fonts/font = SubResource("FontVariation_menu")
+BigOptionButton/base_type = &"OptionButton"
+BigOptionButton/font_sizes/font_size = 16
+BigOptionButton/fonts/font = SubResource("FontVariation_menu")
+BigPopup/base_type = &"PopupMenu"
+BigPopup/constants/h_separation = 2
+BigPopup/constants/item_end_padding = 0
+BigPopup/constants/v_separation = 6
+BigPopup/font_sizes/font_size = 16
+BigPopup/fonts/font = SubResource("FontVariation_menu")
 Button/colors/font_color = Color(0.92549, 0.937255, 1, 1)
 Button/colors/font_disabled_color = Color(0.556863, 0.556863, 0.65098, 1)
 Button/colors/font_focus_color = Color(1, 0.839216, 0.360784, 1)

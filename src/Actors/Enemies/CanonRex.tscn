@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dthmsw8atnen" path="res://src/Shared/StateMachineDebug.tscn" id="5_q7rqy"]
 [ext_resource type="Script" uid="uid://bho3jayp0iwxq" path="res://src/Actors/Enemies/CanonRex/StateDamaged.gd" id="9_d40lq"]
 [ext_resource type="Script" uid="uid://dcyov5jmgc4h3" path="res://src/Actors/Enemies/CanonRex/StateDie.gd" id="10_my2h1"]
+[ext_resource type="Material" path="res://src/Shared/outline_enemy.tres" id="outline_mat"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k6pno"]
 
@@ -192,6 +193,7 @@ FireBall = ExtResource("2_ecwdd")
 points = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("outline_mat")
 texture = ExtResource("3_2kmck")
 hframes = 4
 frame = 2

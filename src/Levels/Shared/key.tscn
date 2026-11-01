@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcncog51jayl6" path="res://src/Levels/Shared/key.gd" id="1_esa5k"]
 [ext_resource type="Texture2D" uid="uid://03ml0hjf3n2e" path="res://src/Levels/Shared/key_idle.png" id="2_esa5k"]
+[ext_resource type="Material" path="res://src/Shared/outline_pickup.tres" id="outline_mat"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_esa5k"]
 radius = 4.1231055
@@ -87,6 +88,7 @@ position = Vector2(-2, 2)
 shape = SubResource("CircleShape2D_esa5k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("outline_mat")
 sprite_frames = SubResource("SpriteFrames_yd7tr")
 
 [node name="Area2D" type="Area2D" parent="."]

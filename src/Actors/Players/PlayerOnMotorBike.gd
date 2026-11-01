@@ -1,158 +1,182 @@
 extends CharacterBody2D
 class_name PlayerOnMotorBike
 
+# Always a full jump: the obstacles and the high items are spaced for it
 const JUMP_VELOCITY = -300.0
+const RISE_GRAVITY_SCALE = 0.8
+# Falls a bit faster than it rises: less floaty, keeps enough air time at top speed
+const FALL_GRAVITY_SCALE = 1.0
+# A press slightly before landing still jumps
+const JUMP_BUFFER = 0.15
+# A press slightly after leaving the ground still jumps
+const COYOTE_TIME = 0.08
+
+# Nose up when taking off, back to flat while falling
+const TAKE_OFF_ANGLE = -0.45
+const TILT_SPEED = 12.0
+const SQUASH_LAND = Vector2(1.2, 0.8)
+const STRETCH_JUMP = Vector2(0.85, 1.15)
+const SQUASH_PICKUP = Vector2(1.15, 0.9)
+const PICKUP_FLASH = Color(1.8, 1.8, 1.8)
+# Last frame of TakeWater/TakeDesserts: the item is in hand. The frames before
+# bend down to the road, so they are skipped in the air
+const PICKUP_IN_HAND_TIME = 0.18
+
+const INVINCIBLE_TIME = 1.2
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# A bottle ("water") or a burger ("burger") has been grabbed: the level highlights it
+signal picked_up(item: String)
+
 @onready var animationPlayer := $AnimationPlayer
+@onready var _sprite: Sprite2D = $motorbike
 
-enum STATE {RIDING, JUMP_START, JUMPING, JUMP_END, TAKE_WATER, OBSTACLE, TAKE_DESSERTS, HITED}
-
+enum STATE {RIDING, TAKE_WATER, OBSTACLE, TAKE_DESSERTS, HITED}
 
 var _state = STATE.RIDING
 var _animationList = {
 	STATE.RIDING: 'riding',
-	STATE.JUMP_START: 'JumpStart',
-	STATE.JUMPING: 'riding',
-	STATE.JUMP_END: 'JumpEnd',
 	STATE.TAKE_WATER: 'TakeWater',
 	STATE.OBSTACLE: 'obstacle',
 	STATE.TAKE_DESSERTS: 'TakeDesserts',
 	STATE.HITED: 'hited'
 }
 
-var jumping = false
-var startJumping = false
-var canJump = true
-var jumpX = 100
-var deltaX = 0
-var groundPositionY = 0.0
-var isHitingObstacle = false
-
-var _pending_water = 0
+var _jumpBuffer := 0.0
+var _coyote := 0.0
+var _wasOnFloor := true
+var _invincible := 0.0
+var _squashTween: Tween
 
 func _ready():
-	groundPositionY = position.y
 	ride()
-	
+
 func getAnimation(stateToCheck) -> String:
 	return _animationList[stateToCheck]
 
-func processJump():
-	velocity.y = JUMP_VELOCITY
-	setState(STATE.JUMP_START)
-	#startJumping=true
-	#jumping=true
+func is_crashed() -> bool:
+	return isState(STATE.OBSTACLE)
 
-func processEndJump():
-	setState(STATE.RIDING)
-	#startJumping=false
-	#canJump=true
-	#ride()
+func is_invincible() -> bool:
+	return _invincible > 0.0 or is_crashed()
 
-func isOnTheFloor():
-	return (velocity.y == 0)
-	
 func hitedObstacle():
 	GlobalAudio.play_sfx("bike_crash", 0.0, 0.0, 0.7)
+	_sprite.rotation = 0.0
+	_sprite.scale = Vector2.ONE
 	setState(STATE.OBSTACLE)
-	#isHitingObstacle=true
-	#animationPlayer.play('obstacle')
-	
+
 func ride():
 	setState(STATE.RIDING)
-	#animationPlayer.play("riding")
-	
-func take_desserts(life):
-	setState(STATE.TAKE_DESSERTS)
 
-func hited():
-	GlobalAudio.play_sfx("bike_crash", 0.05)
-	setState(STATE.HITED)
-	
-func take_water(water_value):
-	_pending_water = water_value
-	setState(STATE.TAKE_WATER)
-	
-func commit_water():
-	GlobalEvents.player_water_changed.emit(_pending_water)
-	_pending_water = 0
-	
-func commit_desserts():
+func take_desserts(_life):
 	GlobalPlayer.increase_life(10)
 	GlobalSheep.increase_life(10)
 	GlobalEvents.player_health_changed.emit(GlobalPlayer.get_life())
 	GlobalEvents.sheep_health_changed.emit(GlobalSheep.get_life())
+	_playPickup(STATE.TAKE_DESSERTS)
+	picked_up.emit("burger")
+
+func hited():
+	GlobalAudio.play_sfx("bike_crash", 0.05)
+	_invincible = INVINCIBLE_TIME
+	Fx.smoke(get_parent(), global_position + Vector2(10, 10))
+	Fx.shake(self, 4.0, 0.3)
+	setState(STATE.HITED)
+
+func take_water(_water_value):
+	_playPickup(STATE.TAKE_WATER)
+	picked_up.emit("water")
+
+# A pickup must not cut the hit animation (it shows the invincibility)
+func _playPickup(newState):
+	if isState(STATE.RIDING) or isState(STATE.TAKE_WATER) or isState(STATE.TAKE_DESSERTS):
+		animationPlayer.stop()
+		setState(newState)
+		if !is_on_floor():
+			_skipToItemInHand()
+	Fx.flash(_sprite, PICKUP_FLASH)
+	_squash(SQUASH_PICKUP)
+
+# The item lies just before an obstacle: the jump often starts while grabbing it
+func _skipToItemInHand():
+	if (isState(STATE.TAKE_WATER) or isState(STATE.TAKE_DESSERTS)) and animationPlayer.current_animation_position < PICKUP_IN_HAND_TIME:
+		animationPlayer.seek(PICKUP_IN_HAND_TIME, true)
 
 func isState(stateToCheck) -> bool:
-	if _state == stateToCheck:
-		return true
-	return false
+	return _state == stateToCheck
 
 func setState(newState):
 	_state = newState
 	animationPlayer.play(_animationList[newState])
 
+func _squash(amount: Vector2):
+	if _squashTween:
+		_squashTween.kill()
+	_sprite.scale = amount
+	_squashTween = create_tween()
+	_squashTween.tween_property(_sprite, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+func _jump():
+	velocity.y = JUMP_VELOCITY
+	_jumpBuffer = 0.0
+	_coyote = 0.0
+	_skipToItemInHand()
+	GlobalAudio.play_sfx("jump", 0.05, 0.0, 0.85)
+	Fx.dust(get_parent(), global_position + Vector2(-20, 36))
+	_squash(STRETCH_JUMP)
+
+func _land():
+	GlobalAudio.play_sfx("land", 0.1, -6.0)
+	Fx.dust(get_parent(), global_position + Vector2(0, 36))
+	_squash(SQUASH_LAND)
+
 func _physics_process(delta):
-	# Add the gravity.
-	if not isOnTheFloor():
-		velocity.y += gravity * delta * 0.8
-		
-	var jumpSizeX = jumpX * delta
-		
-	if isState(STATE.JUMP_START):
-		position.x += jumpSizeX
-		deltaX += jumpSizeX
-		
-	if !isState(STATE.JUMP_START) and deltaX > 0:
-		jumpSizeX = jumpSizeX / 2
-		if jumpSizeX > deltaX:
-			position.x -= deltaX
-			deltaX = 0
-		else:
-			position.x -= jumpSizeX
-			deltaX -= jumpSizeX
-	
-	
-	if isState(STATE.JUMPING) and isOnTheFloor():
-		setState(STATE.JUMP_END)
-		#jumping=false
-		#startJumping=false
-		#animationPlayer.play("JumpEnd")
-	
-	
-	if isState(STATE.RIDING) and GlobalInput.is_press_jump_button():
-		GlobalAudio.play_sfx("jump", 0.05, 0.0, 0.85)
-		setState(STATE.JUMP_START)
-		#$AnimationPlayer.play('JumpStart')
-		#canJump=false
+	if is_crashed():
+		return
 
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-	#	velocity.y = JUMP_VELOCITY
+	_invincible = maxf(_invincible - delta, 0.0)
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction = Input.get_axis("ui_left", "ui_right")
-	#if direction:
-#		velocity.x = direction * SPEED
-#	else:#
-	#	velocity.x = move_toward(velocity.x, 0, SPEED)
+	var onFloor := is_on_floor()
+
+	if onFloor:
+		_coyote = COYOTE_TIME
+	else:
+		_coyote = maxf(_coyote - delta, 0.0)
+		var gravityScale = RISE_GRAVITY_SCALE if velocity.y < 0 else FALL_GRAVITY_SCALE
+		velocity.y += gravity * delta * gravityScale
+
+	if GlobalInput.is_press_jump_button():
+		_jumpBuffer = JUMP_BUFFER
+	else:
+		_jumpBuffer = maxf(_jumpBuffer - delta, 0.0)
+
+	if _jumpBuffer > 0.0 and _coyote > 0.0:
+		_jump()
+
 	move_and_slide()
-	
+
+	onFloor = is_on_floor()
+	if onFloor and !_wasOnFloor:
+		_land()
+	_wasOnFloor = onFloor
+
+	_updateTilt(delta, onFloor)
+
+func _updateTilt(delta: float, onFloor: bool):
+	var targetAngle := 0.0
+	if !onFloor:
+		var fallRatio := inverse_lerp(JUMP_VELOCITY, 0.0, velocity.y)
+		targetAngle = lerpf(TAKE_OFF_ANGLE, 0.0, clampf(fallRatio, 0.0, 1.0))
+	_sprite.rotation = lerp_angle(_sprite.rotation, targetAngle, 1.0 - exp(-TILT_SPEED * delta))
+
+	# Blinks while invincible after a hit
+	_sprite.visible = _invincible <= 0.0 or int(_invincible * 15.0) % 2 == 0
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == getAnimation(STATE.JUMP_START):
-		setState(STATE.JUMPING)
-	elif anim_name == getAnimation(STATE.TAKE_WATER):
-		commit_water()
-		setState(STATE.RIDING)
-	elif anim_name == getAnimation(STATE.TAKE_DESSERTS):
-		#commit_water()
-		commit_desserts()
-		setState(STATE.RIDING)
-	elif anim_name == getAnimation(STATE.OBSTACLE):
+	if anim_name == getAnimation(STATE.OBSTACLE):
 		GlobalEvents.player_gameover.emit()
-	
+	elif anim_name != getAnimation(STATE.RIDING):
+		ride()

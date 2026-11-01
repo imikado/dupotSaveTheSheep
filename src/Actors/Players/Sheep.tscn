@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://fjwnyjherbvu" path="res://src/Actors/Players/States/Sheep/SheepStateWalking.gd" id="6_n3c7p"]
 [ext_resource type="Script" uid="uid://bokplaf44gtn7" path="res://src/Actors/Players/States/Sheep/SheepStateTurn.gd" id="8_ahxuj"]
 [ext_resource type="Script" uid="uid://n84vqtrbs4lk" path="res://src/Actors/Players/States/Sheep/StateDamaged.gd" id="9_rn3ht"]
+[ext_resource type="Material" path="res://src/Shared/outline_ally.tres" id="outline_mat"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivymj"]
 radius = 5.94543
@@ -214,6 +215,7 @@ size = Vector2(20, 2)
 script = ExtResource("1_2bi6n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("outline_mat")
 position = Vector2(1, -32)
 texture = ExtResource("2_t1trx")
 hframes = 3

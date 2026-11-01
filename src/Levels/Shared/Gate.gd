@@ -13,6 +13,7 @@ var _is_open=false
 
 func _ready():
 	_light_arrow.visible=true
+	switch_light(false)
 
 
 func open():
@@ -28,14 +29,17 @@ func close():
 	_light_arrow.visible=true
 
 
-func switch_light():
-	for childLoop in _light.get_children():
-		childLoop.visible=false
-		
-		if _is_open:
-			_light_opened.visible=true
-		else:
-			_light_closed.visible=true
+func switch_light(blink:=true):
+	_light_opened.visible=_is_open
+	_light_closed.visible=!_is_open
+
+	# The new light blinks so the change of state is noticed
+	if blink:
+		var light = _light_opened if _is_open else _light_closed
+		var tween = create_tween()
+		for i in 3:
+			tween.tween_property(light, "modulate:a", 0.15, 0.06)
+			tween.tween_property(light, "modulate:a", 1.0, 0.06)
 
 func action():
 	GlobalAudio.play_sfx("gate")

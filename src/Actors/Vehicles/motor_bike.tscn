@@ -8,10 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bw86gonylphff" path="res://src/Actors/Players/Player/player-on-motorbike.png" id="5_clilh"]
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="6_ikv5x"]
 [ext_resource type="Texture2D" uid="uid://bdcuwuep6hfbt" path="res://src/Actors/Players/Sheep/sheep-idle.png" id="7_pm5i5"]
-[ext_resource type="Texture2D" uid="uid://dfkp8b6shxd28" path="res://src/Levels/parallax01.png" id="9_xlbk5"]
 [ext_resource type="Texture2D" uid="uid://d31q6xg5t6k4e" path="res://src/Levels/Level2/panel_sheep.png" id="10_igqgw"]
 
-[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_material.tres" id="99_nsky"]
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cogoa"]
 radius = 4.0
 height = 60.0
@@ -317,7 +315,7 @@ hframes = 3
 
 [node name="LightArrow" parent="." instance=ExtResource("6_ikv5x")]
 position = Vector2(-45, -30)
-rotation = -0.730388
+scale = Vector2(-1, 1)
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -373,39 +371,6 @@ offset = Vector2(-0.999998, -26)
 hframes = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]
-
-[node name="sky" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
-
-[node name="ColorRect" type="ColorRect" parent="Camera2D/ParallaxBackground/sky"]
-z_as_relative = false
-offset_left = -2372.0
-offset_top = -718.0
-offset_right = 4511.0
-offset_bottom = 2578.0
-material = ExtResource("99_nsky")
-color = Color(0.0784314, 0.0784314, 0.0784314, 1)
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
-motion_scale = Vector2(0.5, 0.5)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer"]
-modulate = Color(0.235294, 0.360784, 0.45098, 1)
-position = Vector2(-212, -161)
-texture = ExtResource("9_xlbk5")
-centered = false
-flip_h = true
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
-motion_scale = Vector2(0.3, 0.3)
-motion_mirroring = Vector2(1920, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Camera2D/ParallaxBackground/ParallaxLayer2"]
-position = Vector2(-266, -172)
-texture = ExtResource("9_xlbk5")
-centered = false
 
 [node name="panel_sheep" type="Node2D" parent="."]
 

@@ -47,6 +47,11 @@ func _ready():
 	# Not in sync, they are chatting
 	trex_list[1].frame = 2
 
+	# Soft blink so the skip hint gets noticed
+	var skip_tween := create_tween().set_loops()
+	skip_tween.tween_property($SkipLabel, "modulate:a", 0.35, 0.8)
+	skip_tween.tween_property($SkipLabel, "modulate:a", 1.0, 0.8)
+
 	_play_intro()
 
 

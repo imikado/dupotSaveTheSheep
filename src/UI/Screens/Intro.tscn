@@ -17,6 +17,7 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 500.0
 offset_bottom = 290.0
+mouse_filter = 2
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 
 [node name="Ground" type="ColorRect" parent="."]
@@ -24,6 +25,7 @@ offset_left = -20.0
 offset_top = 225.0
 offset_right = 500.0
 offset_bottom = 290.0
+mouse_filter = 2
 color = Color(0.152941, 0.152941, 0.207843, 1)
 
 [node name="GroundLine" type="ColorRect" parent="."]
@@ -31,6 +33,7 @@ offset_left = -20.0
 offset_top = 225.0
 offset_right = 500.0
 offset_bottom = 228.0
+mouse_filter = 2
 color = Color(0.317647, 0.317647, 0.411765, 1)
 
 [node name="Computer" type="Sprite2D" parent="."]

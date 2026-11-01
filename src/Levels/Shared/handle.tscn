@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bbnsx4jywd3fm" path="res://src/Levels/Shared/handle.gd" id="1_v77g5"]
 [ext_resource type="Texture2D" uid="uid://dbnhotclb7nrj" path="res://src/Levels/Shared/BuildingWorkTileMap.png" id="1_vi70r"]
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="3_vbyle"]
+[ext_resource type="Material" path="res://src/Shared/outline_pickup.tres" id="outline_mat"]
 
 [sub_resource type="Animation" id="Animation_qfcgf"]
 resource_name = "close"
@@ -77,6 +78,7 @@ size = Vector2(15, 11)
 script = ExtResource("1_v77g5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("outline_mat")
 texture = ExtResource("1_vi70r")
 flip_h = true
 hframes = 3
@@ -94,7 +96,6 @@ shape = SubResource("RectangleShape2D_jb0ux")
 
 [node name="LightArrow" parent="." instance=ExtResource("3_vbyle")]
 position = Vector2(12, -14)
-rotation = 0.744042
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

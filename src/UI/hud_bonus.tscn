@@ -1,21 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://1abyt4tsap5d"]
+[gd_scene format=3 uid="uid://1abyt4tsap5d"]
 
 [ext_resource type="Script" uid="uid://diumdvr3dcywi" path="res://src/UI/hud_bonus.gd" id="1_vx4ed"]
-[ext_resource type="Texture2D" uid="uid://ujla1yog2dyi" path="res://src/Actors/Vehicles/motobike-alone.png" id="1_x6i0w"]
+[ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://src/UI/Controls/Shared/icon-motorbike.png" id="3_bike"]
 
 [node name="motorBikeLifes" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 86.0
+offset_bottom = 20.0
 script = ExtResource("1_vx4ed")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(15.247, 21.4712)
-rotation = -0.834169
-scale = Vector2(0.306429, 0.409759)
-texture = ExtResource("1_x6i0w")
-region_enabled = true
-region_rect = Rect2(0, 28, 65, 37)
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.85)
+layout_mode = 0
+offset_right = 86.0
+offset_bottom = 20.0
+theme = ExtResource("2_theme")
 
-[node name="lifes" type="Node2D" parent="."]
+[node name="lifes" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 82.0
+offset_bottom = 17.0
+theme_override_constants/separation = 3
+
+[node name="life1" type="TextureRect" parent="lifes"]
+layout_mode = 2
+texture = ExtResource("3_bike")
+stretch_mode = 2
+
+[node name="life2" type="TextureRect" parent="lifes"]
+layout_mode = 2
+texture = ExtResource("3_bike")
+stretch_mode = 2
+
+[node name="life3" type="TextureRect" parent="lifes"]
+layout_mode = 2
+texture = ExtResource("3_bike")
+stretch_mode = 2

@@ -13,6 +13,8 @@ func change_scene_to_packed(target:PackedScene)->void:
 	_is_transitioning = true
 	animationPlayer.play('dissolve')
 	await animationPlayer.animation_finished
+	# Paused during the fade (ESC): the next scene would stay frozen
+	get_tree().paused = false
 	get_tree().change_scene_to_packed(target)
 	animationPlayer.play_backwards("dissolve")
 	_is_transitioning = false

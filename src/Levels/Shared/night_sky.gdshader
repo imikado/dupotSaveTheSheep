@@ -16,6 +16,12 @@ uniform bool show_moon = true;
 uniform vec2 moon_position = vec2(0.82, 0.16);
 uniform float moon_radius = 9.0;
 uniform vec4 moon_color : source_color = vec4(0.98, 0.95, 0.80, 1.0);
+// Top of the camera, in game pixels (set by the level every frame)
+uniform float camera_y = 0.0;
+// Below this camera position the moon rises with the parallax layers,
+// so the buildings scrolling up never pass in front of it
+uniform float camera_rest_y = 0.0;
+uniform float moon_parallax = 0.0;
 
 // Sin-free hash: stable on every GPU
 float hash12(vec2 p) {
@@ -32,8 +38,10 @@ vec2 hash22(vec2 p) {
 
 void fragment() {
 	vec2 uv = SCREEN_UV;
+	// Screen size in game pixels, with square pixels whatever the viewport aspect
+	vec2 screen = virtual_size.x * SCREEN_PIXEL_SIZE.x / SCREEN_PIXEL_SIZE;
 	// Position in game pixels, snapped to the pixel grid
-	vec2 px = floor(uv * virtual_size);
+	vec2 px = floor(uv * screen);
 
 	// Banded gradient keeps the pixel-art look
 	float t = floor(uv.y * 16.0) / 16.0;
@@ -58,16 +66,30 @@ void fragment() {
 		color = mix(color, star_color.rgb, star * twinkle * fade);
 	}
 
-	// Moon with a soft halo
+	// Moon: round disc with stepped halo rings, like the sun of the bonus level
 	if (show_moon) {
-		vec2 to_moon = px - floor(moon_position * virtual_size);
+		// Pixel centres so the disc is symmetric
+		vec2 moon_px = floor(moon_position * screen);
+		moon_px.y -= floor(moon_parallax * max(camera_y - camera_rest_y, 0.0));
+		vec2 to_moon = px + 0.5 - moon_px;
 		float dist = length(to_moon);
-		float halo = 1.0 - smoothstep(moon_radius, moon_radius * 3.0, dist);
-		color += moon_color.rgb * halo * 0.08;
+		if (dist < moon_radius * 2.4) {
+			color += moon_color.rgb * 0.05;
+		}
+		if (dist < moon_radius * 1.6) {
+			color += moon_color.rgb * 0.06;
+		}
 		if (dist < moon_radius) {
-			// Darker craters
-			float crater = step(0.8, hash12(floor(to_moon / 3.0) + 7.0));
-			color = mix(moon_color.rgb, moon_color.rgb * 0.82, crater);
+			vec2 n = to_moon / moon_radius;
+			// Shadowed lower-left rim, in two bands
+			float shade = dot(n, normalize(vec2(-0.6, 0.8)));
+			color = moon_color.rgb * (shade > 0.55 ? 0.84 : (shade > 0.25 ? 0.93 : 1.0));
+			// A few round craters, placed relative to the radius
+			if (length(n - vec2(-0.30, -0.25)) < 0.22
+					|| length(n - vec2(0.35, 0.20)) < 0.15
+					|| length(n - vec2(-0.05, 0.45)) < 0.12) {
+				color *= 0.86;
+			}
 		}
 	}
 

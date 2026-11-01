@@ -3,6 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://cfcxilrbu4ub6" path="res://src/Levels/Shared/gate.png" id="1_vgx7k"]
 [ext_resource type="Script" uid="uid://wuci4tl4rgds" path="res://src/Levels/Shared/Gate.gd" id="1_yson1"]
 [ext_resource type="PackedScene" uid="uid://dqic0pk5o1d2c" path="res://src/Levels/Shared/LightArrow.tscn" id="4_2t113"]
+[ext_resource type="Texture2D" path="res://src/Levels/Shared/gate_light_glow.png" id="5_glow"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_glow"]
+blend_mode = 1
 
 [sub_resource type="Animation" id="Animation_l26xd"]
 resource_name = "Close"
@@ -49,7 +53,7 @@ tracks/3/path = NodePath("../CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.9),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -151,7 +155,7 @@ tracks/3/path = NodePath("../CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.9),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -176,6 +180,7 @@ z_as_relative = false
 script = ExtResource("1_yson1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1.7, 1.7, 1.9, 1)
 texture = ExtResource("1_vgx7k")
 hframes = 5
 
@@ -196,9 +201,10 @@ position = Vector2(8.5, 9)
 shape = SubResource("RectangleShape2D_0uc48")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+self_modulate = Color(1.7, 1.7, 1.9, 1)
 z_index = 16
 z_as_relative = false
-position = Vector2(-14, -1)
+position = Vector2(-14, -2)
 texture = ExtResource("1_vgx7k")
 region_enabled = true
 region_rect = Rect2(0, 0, 36, 42)
@@ -207,23 +213,48 @@ region_rect = Rect2(0, 0, 36, 42)
 z_index = 100
 z_as_relative = false
 
-[node name="opened" type="ColorRect" parent="light"]
-offset_left = -1.0
-offset_top = -21.0
-offset_right = 1.0
-offset_bottom = -20.0
-color = Color(0, 0.654902, 0.290196, 1)
+[node name="housing" type="ColorRect" parent="light"]
+offset_left = -2.0
+offset_top = -25.0
+offset_right = 2.0
+offset_bottom = -22.0
+color = Color(0.1, 0.1, 0.18, 1)
 
-[node name="closed" type="ColorRect" parent="light"]
+[node name="opened" type="Node2D" parent="light"]
+visible = false
+
+[node name="glow" type="Sprite2D" parent="light/opened"]
+modulate = Color(0.24, 1, 0.42, 1)
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(-8, -31)
+texture = ExtResource("5_glow")
+centered = false
+
+[node name="core" type="ColorRect" parent="light/opened"]
 offset_left = -1.0
-offset_top = -21.0
+offset_top = -24.0
 offset_right = 1.0
-offset_bottom = -20.0
-color = Color(0.74902, 0, 0.219608, 1)
+offset_bottom = -22.0
+color = Color(0.36, 1, 0.48, 1)
+
+[node name="closed" type="Node2D" parent="light"]
+
+[node name="glow" type="Sprite2D" parent="light/closed"]
+modulate = Color(1, 0.16, 0.23, 1)
+material = SubResource("CanvasItemMaterial_glow")
+position = Vector2(-8, -31)
+texture = ExtResource("5_glow")
+centered = false
+
+[node name="core" type="ColorRect" parent="light/closed"]
+offset_left = -1.0
+offset_top = -24.0
+offset_right = 1.0
+offset_bottom = -22.0
+color = Color(1, 0.23, 0.29, 1)
 
 [node name="LightArrow" parent="." instance=ExtResource("4_2t113")]
 position = Vector2(15, -13)
-rotation = 0.523599
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
