@@ -6,56 +6,6 @@ extends Control
 
 
 
-var scoreListOff=[
-	{
-		"date": "2023-03-24 08:00:00",
-		"score":120
-	},
-	{
-		"date": "2023-03-25 09:25:00",
-		"score":35
-	},
-	{
-		"date": "2023-03-24 08:00:00",
-		"score":20
-	},
-	{
-		"date": "2023-03-25 09:25:00",
-		"score":35
-	},
-	{
-		"date": "2023-03-24 08:00:00",
-		"score":20
-	},
-	{
-		"date": "2023-03-25 09:25:00",
-		"score":35
-	},
-	{
-		"date": "2023-03-24 08:00:00",
-		"score":20
-	},
-	{
-		"date": "2023-03-25 09:25:00",
-		"score":35
-	}
-	,
-	{
-		"date": "2023-03-25 09:25:00",
-		"score":35
-	}
-	,
-	{
-		"date": "2023-03-25 09:25:00",
-		"score":35
-	}
-	,
-	{
-		"date": "2023-03-25 09:25:00",
-		"score":35
-	}
-]
-
 
 
 func sort_descending(a, b):
@@ -104,5 +54,3 @@ func build(scoreList):
 
 func _on_menu_button_pressed() -> void:
 	GlobalTransition.change_scene_to_packed(load("res://src/UI/Screens/Menu.tscn"))
-
-	pass # Replace with function body.

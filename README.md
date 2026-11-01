@@ -98,7 +98,7 @@ Play it in your browser, no install needed: **[dupot-org.itch.io/save-the-sheep]
    ```
 3. Open `project.godot` in Godot and press **F5** to play.
 
-Export presets for **Linux**, **Android** and **HTML5** are included in `export_presets.cfg`.
+Export presets for **Linux** and **HTML5** are included in `export_presets.cfg`.
 
 Helper scripts (set `GODOT` if Godot isn't in your `PATH`):
 

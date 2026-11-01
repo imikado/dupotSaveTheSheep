@@ -4,8 +4,8 @@
 # export/Linux/snap/build-snap.sh.
 #
 # Usage :
-#   ./export_snap.sh            # export + pack
-#   ./export_snap.sh --install  # export + pack + installation locale
+#   ./build_snap.sh            # export + pack
+#   ./build_snap.sh --install  # export + pack + installation locale
 set -e
 
 cd "$(dirname "$0")"
@@ -33,6 +33,9 @@ if [ ! -f "$TEMPLATES/linux_release.x86_64" ]; then
 	echo "Modèles d'export Linux absents pour Godot $GODOT_VERSION ($TEMPLATES)" >&2
 	exit 1
 fi
+
+# La version du snap suit celle du jeu
+"$SNAP_DIR/update-version.sh"
 
 # Godot ne doit pas importer (ni embarquer dans le .pck) les fichiers exportés
 mkdir -p export

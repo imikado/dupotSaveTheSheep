@@ -1,8 +1,8 @@
 extends Node
 
 const INPUT_CARRY='carry_sheep'
-const INPUT_ATTACK='ui_accept'
-const INPUT_JUMP='ui_select'
+const INPUT_ATTACK='player_attack'
+const INPUT_JUMP='player_jump'
 const INPUT_ACTION='player_action'
 
 const INPUT_FOCUS_NEXT="ui_focus_next"

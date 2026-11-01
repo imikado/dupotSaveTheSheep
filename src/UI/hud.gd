@@ -138,7 +138,9 @@ func _create_pause_overlay():
 func _update_sound_label(enabled: bool, label: Label):
 	label.text = "M  SOUND " + ("ON" if enabled else "OFF")
 	
-func _process(delta: float):
+func _process(_delta: float):
+	if !levelProgression.visible or max_x == 0:
+		return
 	if player != null:
 		_playerProgression.global_position.x = _progressionRelativeX * (player.global_position.x / max_x) + _progressionMinX
 	if sheep != null:

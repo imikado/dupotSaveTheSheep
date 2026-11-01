@@ -52,6 +52,10 @@ func increment_water(value):
 		_water = MAX_WATER
 
 
+func set_water(value):
+	_water = value
+
+
 func use_amount_water(value):
 	_water -= value
 

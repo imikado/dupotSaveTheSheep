@@ -59,7 +59,6 @@ func hitedObstacle():
 	GlobalAudio.play_sfx("bike_crash", 0.0, 0.0, 0.7)
 	setState(STATE.OBSTACLE)
 	#isHitingObstacle=true
-	print('obstacle')
 	#animationPlayer.play('obstacle')
 	
 func ride():
@@ -76,19 +75,16 @@ func hited():
 func take_water(water_value):
 	_pending_water = water_value
 	setState(STATE.TAKE_WATER)
-	print('player get value' + str(water_value))
 	
 func commit_water():
-	GlobalEvents.emit_signal("player_water_changed", _pending_water)
+	GlobalEvents.player_water_changed.emit(_pending_water)
 	_pending_water = 0
 	
 func commit_desserts():
-	print(GlobalPlayer.get_life())
 	GlobalPlayer.increase_life(10)
 	GlobalSheep.increase_life(10)
-	print(GlobalPlayer.get_life())
-	GlobalEvents.emit_signal("player_health_changed", GlobalPlayer.get_life())
-	GlobalEvents.emit_signal("sheep_health_changed", GlobalSheep.get_life())
+	GlobalEvents.player_health_changed.emit(GlobalPlayer.get_life())
+	GlobalEvents.sheep_health_changed.emit(GlobalSheep.get_life())
 
 func isState(stateToCheck) -> bool:
 	if _state == stateToCheck:
@@ -99,7 +95,7 @@ func setState(newState):
 	_state = newState
 	animationPlayer.play(_animationList[newState])
 
-func _process(delta):
+func _physics_process(delta):
 	# Add the gravity.
 	if not isOnTheFloor():
 		velocity.y += gravity * delta * 0.8
@@ -119,14 +115,11 @@ func _process(delta):
 			position.x -= jumpSizeX
 			deltaX -= jumpSizeX
 	
-	#print(velocity.y)
-	#print(position.y)
 	
 	if isState(STATE.JUMPING) and isOnTheFloor():
 		setState(STATE.JUMP_END)
 		#jumping=false
 		#startJumping=false
-		#print('floor')
 		#animationPlayer.play("JumpEnd")
 	
 	
@@ -161,6 +154,5 @@ func _on_animation_player_animation_finished(anim_name):
 		commit_desserts()
 		setState(STATE.RIDING)
 	elif anim_name == getAnimation(STATE.OBSTACLE):
-		GlobalEvents.emit_signal("player_gameover")
+		GlobalEvents.player_gameover.emit()
 	
-	pass # Replace with function body.

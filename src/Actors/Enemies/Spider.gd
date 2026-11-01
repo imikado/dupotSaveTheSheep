@@ -38,7 +38,7 @@ func finish_die():
 	newKeyItem.global_position=global_position-Vector2(10,30)
 	
 	queue_free()
-	GlobalEvents.emit_signal("enemy_die",self)
+	GlobalEvents.enemy_die.emit(self)
 
 func shoot():
 	if _alive:
@@ -61,7 +61,6 @@ func spawn_fireball():
 	newFireBall.global_position=spawnFireBall.global_position
 	#newFireBall.set_vector(moveVector)
 	GlobalAudio.play_sfx("fireball", 0.1, -4.0, 1.6)
-	print('spawn fire ball')
 
 
 func get_current_state()->EnemyState:
@@ -71,13 +70,11 @@ func get_current_state()->EnemyState:
 func set_new_state(new_state):
 	current_state_name=new_state
 	_state_machine.set_state(new_state)
-	#print("new state:"+new_state)
 
 
 func _on_timer_timeout():
 	shoot()
 	shootTimer.start()
-	pass # Replace with function body
 	
 func disable():
 	shootTimer.stop()

@@ -55,7 +55,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			enabled=true;
 			load_source()
 			
-	pass # Replace with function body.
 
 func hide_lifebar()->void:
 	if(!alive):
@@ -72,4 +71,3 @@ func display_lifebar()->void:
 
 func _on_timer_hide_life_bar_timeout() -> void:
 	hide_lifebar()
-	pass # Replace with function body.

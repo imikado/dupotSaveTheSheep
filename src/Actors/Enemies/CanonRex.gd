@@ -28,7 +28,7 @@ func die():
 func finish_die():
 	die_feedback()
 	queue_free()
-	GlobalEvents.emit_signal("enemy_die",self)
+	GlobalEvents.enemy_die.emit(self)
 
 func shoot():
 	if _alive:
@@ -50,7 +50,6 @@ func spawn_fireball():
 	newFireBall.global_position=spawnFireBall.global_position
 	newFireBall.set_vector(moveVector)
 	GlobalAudio.play_sfx("fireball", 0.1)
-	print('spawn fire ball')
 
 
 func get_current_state()->EnemyState:
@@ -60,13 +59,11 @@ func get_current_state()->EnemyState:
 func set_new_state(new_state):
 	current_state_name=new_state
 	_state_machine.set_state(new_state)
-	#print("new state:"+new_state)
 
 
 func _on_timer_timeout():
 	shoot()
 	shootTimer.start()
-	pass # Replace with function body
 	
 func disable():
 	shootTimer.stop()
@@ -98,10 +95,8 @@ func turnBack():
 func _on_area_2d_body_entered(body):
 	if body is Player or body is Sheep:
 		turn()
-	pass # Replace with function body.
 
 
 func _on_area_2d_body_exited(body):
 	if body is Player or body is Sheep:
 		turnBack()
-	pass # Replace with function body.

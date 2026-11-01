@@ -39,10 +39,10 @@ const COLOR_HURRY = Color(1, 0.27451, 0.27451)
 var _countDown = 60
 
 const XBETWEEN_OBSTACLE = 250
-var _xBetweenObstacle = 50
+var _xBetweenObstacle := 50.0
 
 const XBETWEEN_WATERBOTTLE = 1240
-var _xBetweenWaterbottle = 50
+var _xBetweenWaterbottle := 50.0
 
 
 var _switchWaterDesserts = 0
@@ -57,14 +57,14 @@ func _ready():
 	
 	_yStart = _player.position.y
 	
-	GlobalEvents.connect("player_take_water_bottle", on_player_take_water_bottle)
+	GlobalEvents.player_take_water_bottle.connect(on_player_take_water_bottle)
 	
-	GlobalEvents.connect("player_water_changed", on_player_water_changed)
+	GlobalEvents.player_water_changed.connect(on_player_water_changed)
 	
-	GlobalEvents.connect("player_health_changed", on_player_health_changed)
-	GlobalEvents.connect("sheep_health_changed", on_sheep_health_changed)
+	GlobalEvents.player_health_changed.connect(on_player_health_changed)
+	GlobalEvents.sheep_health_changed.connect(on_sheep_health_changed)
 	
-	GlobalEvents.connect("player_gameover", end)
+	GlobalEvents.player_gameover.connect(end)
 
 	GlobalEvents.bonus_animation_gameover.connect(on_gameover_animation)
 
@@ -96,13 +96,9 @@ func _show_banner():
 	tween.tween_callback(_banner.hide)
 	
 func on_player_health_changed(newvalue):
-	print('hud player')
-	print(GlobalPlayer.get_life())
 	hud.set_player_life(GlobalPlayer.get_life())
 	
 func on_sheep_health_changed(newvalue):
-	print('hud sheep')
-	print(GlobalSheep.get_life())
 	hud.set_sheep_life(GlobalSheep.get_life())
 
 func on_player_take_water_bottle(water_value):
@@ -130,8 +126,8 @@ func _process(delta):
 	_player.position.x += speed
 	_camera.position.x += speed
 	
-	shouldSpawnObstacle()
-	shouldSpawnWaterBottleOrDesserts()
+	shouldSpawnObstacle(delta)
+	shouldSpawnWaterBottleOrDesserts(delta)
 
 	
 	var distance_between_ground = _camera.position.x - camera_start_x - _ground.position.x
@@ -139,15 +135,11 @@ func _process(delta):
 	if distance_between_ground >= GROUND_WIDTH:
 		_ground.position.x += GROUND_WIDTH
 		
-	#print(_camera.position.x)
-	#print(_ground.position.x)
-	#print("distance_between:",distance_between_ground)
-	#print(screen_size.x)
 
 	pass
 
-func shouldSpawnObstacle():
-	_xBetweenObstacle -= 1
+func shouldSpawnObstacle(delta: float):
+	_xBetweenObstacle -= delta * 60.0
 	
 	if _xBetweenObstacle <= 0:
 		_xBetweenObstacle = XBETWEEN_OBSTACLE
@@ -160,8 +152,8 @@ func shouldSpawnObstacle():
 		
 		currentSpeed += 20
 		
-func shouldSpawnWaterBottleOrDesserts():
-	_xBetweenWaterbottle -= 1
+func shouldSpawnWaterBottleOrDesserts(delta: float):
+	_xBetweenWaterbottle -= delta * 60.0
 	
 	if _xBetweenWaterbottle <= 0:
 		_xBetweenWaterbottle = XBETWEEN_WATERBOTTLE
@@ -186,7 +178,6 @@ func shouldSpawnWaterBottleOrDesserts():
 
 func _on_play_button_pressed():
 	GlobalTransition.change_scene_to_packed(nextLevel)
-	pass # Replace with function body.
 
 
 func end():

@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 # Syncs the `version:` field in snapcraft.yaml from the game's own version
-# source of truth: src/Common/Autoload/GlobalVersion.gd (`var version = "X.Y"`).
+# source of truth: project.godot (`config/version="X.Y.Z"`).
 #
 # Usage: ./update-version.sh
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$DIR/../../.." && pwd)"
-GLOBAL_VERSION_GD="$PROJECT_ROOT/src/Common/Autoload/GlobalVersion.gd"
+PROJECT_GODOT="$PROJECT_ROOT/project.godot"
 SNAPCRAFT_YAML="$DIR/snapcraft.yaml"
 
-NEW_VERSION="$(grep -m1 -E '^\s*var version\s*=' "$GLOBAL_VERSION_GD" | sed -E 's/.*=\s*"([^"]+)".*/\1/')"
+NEW_VERSION="$(grep -m1 -E '^config/version=' "$PROJECT_GODOT" | sed -E 's/.*=\s*"([^"]+)".*/\1/')"
 if [ -z "$NEW_VERSION" ]; then
-  echo "ERROR: could not read 'var version = \"...\"' from $GLOBAL_VERSION_GD" >&2
+  echo "ERROR: could not read 'config/version=\"...\"' from $PROJECT_GODOT" >&2
   exit 1
 fi
 

@@ -33,7 +33,6 @@ func start_tween():
 	tween.tween_property(self,'position',  end_position,phase_time)
 	tween.tween_property(self,'position',  start_position,phase_time)
 	tween.finished.connect(end_tween)
-	#print('drone, start tween')
 
 func end_tween():
 	running=false

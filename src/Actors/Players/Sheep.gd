@@ -25,7 +25,7 @@ func walk_right():
 	direction=1
 	set_new_state(_state_machine.STATE_WALKING)
 
-func _process(delta):
+func _physics_process(delta):
 
 	if _damage_invulnerability_timer > 0.0:
 		_damage_invulnerability_timer = max(_damage_invulnerability_timer - delta, 0.0)
@@ -39,6 +39,7 @@ func _process(delta):
 		queue_free()
 		
 		_pending_vehicle.sheep_go_from_left()	
+		return
 
 	# Add the gravity.
 	if get_current_state().has_gravity:
@@ -134,4 +135,4 @@ func reset_pending_vehicle():
 
 func _on_jump_on_head_area_body_entered(body: Node2D) -> void:
 	if body is Player:
-		body.process_jump(1) # # Replace with function body.
+		body.process_jump(1)

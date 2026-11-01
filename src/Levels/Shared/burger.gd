@@ -10,4 +10,3 @@ func _on_body_entered(body):
 		Fx.popup_text(get_parent(), global_position + Vector2(0, -12), "+" + str(life), Color(0.5, 1.0, 0.5))
 		body.take_burger(life)
 		queue_free()
-	pass # Replace with function body.

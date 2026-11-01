@@ -56,10 +56,16 @@ func _ready():
 	var totalScore = userScore + bonusLevelScore + bonusPlayerLife + bonusSheepLife
 
 	GlobalPlayer.save_score(totalScore)
-	GlobalGame.saveHighScore(totalScore)
+	if _is_final():
+		GlobalGame.saveHighScore(totalScore)
 
 	GlobalAudio.play_jingle("level_complete")
 	_animate(totalScore)
+
+
+# Overridden by the last screen of the game, the only one that records the score
+func _is_final() -> bool:
+	return false
 
 
 func _add_row(icon: Texture2D, text: String, value: String, value_color := COLOR_GAIN) -> void:

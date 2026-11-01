@@ -30,7 +30,7 @@ static func create()->TRex:
 	return room
 
 
-func _process(delta):
+func _physics_process(delta):
 	
 	if !_alive:
 		return
@@ -45,7 +45,7 @@ func _process(delta):
 			velocity.x = direction * get_current_speed()
 			
 			if is_on_wall():
-				var collision = move_and_collide(velocity * delta)
+				var collision = move_and_collide(velocity * delta, true)
 				if collision:
 					var collider=collision.get_collider()
 					if collider is Player or collider is Sheep:
@@ -115,7 +115,7 @@ func die():
 func finish_die():
 	die_feedback()
 	queue_free()
-	GlobalEvents.emit_signal("enemy_die",self)
+	GlobalEvents.enemy_die.emit(self)
 
 func turn():
 	direction=next_direction
@@ -126,7 +126,6 @@ func get_current_state()->EnemyState:
 func set_new_state(new_state):
 	current_state_name=new_state
 	_state_machine.set_state(new_state)
-	#print("new state:"+new_state)
 
 
 
@@ -137,7 +136,6 @@ func get_current_speed():
 
 func _on_attack_timer_timeout():
 	can_attack=true
-	pass # Replace with function body.
 	
 func _on_jump_on_head_area_body_entered(body: Node2D) -> void:
 	if body is Player:

@@ -199,7 +199,7 @@ func shoot():
 	GlobalAudio.play_sfx("shoot", 0.08)
 	GlobalPlayer.use_amount_water(SHOOT_WATER_VALUE)
 
-	GlobalEvents.emit_signal("player_water_changed", GlobalPlayer.get_water())
+	GlobalEvents.player_water_changed.emit(GlobalPlayer.get_water())
 
 
 func update_move(_delta):
@@ -214,7 +214,7 @@ func update_move(_delta):
 		set_new_state(PlayerStateMachine.STATE_WALKING)
 		velocity.x = _direction * currentSpeed
 		
-		_sprite.flip_h = (_direction == -1)
+		_sprite.flip_h = (_direction < 0)
 		
 	else:
 		if !_raycast.is_colliding():
@@ -244,7 +244,7 @@ func update_min_move(_delta):
 	if _direction:
 		velocity.x = _direction * currentSpeed
 		
-		_sprite.flip_h = (_direction == -1)
+		_sprite.flip_h = (_direction < 0)
 
 
 func process_move():
@@ -292,7 +292,7 @@ func take_water(water_value):
 	set_new_state(PlayerStateMachine.STATE_TAKINGWATER)
 
 func commit_water():
-	GlobalEvents.emit_signal("player_water_changed", _pending_water)
+	GlobalEvents.player_water_changed.emit(_pending_water)
 	_pending_water = 0
 
 func action():

@@ -1,0 +1,119 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://src/UI/Screens/Intro.gd" id="1_intro"]
+[ext_resource type="PackedScene" uid="uid://cd5514wt0rdxf" path="res://src/UI/Screens/Menu.tscn" id="2_menu"]
+[ext_resource type="Material" path="res://src/Levels/Shared/night_sky_material.tres" id="3_sky"]
+[ext_resource type="Texture2D" path="res://src/UI/Screens/Intro/chipset.png" id="4_chips"]
+[ext_resource type="Texture2D" path="res://src/UI/Screens/Intro/computer.png" id="6_computer"]
+[ext_resource type="Theme" uid="uid://bcvv75vn0mwh1" path="res://src/UI/Theme.tres" id="5_theme"]
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_intro")
+target = ExtResource("2_menu")
+
+[node name="Sky" type="ColorRect" parent="."]
+material = ExtResource("3_sky")
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 500.0
+offset_bottom = 290.0
+color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+
+[node name="Ground" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = 225.0
+offset_right = 500.0
+offset_bottom = 290.0
+color = Color(0.152941, 0.152941, 0.207843, 1)
+
+[node name="GroundLine" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = 225.0
+offset_right = 500.0
+offset_bottom = 228.0
+color = Color(0.317647, 0.317647, 0.411765, 1)
+
+[node name="Computer" type="Sprite2D" parent="."]
+position = Vector2(200, 227)
+scale = Vector2(2, 2)
+texture = ExtResource("6_computer")
+offset = Vector2(0, -15)
+
+[node name="PowerLight" type="ColorRect" parent="Computer"]
+offset_left = 7.0
+offset_top = -29.0
+offset_right = 9.0
+offset_bottom = -28.0
+color = Color(0.352941, 0.901961, 0.470588, 1)
+
+[node name="Chipset" type="Sprite2D" parent="."]
+position = Vector2(193, 202)
+scale = Vector2(2, 2)
+texture = ExtResource("4_chips")
+
+[node name="TRex1" type="AnimatedSprite2D" parent="."]
+position = Vector2(300, 227)
+scale = Vector2(2, 2)
+offset = Vector2(0, -32)
+
+[node name="Alert" type="Node2D" parent="TRex1"]
+position = Vector2(4, -42)
+
+[node name="Label" type="Label" parent="TRex1/Alert"]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 4.0
+theme = ExtResource("5_theme")
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.0784314, 0.0784314, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TRex2" type="AnimatedSprite2D" parent="."]
+position = Vector2(410, 227)
+scale = Vector2(2, 2)
+offset = Vector2(0, -32)
+
+[node name="Alert" type="Node2D" parent="TRex2"]
+position = Vector2(4, -42)
+
+[node name="Label" type="Label" parent="TRex2/Alert"]
+offset_left = -20.0
+offset_top = -12.0
+offset_right = 20.0
+offset_bottom = 4.0
+theme = ExtResource("5_theme")
+theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
+theme_override_colors/font_outline_color = Color(0.6, 0.0784314, 0.0784314, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 8
+text = "!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sheep" type="AnimatedSprite2D" parent="."]
+position = Vector2(-60, 227)
+scale = Vector2(2, 2)
+offset = Vector2(0, -32)
+
+[node name="BellyLight" type="ColorRect" parent="Sheep"]
+offset_left = -2.0
+offset_top = -11.0
+offset_right = 0.0
+offset_bottom = -9.0
+color = Color(0.352941, 0.901961, 0.470588, 1)
+
+[node name="SkipLabel" type="Label" parent="."]
+offset_left = 380.0
+offset_top = 240.0
+offset_right = 474.0
+offset_bottom = 262.0
+theme = ExtResource("5_theme")
+theme_override_colors/font_color = Color(1, 1, 1, 0.5)
+text = "skip >"
+horizontal_alignment = 2
+vertical_alignment = 1

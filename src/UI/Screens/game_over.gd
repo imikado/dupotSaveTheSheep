@@ -58,13 +58,11 @@ func set_score_text(scoreValue:int):
 
 func _on_label_button_pressed():
 	GlobalTransition.change_scene_to_packed(load('res://src/UI/Screens/Menu.tscn'))
-	pass # Replace with function body.
 
 
 func _on_replay_button_pressed() -> void:
-	GlobalPlayer._life=GlobalGame.getLevelPlayerLife()
-	GlobalPlayer._water=GlobalGame.getLevelWaterValue()
-	GlobalSheep._life=GlobalGame.getLevelSheepLife()
+	GlobalPlayer.update_life(GlobalGame.getLevelPlayerLife())
+	GlobalPlayer.set_water(GlobalGame.getLevelWaterValue())
+	GlobalSheep.update_life(GlobalGame.getLevelSheepLife())
 	GlobalPlayer.save_score(GlobalGame.getLevelScore())
-	get_tree().change_scene_to_file("res://src/Levels/level_2.tscn")
-	pass # Replace with function body.
+	GlobalTransition.change_scene_to_packed(load("res://src/Levels/level_2.tscn"))

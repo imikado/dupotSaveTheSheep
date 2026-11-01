@@ -53,10 +53,10 @@ func spawn_trex():
 		
 		_enemyList.add_child(new_TRex)
 		
-		new_TRex.set_process(false)
+		new_TRex.set_physics_process(false)
 		new_TRex.spawn()
 		new_TRex.global_position = _spawnMarker2D.global_position
-		new_TRex.set_process(true)
+		new_TRex.set_physics_process(true)
 
 
 	_spawnTimer.start()
@@ -66,7 +66,6 @@ func is_enabled() -> bool:
 	return enabled
 
 func _on_visible_on_screen_notifier_2d_screen_entered():
-	print('visible')
 	set_decor_visible(true)
 	if !is_enabled():
 		if !started:
@@ -93,14 +92,12 @@ func enable_enemy_list():
 	
 func set_enemy_process(processEnabled: bool):
 	for enmyLoop: Enemy in _enemyList.get_children():
-		enmyLoop.set_process(processEnabled)
+		enmyLoop.set_physics_process(processEnabled)
 
 func _on_timer_timeout():
 	if is_enabled():
-		print('timer 30s')
 		spawn_trex()
 
 func _on_start_timer_timeout():
 	if is_enabled():
-		print('timer 2s')
 		spawn_trex()

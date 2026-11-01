@@ -52,4 +52,9 @@ func set_state(state_name):
 
 func _on_animation_player_animation_finished(anim_name):
 	current_state.on_animation_finished(anim_name)
-	pass # Replace with function body.
+
+func _notification(what):
+	if what == NOTIFICATION_PREDELETE:
+		for state in state_list.values():
+			if is_instance_valid(state) and state.get_parent() == null:
+				state.free()

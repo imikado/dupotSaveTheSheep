@@ -15,7 +15,6 @@ func _ready() -> void:
 	hud.set_player_life(GlobalPlayer.get_life())
 	hud.set_sheep_life(GlobalSheep.get_life())
 	
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

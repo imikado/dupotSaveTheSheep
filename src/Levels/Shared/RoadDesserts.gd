@@ -8,4 +8,3 @@ func _on_body_entered(body):
 		GlobalAudio.play_sfx("pickup_life")
 		body.take_desserts(life)
 		queue_free()
-	pass # Replace with function body.

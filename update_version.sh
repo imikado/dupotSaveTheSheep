@@ -2,7 +2,6 @@
 # Reporte le numéro de version de la dernière release déclarée dans l'appdata
 # Flathub (première balise <release>) dans le reste du projet :
 #   - project.godot                       application/config/version
-#   - src/Autoload/GlobalVersion.gd       var version = "X.Y.Z"
 #   - export/Linux/snap/snapcraft.yaml    version: "X.Y.Z"
 #
 # Usage : ajouter une <release version="X.Y.Z"> en tête de <releases> dans
@@ -13,7 +12,6 @@ cd "$(dirname "$0")"
 
 APPDATA="export/Linux/flatpak/org.dupot.savethesheep.appdata.xml"
 PROJECT="project.godot"
-GLOBAL_VERSION="src/Autoload/GlobalVersion.gd"
 SNAPCRAFT="export/Linux/snap/snapcraft.yaml"
 
 VERSION="$(grep -m1 -oP '<release\b[^>]*\bversion="\K[^"]+' "$APPDATA" || true)"
@@ -31,14 +29,11 @@ else
 fi
 echo "  $PROJECT"
 
-sed -i -E "s|^(var version = )\"[^\"]*\"|\1\"$VERSION\"|" "$GLOBAL_VERSION"
-echo "  $GLOBAL_VERSION"
-
 sed -i -E "s|^version:.*|version: \"$VERSION\"|" "$SNAPCRAFT"
 echo "  $SNAPCRAFT"
 
 # Contrôle : chaque fichier doit maintenant contenir la version
-for f in "$PROJECT" "$GLOBAL_VERSION" "$SNAPCRAFT"; do
+for f in "$PROJECT" "$SNAPCRAFT"; do
 	if ! grep -q "\"$VERSION\"" "$f"; then
 		echo "Version non mise à jour dans $f" >&2
 		exit 1

@@ -51,9 +51,12 @@
 
 
 
-    <release date="2026-10-11" version="1.9.1">
+    <release date="2026-11-01" version="1.9.2">
       <description>
         <ul>
+          <li>Add intro animation</li>
+          <li>graphism and animation Improvments</li>
+          <li>Bug fixes</li>
           <li>Update screenshots</li>
         </ul>
       </description>

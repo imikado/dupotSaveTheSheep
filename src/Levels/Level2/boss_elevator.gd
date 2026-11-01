@@ -36,7 +36,6 @@ func _on_lock_area_2d_body_entered(body: Node2D) -> void:
 			open_elevator()
 		else:
 			display_panel()
-	pass # Replace with function body.
 
 
 func hide_sheep_panel():
@@ -67,10 +66,8 @@ func _on_gate_area_2d_body_entered(body: Node2D) -> void:
 		
 	if body is Player:
 		if _hasSheep:
-			body.set_process(false)
+			body.set_physics_process(false)
 			GlobalEvents.end_level.emit()
-			print('END')
 		else:
 			display_sheep_panel()
 			
-	pass # Replace with function body.

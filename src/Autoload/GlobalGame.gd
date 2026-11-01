@@ -6,6 +6,7 @@ const GROUP_ENEMY := "enemy"
 const GROUP_BONUSACTOR := "bonusactor"
 
 const PATH_HIGHSCORE := "user://highscore.dat"
+const MAX_HIGHSCORES := 10
 
 enum ENEMY_TYPE_LIST {ANT, SPIDER, BEETLE}
 
@@ -38,7 +39,7 @@ var player_coef_water = LEVEL_NORMAL_COEF_WATER
 var player_start_life = LEVEL_NORMAL_PLAYER_START_LIFE
 var sheep_start_life = LEVEL_NORMAL_SHEEP_START_LIFE
 
-var _level_difficulty = LEVEL_DIFFICULTY.EASY
+var _level_difficulty = LEVEL_DIFFICULTY.NORMAL
 
 var levelPlayerLife=0
 var levelSheepLife=0
@@ -91,13 +92,11 @@ func loadDifficulty(levelDifficulty: LEVEL_DIFFICULTY):
 		player_coef_water = LEVEL_EASY_COEF_WATER
 		player_start_life = LEVEL_EASY_PLAYER_START_LIFE
 		sheep_start_life = LEVEL_EASY_SHEEP_START_LIFE
-		print('easy')
 	elif levelDifficulty == LEVEL_DIFFICULTY.NORMAL:
 		player_start_water = LEVEL_NORMAL_START_WATER
 		player_coef_water = LEVEL_NORMAL_COEF_WATER
 		player_start_life = LEVEL_NORMAL_PLAYER_START_LIFE
 		sheep_start_life = LEVEL_NORMAL_SHEEP_START_LIFE
-		print('normal')
 
 func isPlayerCameraMode():
 	if camera_mode == CAMERA_MODE_LIST.PLAYER_CAMERA:
@@ -105,7 +104,7 @@ func isPlayerCameraMode():
 	return false
 
 func isZoomedCameraMode():
-	if camera_mode == CAMERA_MODE_LIST.PLAYER_CAMERA:
+	if camera_mode == CAMERA_MODE_LIST.ZOOMED_CAMERA:
 		return true
 	return false
 
@@ -113,7 +112,6 @@ func isZoomedCameraMode():
 func resetGame():
 	GlobalPlayer.reset_game()
 	GlobalSheep.reset_game()
-	pass
 
 
 func isControlsEnabled():
@@ -137,17 +135,17 @@ func saveHighScore(newScoreValue):
 
 	var highScoreList = getHighScoreList()
 
-	if !isHighestScore(highScoreList, newScoreValue):
+	if newScoreValue <= 0:
 		return
 
 	var newScoreObj = {"score": newScoreValue, "date": dateTimeString}
 
 	highScoreList.append(newScoreObj)
+	highScoreList.sort_custom(func(a, b): return a.score > b.score)
+	highScoreList = highScoreList.slice(0, MAX_HIGHSCORES)
 
 	var jsonList = JSON.stringify(highScoreList)
 	saveFile(PATH_HIGHSCORE, jsonList)
-
-	pass
 
 
 func getHighestScore(highScoreList):
@@ -157,14 +155,6 @@ func getHighestScore(highScoreList):
 			highestScore = highScoreLoop.score
 
 	return highestScore
-
-
-func isHighestScore(highScoreList, askScore):
-	var highestScore = getHighestScore(highScoreList)
-	if askScore > highestScore:
-		return true
-
-	return false
 
 
 func getHighScoreList() -> Array:

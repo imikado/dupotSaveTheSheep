@@ -38,7 +38,6 @@ func _ready():
 	#open()
 	
 	#close()
-	pass # Replace with function body.
 
 func open():
 	if(!_available):
@@ -68,7 +67,6 @@ func sub_close():
 func bridge_tween_closed():
 	init=true
 	_available=true
-	print('fini ouvrir')
 	
 	
 func sub_open():

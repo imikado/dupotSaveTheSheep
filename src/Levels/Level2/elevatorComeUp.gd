@@ -62,7 +62,6 @@ func _on_handle_area_body_entered(body: Node2D) -> void:
 func _on_handle_area_body_exited(body: Node2D) -> void:
 	if body is Player:
 		body.reset_pending_action()
-	pass # Replace with function body.
 	
 func switch_state():
 	if state == STATE.UP:
@@ -84,10 +83,8 @@ func switch_state():
 func _on_carry_area_2d_body_entered(body: Node2D) -> void:
 	if body is Sheep:
 		pendingCarried = body
-	pass # Replace with function body.
 
 
 func _on_carry_area_2d_body_exited(body: Node2D) -> void:
 	if body is Sheep:
 		pendingCarried = null
-	pass # Replace with function body.
