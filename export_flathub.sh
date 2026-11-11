@@ -20,6 +20,12 @@ if [ ! -x "$GODOT" ]; then
 	exit 1
 fi
 
+# export_presets.cfg doit contenir le preset « Linux »
+if ! grep -q "^name=\"$PRESET\"" export_presets.cfg 2>/dev/null; then
+	echo "Preset « $PRESET » absent de export_presets.cfg : le créer dans Godot (Projet > Exporter)" >&2
+	exit 1
+fi
+
 for f in "$FLATPAK_DIR/$APP_ID.appdata.xml" "$FLATPAK_DIR/$APP_ID.desktop" "$FLATPAK_DIR/icons"; do
 	if [ ! -e "$f" ]; then
 		echo "Fichier manquant : $f" >&2
@@ -37,6 +43,10 @@ if [ -n "$(git status --porcelain -- "$SCREENSHOTS_DIR")" ]; then
 	exit 1
 fi
 SCREENSHOTS_COMMIT="$(git log -1 --format=%H -- "$SCREENSHOTS_DIR")"
+if [ -z "$SCREENSHOTS_COMMIT" ]; then
+	echo "Aucun screenshot commité ($SCREENSHOTS_DIR) : lancer ./update_screenshots.sh capture puis commiter et pousser" >&2
+	exit 1
+fi
 if [ -z "$(git branch -r --contains "$SCREENSHOTS_COMMIT")" ]; then
 	echo "Le commit $SCREENSHOTS_COMMIT des screenshots n'est pas poussé : git push d'abord" >&2
 	exit 1

@@ -4,8 +4,8 @@
 # export/Linux/snap/build-snap.sh.
 #
 # Usage :
-#   ./build_snap.sh            # export + pack
-#   ./build_snap.sh --install  # export + pack + installation locale
+#   ./export_snap.sh            # export + pack
+#   ./export_snap.sh --install  # export + pack + installation locale
 set -e
 
 cd "$(dirname "$0")"
@@ -23,6 +23,12 @@ fi
 
 if ! command -v snapcraft >/dev/null; then
 	echo "snapcraft introuvable : sudo snap install snapcraft --classic" >&2
+	exit 1
+fi
+
+# export_presets.cfg doit contenir le preset « Linux »
+if ! grep -q "^name=\"$PRESET\"" export_presets.cfg 2>/dev/null; then
+	echo "Preset « $PRESET » absent de export_presets.cfg : le créer dans Godot (Projet > Exporter)" >&2
 	exit 1
 fi
 

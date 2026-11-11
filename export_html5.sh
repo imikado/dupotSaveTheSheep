@@ -15,6 +15,12 @@ if [ ! -x "$GODOT" ]; then
 	exit 1
 fi
 
+# export_presets.cfg doit contenir le preset « Web »
+if ! grep -q "^name=\"$PRESET\"" export_presets.cfg 2>/dev/null; then
+	echo "Preset « $PRESET » absent de export_presets.cfg : le créer dans Godot (Projet > Exporter)" >&2
+	exit 1
+fi
+
 # Les modèles d'export Web doivent correspondre à la version de Godot
 GODOT_VERSION="$("$GODOT" --version | sed "s/\.official.*//")"
 TEMPLATES="$HOME/.local/share/godot/export_templates/$GODOT_VERSION"
@@ -22,6 +28,9 @@ if [ ! -f "$TEMPLATES/web_nothreads_release.zip" ]; then
 	echo "Modèles d'export Web absents pour Godot $GODOT_VERSION ($TEMPLATES)" >&2
 	exit 1
 fi
+
+# Version du jeu reprise de l'appdata
+./update_version.sh
 
 # Godot ne doit pas importer (ni embarquer dans le .pck) les fichiers exportés :
 # screenshots, cover itch.io, gif promo, builds Linux/Android...

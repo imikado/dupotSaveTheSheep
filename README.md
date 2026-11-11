@@ -133,6 +133,9 @@ Helper scripts (set `GODOT` if Godot isn't in your `PATH`):
 | `./export_html5.sh` | Exports the web build and zips it for itch.io |
 | `./generate_itchio.sh` | Builds the itch.io banner, embed background and `export/itchio/ITCHIO.md` from the screenshots (needs `python3-pil`) |
 | `./export_flathub.sh` | Exports the `.pck` and builds `export/Linux/bundle.tar.gz` for the Flathub manifest |
+| `./export_snap.sh [--install]` | Exports the Linux build and packs the `.snap` (needs `snapcraft`) |
+| `./update_screenshots.sh capture` | Regenerates the screenshots and the promo GIF (runs `tools/capture/capture.sh`) |
+| `./update_screenshots.sh appdata` | After committing and pushing the screenshots, points the appdata screenshot URLs to that commit |
 | `tools/capture/capture.sh` | Plays an automated run (solo, then 2 players) and regenerates the screenshots and the promo GIF (needs `ffmpeg`) |
 | `tools/capture/promo_video.sh` | Records the automated run (solo, then 2 players) in 1080p60 with sound and edits the YouTube trailer `export/promo/save_the_sheep.mp4` (needs `ffmpeg`) |
 
