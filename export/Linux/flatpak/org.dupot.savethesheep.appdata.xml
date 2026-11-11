@@ -11,34 +11,57 @@
   <summary>Protect the sheep on each level</summary>
   <description>
     <p>
-       Gordon needs to protect the sheep so that he can go on to the end of each level
+      Gordon needs to protect the sheep so that he can go on to the end of each level
     </p>
     <p>
       Use your water gun to kill enemies, the action handler to open the gate, and enable the elevator to help the sheep to pass
     </p>
     <p>
-  This Game was made with Godot 4.5
+      Play alone or with a friend on the same screen in 2 players co-op mode:
+    </p>
+    <ul>
+      <li>One keyboard, a keyboard and a gamepad, or two gamepads</li>
+      <li>Every key and button can be changed and tried in a test area before the game starts</li>
+      <li>Each player has their own life bar</li>
+      <li>Gates and elevators only move once both players pull the handle</li>
+      <li>A fallen player is back at the next level</li>
+      <li>Two motorbikes on two roads in the bonus level</li>
+    </ul>
+    <p>
+      This game was made with Godot 4.7
     </p>
   </description>
   <screenshots>
     <screenshot type="default">
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/0d761600023fe0115e7217b79d0b48c89fae1057/export/Linux/screenshots/level_01_start.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/61bc153dd47cdedbb252aab3833a119a84a61b89/export/Linux/screenshots/level_01_start.png</image>
       <caption>Gordon and the sheep at the start of level 1</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/0d761600023fe0115e7217b79d0b48c89fae1057/export/Linux/screenshots/level_01_gate.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/61bc153dd47cdedbb252aab3833a119a84a61b89/export/Linux/screenshots/level_01_two_players.png</image>
+      <caption>2 players co-op: both players pull the handle to open the gate</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/61bc153dd47cdedbb252aab3833a119a84a61b89/export/Linux/screenshots/level_01_gate.png</image>
       <caption>Jump over the gate, then open it for the sheep</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/0d761600023fe0115e7217b79d0b48c89fae1057/export/Linux/screenshots/level_01_trex.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/61bc153dd47cdedbb252aab3833a119a84a61b89/export/Linux/screenshots/level_01_trex.png</image>
       <caption>Blast the T-Rex with the water gun</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/0d761600023fe0115e7217b79d0b48c89fae1057/export/Linux/screenshots/bonus_level.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/61bc153dd47cdedbb252aab3833a119a84a61b89/export/Linux/screenshots/bonus_level_two_players.png</image>
+      <caption>2 players bonus level: two motorbikes on two roads</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/61bc153dd47cdedbb252aab3833a119a84a61b89/export/Linux/screenshots/bonus_level.png</image>
       <caption>Motorbike bonus level</caption>
     </screenshot>
     <screenshot>
-      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/0d761600023fe0115e7217b79d0b48c89fae1057/export/Linux/screenshots/menu.png</image>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/61bc153dd47cdedbb252aab3833a119a84a61b89/export/Linux/screenshots/menu_two_players.png</image>
+      <caption>2 players setup: keyboard or gamepad, custom keys and a test area</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source">https://raw.githubusercontent.com/imikado/dupotSaveTheSheep/61bc153dd47cdedbb252aab3833a119a84a61b89/export/Linux/screenshots/menu.png</image>
       <caption>Main menu</caption>
     </screenshot>
   </screenshots>

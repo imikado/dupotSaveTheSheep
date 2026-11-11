@@ -10,7 +10,7 @@
 
 *Run, jump, blast dinosaurs with your water gun and get the sheep home safe, alone or with a friend.*
 
-**👥 New: 2 players co-op on the same screen!**
+**👥 New: [2 players co-op on the same screen](#-play-together-on-one-screen)!**
 
 **[▶ Play it now in your browser](https://dupot-org.itch.io/save-the-sheep)** · **[Get it on Flathub](https://flathub.org/apps/org.dupot.savethesheep)**
 
@@ -38,9 +38,30 @@ Gordon has one job: **protect the sheep**. The sheep walks on its own, and Gordo
 - 🚪 **Action handle**: open gates to let the sheep through
 - 🛗 **Elevators**: turn them on to carry the sheep over obstacles
 - 🏍️ **Bonus level**: ride the motorbike, jump the rocks and grab water and desserts before time runs out
-- 👥 **2 players co-op**: play together on the same screen, each player with his own life bar; gates and elevators only move once both players pull the handle, a player down is back at the next level, and the bonus level gets two motorbikes on two roads (the sheep rides with player 1)
+- 👥 **Solo or 2 players co-op on the same screen**: see [Play together on one screen](#-play-together-on-one-screen)
 
 If the sheep doesn't make it, neither do you.
+
+## 👥 Play together on one screen
+
+Grab a friend: pick **2 PLAYERS** in the menu and save the sheep together through the whole adventure, bonus level included.
+
+- 🎮 **Any setup**: two players on **one keyboard**, a **keyboard + a gamepad**, or **two gamepads**. A gamepad plugged in? Player 2 takes it.
+- ⌨️ **Your keys, your way**: every key (and gamepad button) can be changed before the game starts, and the setup is remembered for next time.
+- 🧪 **Try before you play**: each player tests their controls with their own Gordon in the **TEST** area, then **START**.
+- 🤝 **Teamwork required**: gates and elevators only move once **both players pull the handle**.
+- ❤️ **Two life bars**: each player has their own life bar, the sheep's life is shared.
+- 💫 **Never out for long**: a fallen partner is back at the next level.
+- 🏍️ **Two motorbikes, two roads**: in the bonus level each player rides their own bike (the sheep rides with player 1).
+- 🐺 **Two Gordons**: *P1* in blue, *P2* in orange, with tags above their heads.
+
+<div align="center">
+
+| Controls setup and test area | Both pull the handle | Two motorbikes, two roads |
+|:---:|:---:|:---:|
+| ![Keys of the two players](export/Linux/screenshots/menu_two_players.png) | ![Two players open a gate together](export/Linux/screenshots/level_01_two_players.png) | ![Two motorbikes in the bonus level](export/Linux/screenshots/bonus_level_two_players.png) |
+
+</div>
 
 ## 📸 Screenshots
 
@@ -49,10 +70,6 @@ If the sheep doesn't make it, neither do you.
 | Level start | Jump the gate, then open it | Watch out for the T-Rex! |
 |:---:|:---:|:---:|
 | ![Level 01 start](export/Linux/screenshots/level_01_start.png) | ![Gordon jumps over a gate](export/Linux/screenshots/level_01_gate.png) | ![Gordon fights a T-Rex](export/Linux/screenshots/level_01_trex.png) |
-
-| 2 players: controls and test | Both pull the handle | Two motorbikes, two roads |
-|:---:|:---:|:---:|
-| ![Keys of the two players](export/Linux/screenshots/menu_two_players.png) | ![Two players open a gate together](export/Linux/screenshots/level_01_two_players.png) | ![Two motorbikes in the bonus level](export/Linux/screenshots/bonus_level_two_players.png) |
 
 | Main menu | Bonus level |
 |:---:|:---:|
@@ -71,7 +88,7 @@ If the sheep doesn't make it, neither do you.
 | Pause | `Esc` | `Esc` | `Esc` |
 | Sound on/off | `M` | `M` | `M` |
 
-After **1 PLAYER** or **2 PLAYERS** in the menu, the controls screen lets each player pick **keyboard or gamepad**, change his keys / buttons (saved for the next time), and try them with his Gordon in the test area (**TEST**) before **START**. 🎮 With a gamepad, moving stays on the d-pad and the left stick; Android gets on-screen touch controls.
+After **1 PLAYER** or **2 PLAYERS** in the menu, the controls screen lets each player pick **keyboard or gamepad**, change their keys / buttons (saved for the next time), and try them with their Gordon in the test area (**TEST**) before **START**. 🎮 With a gamepad, moving stays on the d-pad and the left stick; Android gets on-screen touch controls.
 
 ## 📦 Install
 
