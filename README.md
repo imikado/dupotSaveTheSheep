@@ -10,7 +10,9 @@
 
 *Run, jump, blast dinosaurs with your water gun and get the sheep home safe, alone or with a friend.*
 
-**👥 New: [2 players co-op on the same screen](#-play-together-on-one-screen)!**
+### 👥 New: 2 players co-op on the same screen!
+
+Grab a friend, a sibling or your kid and save the sheep **together**: one keyboard or gamepads, two Gordons, one sheep. **[See how it works ↓](#-play-together-on-one-screen)**
 
 **[▶ Play it now in your browser](https://dupot-org.itch.io/save-the-sheep)** · **[Get it on Flathub](https://flathub.org/apps/org.dupot.savethesheep)**
 
@@ -28,19 +30,6 @@ Free · 1–2 players · Age 3+ · Linux x86_64 & aarch64 · Web · Made with Go
 </div>
 
 ---
-
-## 📖 About
-
-Gordon has one job: **protect the sheep**. The sheep walks on its own, and Gordon has to clear the way so it can reach the end of each level in one piece.
-
-- 🌃 **A city at night**: run and jump across rooftops, streets and building sites under a starry sky
-- 💦 **Water gun**: blast the enemies (dinosaurs included!) before they reach the sheep
-- 🚪 **Action handle**: open gates to let the sheep through
-- 🛗 **Elevators**: turn them on to carry the sheep over obstacles
-- 🏍️ **Bonus level**: ride the motorbike, jump the rocks and grab water and desserts before time runs out
-- 👥 **Solo or 2 players co-op on the same screen**: see [Play together on one screen](#-play-together-on-one-screen)
-
-If the sheep doesn't make it, neither do you.
 
 ## 👥 Play together on one screen
 
@@ -62,6 +51,19 @@ Grab a friend: pick **2 PLAYERS** in the menu and save the sheep together throug
 | ![Keys of the two players](export/Linux/screenshots/menu_two_players.png) | ![Two players open a gate together](export/Linux/screenshots/level_01_two_players.png) | ![Two motorbikes in the bonus level](export/Linux/screenshots/bonus_level_two_players.png) |
 
 </div>
+
+## 📖 About
+
+Gordon has one job: **protect the sheep**. The sheep walks on its own, and Gordon has to clear the way so it can reach the end of each level in one piece.
+
+- 🌃 **A city at night**: run and jump across rooftops, streets and building sites under a starry sky
+- 💦 **Water gun**: blast the enemies (dinosaurs included!) before they reach the sheep
+- 🚪 **Action handle**: open gates to let the sheep through
+- 🛗 **Elevators**: turn them on to carry the sheep over obstacles
+- 🏍️ **Bonus level**: ride the motorbike, jump the rocks and grab water and desserts before time runs out
+- 👥 **Solo or 2 players co-op on the same screen**: see [Play together on one screen](#-play-together-on-one-screen)
+
+If the sheep doesn't make it, neither do you.
 
 ## 📸 Screenshots
 
