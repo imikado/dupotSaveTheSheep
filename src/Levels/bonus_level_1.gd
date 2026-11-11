@@ -95,13 +95,26 @@ const DESSERTS_EVERY := 8
 const BOTTLE_CHANCE := 0.2
 
 var _distance := 0.0
-var _nextSpawnAt := 400.0
-var _patternCount := 0
 
 var _spawned: Array[Node2D] = []
-var _obstacles: Array[Node2D] = []
 
 var _yStart = 0
+
+# Two players mode: player 2 rides his own motorbike on a second road above,
+# with its own line of obstacles and rewards (physics layer of its own)
+const PLAYER_ON_MOTORBIKE = preload("res://src/Actors/Players/PlayerOnMotorBike.tscn")
+const LANE2_OFFSET := -100.0
+const LANE2_LAYER := 1 << 5
+const LANE2_FIRST_SPAWN := 560.0
+# Two players: the bike lives go under the timer, top right, out of the way
+# of the bike of player 2 (the upper road can then be higher)
+const HUD_LIVES_POSITION_TWO_PLAYERS := Vector2(388, 37)
+
+# One per road: {bike, y, mask, nextSpawnAt, patternCount, obstacles}
+var _lanes: Array[Dictionary] = []
+var _grounds: Array[StaticBody2D] = []
+var _bikes: Array[PlayerOnMotorBike] = []
+var _insetBike: Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -110,10 +123,15 @@ func _ready():
 	camera_start_x = _camera.position.x
 	
 	_yStart = _player.position.y
+	_insetBike = _player
 	_createInset()
-	_player.connect("picked_up", _on_player_picked_up)
-	
-	GlobalEvents.player_take_water_bottle.connect(on_player_take_water_bottle)
+	_addLane(_player, 0.0, 1, 400.0)
+	_grounds.append(_ground)
+	if GlobalGame.is_two_players():
+		GlobalPlayer.revive_downed()
+		_addSecondBike()
+
+	GlobalInput.set_two_players(GlobalGame.is_two_players())
 	
 	GlobalEvents.player_gameover.connect(end)
 
@@ -126,6 +144,10 @@ func _ready():
 	hud.set_score(GlobalPlayer.get_score())
 	hud.set_water(GlobalPlayer.get_water())
 	hud.set_player_life(GlobalPlayer.get_life())
+	if GlobalGame.is_two_players():
+		hud.enable_second_player()
+		hud.set_player_life(GlobalPlayer.get_life(2), 2)
+		hud_motorbike.position = HUD_LIVES_POSITION_TWO_PLAYERS
 	hud.set_sheep_life(GlobalSheep.get_life())
 	
 	_countDownTimer.start()
@@ -146,25 +168,66 @@ func _show_banner():
 	tween.tween_property(_banner, "position:x", target_x - 480, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	tween.tween_callback(_banner.hide)
 	
-func on_player_take_water_bottle(_water_value):
-	_player.take_water(_water_value)
-	_add_score(10)
+func _addLane(bike: PlayerOnMotorBike, yOffset: float, mask: int, firstSpawn: float):
+	_bikes.append(bike)
+	bike.picked_up.connect(_on_player_picked_up.bind(bike))
+	_lanes.append({
+		"bike": bike,
+		"y": _yStart + yOffset,
+		"mask": mask,
+		"nextSpawnAt": firstSpawn,
+		"patternCount": 0,
+		"obstacles": [] as Array[Node2D],
+	})
 
 
-func _add_score(value: int):
+func _addSecondBike():
+	var bike: PlayerOnMotorBike = PLAYER_ON_MOTORBIKE.instantiate()
+	add_child(bike)
+	bike.position = _player.position + Vector2(0, LANE2_OFFSET)
+	bike.collision_layer = LANE2_LAYER
+	bike.collision_mask = LANE2_LAYER
+	bike.setup_solo(2)
+
+	var ground: StaticBody2D = _ground.duplicate()
+	add_child(ground)
+	ground.position = _ground.position + Vector2(0, LANE2_OFFSET)
+	ground.collision_layer = LANE2_LAYER
+	_grounds.append(ground)
+
+	var road := Sprite2D.new()
+	road.texture = INSET_ROAD_TEXTURE
+	road.centered = false
+	road.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	road.region_enabled = true
+	road.region_rect = Rect2(0, 0, INSET_ROAD_LENGTH, INSET_ROAD_TEXTURE.get_height())
+	road.position = INSET_ROAD_POSITION + Vector2(0, LANE2_OFFSET)
+	road.z_index = -1
+	add_child(road)
+
+	_addLane(bike, LANE2_OFFSET, LANE2_LAYER, LANE2_FIRST_SPAWN)
+	# Colored halo of each player while they arrive
+	Player.arrival_halo(_player, _player._sprite, 1)
+	Player.arrival_halo(bike, bike._sprite, 2)
+
+
+func _add_score(value: int, bike: Node2D = null):
+	if bike == null:
+		bike = _player
 	GlobalPlayer.increase_score(value)
 	hud.set_score(GlobalPlayer.get_score())
-	Fx.popup_text(self, _player.global_position + Vector2(0, -10), "+" + str(value), Fx.COLOR_HEAL)
+	Fx.popup_text(self, bike.global_position + Vector2(0, -10), "+" + str(value), Fx.COLOR_HEAL)
 
 
 func on_gameover_animation():
 	_stopPickupInset()
-	_player.hitedObstacle()
+	for bike in _bikes:
+		bike.hitedObstacle()
 
 
-func motorbike_hit_obstacle():
+func motorbike_hit_obstacle(bike: PlayerOnMotorBike):
 	_stopPickupInset()
-	_player.hited()
+	bike.hited()
 	hud_motorbike.decrease_life()
 
 func _process(delta):
@@ -172,90 +235,100 @@ func _process(delta):
 	currentSpeed = lerpf(SPEED_START, SPEED_END, clampf(_elapsed / BONUS_DURATION, 0.0, 1.0))
 
 	var step = currentSpeed * delta
-	_player.position.x += step
+	for bike in _bikes:
+		bike.position.x += step
 	_camera.position.x += step
 	_updateInsetCamera()
 	_distance += step
 
-	if _distance >= _nextSpawnAt:
-		_spawnPattern()
-
-	_checkClearedObstacles()
+	for lane in _lanes:
+		if _distance >= lane.nextSpawnAt:
+			_spawnPattern(lane)
+		_checkClearedObstacles(lane)
 	_freeLeftBehind()
 
-	var distance_between_ground = _camera.position.x - camera_start_x - _ground.position.x
-	if distance_between_ground >= GROUND_WIDTH:
-		_ground.position.x += GROUND_WIDTH
+	for ground in _grounds:
+		var distance_between_ground = _camera.position.x - camera_start_x - ground.position.x
+		if distance_between_ground >= GROUND_WIDTH:
+			ground.position.x += GROUND_WIDTH
 
 
 # Picks what comes next; every pattern ends with a free gap to breathe
-func _spawnPattern():
-	var x = _player.position.x + SPAWN_AHEAD
+func _spawnPattern(lane: Dictionary):
+	var x = lane.bike.position.x + SPAWN_AHEAD
 	var length := 0.0
-	_patternCount += 1
+	lane.patternCount += 1
 
 	var roll = randf()
-	if _patternCount % DESSERTS_EVERY == 0:
-		_spawnItemBefore(Desserts, x)
-		_spawnObstacle(x)
+	if lane.patternCount % DESSERTS_EVERY == 0:
+		_spawnItemBefore(lane, Desserts, x)
+		_spawnObstacle(lane, x)
 	elif roll < 0.3 and _elapsed > DOUBLE_AFTER:
 		var gap = currentSpeed * DOUBLE_GAP_TIME
-		_spawnObstacle(x)
-		_spawnObstacle(x + gap)
+		_spawnObstacle(lane, x)
+		_spawnObstacle(lane, x + gap)
 		length = gap
 	else:
 		# Now and then a reward for daring to jump at the last moment
 		if randf() < BOTTLE_CHANCE:
-			_spawnItemBefore(WaterBottle, x)
-		_spawnObstacle(x)
+			_spawnItemBefore(lane, WaterBottle, x)
+		_spawnObstacle(lane, x)
 
-	_nextSpawnAt = _distance + length + currentSpeed * randf_range(GAP_TIME_MIN, GAP_TIME_MAX)
+	lane.nextSpawnAt = _distance + length + currentSpeed * randf_range(GAP_TIME_MIN, GAP_TIME_MAX)
 
 
-func _spawn(scene: PackedScene, x: float, yOffset: float) -> Node2D:
-	var item: Node2D = scene.instantiate()
+# Items only see the motorbike of their road
+func _spawn(lane: Dictionary, scene: PackedScene, x: float, yOffset: float) -> Node2D:
+	var item: Area2D = scene.instantiate()
+	item.collision_mask = lane.mask
 	add_child(item)
-	item.position = Vector2(x, _yStart + yOffset)
+	item.position = Vector2(x, lane.y + yOffset)
+	item.set_meta("bike", lane.bike)
 	_spawned.append(item)
 	return item
 
 
-# On the road before the obstacle at obstacleX; call it before _spawnObstacle so _spawned stays sorted by position
-func _spawnItemBefore(scene: PackedScene, obstacleX: float):
+# On the road before the obstacle at obstacleX
+func _spawnItemBefore(lane: Dictionary, scene: PackedScene, obstacleX: float):
 	var before = currentSpeed * randf_range(ITEM_BEFORE_TIME_MIN, ITEM_BEFORE_TIME_MAX)
-	_spawn(scene, obstacleX - before, GROUND_ITEM_Y)
+	_spawn(lane, scene, obstacleX - before, GROUND_ITEM_Y)
 
 
-func _spawnObstacle(x: float):
-	_obstacles.append(_spawn(Obstacle, x, 34))
+func _spawnObstacle(lane: Dictionary, x: float):
+	lane.obstacles.append(_spawn(lane, Obstacle, x, 34))
 
 
 # Obstacles behind the bike without being hit give points
-func _checkClearedObstacles():
-	_obstacles = _obstacles.filter(func(obstacle): return is_instance_valid(obstacle) and !obstacle.hit)
-	while !_obstacles.is_empty() and _obstacles[0].position.x < _player.position.x - 40:
-		_obstacles.pop_front()
-		_add_score(CLEAR_SCORE)
+func _checkClearedObstacles(lane: Dictionary):
+	lane.obstacles = lane.obstacles.filter(func(obstacle): return is_instance_valid(obstacle) and !obstacle.hit)
+	while !lane.obstacles.is_empty() and lane.obstacles[0].position.x < lane.bike.position.x - 40:
+		lane.obstacles.pop_front()
+		_add_score(CLEAR_SCORE, lane.bike)
 
 
 func _freeLeftBehind():
 	var limit = _camera.position.x - 300
-	_spawned = _spawned.filter(is_instance_valid)
-	while !_spawned.is_empty() and _spawned[0].position.x < limit:
-		_spawned.pop_front().queue_free()
+	for item in _spawned:
+		if is_instance_valid(item) and item.position.x < limit:
+			item.queue_free()
+	_spawned = _spawned.filter(func(item): return is_instance_valid(item) and !item.is_queued_for_deletion())
 
 
 func _on_play_button_pressed():
 	GlobalTransition.change_scene_to_packed(nextLevel)
 
 
-func _on_player_picked_up(item: String):
+func _on_player_picked_up(item: String, bike: PlayerOnMotorBike):
+	_insetBike = bike
 	if item == "water":
+		_add_score(10, bike)
 		_flyToHud(_waterIcon(), $HUD/Water/icon, func(): hud.set_water(GlobalPlayer.get_water()))
-	else:
+	elif bike.has_sheep:
 		# The burger heals both: one for Max, one for the sheep
 		_flyToHud(BURGER_TEXTURE, $HUD/Player/icon, func(): hud.set_player_life(GlobalPlayer.get_life()))
 		_flyToHud(BURGER_TEXTURE, $HUD/Sheep/icon, func(): hud.set_sheep_life(GlobalSheep.get_life()), PICKUP_ICON_FLY * 0.25)
+	else:
+		_flyToHud(BURGER_TEXTURE, $HUD/Player2/icon, func(): hud.set_player_life(GlobalPlayer.get_life(2), 2))
 	_showPickupInset(item)
 
 
@@ -273,7 +346,7 @@ func _flyToHud(texture: Texture2D, target: Control, onArrival: Callable, delay :
 	icon.material = OUTLINE_MATERIAL
 	icon.scale = Vector2.ZERO
 	hud.add_child(icon)
-	var start = _player.get_global_transform_with_canvas().origin + Vector2(0, -10)
+	var start = _insetBike.get_global_transform_with_canvas().origin + Vector2(0, -10)
 	icon.position = start
 	var end = target.global_position + target.size / 2
 
@@ -364,7 +437,7 @@ func _createInset():
 
 func _updateInsetCamera():
 	if _inset.visible:
-		_insetCamera.global_position = _player.global_position + INSET_FOCUS
+		_insetCamera.global_position = _insetBike.global_position + INSET_FOCUS
 
 
 func _showPickupInset(item: String):

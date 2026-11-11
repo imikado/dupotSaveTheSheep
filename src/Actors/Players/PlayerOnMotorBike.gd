@@ -24,6 +24,17 @@ const PICKUP_IN_HAND_TIME = 0.18
 
 const INVINCIBLE_TIME = 1.2
 
+# Two players mode: player 2 rides his own motorbike, without the sheep, with
+# his own sprites (tools/generate_player2.py)
+const SOLO_TEXTURES = {
+	"res://src/Actors/Vehicles/motobike-riding.png": preload("res://src/Actors/Vehicles/motobike-riding-player2.png"),
+	"res://src/Actors/Vehicles/motobike-take-water.png": preload("res://src/Actors/Vehicles/motobike-take-water-player2.png"),
+	"res://src/Actors/Vehicles/motobike-take-desserts.png": preload("res://src/Actors/Vehicles/motobike-take-desserts-player2.png"),
+}
+
+var player_index := 1
+var has_sheep := true
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -71,9 +82,30 @@ func hitedObstacle():
 func ride():
 	setState(STATE.RIDING)
 
+# Player 2 without the sheep on his motorbike: rides alone
+func setup_solo(index: int):
+	player_index = index
+	has_sheep = false
+	var library: AnimationLibrary = animationPlayer.get_animation_library("").duplicate(true)
+	for animationName in library.get_animation_list():
+		var animation := library.get_animation(animationName)
+		for track in animation.get_track_count():
+			if animation.track_get_path(track) != NodePath("motorbike:texture"):
+				continue
+			for key in animation.track_get_key_count(track):
+				var texture = animation.track_get_key_value(track, key)
+				if texture is Texture2D and SOLO_TEXTURES.has(texture.resource_path):
+					animation.track_set_key_value(track, key, SOLO_TEXTURES[texture.resource_path])
+	animationPlayer.remove_animation_library("")
+	animationPlayer.add_animation_library("", library)
+	if SOLO_TEXTURES.has(_sprite.texture.resource_path):
+		_sprite.texture = SOLO_TEXTURES[_sprite.texture.resource_path]
+	setState(_state)
+
 func take_desserts(_life):
-	GlobalPlayer.increase_life(10)
-	GlobalSheep.increase_life(10)
+	GlobalPlayer.increase_life(10, player_index)
+	if has_sheep:
+		GlobalSheep.increase_life(10)
 	GlobalEvents.player_health_changed.emit(GlobalPlayer.get_life())
 	GlobalEvents.sheep_health_changed.emit(GlobalSheep.get_life())
 	_playPickup(STATE.TAKE_DESSERTS)
@@ -148,7 +180,7 @@ func _physics_process(delta):
 		var gravityScale = RISE_GRAVITY_SCALE if velocity.y < 0 else FALL_GRAVITY_SCALE
 		velocity.y += gravity * delta * gravityScale
 
-	if GlobalInput.is_press_jump_button():
+	if GlobalInput.is_press_jump_button(player_index):
 		_jumpBuffer = JUMP_BUFFER
 	else:
 		_jumpBuffer = maxf(_jumpBuffer - delta, 0.0)

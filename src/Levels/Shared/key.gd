@@ -13,4 +13,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		GlobalAudio.play_sfx("pickup_key")
 		GlobalEvents.get_key.emit()
 		queue_free()
-		body.get_key()
+		# Shared key in two players mode
+		for playerLoop in GlobalPlayer.get_actors():
+			playerLoop.get_key()

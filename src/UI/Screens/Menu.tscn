@@ -10,26 +10,6 @@
 [ext_resource type="Script" uid="uid://c24nlod1y5kue" path="res://src/UI/Controls/SoundToggle.gd" id="7_sound"]
 [ext_resource type="Texture2D" uid="uid://diy5y25bagh17" path="res://src/UI/Controls/Shared/icon-sound-on.png" id="8_sndon"]
 [ext_resource type="Shader" path="res://src/UI/Screens/title_outline.gdshader" id="9_outline"]
-[ext_resource type="FontFile" path="res://src/UI/Controls/Shared/Pixeled.ttf" id="10_font"]
-[ext_resource type="Texture2D" path="res://src/UI/Controls/Shared/keycap.png" id="11_keycap"]
-[ext_resource type="Texture2D" path="res://src/UI/Controls/Shared/keycap-left.png" id="12_kleft"]
-[ext_resource type="Texture2D" path="res://src/UI/Controls/Shared/keycap-right.png" id="13_kright"]
-
-[sub_resource type="FontVariation" id="FontVariation_keys"]
-base_font = ExtResource("10_font")
-spacing_top = -8
-spacing_bottom = -5
-
-[sub_resource type="StyleBoxTexture" id="StyleBox_keycap"]
-content_margin_left = 3.0
-content_margin_top = 3.0
-content_margin_right = 3.0
-content_margin_bottom = 3.0
-texture = ExtResource("11_keycap")
-texture_margin_left = 2.0
-texture_margin_top = 2.0
-texture_margin_right = 2.0
-texture_margin_bottom = 3.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
 shader = ExtResource("3_nrxk5")
@@ -159,7 +139,7 @@ flip_h = true
 
 [node name="MenuColumn" type="VBoxContainer" parent="." unique_id=1293320987]
 layout_mode = 0
-offset_left = 344.0
+offset_left = 318.0
 offset_top = -1.0
 offset_right = 472.0
 offset_bottom = 257.0
@@ -171,7 +151,14 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 theme_type_variation = &"BigButton"
-text = "PLAY"
+text = "1 PLAYER"
+
+[node name="TwoPlayersButton" type="Button" parent="MenuColumn" unique_id=1821791876]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_type_variation = &"BigButton"
+text = "2 PLAYERS"
 
 [node name="ScoreButton" type="Button" parent="MenuColumn" unique_id=1603152831]
 custom_minimum_size = Vector2(0, 28)
@@ -196,189 +183,6 @@ popup/item_1/id = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="KeysPanel" type="PanelContainer" parent="MenuColumn" unique_id=1043794303]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="rows" type="VBoxContainer" parent="MenuColumn/KeysPanel" unique_id=405026378]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 2
-
-[node name="move" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043802222]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/move" unique_id=1043810141]
-custom_minimum_size = Vector2(38, 0)
-layout_mode = 2
-theme_override_constants/separation = 2
-alignment = 2
-
-[node name="cap0" type="TextureRect" parent="MenuColumn/KeysPanel/rows/move/keys" unique_id=1043818060]
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("12_kleft")
-stretch_mode = 2
-
-[node name="cap1" type="TextureRect" parent="MenuColumn/KeysPanel/rows/move/keys" unique_id=1043825979]
-layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("13_kright")
-stretch_mode = 2
-
-[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/move" unique_id=1043833898]
-layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "MOVE"
-vertical_alignment = 1
-
-[node name="shoot" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043841817]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/shoot" unique_id=1043849736]
-custom_minimum_size = Vector2(38, 0)
-layout_mode = 2
-theme_override_constants/separation = 2
-alignment = 2
-
-[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/shoot/keys" unique_id=1043857655]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_keycap")
-
-[node name="label" type="Label" parent="MenuColumn/KeysPanel/rows/shoot/keys/cap0" unique_id=1043865574]
-custom_minimum_size = Vector2(8, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "A"
-horizontal_alignment = 1
-
-[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/shoot" unique_id=1043873493]
-layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "SHOOT"
-vertical_alignment = 1
-
-[node name="jump" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043881412]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/jump" unique_id=1043889331]
-custom_minimum_size = Vector2(38, 0)
-layout_mode = 2
-theme_override_constants/separation = 2
-alignment = 2
-
-[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/jump/keys" unique_id=1043897250]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_keycap")
-
-[node name="label" type="Label" parent="MenuColumn/KeysPanel/rows/jump/keys/cap0" unique_id=1043905169]
-custom_minimum_size = Vector2(8, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "Z"
-horizontal_alignment = 1
-
-[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/jump" unique_id=1043913088]
-layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "JUMP"
-vertical_alignment = 1
-
-[node name="action" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043921007]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/action" unique_id=1043928926]
-custom_minimum_size = Vector2(38, 0)
-layout_mode = 2
-theme_override_constants/separation = 2
-alignment = 2
-
-[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/action/keys" unique_id=1043936845]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_keycap")
-
-[node name="label" type="Label" parent="MenuColumn/KeysPanel/rows/action/keys/cap0" unique_id=1043944764]
-custom_minimum_size = Vector2(8, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "E"
-horizontal_alignment = 1
-
-[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/action" unique_id=1043952683]
-layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "ACTION"
-vertical_alignment = 1
-
-[node name="pause" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1043960602]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/pause" unique_id=1043968521]
-custom_minimum_size = Vector2(38, 0)
-layout_mode = 2
-theme_override_constants/separation = 2
-alignment = 2
-
-[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/pause/keys" unique_id=1043976440]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_keycap")
-
-[node name="label" type="Label" parent="MenuColumn/KeysPanel/rows/pause/keys/cap0" unique_id=1043984359]
-custom_minimum_size = Vector2(8, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "ESC"
-horizontal_alignment = 1
-
-[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/pause" unique_id=1043992278]
-layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "PAUSE"
-vertical_alignment = 1
-
-[node name="sound" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows" unique_id=1044000197]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="keys" type="HBoxContainer" parent="MenuColumn/KeysPanel/rows/sound" unique_id=1044008116]
-custom_minimum_size = Vector2(38, 0)
-layout_mode = 2
-theme_override_constants/separation = 2
-alignment = 2
-
-[node name="cap0" type="PanelContainer" parent="MenuColumn/KeysPanel/rows/sound/keys" unique_id=1044016035]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBox_keycap")
-
-[node name="SoundKey" type="Label" parent="MenuColumn/KeysPanel/rows/sound/keys/cap0" unique_id=1044023954]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(8, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.839216, 0.360784, 1)
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "M"
-horizontal_alignment = 1
-
-[node name="action" type="Label" parent="MenuColumn/KeysPanel/rows/sound" unique_id=1044031873]
-layout_mode = 2
-theme_override_fonts/font = SubResource("FontVariation_keys")
-text = "SOUND"
-vertical_alignment = 1
-
 [node name="SoundToggle" type="Button" parent="MenuColumn" unique_id=816417202]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
@@ -399,5 +203,6 @@ text = "v0.0.0"
 vertical_alignment = 1
 
 [connection signal="pressed" from="MenuColumn/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MenuColumn/TwoPlayersButton" to="." method="_on_two_players_button_pressed"]
 [connection signal="pressed" from="MenuColumn/ScoreButton" to="." method="_on_score_button_pressed"]
 [connection signal="item_selected" from="MenuColumn/levelDifficulty" to="." method="_on_level_difficulty_item_selected"]

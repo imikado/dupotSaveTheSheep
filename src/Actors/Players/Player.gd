@@ -14,6 +14,18 @@ const SPRITE_Y = -32.0
 
 const AREA = 'PlayerArea'
 
+# Two players mode, same colors as Beat and Match to Pass: P1 blue, P2 orange
+# (tag, outline halo, HUD). Player 2 has his own sprites (Player2.tscn, made by
+# tools/generate_player2.py) and his own controls
+const COOP_COLORS = {1: Color("7fdbff"), 2: Color("ff9f43")}
+const COOP_OUTLINES = {1: Color(0.05, 0.08, 0.22), 2: Color(0.25, 0.06, 0.04)}
+const COOP_OUTLINE_STRENGTH = 0.7
+# The colored halo only shows while the players arrive, then fades to the usual outline
+const ARRIVAL_HALO_TIME = 2.0
+const ARRIVAL_HALO_FADE = 0.8
+
+@export var player_index := 1
+
 const SHOOT_WATER_VALUE = 1
 const DAMAGE_INVULNERABILITY_TIME = 1.0
 const DAMAGE_KNOCKBACK = 160.0
@@ -29,6 +41,7 @@ var _pending_vehicle = null
 var _direction
 var _damage_invulnerability_timer := 0.0
 var _dying := false
+var _down := false
 
 var _coyote_timer := 0.0
 var _jump_buffer_timer := 0.0
@@ -51,6 +64,47 @@ signal action_finished
 
 var _hasKey:bool= false
 
+func _ready():
+	if GlobalGame.is_two_players():
+		_set_coop_outline()
+		_add_player_tag()
+
+func _set_coop_outline():
+	Player.arrival_halo(self, _sprite, player_index)
+
+# Colored halo of the player on a sprite using the outline shader, faded out
+# after the arrival (also used by the motorbikes of the bonus level)
+static func arrival_halo(owner_node: Node, sprite: CanvasItem, index: int):
+	if !(sprite.material is ShaderMaterial):
+		return
+	var material: ShaderMaterial = sprite.material.duplicate()
+	sprite.material = material
+	var params = ["light_color", "light_strength", "dark_color"]
+	var base = params.map(func(param): return material.get_shader_parameter(param))
+	var coop = [COOP_COLORS[index], COOP_OUTLINE_STRENGTH, COOP_OUTLINES[index]]
+	var blend = func(weight: float):
+		for i in params.size():
+			material.set_shader_parameter(params[i], lerp(coop[i], base[i], weight))
+	blend.call(0.0)
+	var tween = owner_node.create_tween()
+	tween.tween_interval(ARRIVAL_HALO_TIME)
+	tween.tween_method(blend, 0.0, 1.0, ARRIVAL_HALO_FADE)
+
+# "P1" / "P2" above the head
+func _add_player_tag():
+	var tag := Label.new()
+	tag.text = "P" + str(player_index)
+	tag.add_theme_font_override("font", Fx.FONT)
+	tag.add_theme_font_size_override("font_size", 8)
+	tag.add_theme_color_override("font_color", COOP_COLORS[player_index])
+	tag.add_theme_color_override("font_outline_color", Color.BLACK)
+	tag.add_theme_constant_override("outline_size", 3)
+	tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	tag.size = Vector2(20, 12)
+	# Staggered: still readable when both players stand at the same place
+	tag.position = Vector2(-10, -52 - 8 * (player_index - 1))
+	add_child(tag)
+
 func _physics_process(delta):
 
 	if _dying:
@@ -65,6 +119,11 @@ func _physics_process(delta):
 			modulate = Color.WHITE
 
 	if _pending_vehicle != null:
+		# Only one seat on the motorbike: the other player leaves with him
+		for playerLoop in GlobalPlayer.get_actors():
+			if playerLoop != self:
+				Fx.smoke(playerLoop.get_parent(), playerLoop.global_position)
+				playerLoop.queue_free()
 		queue_free()
 		_pending_vehicle.player_go_from_left()
 		return
@@ -139,7 +198,7 @@ func update_jump(delta):
 
 	# Jump buffer: a press just before landing is not lost
 	_jump_buffer_timer = max(_jump_buffer_timer - delta, 0.0)
-	if GlobalInput.is_press_jump_button():
+	if GlobalInput.is_press_jump_button(player_index):
 		_jump_buffer_timer = JUMP_BUFFER_TIME
 
 	var state = get_current_state()
@@ -156,7 +215,7 @@ func update_landing():
 	_was_on_floor = on_floor
 
 func update_air_move(delta):
-	_direction = GlobalInput.get_direction()
+	_direction = GlobalInput.get_direction(player_index)
 	velocity.x = move_toward(velocity.x, _direction * SPEED, AIR_ACCELERATION * delta)
 	if _direction:
 		_sprite.flip_h = (_direction < 0)
@@ -177,13 +236,13 @@ func _set_sprite_scale(new_scale: Vector2):
 	_sprite.position.y = SPRITE_Y * new_scale.y
 
 func update_takeoutgun(_delta):
-	if GlobalInput.is_press_attack_button():
+	if GlobalInput.is_press_attack_button(player_index):
 		# Plant the feet: drawing the gun fires right away
 		velocity.x = 0
 		set_new_state(PlayerStateMachine.STATE_TAKEOUTGUN)
 
 func update_gunshoot(_delta):
-	if GlobalInput.is_press_attack_button():
+	if GlobalInput.is_press_attack_button(player_index):
 		velocity.x = 0
 		set_new_state(PlayerStateMachine.STATE_GUNSHOOT)
 
@@ -211,12 +270,12 @@ func shoot():
 
 func update_move(_delta):
 
-	if _pending_action != null and GlobalInput.is_press_action_button():
+	if _pending_action != null and GlobalInput.is_press_action_button(player_index):
 		action()
 
 	var currentSpeed = get_current_speed()
 	
-	_direction = GlobalInput.get_direction()
+	_direction = GlobalInput.get_direction(player_index)
 	if _direction:
 		set_new_state(PlayerStateMachine.STATE_WALKING)
 		velocity.x = _direction * currentSpeed
@@ -247,7 +306,7 @@ func update_min_move(_delta):
 	else:
 		currentSpeed = get_current_speed() / 2
 
-	_direction = GlobalInput.get_direction()
+	_direction = GlobalInput.get_direction(player_index)
 	if _direction:
 		velocity.x = _direction * currentSpeed
 		
@@ -293,7 +352,7 @@ func hit_damage(damage):
 	Fx.shake(self, 4.0, 0.3)
 	GlobalAudio.play_sfx("player_hurt")
 	
-	GlobalEvents.player_take_damage.emit(damage)
+	GlobalEvents.player_take_damage.emit(damage, player_index)
 
 	
 # Fatal fall (wastes): pain hop, then drop through the floor before the game over
@@ -320,7 +379,11 @@ func die():
 	tween.tween_property(self, "modulate", Color(1.0, 0.6, 0.6), 0.3)
 	Fx.shake(self, 6.0, 0.4)
 	GlobalAudio.play_sfx("player_hurt")
-	get_tree().create_timer(DEATH_DURATION).timeout.connect(GlobalEvents.player_gameover.emit)
+	# All the life is lost: game over, or this player is down in two players mode
+	get_tree().create_timer(DEATH_DURATION).timeout.connect(_on_death_finished)
+
+func _on_death_finished():
+	GlobalEvents.player_take_damage.emit(GlobalPlayer.get_life(player_index), player_index)
 
 func update_dying(delta):
 	velocity.y = min(velocity.y + _gravity * delta, MAX_FALL_SPEED)
@@ -351,7 +414,8 @@ func action():
 	set_new_state(PlayerStateMachine.STATE_ACTION)
 
 func commit_action():
-	_pending_action.action()
+	if _pending_action != null:
+		CoopAction.request(_pending_action, self)
 
 func take_burger(value):
 	if _dying:
@@ -363,13 +427,32 @@ func take_burger(value):
 	set_new_state(PlayerStateMachine.STATE_TAKINGBURGER)
 
 func commit_increase_life():
-	GlobalEvents.player_increase_life.emit(_pending_life)
+	GlobalEvents.player_increase_life.emit(_pending_life, player_index)
 	_pending_life = 0
+
+func is_down() -> bool:
+	return _down
+
+# Two players mode, no life left: out of the level, back at the next one
+func down():
+	if _down:
+		return
+	reset_pending_action()
+	reset_pending_vehicle()
+	_down = true
+	Fx.smoke(get_parent(), global_position + Vector2(0, -16))
+	visible = false
+	set_physics_process(false)
+	collision_layer = 0
+	collision_mask = 0
+	$PlayerArea.set_deferred("monitorable", false)
+	$PlayerArea.set_deferred("monitoring", false)
 
 func set_pending_action(pending_action):
 	_pending_action = pending_action
 
 func reset_pending_action():
+	CoopAction.cancel(_pending_action, self)
 	_pending_action = null
 
 

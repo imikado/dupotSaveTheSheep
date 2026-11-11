@@ -18,7 +18,7 @@ func _on_body_entered(body):
 	if hit or !(body is PlayerOnMotorBike) or body.is_invincible():
 		return
 	hit = true
-	GlobalEvents.motorbike_hit_obstacle.emit()
+	GlobalEvents.motorbike_hit_obstacle.emit(body)
 	_knock_away()
 
 # The bike sends the obstacle flying instead of driving through it

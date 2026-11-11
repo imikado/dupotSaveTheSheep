@@ -17,6 +17,8 @@ var _scoreValue=0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Arrow keys back to the menus (they are player 2 keys in two players mode)
+	GlobalInput.set_two_players(false)
 	var score = GlobalPlayer.get_score()
 	var previousBest = GlobalGame.getHighestScore(GlobalGame.getHighScoreList())
 	GlobalGame.saveHighScore(score)
@@ -97,6 +99,7 @@ func _on_label_button_pressed():
 
 func _on_replay_button_pressed() -> void:
 	GlobalPlayer.update_life(GlobalGame.getLevelPlayerLife())
+	GlobalPlayer.update_life(GlobalGame.getLevelPlayer2Life(), 2)
 	GlobalPlayer.set_water(GlobalGame.getLevelWaterValue())
 	GlobalSheep.update_life(GlobalGame.getLevelSheepLife())
 	GlobalPlayer.save_score(GlobalGame.getLevelScore())

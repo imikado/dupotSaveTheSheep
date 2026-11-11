@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 const THEME = preload("res://src/UI/Theme.tres")
+const PLAYER2_ICON = preload("res://src/UI/Controls/Shared/icon-player2.png")
 const HURT_COLOR = Color(1, 0.3, 0.3)
 const SCORE_COLOR = Color(1, 0.839216, 0.360784)
 
@@ -36,6 +37,15 @@ var _sheepLifeValue = 0
 var _waterValue = 0
 
 var _pause_overlay: ColorRect
+var _resume_button: Button
+const MENU_SCENE = "res://src/UI/Screens/Menu.tscn"
+
+# Two players mode: second life row under the one of player 1
+const PLAYER2_ROW_SHIFT = 17
+const PLAYER_TAG_WIDTH = 16
+var _player2Row: Control = null
+var _player2ProgressBar: PixelBar = null
+var _player2LifeIcon: TextureRect = null
 
 
 @onready var _progressionMinX: float = $LevelProgression/Marker2D.global_position.x
@@ -87,8 +97,24 @@ func toggle_pause():
 	get_tree().paused = is_paused
 	if _pause_overlay != null:
 		_pause_overlay.visible = is_paused
+	if is_paused and _resume_button != null:
+		_resume_button.grab_focus()
 	GlobalAudio.play_sfx("pause")
 	GlobalAudio.duck_music(is_paused)
+
+# Space / Enter on RESUME are also jump / shoot: resume a bit later so the
+# game does not take the key press
+func _resume_from_button():
+	get_tree().create_timer(0.1, true).timeout.connect(func():
+		if get_tree().paused:
+			toggle_pause())
+
+# Pause screen: leave the game for the main menu (the game stays frozen
+# during the fade, the transition unpauses it)
+func quit_to_menu():
+	GlobalAudio.duck_music(false)
+	GlobalInput.set_two_players(false)
+	GlobalTransition.change_scene_to_packed(load(MENU_SCENE))
 
 func _create_pause_overlay():
 	_pause_overlay = ColorRect.new()
@@ -130,10 +156,30 @@ func _create_pause_overlay():
 	_update_sound_label(GlobalAudio.is_sound_enabled(), sound)
 	GlobalAudio.sound_toggled.connect(_update_sound_label.bind(sound))
 
+	# One under the other: up / down still work in two players mode, where
+	# the left / right arrows belong to player 2
+	var buttons = VBoxContainer.new()
+	buttons.add_theme_constant_override("separation", 3)
+	var spacer = Control.new()
+	spacer.custom_minimum_size = Vector2(0, 4)
+	box.add_child(spacer)
+	box.add_child(buttons)
+	_resume_button = _pause_button("RESUME", _resume_from_button)
+	buttons.add_child(_resume_button)
+	buttons.add_child(_pause_button("MENU", quit_to_menu))
+
 	# blink the hint while paused
 	var tween = hint.create_tween().set_loops()
 	tween.tween_property(hint, "modulate:a", 0.2, 0.0).set_delay(0.6)
 	tween.tween_property(hint, "modulate:a", 1.0, 0.0).set_delay(0.4)
+
+func _pause_button(text: String, callback: Callable) -> Button:
+	var button = Button.new()
+	button.text = text
+	button.custom_minimum_size = Vector2(80, 20)
+	button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	button.pressed.connect(callback)
+	return button
 
 func _update_sound_label(enabled: bool, label: Label):
 	label.text = "M  SOUND " + ("ON" if enabled else "OFF")
@@ -165,9 +211,68 @@ func set_water(value):
 	_waterProgressBar.set_value_animated(value)
 	_waterValue = value
 
-func set_player_life(value):
+func set_player_life(value, index := 1):
+	if index == 2:
+		if _player2Row != null:
+			_update_life_row(_player2Row, _player2ProgressBar, _player2LifeIcon, value)
+		return
 	_update_life_row($Player, _playerProgressBar, _playerLifeIcon, value)
 	_playerLifeValue = value
+
+# Life row of player 2, rows below it go down, "P1" / "P2" tags in the
+# colors of the players
+func enable_second_player():
+	if _player2Row != null:
+		return
+	_playerProgressBar.size.x -= PLAYER_TAG_WIDTH
+	_player2Row = $Player.duplicate()
+	_player2Row.name = "Player2"
+	add_child(_player2Row)
+	move_child(_player2Row, $Player.get_index() + 1)
+	_player2Row.position.y += PLAYER2_ROW_SHIFT
+	_player2ProgressBar = _player2Row.get_node("lifeBar")
+	_player2LifeIcon = _player2Row.get_node("icon")
+	_player2LifeIcon.texture = PLAYER2_ICON
+	for node in [$Sheep, $Water, key]:
+		node.position.y += PLAYER2_ROW_SHIFT
+	$StatsPanel.size.y += PLAYER2_ROW_SHIFT
+	_add_player_tag($Player, 1)
+	_add_player_tag(_player2Row, 2)
+
+func _add_player_tag(row: Control, index: int):
+	var bar: Control = row.get_node("lifeBar")
+	var tag = Label.new()
+	tag.text = "P" + str(index)
+	tag.theme = THEME
+	tag.add_theme_color_override("font_color", Player.COOP_COLORS[index])
+	tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	tag.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	tag.position = Vector2(bar.position.x + bar.size.x + 1, 0)
+	tag.size = Vector2(PLAYER_TAG_WIDTH, row.size.y)
+	row.add_child(tag)
+
+# Big message in the middle of the screen (e.g. a player down)
+func show_banner(title: String, subtitle: String, color: Color):
+	var box = VBoxContainer.new()
+	box.theme = THEME
+	box.add_theme_constant_override("separation", 0)
+	box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
+	box.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	box.position.y = 70
+	add_child(box)
+	for text in [title, subtitle]:
+		var label = Label.new()
+		label.text = text
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.add_theme_color_override("font_outline_color", Color.BLACK)
+		label.add_theme_constant_override("outline_size", 4)
+		box.add_child(label)
+	box.get_child(0).add_theme_font_size_override("font_size", 16)
+	box.get_child(0).add_theme_color_override("font_color", color)
+	var tween = box.create_tween()
+	tween.tween_interval(1.6)
+	tween.tween_property(box, "modulate:a", 0.0, 0.4)
+	tween.tween_callback(box.queue_free)
 
 func set_sheep_life(value):
 	var lost = _update_life_row($Sheep, _sheepProgressBar, _sheepLifeIcon, value)

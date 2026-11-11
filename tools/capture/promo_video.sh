@@ -2,13 +2,15 @@
 # Enregistre la partie pilotée automatiquement (capture.gd, Movie Maker de
 # Godot) en 1920x1080 avec le son du jeu, puis monte la vidéo de promotion
 # YouTube export/promo/save_the_sheep.mp4 :
-#   - extraits de la partie : menu, niveau 1 (grille, T-Rex), niveau bonus
+#   - mêmes extraits de la partie que le GIF de démo (demo_segments.sh) :
+#     menu, niveau 1 (grille, T-Rex), niveau bonus, puis le mode 2 joueurs
+#     (menu 2P, grille ouverte à deux), avec le son du jeu
 #   - écran de fin (titre, liens Flathub / Snap Store / itch.io) sur la
 #     musique du menu
 #
 # La partie est reproductible (temps fixe) : les extraits ci-dessous
 # désignent toujours le même moment. Après un changement de gameplay,
-# vérifier la vidéo et ajuster SEGMENTS si besoin.
+# vérifier la vidéo et ajuster demo_segments.sh si besoin.
 #
 # Usage : ./tools/capture/promo_video.sh [dossier_images]
 #   dossier_images : réutilise un enregistrement existant (f*.png + f.wav)
@@ -19,9 +21,9 @@ cd "$(dirname "$0")/../.."
 
 GODOT="${GODOT:-$(command -v godot || echo "$HOME/apps/Godot_v4.7.2-stable_linux.x86_64")}"
 FPS=60
-# Extraits (secondes) : menu + début du niveau 1 + grille, combat contre le
-# T-Rex (début, puis fin), niveau bonus
-SEGMENTS="0:13 14:19 24.5:28.5 34:49"
+# Extraits (secondes) communs avec le GIF de démo
+source tools/capture/demo_segments.sh
+SEGMENTS="$DEMO_SEGMENTS"
 END_CARD=7
 FONT="src/UI/Controls/Shared/Pixeled.ttf"
 END_MUSIC="assets/audio/music/menu.ogg"
@@ -86,6 +88,7 @@ CARD_FRAME="$(printf "%s/f%08d.png" "$FRAMES_DIR" "$(calc "int($LAST_END * $FPS)
 
 # Textes de l'écran de fin (fichiers : pas d'échappement des « : »)
 echo "SAVE THE SHEEP" > "$WORK_DIR/title.txt"
+echo "SOLO OR 2 PLAYERS CO-OP" > "$WORK_DIR/coop.txt"
 echo "FREE AND OPEN SOURCE" > "$WORK_DIR/free.txt"
 echo "LINUX : FLATHUB - SNAP STORE" > "$WORK_DIR/linux.txt"
 echo "PLAY IN YOUR BROWSER ON ITCH.IO" > "$WORK_DIR/web.txt"
@@ -103,7 +106,8 @@ GRAPH+="${CONCAT}concat=n=$COUNT:v=1:a=1[gamev][gamea];
 	[gamev]fps=$FPS,settb=1/$FPS,format=yuv420p,fade=in:d=0.5[game];
 	[2:v]gblur=sigma=14,eq=brightness=-0.3,
 		$(text title.txt 0.09 white 0.16),
-		$(text free.txt 0.042 0xFFC83C 0.40),
+		$(text coop.txt 0.042 0x80FF8C 0.31),
+		$(text free.txt 0.042 0xFFC83C 0.42),
 		$(text linux.txt 0.037 white 0.55),
 		$(text web.txt 0.037 white 0.66),
 		$(text url.txt 0.033 0xFFC83C 0.76),

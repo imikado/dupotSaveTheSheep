@@ -16,6 +16,9 @@ var _is_debug := false
 
 var _is_controls_enabled := false
 
+# Local co-op: a second Gordon, gates and handles need both players
+var _is_two_players := false
+
 var _last_screenshot
 
 enum CAMERA_MODE_LIST {ZOOMED_CAMERA, PLAYER_CAMERA}
@@ -59,6 +62,14 @@ func getLevel():
 
 func saveLevelPlayerLife(levelValue):
 	levelPlayerLife=levelValue
+
+var levelPlayer2Life=0
+
+func saveLevelPlayer2Life(levelValue):
+	levelPlayer2Life=levelValue
+
+func getLevelPlayer2Life():
+	return levelPlayer2Life
 
 func saveLevelSheepLife(levelValue):
 	levelSheepLife=levelValue
@@ -121,6 +132,14 @@ func resetGame():
 	_run_id = str(Time.get_unix_time_from_system())
 	GlobalPlayer.reset_game()
 	GlobalSheep.reset_game()
+
+
+func is_two_players() -> bool:
+	return _is_two_players
+
+
+func set_two_players(enabled: bool) -> void:
+	_is_two_players = enabled
 
 
 func isControlsEnabled():

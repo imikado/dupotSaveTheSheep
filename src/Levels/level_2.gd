@@ -9,6 +9,7 @@ func _ready() -> void:
 	GlobalEvents.get_key.connect(on_get_key)
 
 	GlobalGame.saveLevelPlayerLife(GlobalPlayer.get_life())
+	GlobalGame.saveLevelPlayer2Life(GlobalPlayer.get_life(2))
 	GlobalGame.saveLevelSheepLife(GlobalSheep.get_life())
 	GlobalGame.saveLevelWaterValue(GlobalPlayer.get_water())
 	GlobalGame.saveLevelScore(GlobalPlayer.get_score())

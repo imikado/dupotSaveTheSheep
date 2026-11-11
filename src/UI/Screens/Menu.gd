@@ -10,19 +10,54 @@ func _ready():
 	$VersionLabel.text = "v" + ProjectSettings.get_setting("application/config/version", "")
 	GlobalAudio.play_music("menu")
 
+	# Menus with every pad, the players get their pad in the level
+	GlobalInput.set_two_players(false)
+
 	# Keep the difficulty chosen before the last game
 	%levelDifficulty.selected = GlobalGame.getLevelDifficulty()
 
-	# No keyboard help when playing with touch controls
-	GlobalInput.touch_mode_changed.connect(_on_touch_mode_changed)
-	_on_touch_mode_changed(GlobalInput.is_touch_mode())
 
-func _on_touch_mode_changed(enabled: bool):
-	%KeysPanel.visible = !enabled
+# 1 PLAYER / 2 PLAYERS: the keys of the players, then START (touch controls
+# in one player mode need no keys screen)
+var _controls: ControlsScreen = null
 
 func _on_play_button_pressed():
+	if GlobalInput.is_touch_mode():
+		start_game(false)
+		return
+	show_controls(false)
+
+
+func _on_two_players_button_pressed():
+	show_controls(true)
+
+
+func show_controls(two_players: bool):
+	if _controls != null:
+		return
+	# The test players of the screen read the actions of the mode
+	GlobalGame.set_two_players(two_players)
+	GlobalInput.set_two_players(two_players)
+	_controls = ControlsScreen.new(two_players)
+	_controls.start_pressed.connect(start_game.bind(two_players))
+	_controls.back_pressed.connect(hide_controls.bind(two_players))
+	add_child(_controls)
+
+
+func hide_controls(two_players: bool):
+	if _controls == null:
+		return
+	_controls.queue_free()
+	_controls = null
+	GlobalGame.set_two_players(false)
+	GlobalInput.set_two_players(false)
+	(%TwoPlayersButton if two_players else %PlayButton).grab_focus()
+
+
+func start_game(two_players: bool):
 	GlobalGame.resetGame()
 	GlobalGame._is_debug = false
+	GlobalGame.set_two_players(two_players)
 	launch_level()
 
 

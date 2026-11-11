@@ -47,13 +47,17 @@ func _ready():
 
 	var bonusPlayerLife = GlobalPlayer.get_life() * bonusLife
 	var bonusSheepLife = GlobalSheep.get_life() * bonusLife
+	var twoPlayers = GlobalGame.is_two_players()
+	var bonusPlayer2Life = max(GlobalPlayer.get_life(2), 0) * bonusLife if twoPlayers else 0
 
 	_add_row(ICON_SPIDER, "SCORE", str(userScore), COLOR_TEXT)
-	_add_row(ICON_PLAYER, "GORDON %sx%s" % [GlobalPlayer.get_life(), bonusLife], "+" + str(bonusPlayerLife))
+	_add_row(ICON_PLAYER, "%s %sx%s" % ["P1" if twoPlayers else "GORDON", GlobalPlayer.get_life(), bonusLife], "+" + str(bonusPlayerLife))
+	if twoPlayers:
+		_add_row(ICON_PLAYER, "P2 %sx%s" % [max(GlobalPlayer.get_life(2), 0), bonusLife], "+" + str(bonusPlayer2Life))
 	_add_row(ICON_SHEEP, "SHEEP %sx%s" % [GlobalSheep.get_life(), bonusLife], "+" + str(bonusSheepLife))
 	_add_row(ICON_KEY, "LEVEL CLEAR", "+" + str(bonusLevelScore))
 
-	var totalScore = userScore + bonusLevelScore + bonusPlayerLife + bonusSheepLife
+	var totalScore = userScore + bonusLevelScore + bonusPlayerLife + bonusPlayer2Life + bonusSheepLife
 
 	GlobalPlayer.save_score(totalScore)
 	if _is_final():

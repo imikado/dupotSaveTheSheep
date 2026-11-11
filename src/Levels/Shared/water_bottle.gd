@@ -23,7 +23,7 @@ func _on_body_entered(body):
 		Fx.sparkle(get_parent(), global_position, Fx.COLOR_WATER)
 		GlobalAudio.play_sfx("pickup_water")
 		GlobalPlayer.increment_water(_water_value)
-		GlobalEvents.player_take_water_bottle.emit(GlobalPlayer.get_water())
+		body.take_water(GlobalPlayer.get_water())
 		queue_free()
 		
 	elif body is PlayerOnMotorBike:
@@ -31,7 +31,7 @@ func _on_body_entered(body):
 		Fx.sparkle(get_parent(), global_position, Fx.COLOR_WATER)
 		GlobalAudio.play_sfx("pickup_water")
 		GlobalPlayer.increment_water(_water_value)
-		GlobalEvents.player_take_water_bottle.emit(GlobalPlayer.get_water())
+		body.take_water(GlobalPlayer.get_water())
 		queue_free()
 		
 		
