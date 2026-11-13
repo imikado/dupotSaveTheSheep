@@ -2,10 +2,19 @@ title: Save the sheep
 name: dupot-save-the-sheep
 base: core24
 version: "1.11.0"
-summary: Save the sheep
+summary: Protect the sheep, solo or 2 players co-op
 description: |
   Gordon needs to protect the sheep so that he can go on to the end of each level
   Use your water gun to kill enemies, the action handler to open the gate, and enable the elevator to help the sheep to pass
+
+  Play alone or with a friend on the same screen in 2 players co-op mode:
+  - One keyboard, a keyboard and a gamepad, or two gamepads
+  - Every key and button can be changed and tried in a test area before the game starts
+  - Each player has their own life bar
+  - Gates and elevators only move once both players pull the handle
+  - A fallen player is back at the next level
+  - Two motorbikes on two roads in the bonus level
+
   This Game was made with Godot 4.7.2
 
 grade: stable
