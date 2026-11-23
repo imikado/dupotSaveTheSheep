@@ -74,29 +74,32 @@ func _ready() -> void:
 	for action in PLAYER_ACTIONS:
 		_project_events[action] = InputMap.action_get_events(action).map(func(event): return event.duplicate())
 	reset_profiles()
+	_touch_mode = is_mobile()
 	load_config()
 	apply()
 	Input.joy_connection_changed.connect(func(_device, _connected): apply())
-	# Touch controls by default on phones/tablets, the first key or pad button hides them
-	_touch_mode = OS.has_feature("mobile") or OS.has_feature("web_android") or OS.has_feature("web_ios") \
-		or DisplayServer.is_touchscreen_available()
 
-func _input(event: InputEvent) -> void:
-	# Touch events emulated from the mouse (emulate_touch_from_mouse) don't count
-	if event is InputEventScreenTouch and event.pressed and event.device != InputEvent.DEVICE_ID_EMULATION:
-		set_touch_mode(true)
-	elif (event is InputEventKey or event is InputEventJoypadButton) and event.pressed:
-		set_touch_mode(false)
+#touch controls, as in Beat and Match to Pass: a saved setting (TOUCH ON/OFF
+# in the menu), on by default on phones / tablets, never on Fire TV
+func is_mobile() -> bool:
+	if is_firetv():
+		return false
+	return OS.has_feature("mobile") or OS.has_feature("web_android") or OS.has_feature("web_ios")
 
-#touch controls
+func is_firetv() -> bool:
+	return OS.has_feature("firetv")
+
 func is_touch_mode() -> bool:
 	return _touch_mode
 
-func set_touch_mode(enabled: bool) -> void:
-	if enabled == _touch_mode:
-		return
+func set_touch_mode(enabled: bool, persist := false) -> void:
+	enabled = enabled and !is_firetv()
+	var changed := enabled != _touch_mode
 	_touch_mode = enabled
-	touch_mode_changed.emit(enabled)
+	if persist:
+		save_config()
+	if changed:
+		touch_mode_changed.emit(enabled)
 
 #two players: the game reads the "p1_" / "p2_" actions
 func is_two_players() -> bool:
@@ -303,12 +306,16 @@ func save_config() -> void:
 		config.set_value(profile, "device", profiles[profile]["device"])
 		config.set_value(profile, "keys", profiles[profile]["keys"])
 		config.set_value(profile, "buttons", profiles[profile]["buttons"])
+	config.set_value("touch", "enabled", _touch_mode)
 	config.save(PATH_CONFIG)
 
 func load_config() -> void:
 	var config := ConfigFile.new()
 	if config.load(PATH_CONFIG) != OK:
 		return
+	var touch = config.get_value("touch", "enabled", _touch_mode)
+	if touch is bool:
+		_touch_mode = touch and !is_firetv()
 	for profile in PROFILES:
 		var device = config.get_value(profile, "device", profiles[profile]["device"])
 		if device in [Device.KEYBOARD, Device.GAMEPAD]:
@@ -330,6 +337,11 @@ func press_jump_button(player := 1)->void:
 
 func is_press_jump_button(player := 1)->bool:
 	return _is_button_pressed_in_list([get_action_name(INPUT_JUMP, player)])
+
+
+# Still held (variable jump height)
+func is_hold_jump_button(player := 1)->bool:
+	return Input.is_action_pressed(get_action_name(INPUT_JUMP, player))
 
 
 func press_action_button(player := 1)->void:

@@ -18,7 +18,7 @@ func _ready():
 	add_target(sheep)
 	add_target(player)
 
-func _process(_delta):
+func _physics_process(_delta):
 	var min_x=0
 	var min_y=0
 	

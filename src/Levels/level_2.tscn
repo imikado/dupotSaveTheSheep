@@ -33,6 +33,7 @@ z_as_relative = false
 position = Vector2(93, 99)
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/Player"]
+process_callback = 0
 position = Vector2(1, 21)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
@@ -79,6 +80,7 @@ z_as_relative = false
 position = Vector2(52, 41)
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer2/SubViewport/Sheep"]
+process_callback = 0
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D"]
 

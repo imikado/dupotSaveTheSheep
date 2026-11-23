@@ -33,6 +33,7 @@ position = Vector2(0, 7)
 position = Vector2(37, 227)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
 position = Vector2(240, 134)
 
 [node name="Control" type="Control" parent="Camera2D"]

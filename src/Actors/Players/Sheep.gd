@@ -105,7 +105,8 @@ func get_current_speed():
 	return SPEED
 	
 
-func hit_damage(damage):
+# source_position: where the hit comes from, the sheep is pushed away from it
+func hit_damage(damage, source_position = null):
 	if _damage_invulnerability_timer > 0.0:
 		return
 
@@ -114,7 +115,9 @@ func hit_damage(damage):
 		_state_before_damage=get_current_state().name
 	set_new_state(SheepStateMachine.STATE_DAMAGED)
 	var knockback_direction := 1.0
-	if direction != 0:
+	if source_position is Vector2 and !is_equal_approx(source_position.x, global_position.x):
+		knockback_direction = sign(global_position.x - source_position.x)
+	elif direction != 0:
 		knockback_direction = -direction
 	elif last_direction != 0:
 		knockback_direction = -last_direction

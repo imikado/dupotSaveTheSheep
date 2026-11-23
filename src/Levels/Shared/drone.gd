@@ -29,7 +29,7 @@ func start_tween():
 	if running:
 		return
 	running=true
-	var tween = get_tree().create_tween()
+	var tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	tween.tween_property(self,'position',  end_position,phase_time)
 	tween.tween_property(self,'position',  start_position,phase_time)
 	tween.finished.connect(end_tween)

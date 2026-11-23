@@ -406,6 +406,7 @@ func _createInset():
 	view.canvas_item_default_texture_filter = Viewport.DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST
 	container.add_child(view)
 	_insetCamera = Camera2D.new()
+	_insetCamera.process_callback = Camera2D.CAMERA2D_PROCESS_PHYSICS
 	_insetCamera.zoom = Vector2(INSET_ZOOM, INSET_ZOOM)
 	view.add_child(_insetCamera)
 

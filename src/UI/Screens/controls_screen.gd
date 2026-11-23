@@ -2,10 +2,12 @@ extends CanvasLayer
 class_name ControlsScreen
 
 ## Shown by the menu after 1 PLAYER / 2 PLAYERS, as the coop setup of Beat and
-## Match to Pass: each player picks keyboard or gamepad and changes his keys /
-## buttons, then tries them with his Gordon in the test area (TEST).
+## Match to Pass. By default only the bottom choices are selectable:
+## PLAY, KEYS (change the keys / buttons), TEST (try them with his Gordon in the
+## test area) or BACK to the menu.
+## In KEYS: each player picks keyboard or gamepad and changes his keys / buttons.
 ## Up / down: row, left / right: player (or button), Enter: change,
-## Esc: back (or stop the test / cancel the new key).
+## Esc: done (or back / stop the test / cancel the new key).
 
 signal start_pressed
 signal back_pressed
@@ -22,7 +24,7 @@ const COLOR_NORMAL := Color(1, 1, 1, 0.9)
 const COLOR_DIM := Color(1, 1, 1, 0.45)
 const COLOR_ERROR := Color("ff4d4d")
 const COLOR_HIGHLIGHT := Color(1.0, 0.83, 0.3, 0.22)
-const COLOR_PANEL := Color(0.05, 0.05, 0.16, 0.94)
+const COLOR_PANEL := Color(0.05, 0.05, 0.16)
 const COLOR_TEST_AREA := Color(0.0, 0.0, 0.05, 0.6)
 const COLOR_GROUND := Color(0.36, 0.33, 0.45)
 
@@ -32,11 +34,12 @@ const HIGHLIGHT_OFFSET_Y := 4.0
 const ROW_DEVICE := 0
 const ROW_FIRST_KEY := 1
 const ROW_BUTTONS := ROW_FIRST_KEY + 5
-const BUTTON_TEST := 0
-const BUTTON_START := 1
-const BUTTON_BACK := 2
-const BUTTON_TEXTS := ["TEST", "START", "BACK"]
-const BUTTON_X := [130.0, 205.0, 280.0]
+const BUTTON_PLAY := 0
+const BUTTON_KEYS := 1
+const BUTTON_TEST := 2
+const BUTTON_BACK := 3
+const BUTTON_TEXTS := ["PLAY", "KEYS", "TEST", "BACK"]
+const BUTTON_X := [92.0, 167.0, 242.0, 317.0]
 const BUTTON_WIDTH := 70.0
 
 const COLUMNS_SOLO := [150.0]
@@ -45,23 +48,25 @@ const COLUMN_WIDTH_SOLO := 180.0
 const COLUMN_WIDTH_TWO := 200.0
 const NAME_WIDTH := 70.0
 
-const Y_TITLE := 3.0
-const Y_HEADER := 25.0
-const Y_DEVICE := 37.0
-const Y_FIRST_KEY := 49.0
-const Y_PAD_NAME := 110.0
-const Y_MESSAGE := 122.0
-const TEST_AREA := Rect2(10, 136, 460, 100)
-const GROUND_Y := 228.0
-const Y_BUTTONS := 245.0
+const Y_TITLE := 0.0
+const Y_HEADER := 26.0
+const Y_DEVICE := 39.0
+const Y_FIRST_KEY := 51.0
+const Y_PAD_NAME := 114.0
+const Y_MESSAGE := 127.0
+const TEST_AREA := Rect2(10, 146, 460, 86)
+const GROUND_Y := 224.0
+const Y_BUTTONS := 244.0
 const PLAYER_START_X := {1: 190.0, 2: 290.0}
 
 var _two_players := false
 var _profiles: Array = []
 var _columns: Array = []
 var _column_width := 0.0
-var _row := ROW_DEVICE
-var _col := 0
+var _row := ROW_BUTTONS
+var _col := BUTTON_PLAY
+# KEYS chosen: the rows of the keys are selectable
+var _editing := false
 var _capturing := false
 var _testing := false
 var _leaving := false
@@ -87,6 +92,10 @@ func _init(two_players := false):
 
 func _ready():
 	_profiles = GlobalInput.profiles_of(_two_players)
+	# Phone / tablet: no keyboard, gamepads only
+	if GlobalInput.is_mobile():
+		for profile in _profiles:
+			GlobalInput.set_device(profile, GlobalInput.Device.GAMEPAD)
 	_columns = COLUMNS_TWO if _two_players else COLUMNS_SOLO
 	_column_width = COLUMN_WIDTH_TWO if _two_players else COLUMN_WIDTH_SOLO
 	_font = FontVariation.new()
@@ -128,6 +137,12 @@ func _clickable(label: Label, row: int, col: int):
 	label.mouse_filter = Control.MOUSE_FILTER_STOP
 	label.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and !_capturing and !_leaving:
+			if row != ROW_BUTTONS:
+				if _testing:
+					return
+				_editing = true
+			elif col != BUTTON_KEYS:
+				_editing = false
 			_row = row
 			_col = col
 			activate()
@@ -258,15 +273,31 @@ func _profile(col: int) -> String:
 	return _profiles[col]
 
 
-# Rows of the selected player (on a gamepad, moving cannot be changed)
+# Rows of the selected player (on a gamepad, moving cannot be changed),
+# only the bottom choices until KEYS
 func selectable_rows() -> Array:
-	var profile := _profile(0 if _row == ROW_BUTTONS else _col)
+	if !_editing:
+		return [ROW_BUTTONS]
+	var profile := _profile(_col)
 	var rows := [ROW_DEVICE]
 	for i in GlobalInput.PLAYER_ACTIONS.size():
 		if GlobalInput.is_remappable(profile, GlobalInput.PLAYER_ACTIONS[i]):
 			rows.append(ROW_FIRST_KEY + i)
-	rows.append(ROW_BUTTONS)
 	return rows
+
+
+func set_editing(enabled: bool):
+	if _testing:
+		set_testing(false)
+	_editing = enabled
+	if enabled:
+		_row = ROW_DEVICE
+		_col = 0
+	else:
+		_row = ROW_BUTTONS
+		_col = BUTTON_KEYS
+	GlobalAudio.play_sfx("ui_move")
+	refresh()
 
 
 func refresh():
@@ -276,6 +307,8 @@ func refresh():
 		var keyboard := GlobalInput.is_keyboard(profile)
 		var button_conflicts := GlobalInput.conflicting_buttons(profile)
 		_values[col][ROW_DEVICE].text = "< KEYBOARD >" if keyboard else "< GAMEPAD >"
+		if GlobalInput.is_mobile():
+			_values[col][ROW_DEVICE].text = "GAMEPAD"
 		_set_color(_values[col][ROW_DEVICE], _is_selected(ROW_DEVICE, col))
 
 		for i in GlobalInput.PLAYER_ACTIONS.size():
@@ -310,12 +343,15 @@ func refresh():
 	elif error_text != "":
 		_message.text = error_text
 		_message.add_theme_color_override("font_color", COLOR_ERROR)
+	elif _editing:
+		_message.text = "TAP A BUTTON TO CHANGE IT" if GlobalInput.is_mobile() else "ENTER: CHANGE   ESC: DONE"
+		_message.add_theme_color_override("font_color", COLOR_DIM)
 	else:
-		_message.text = "ENTER: CHANGE   ESC: BACK"
+		_message.text = "ENTER: CHOOSE   ESC: BACK"
 		_message.add_theme_color_override("font_color", COLOR_DIM)
 
 	for i in _buttons.size():
-		var enabled := i != BUTTON_START or error_text == ""
+		var enabled := i != BUTTON_PLAY or error_text == ""
 		_set_color(_buttons[i], _is_selected(ROW_BUTTONS, i), COLOR_NORMAL if enabled else COLOR_DIM)
 	_buttons[BUTTON_TEST].text = "STOP" if _testing else "TEST"
 	_place_highlight()
@@ -365,7 +401,10 @@ func _input(event: InputEvent):
 	elif event.is_action_pressed("ui_right"):
 		_horizontal(1)
 	elif event.is_action_pressed("ui_cancel"):
-		_leave(false)
+		if _editing:
+			set_editing(false)
+		else:
+			_leave(false)
 	elif event.is_action_pressed("ui_accept"):
 		activate()
 	elif event is InputEventKey or event is InputEventJoypadButton or event is InputEventJoypadMotion:
@@ -412,13 +451,10 @@ func _end_capture():
 
 func _move(direction: int):
 	var rows := selectable_rows()
+	if rows.size() <= 1:
+		return
 	var index := rows.find(_row)
-	var previous := _row
 	_row = rows[wrapi(index + direction, 0, rows.size())]
-	if _row == ROW_BUTTONS and previous != ROW_BUTTONS:
-		_col = BUTTON_START
-	elif previous == ROW_BUTTONS and _row != ROW_BUTTONS:
-		_col = 0
 	GlobalAudio.play_sfx("ui_move")
 	refresh()
 
@@ -439,6 +475,8 @@ func _horizontal(direction: int):
 func activate():
 	match _row:
 		ROW_DEVICE:
+			if GlobalInput.is_mobile():
+				return
 			var profile := _profile(_col)
 			var device: int = GlobalInput.Device.GAMEPAD if GlobalInput.is_keyboard(profile) else GlobalInput.Device.KEYBOARD
 			GlobalInput.set_device(profile, device)
@@ -446,10 +484,12 @@ func activate():
 			refresh()
 		ROW_BUTTONS:
 			match _col:
+				BUTTON_PLAY:
+					_start()
+				BUTTON_KEYS:
+					set_editing(true)
 				BUTTON_TEST:
 					set_testing(!_testing)
-				BUTTON_START:
-					_start()
 				BUTTON_BACK:
 					_leave(false)
 		_:

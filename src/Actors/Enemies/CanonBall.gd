@@ -22,5 +22,5 @@ func _on_timer_timeout():
 
 func _on_area_2d_body_entered(body):
 	if body is Player or body is Sheep:
-		body.hit_damage(5)
+		body.hit_damage(5, global_position)
 		queue_free()

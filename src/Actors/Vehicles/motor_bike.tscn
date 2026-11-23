@@ -371,6 +371,7 @@ offset = Vector2(-0.999998, -26)
 hframes = 5
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
 
 [node name="panel_sheep" type="Node2D" parent="."]
 

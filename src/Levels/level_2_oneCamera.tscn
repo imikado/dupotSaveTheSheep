@@ -86,6 +86,7 @@ z_as_relative = false
 position = Vector2(-810, 25)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player", "sheep")]
+process_callback = 0
 script = ExtResource("5_1hkgj")
 zoom_speed = 0.5
 player = NodePath("../Player")

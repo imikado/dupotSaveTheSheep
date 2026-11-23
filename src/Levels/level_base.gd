@@ -24,6 +24,8 @@ const PLAYER2_SCENE = preload("res://src/Actors/Players/Player2.tscn")
 const PLAYER2_SPAWN_OFFSET = Vector2(-26, 0)
 const MAX_PLAYERS_DISTANCE_X = 400.0
 
+const SHEEP_ARROW_TARGET = Vector2(0, -8)
+
 var player2: Player = null
 var _camera: Camera2D = null
 var _camera_offset := Vector2.ZERO
@@ -32,6 +34,8 @@ var _camera_offset := Vector2.ZERO
 func _ready() -> void:
 	var world = subviewPortMain.find_world_2d()
 	subViewPortSheep.world_2d = world
+	# The sheep inset draws the whole world again: only while it is shown
+	subViewPortSheep.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
 
 	GlobalPlayer.set_actor(player)
 	GlobalInput.set_two_players(GlobalGame.is_two_players())
@@ -66,6 +70,7 @@ func _spawn_player2() -> void:
 	player2.z_as_relative = player.z_as_relative
 	subviewPortMain.add_child(player2)
 	player2.global_position = player.global_position + PLAYER2_SPAWN_OFFSET
+	player2.reset_physics_interpolation()
 	# Players walk through each other
 	player2.add_collision_exception_with(player)
 	player.add_collision_exception_with(player2)
@@ -76,6 +81,7 @@ func _spawn_player2() -> void:
 		_camera_offset = _camera.position
 		_camera.top_level = true
 		_camera.global_position = _players_center() + _camera_offset
+		_camera.reset_physics_interpolation()
 		_camera.reset_smoothing()
 
 
@@ -99,6 +105,8 @@ func _physics_process(_delta: float) -> void:
 		var center_x := _players_center().x
 		for actorLoop in actors:
 			actorLoop.global_position.x = clamp(actorLoop.global_position.x, center_x - MAX_PLAYERS_DISTANCE_X / 2, center_x + MAX_PLAYERS_DISTANCE_X / 2)
+	# Moved on the physics tick like the players it follows: physics
+	# interpolation and the camera smoothing keep it smooth on any refresh rate
 	if is_instance_valid(_camera) and !actors.is_empty():
 		_camera.global_position = _players_center() + _camera_offset
 
@@ -120,6 +128,16 @@ func _process(_delta: float) -> void:
 	else:
 		$SubViewportContainer2.visible = false
 		$ColorRect.visible = false
+	_update_sheep_arrow()
+
+
+# Arrow on the edge of the screen towards the sheep when it is out of sight
+func _update_sheep_arrow() -> void:
+	if !is_instance_valid(sheep) or !sheep.is_inside_tree():
+		hud.hide_sheep_arrow()
+		return
+	var screen_position: Vector2 = subviewPortMain.get_canvas_transform() * (sheep.global_position + SHEEP_ARROW_TARGET)
+	hud.update_sheep_arrow(screen_position, get_viewport().get_visible_rect())
 
 
 func on_enemy_die(enemy):
@@ -184,6 +202,10 @@ func on_end_level():
 		return
 	_level_ended = true
 
+	# Read back once the frame is drawn: the GPU is idle, no stall
+	await RenderingServer.frame_post_draw
+	if !is_inside_tree():
+		return
 	var screenshotImage = get_viewport().get_texture().get_image()
 	var screenshotTexture = ImageTexture.create_from_image(screenshotImage)
 

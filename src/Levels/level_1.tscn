@@ -37,6 +37,7 @@ z_as_relative = false
 position = Vector2(19, 0)
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer/SubViewport/Player" unique_id=1850155949]
+process_callback = 0
 position = Vector2(0, -48)
 offset = Vector2(0, 100)
 position_smoothing_enabled = true
@@ -112,6 +113,7 @@ z_index = 14
 z_as_relative = false
 
 [node name="Camera2D" type="Camera2D" parent="SubViewportContainer2/SubViewport/Sheep" unique_id=1586658762]
+process_callback = 0
 offset = Vector2(0, -10)
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="SubViewportContainer2/SubViewport/Sheep/Camera2D" unique_id=209753291]

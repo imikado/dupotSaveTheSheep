@@ -6,6 +6,12 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -300.0
 const BOUNCE_VELOCITY = -180.0
 const AIR_ACCELERATION = 600.0
+# Short ramp on the ground: responsive but not robotic
+const GROUND_ACCELERATION = 1800.0
+const GROUND_DECELERATION = 2400.0
+# Jump button released while rising: shorter jump
+const JUMP_CUT_MULTIPLIER = 0.5
+const HIT_STOP_TIME = 0.06
 const FALL_GRAVITY_MULTIPLIER = 1.6
 const MAX_FALL_SPEED = 400.0
 const COYOTE_TIME = 0.1
@@ -46,6 +52,7 @@ var _down := false
 var _coyote_timer := 0.0
 var _jump_buffer_timer := 0.0
 var _was_on_floor := true
+var _jump_cut_allowed := false
 
 # Rising gravity: gives the same jump height (~72px) as before with a real arc.
 var _gravity = JUMP_VELOCITY * JUMP_VELOCITY / (2.0 * 72.0)
@@ -164,11 +171,13 @@ func has_key():
 # Bounce (on the sheep or an enemy head)
 func process_jump(_delta):
 	velocity.y = BOUNCE_VELOCITY
+	_jump_cut_allowed = false
 	GlobalAudio.play_sfx("jump", 0.05, 0.0, 1.25)
 	stretch()
 
 func start_jump():
 	velocity.y = JUMP_VELOCITY
+	_jump_cut_allowed = true
 	_coyote_timer = 0
 	_jump_buffer_timer = 0
 	Fx.dust(get_parent(), global_position)
@@ -183,6 +192,11 @@ func update_gravity(delta):
 		return
 	if !is_in_air_state():
 		set_new_state(PlayerStateMachine.STATE_FALL)
+	if _jump_cut_allowed and velocity.y < 0 and !GlobalInput.is_hold_jump_button(player_index):
+		velocity.y *= JUMP_CUT_MULTIPLIER
+		_jump_cut_allowed = false
+	if velocity.y >= 0:
+		_jump_cut_allowed = false
 	# Fall faster than rising: snappier, less floaty jumps
 	var gravity = _gravity
 	if velocity.y > 0:
@@ -268,7 +282,7 @@ func shoot():
 	GlobalEvents.player_water_changed.emit(GlobalPlayer.get_water())
 
 
-func update_move(_delta):
+func update_move(delta):
 
 	if _pending_action != null and GlobalInput.is_press_action_button(player_index):
 		action()
@@ -278,19 +292,22 @@ func update_move(_delta):
 	_direction = GlobalInput.get_direction(player_index)
 	if _direction:
 		set_new_state(PlayerStateMachine.STATE_WALKING)
-		velocity.x = _direction * currentSpeed
+		# Turning around brakes as fast as stopping
+		var acceleration = GROUND_ACCELERATION if sign(velocity.x) == sign(_direction) else GROUND_DECELERATION
+		velocity.x = move_toward(velocity.x, _direction * currentSpeed, acceleration * delta)
 		
 		_sprite.flip_h = (_direction < 0)
 		
 	else:
 		if !_raycast.is_colliding():
 			set_new_state(PlayerStateMachine.STATE_EDGE)
-			velocity.x = move_toward(velocity.x, 0, currentSpeed)
+			# Stops at once at the edge: no sliding off the ledge
+			velocity.x = 0
 
 		else:
 			if get_current_state().can_idle:
 				set_new_state(PlayerStateMachine.STATE_IDLE)
-			velocity.x = move_toward(velocity.x, 0, currentSpeed)
+			velocity.x = move_toward(velocity.x, 0, GROUND_DECELERATION * delta)
 
 func update_min_move(_delta):
 	if velocity.x != 0:
@@ -326,11 +343,13 @@ func get_current_speed():
 	return SPEED
 
 
-func hit_damage(damage):
+# source_position: where the hit comes from, the player is pushed away from it
+func hit_damage(damage, source_position = null):
 	if _dying or _damage_invulnerability_timer > 0.0:
 		return
 
 	_damage_invulnerability_timer = DAMAGE_INVULNERABILITY_TIME
+	_jump_cut_allowed = false
 	# The hit cuts the eating/drinking animation, do not lose what was taken
 	if _pending_life:
 		commit_increase_life()
@@ -338,7 +357,9 @@ func hit_damage(damage):
 		commit_water()
 	set_new_state(PlayerStateMachine.STATE_DAMAGED)
 	var knockback_direction := 1.0
-	if _direction != 0:
+	if source_position is Vector2 and !is_equal_approx(source_position.x, global_position.x):
+		knockback_direction = sign(global_position.x - source_position.x)
+	elif _direction != 0:
 		knockback_direction = -_direction
 	elif _sprite.flip_h:
 		knockback_direction = 1.0
@@ -350,6 +371,7 @@ func hit_damage(damage):
 	tween.tween_property(self, "modulate", Color.RED, 0.1)
 	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
 	Fx.shake(self, 4.0, 0.3)
+	Fx.hit_stop(self, HIT_STOP_TIME)
 	GlobalAudio.play_sfx("player_hurt")
 	
 	GlobalEvents.player_take_damage.emit(damage, player_index)

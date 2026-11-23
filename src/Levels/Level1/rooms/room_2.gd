@@ -56,6 +56,7 @@ func spawn_trex():
 		new_TRex.set_physics_process(false)
 		new_TRex.spawn()
 		new_TRex.global_position = _spawnMarker2D.global_position
+		new_TRex.reset_physics_interpolation()
 		new_TRex.set_physics_process(true)
 
 

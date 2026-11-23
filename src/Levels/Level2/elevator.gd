@@ -27,6 +27,8 @@ var isAnimationRunning=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Moves bodies: stepped with the physics (smooth with physics interpolation)
+	platformAnimation.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
 	platformAnimation.play("RESET")
 	handleAnimation.play("RESET")
 	

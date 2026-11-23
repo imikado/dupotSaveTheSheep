@@ -11,6 +11,27 @@ const COLOR_HEAL := Color(1.0, 0.85, 0.3)
 
 const FONT := preload("res://src/UI/Controls/Shared/Pixeled.ttf")
 
+# Almost frozen: a time scale of 0 gives a delta of 0 to move_and_slide()
+const HIT_STOP_TIME_SCALE := 0.05
+
+static var _hit_stopping := false
+
+
+# Freezes the game a few hundredths of a second on an impact. Ignored while
+# the time is already slowed (bonus level inset) or during another freeze
+static func hit_stop(node: Node, duration := 0.06) -> void:
+	if _hit_stopping or Engine.time_scale != 1.0 or !is_instance_valid(node) or !node.is_inside_tree():
+		return
+	_hit_stopping = true
+	Engine.time_scale = HIT_STOP_TIME_SCALE
+	node.get_tree().create_timer(duration, true, false, true).timeout.connect(_end_hit_stop)
+
+
+static func _end_hit_stop() -> void:
+	_hit_stopping = false
+	if Engine.time_scale == HIT_STOP_TIME_SCALE:
+		Engine.time_scale = 1.0
+
 
 static func burst(parent: Node, at: Vector2, color: Color, amount := 8, speed := 40.0, spread := 180.0, direction := Vector2.UP, lifetime := 0.4, gravity := 120.0) -> void:
 	if !is_instance_valid(parent) or !parent.is_inside_tree():

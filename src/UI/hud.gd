@@ -4,6 +4,10 @@ const THEME = preload("res://src/UI/Theme.tres")
 const PLAYER2_ICON = preload("res://src/UI/Controls/Shared/icon-player2.png")
 const HURT_COLOR = Color(1, 0.3, 0.3)
 const SCORE_COLOR = Color(1, 0.839216, 0.360784)
+const SHEEP_ICON = preload("res://src/UI/Controls/Shared/icon-sheep.png")
+# Shots left under which the water gauge warns
+const LOW_WATER = 5
+const SHEEP_ARROW_MARGIN = 14.0
 
 @export var player: Player
 @export var sheep: Sheep
@@ -59,6 +63,7 @@ func _ready():
 	key.visible=false
 	GlobalEvents.player_out_of_water.connect(on_player_out_of_water)
 	_create_pause_overlay()
+	_create_sheep_arrow()
 
 # Shake the water gauge so the player understands why nothing is fired
 func on_player_out_of_water():
@@ -208,8 +213,12 @@ func set_score_text(scoreValue: int):
 func set_water(value):
 	if _waterProgressBar._initialized and value > _waterProgressBar.value:
 		_bump_icon(_waterLifeIcon, Color(0.6, 0.85, 1))
+	var was_low = _waterLowTween != null
 	_waterProgressBar.set_value_animated(value)
 	_waterValue = value
+	_waterLowTween = _update_danger_pulse(_waterLowTween, _waterLifeIcon, value <= LOW_WATER)
+	if !was_low and _waterLowTween != null and _waterProgressBar._initialized:
+		GlobalAudio.play_sfx("tick")
 
 func set_player_life(value, index := 1):
 	if index == 2:
@@ -301,17 +310,60 @@ func _update_life_row(row: Control, bar: PixelBar, icon: TextureRect, value) -> 
 
 # Pulse the sheep icon while its life is low
 var _sheepDangerTween: Tween = null
+var _waterLowTween: Tween = null
 
 func update_sheep_danger():
 	var in_danger = _sheepLifeValue > 0 and _sheepLifeValue <= GlobalGame.sheep_start_life * 0.3
-	if in_danger and _sheepDangerTween == null:
-		_sheepDangerTween = create_tween().set_loops()
-		_sheepDangerTween.tween_property(_sheepLifeIcon, "self_modulate", Color(1, 0.3, 0.3), 0.3)
-		_sheepDangerTween.tween_property(_sheepLifeIcon, "self_modulate", Color.WHITE, 0.3)
-	elif !in_danger and _sheepDangerTween != null:
-		_sheepDangerTween.kill()
-		_sheepDangerTween = null
-		_sheepLifeIcon.self_modulate = Color.WHITE
+	_sheepDangerTween = _update_danger_pulse(_sheepDangerTween, _sheepLifeIcon, in_danger)
+
+# Red pulse of a gauge icon while in danger, returns the running tween (or null)
+func _update_danger_pulse(tween: Tween, icon: TextureRect, in_danger: bool) -> Tween:
+	if in_danger and tween == null:
+		tween = create_tween().set_loops()
+		tween.tween_property(icon, "self_modulate", Color(1, 0.3, 0.3), 0.3)
+		tween.tween_property(icon, "self_modulate", Color.WHITE, 0.3)
+	elif !in_danger and tween != null:
+		tween.kill()
+		tween = null
+		icon.self_modulate = Color.WHITE
+	return tween
+
+# Sheep out of sight: its icon on the edge of the screen, pointing at it
+var _sheepArrow: Node2D = null
+var _sheepArrowPointer: Polygon2D = null
+
+func _create_sheep_arrow():
+	_sheepArrow = Node2D.new()
+	_sheepArrow.name = "SheepArrow"
+	_sheepArrow.visible = false
+	add_child(_sheepArrow)
+	move_child(_sheepArrow, 0)
+	_sheepArrowPointer = Polygon2D.new()
+	_sheepArrowPointer.polygon = PackedVector2Array([Vector2(14, 0), Vector2(9, -4), Vector2(9, 4)])
+	_sheepArrowPointer.color = Color.WHITE
+	_sheepArrow.add_child(_sheepArrowPointer)
+	var icon = Sprite2D.new()
+	icon.texture = SHEEP_ICON
+	_sheepArrow.add_child(icon)
+	var tween = _sheepArrow.create_tween().set_loops()
+	tween.tween_property(_sheepArrow, "modulate:a", 0.5, 0.4)
+	tween.tween_property(_sheepArrow, "modulate:a", 1.0, 0.4)
+
+func update_sheep_arrow(screen_position: Vector2, screen_rect: Rect2):
+	if _sheepArrow == null:
+		return
+	var inner = screen_rect.grow(-SHEEP_ARROW_MARGIN)
+	if screen_rect.has_point(screen_position) or get_tree().paused:
+		_sheepArrow.visible = false
+		return
+	var edge = screen_position.clamp(inner.position, inner.end)
+	_sheepArrow.position = edge
+	_sheepArrowPointer.rotation = (screen_position - edge).angle()
+	_sheepArrow.visible = true
+
+func hide_sheep_arrow():
+	if _sheepArrow != null:
+		_sheepArrow.visible = false
 
 func enable_key():
 	key.visible=true

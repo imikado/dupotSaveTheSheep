@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c24nlod1y5kue" path="res://src/UI/Controls/SoundToggle.gd" id="7_sound"]
 [ext_resource type="Texture2D" uid="uid://diy5y25bagh17" path="res://src/UI/Controls/Shared/icon-sound-on.png" id="8_sndon"]
 [ext_resource type="Shader" path="res://src/UI/Screens/title_outline.gdshader" id="9_outline"]
+[ext_resource type="Script" path="res://src/UI/Controls/TouchToggle.gd" id="10_touch"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
 shader = ExtResource("3_nrxk5")
@@ -122,6 +123,7 @@ position = Vector2(252, 131)
 texture = ExtResource("3_rrifp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2105202518]
+process_callback = 0
 position = Vector2(241, 128)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=694567454]
@@ -182,6 +184,13 @@ popup/item_1/id = 1
 [node name="Spacer" type="Control" parent="MenuColumn" unique_id=466992899]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="TouchToggle" type="Button" parent="MenuColumn"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+theme_type_variation = &"BigButton"
+text = "TOUCH"
+script = ExtResource("10_touch")
 
 [node name="SoundToggle" type="Button" parent="MenuColumn" unique_id=816417202]
 custom_minimum_size = Vector2(0, 28)

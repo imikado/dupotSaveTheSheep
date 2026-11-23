@@ -53,7 +53,7 @@ func _physics_process(delta):
 							set_new_state(TRexStateMachine.STATE_ATTACK)
 							GlobalAudio.play_sfx("roar", 0.1)
 							move_and_slide()
-							collider.hit_damage(10)
+							collider.hit_damage(10, global_position)
 							can_attack=false
 							_attackTimer.start()
 						else:

@@ -96,5 +96,6 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
 enabled = false
 zoom = Vector2(2, 2)

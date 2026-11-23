@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="dupotSaveTheSheep"
-config/version="1.14.0"
+config/version="1.14.1"
 config/tags=PackedStringArray("current")
 run/main_scene="res://src/UI/Screens/Boot.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
@@ -107,6 +107,10 @@ player_attack={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[physics]
+
+common/physics_interpolation=true
 
 [rendering]
 

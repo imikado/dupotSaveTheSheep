@@ -22,7 +22,8 @@ func is_open():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	_subBridgeAnimation.callback_mode_process = AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS
+
 	if ! _camera_enabled:
 		_camera.queue_free()
 	
@@ -34,6 +35,7 @@ func _ready():
 		
 		new_sub_bridge.visible=true
 		new_sub_bridge.global_position=_subBridge.global_position
+		new_sub_bridge.reset_physics_interpolation()
 	
 	#open()
 	
@@ -55,7 +57,7 @@ func sub_close():
 		
 	
 	var number=0
-	var tween = get_tree().create_tween()
+	var tween = get_tree().create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 		
 	for child in _subBridgetParts.get_children():
 		number+=1

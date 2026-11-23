@@ -29,6 +29,7 @@ func spawn_trex():
 			_enemyList.add_child(new_TRex)
 			
 			new_TRex.global_position=child.global_position
+			new_TRex.reset_physics_interpolation()
 
 
 	spawnTimer.start()
